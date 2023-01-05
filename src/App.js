@@ -1,9 +1,12 @@
 import './App.css';
-import Home from './pages/home/home';
+// import Login from './pages/login/login';
+import Register from './pages/register/register';
+// import Home from './pages/home/home';
+// import Profile from './pages/profile/profile';
 
 function App() {
   return (
-    <Home />
+    <Register />
   );
 }
 

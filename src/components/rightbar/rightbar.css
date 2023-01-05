@@ -71,7 +71,8 @@
 .rightbarFollowings {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+
 }
 
 .rightbarFollowing {
@@ -79,6 +80,9 @@
     flex-direction: column;
     margin-bottom: 20px;
     cursor: pointer;
+    /* padding: 5px 5px 5px 5px; */
+    width: 150px;
+    height: 150px;
 }
 
 .rightbarFollowingImg {
@@ -86,4 +90,16 @@
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.rightbarFollowingName {
+    display: -webkit-box;
+    max-height: 3.2rem;
+    max-width: 80%;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    line-height: 1.6rem;
 }
