@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './register.css';
 
 function Register() {
@@ -11,17 +12,17 @@ function Register() {
             </div>
             <div className="loginRight">
                 <div className="loginBox">
-                    <span className="title">
-                        Đăng ký
-                    </span>
+
                     <input placeholder="Tên hiển thị" className="loginInput" />
                     <input placeholder="Email" className="loginInput" />
                     <input placeholder="Mật khẩu" className="loginInput" />
                     <input placeholder="Xác nhận mật khẩu" className="loginInput" />
                     <button className="loginButton">Đăng ký</button>
-                    <button className="loginRegisterButton">
-                        Đã có tài khoản, đăng nhập ngay
-                    </button>
+
+                    <Link to="/login" className="loginRegisterButton">
+                        Đã có tải khoản, đăng nhập ngay
+                    </Link>
+
                 </div>
             </div>
         </div>

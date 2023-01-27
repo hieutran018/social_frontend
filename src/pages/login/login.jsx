@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './login.css';
 
 function Login() {
@@ -13,11 +14,13 @@ function Login() {
                 <div className="loginBox">
                     <input placeholder="Email" className="loginInput" />
                     <input placeholder="Password" className="loginInput" />
-                    <button className="loginButton">Đăng nhập</button>
+                    <Link to="/" className="loginButton">Đăng nhập</Link>
                     <span className="loginForgot">Quên mật khẩu?</span>
-                    <button className="loginRegisterButton">
+
+                    <Link to="/registration" className="loginRegisterButton">
                         Tạo một tài khoản mới
-                    </button>
+                    </Link>
+
                 </div>
             </div>
         </div>
