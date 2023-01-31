@@ -55,3 +55,12 @@
     margin: 0;
     list-style: none;
 }
+
+.sidebarListItemText {
+    text-decoration: none;
+
+}
+
+.sidebarListItemText:active {
+    color: #1877f2;
+}
