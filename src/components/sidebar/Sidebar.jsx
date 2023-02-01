@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import {
     RssFeed,
-    Chat,
     PlayCircleFilledOutlined,
-    Group,
+    Groups3TwoTone,
     Event,
+    GroupOutlined
 } from '@mui/icons-material';
 import './sidebar.css';
 import CloseFriend from '../closefriend/CloseFriend';
@@ -59,8 +59,8 @@ function Sidebar({ page }) {
                         <span className="sidebarListItemText">Bảng tin</span>
                     </li>
                     <li className="sidebarListItem">
-                        <Chat className="sidebarIcon" />
-                        <span className="sidebarListItemText">Tin nhắn</span>
+                        <GroupOutlined className="sidebarIcon" />
+                        <span className="sidebarListItemText">Bạn bè</span>
                     </li>
                     <li className="sidebarListItem">
                         <Link to="/video" className="sidebarListItemText">
@@ -69,7 +69,7 @@ function Sidebar({ page }) {
                         </Link>
                     </li>
                     <li className="sidebarListItem">
-                        <Group className="sidebarIcon" />
+                        <Groups3TwoTone className="sidebarIcon" />
                         <span className="sidebarListItemText">Nhóm</span>
                     </li>
                     <li className="sidebarListItem">

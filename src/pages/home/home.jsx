@@ -8,8 +8,11 @@ import Rightbar from "../../components/rightbar/Rightbar";
 function Home() {
     return (
         <>
-            <Topbar />
+            <div>
+                <Topbar />
+            </div>
             <div className="homeContainer">
+
                 <Sidebar page />
                 <Feed />
                 <Rightbar />
