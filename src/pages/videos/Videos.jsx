@@ -1,18 +1,18 @@
 import './video.css';
 import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
-import Feed from '../../components/feed/Feed';
+import Watch from '../../components/watch/Watch';
 
-function Video() {
+function Videos() {
     return (
         <>
             <Topbar />
             <div className="homeContainer">
                 <Sidebar />
-                <Feed />
+                <Watch />
             </div>
         </>
     );
 }
 
-export default Video;
+export default Videos;
