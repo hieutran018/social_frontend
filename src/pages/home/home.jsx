@@ -13,7 +13,7 @@ function Home() {
             </div>
             <div className="homeContainer">
 
-                <Sidebar page />
+                <Sidebar page={1} />
                 <Feed />
                 <Rightbar />
             </div>

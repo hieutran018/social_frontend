@@ -2,6 +2,7 @@ import "./rightbar.css";
 import { Users } from "../../data";
 import Online from "../online/Online";
 
+
 export default function Rightbar({ profile }) {
     const HomeRightbar = () => {
         return (

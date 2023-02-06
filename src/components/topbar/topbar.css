@@ -19,7 +19,13 @@
     font-weight: bold;
     color: white;
     cursor: pointer;
+    text-decoration: none;
 }
+.sidebarLogo{
+text-decoration: none;
+/* pointer-events: none; */
+}
+
 
 .topbarCenter {
     flex: 5;

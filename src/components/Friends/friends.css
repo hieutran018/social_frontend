@@ -1,0 +1,15 @@
+.friends {
+    flex: 5.5;
+    height: 95vh;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.titleAndViewMore{
+    display: flex;
+    justify-content: space-between;
+}
+.viewMore{
+    font-weight: 400;
+}
+

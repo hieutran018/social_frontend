@@ -4,7 +4,12 @@ import {
     PlayCircleFilledOutlined,
     Groups3TwoTone,
     Event,
-    GroupOutlined
+    GroupOutlined,
+    RecordVoiceOver,
+    PersonAddAlt1,
+    Diversity3,
+    Cake,
+    ReduceCapacity
 } from '@mui/icons-material';
 import './sidebar.css';
 import CloseFriend from '../closefriend/CloseFriend';
@@ -50,6 +55,49 @@ function Sidebar({ page }) {
         );
     };
 
+    const SideBarFriend = () => {
+        return (
+            <>
+                <>
+                    <ul className="sidebarList">
+                        <li className="sidebarListItem">
+                            <GroupOutlined className="sidebarIcon" />
+                            <span className="sidebarListItemText">Trang Chủ </span>
+                        </li>
+                        <li className="sidebarListItem">
+
+                            <RecordVoiceOver className="sidebarIcon" />
+                            <span className="sidebarListItemText">Lời mời kết bạn</span>
+
+
+                        </li>
+                        <li className="sidebarListItem">
+
+                            <PersonAddAlt1 className="sidebarIcon" />
+                            <span className="sidebarListItemText">Gợi ý</span>
+
+                        </li>
+                        <li className="sidebarListItem">
+                            <Diversity3 className="sidebarIcon" />
+                            <span className="sidebarListItemText">Tất cả bạn bè</span>
+                        </li>
+                        <li className="sidebarListItem">
+                            <Cake className="sidebarIcon" />
+                            <span className="sidebarListItemText">Sinh nhật</span>
+                        </li>
+                        <li className="sidebarListItem">
+                            <ReduceCapacity className="sidebarIcon" />
+                            <span className="sidebarListItemText">Danh sách tùy chỉnh</span>
+                        </li>
+                    </ul>
+
+                    <hr className="sidebarHr" />
+
+                </>
+            </>
+        );
+    }
+
     const SidebarHomePage = () => {
         return (
             <>
@@ -59,8 +107,11 @@ function Sidebar({ page }) {
                         <span className="sidebarListItemText">Bảng tin</span>
                     </li>
                     <li className="sidebarListItem">
-                        <GroupOutlined className="sidebarIcon" />
-                        <span className="sidebarListItemText">Bạn bè</span>
+                        <Link to="/friend" className="sidebarListItemText">
+                            <GroupOutlined className="sidebarIcon" />
+                            <span className="sidebarListItemText">Bạn bè</span>
+                        </Link>
+
                     </li>
                     <li className="sidebarListItem">
                         <Link to="/video" className="sidebarListItemText">
@@ -90,7 +141,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page ? <SidebarHomePage /> : <SidebarVideo />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : <SideBarFriend />}
             </div>
         </div>
     );

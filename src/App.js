@@ -5,6 +5,7 @@ import Register from './pages/register/register';
 import Home from './pages/home/home';
 import Videos from './pages/videos/Videos';
 // import Profile from './pages/profile/profile';
+import Friend from './pages/friend/Friend';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/registration" element={<Register />} />
       <Route path="/" element={<Home />} />
       <Route path='/video' element={<Videos />} />
+      <Route path='/friend' element={<Friend />} />
     </Routes>
   );
 }
