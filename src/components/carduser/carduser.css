@@ -8,12 +8,13 @@
 .cardUserProfileImg{
     border-radius: 5px 5px 0px 0px;
     width: 100%;
-    height: 150px;
+    height: 160px;
     max-height: 160px;
 
 }
 .textName{
     font-size: 18px;
+    padding: 10px 0px 15px 0px;
 }
 
 .title {
@@ -23,7 +24,7 @@
 
 
 .accept{
-    padding: 5px;
+    padding-top: 5px;  
 }
 .buttonAccept{
     border-radius: 5px;
@@ -39,7 +40,7 @@
     font-size: 18px;
 }
 .cancel{
-    padding: 5px;  
+    padding-top: 5px;  
 }
 
 .buttonCancel{

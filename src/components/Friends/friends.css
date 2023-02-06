@@ -8,8 +8,10 @@
 .titleAndViewMore{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 10px;
 }
 .viewMore{
     font-weight: 400;
+    font-size: 18px;
 }
 
