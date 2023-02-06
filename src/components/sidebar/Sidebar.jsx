@@ -9,7 +9,8 @@ import {
     PersonAddAlt1,
     Diversity3,
     Cake,
-    ReduceCapacity
+    ReduceCapacity,
+    ArrowBack
 } from '@mui/icons-material';
 import './sidebar.css';
 import CloseFriend from '../closefriend/CloseFriend';
@@ -65,17 +66,14 @@ function Sidebar({ page }) {
                             <span className="sidebarListItemText">Trang Chủ </span>
                         </li>
                         <li className="sidebarListItem">
-
                             <RecordVoiceOver className="sidebarIcon" />
                             <span className="sidebarListItemText">Lời mời kết bạn</span>
-
-
                         </li>
                         <li className="sidebarListItem">
-
-                            <PersonAddAlt1 className="sidebarIcon" />
-                            <span className="sidebarListItemText">Gợi ý</span>
-
+                            <Link to="/friend-suggestion" className="sidebarListItemText">
+                                <PersonAddAlt1 className="sidebarIcon" />
+                                <span className="sidebarListItemText">Gợi ý</span>
+                            </Link>
                         </li>
                         <li className="sidebarListItem">
                             <Diversity3 className="sidebarIcon" />
@@ -138,10 +136,35 @@ function Sidebar({ page }) {
             </>);
     };
 
+    const SidebarFriendSuggestion = () => {
+        return (
+            <>
+                <div className="titleFriendSuggestion">
+                    <Link to="/friend"><ArrowBack className='iconBack' />
+                    </Link> Gợi ý
+                </div>
+                <ul className="sidebarList">
+                    {Users.map((u) => (
+                        <li className="sidebarListItemFriendSuggestion">
+                            <img className='imageProfile' src={u.profilePicture} alt="" />
+                            <div className='profileInfo'>
+                                <div className="nameProfile">{u.username}</div>
+                                <div className="buttonAction">
+                                    <button className='buttonSuggesstionAccept'>Xác nhận</button>
+                                    <button className='buttonSuggesstionCancel'>Xóa</button>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </>
+        );
+    }
+
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : <SideBarFriend />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

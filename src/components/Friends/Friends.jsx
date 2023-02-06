@@ -14,7 +14,7 @@ function Friends() {
                 <div><h5 className='viewMore'>Xem tất cả </h5></div>
             </div>
             <Box sx={{ width: '100%' }}>
-                <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
                     {Users.map((u) => (
                         <Grid item xs={2}>
                             <CardUser key={u.id} user={u} />

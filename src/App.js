@@ -6,6 +6,7 @@ import Home from './pages/home/home';
 import Videos from './pages/videos/Videos';
 // import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
+import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path='/video' element={<Videos />} />
       <Route path='/friend' element={<Friend />} />
+      <Route path='/friend-suggestion' element={<FriendSuggestion />} />
     </Routes>
   );
 }
