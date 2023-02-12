@@ -32,13 +32,14 @@
 }
 
 .rightbarTitle {
-    margin-bottom: 20px;
+    margin-top: 10px;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .rightbarFriendList {
 
-    padding: 25px 0px 0px 0px;
+    padding: 0px;
     margin: 0;
     height: 100%;
     overflow-y: scroll;

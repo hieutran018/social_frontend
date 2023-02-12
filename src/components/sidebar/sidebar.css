@@ -103,8 +103,10 @@
 }
 
 .buttonAction{
-    padding-top: 20px;
+    display: flex;
+    margin-top: 15px;
     margin-left: 10px;
+    margin-right: auto;
     
 }
 

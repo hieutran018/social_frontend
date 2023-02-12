@@ -2,7 +2,7 @@ import './video.css';
 import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../data";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 
 function Video({ post }) {
@@ -13,6 +13,32 @@ function Video({ post }) {
         setLike(isLiked ? like - 1 : like + 1)
         setIsLiked(!isLiked)
     }
+
+    // const [playing, setPlaying] = useState(false);
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        let options = {
+            rootMargin: "0px",
+            threshold: [0.25, 0.75]
+        };
+
+        let handlePlay = (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    videoRef.current.play();
+                } else {
+                    videoRef.current.pause();
+                }
+            });
+        };
+
+        let observer = new IntersectionObserver(handlePlay, options);
+
+        observer.observe(videoRef.current);
+    });
+
+
     return (
         <>
             <div className="post">
@@ -35,7 +61,7 @@ function Video({ post }) {
                     </div>
                     <div className="postCenter">
                         <span className="postText">{post?.desc}</span>
-                        <video className="srcVideo" src="http://webcoban.vn/file/bunny.mp4" controls></video>
+                        <video loop ref={videoRef} className="srcVideo" src="http://webcoban.vn/file/bunny.mp4" controls></video>
                     </div>
                     <div className="postBottom">
                         <div className="postBottomLeft">
