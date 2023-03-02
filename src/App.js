@@ -4,7 +4,7 @@ import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Home from './pages/home/home';
 import Videos from './pages/videos/Videos';
-// import Profile from './pages/profile/profile';
+import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 
@@ -17,6 +17,7 @@ function App() {
       <Route path='/video' element={<Videos />} />
       <Route path='/friend' element={<Friend />} />
       <Route path='/friend-suggestion' element={<FriendSuggestion />} />
+      <Route path='/frofile' element={<Profile />} />
     </Routes>
   );
 }

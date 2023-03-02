@@ -1,4 +1,7 @@
-.login {
+.body{
+    overflow-y: scroll;
+}
+.register {
     width: 100vw;
     height: 100vh;
     background-color: #f0f2f5;
@@ -7,14 +10,14 @@
     justify-content: center;
 }
 
-.loginWrapper {
+.registerWrapper {
     width: 50%;
     height: 50%;
     display: flex;
 }
 
-.loginLeft,
-.loginRight {
+.registerLeft,
+.registerRight {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -32,40 +35,42 @@
     justify-content: space-around;
 }
 
-.loginLogo {
+.registerLogo {
     font-size: 50px;
     font-weight: 800;
     color: #1775ee;
     margin-bottom: 10px;
 }
 
-.loginDesc {
+.registerDesc {
     font-size: 24px;
 }
 
-.loginBox {
-    height: 150%;
+.registerBox {
+    height: 700vh;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
 }
 
-.loginInput {
+.registerInput {
     height: 50px;
     border-radius: 10px;
     border: 1px solid gray;
     font-size: 18px;
     padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.loginInput:focus {
+.registerInput:focus {
     outline: none;
 }
 
-.loginButton {
+.registerButton {
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -76,12 +81,28 @@
     cursor: pointer;
 }
 
-.loginForgot {
+.submitRegisterButton {
+    width: 100%;
+    align-self: center;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1877F2;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    line-height: 50px;
     text-align: center;
-    color: #1775ee;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.loginRegisterButton {
+.registerButton {
     width: 75%;
     align-self: center;
     height: 50px;
@@ -98,5 +119,11 @@
     text-align: center;
     cursor: pointer;
     text-decoration: none;
+    margin-top: 5px;
 
+}
+
+.textError{
+    color: red;
+    display: none;
 }

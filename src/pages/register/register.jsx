@@ -1,25 +1,60 @@
 import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from "axios";
 import './register.css';
 
 function Register() {
-    return (<div className="login">
-        <div className="loginWrapper">
-            <div className="loginLeft">
-                <h3 className="loginLogo">CKCS</h3>
-                <span className="loginDesc">
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        axios.post('http://127.0.0.1:8000/api/auth/register', {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    return (<div className="register">
+        <div className="registerWrapper">
+            <div className="registerLeft">
+                <h3 className="registerLogo">CKCS</h3>
+                <span className="registerDesc">
                     Kết nối với bạn bè và thế giới xung quanh bạn trên CKCS.
                 </span>
             </div>
-            <div className="loginRight">
-                <div className="loginBox">
+            <div className="registerRight">
+                <div className="registerBox">
 
-                    <input placeholder="Tên hiển thị" className="loginInput" />
-                    <input placeholder="Email" className="loginInput" />
-                    <input placeholder="Mật khẩu" className="loginInput" />
-                    <input placeholder="Xác nhận mật khẩu" className="loginInput" />
-                    <button className="loginButton">Đăng ký</button>
+                    <input placeholder="Họ" className="registerInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
+                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <input placeholder="Tên" className="registerInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
+                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <input placeholder="Email" className="registerInput" value={email} onChange={(event) => setEmail(event.target.value)} />
+                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <input placeholder="Mật khẩu" className="registerInput" value={password} onChange={(event) => setPassword(event.target.value)} />
+                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <input placeholder="Xác nhận mật khẩu" className="registerInput" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <button onClick={handleFormSubmit} className="submitRegisterButton">Đăng ký</button>
 
-                    <Link to="/login" className="loginRegisterButton">
+                    <Link to="/login" className="registerButton">
                         Đã có tải khoản, đăng nhập ngay
                     </Link>
 
