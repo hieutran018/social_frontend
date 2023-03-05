@@ -27,12 +27,21 @@ function Auth() {
         navigate('/');
     }
 
+    const saveAsToken = (user, token) => {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', user);
+        setToken(token);
+        setUser(user);
+        navigate('/');
+    }
+
     const http = axios.create({
         baseURL: "http://127.0.0.1:8000/api/auth",
         headers: { "Content-Type": "application/json" },
     });
     return {
         setToken: saveToken,
+        resetToken: saveAsToken,
         token,
         user,
         getToken,
