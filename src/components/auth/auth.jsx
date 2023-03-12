@@ -32,7 +32,10 @@ function Auth() {
         sessionStorage.setItem('user', user);
         setToken(token);
         setUser(user);
-        navigate('/');
+        setTimeout(function () {
+            navigate('/');
+        }, 4000);
+
     }
 
     const http = axios.create({

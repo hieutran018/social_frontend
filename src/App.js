@@ -7,9 +7,12 @@ import Videos from './pages/videos/Videos';
 import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
+import Loading from './components/loading/Loading';
+
 
 function App() {
   return (
+
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/registration" element={<Register />} />
@@ -18,6 +21,7 @@ function App() {
       <Route path='/friend' element={<Friend />} />
       <Route path='/friend-suggestion' element={<FriendSuggestion />} />
       <Route path='/frofile' element={<Profile />} />
+      <Route path="/loading" element={<Loading />} />
     </Routes>
   );
 }
