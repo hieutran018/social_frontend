@@ -1,5 +1,5 @@
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../data";
+import PublicIcon from '@mui/icons-material/Public';
 import { useState } from "react";
 import './post.css';
 
@@ -18,20 +18,26 @@ function Post({ post }) {
                     <div className="postTopLeft">
                         <img
                             className="postProfileImg"
-                            src="assets/person/2.jpeg"
+                            src="assets/person/1.jpeg"
                             alt=""
                         />
                         <span className="postUsername">
                             {post.user_id}
                         </span>
-                        <span className="postDate">{post.date}</span>
+
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
                     </div>
                 </div>
+                <div className="postPrivacy">
+                    <span className="postDate">{post.created_at}  <PublicIcon className="postIconPrivacy" /></span>
+
+                </div>
                 <div className="postCenter">
-                    <span className="postText">{post.post_content}</span>
+
+                    <div className="postText">{post.post_content} </div><div className="viewMoreText">xem them</div>
+
                     <img className="postImg" src={post.photo} alt="" />
                 </div>
                 <div className="postBottom">

@@ -46,11 +46,11 @@ function Video({ post }) {
                     <div className="postTop">
                         <div className="postTopLeft">
                             <img
-                                className="postProfileImg"
+                                className="videoProfileImg"
                                 src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
                                 alt=""
                             />
-                            <span className="postUsername">
+                            <span className="videoUsername">
                                 {Users.filter((u) => u.id === post?.userId)[0].username}
                             </span>
                             <span className="postDate">{post.date}</span>
