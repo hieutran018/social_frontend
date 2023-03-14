@@ -18,11 +18,11 @@ function Post({ post }) {
                     <div className="postTopLeft">
                         <img
                             className="postProfileImg"
-                            src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+                            src="assets/person/2.jpeg"
                             alt=""
                         />
                         <span className="postUsername">
-                            {Users.filter((u) => u.id === post?.userId)[0].username}
+                            {post.user_id}
                         </span>
                         <span className="postDate">{post.date}</span>
                     </div>
@@ -31,7 +31,7 @@ function Post({ post }) {
                     </div>
                 </div>
                 <div className="postCenter">
-                    <span className="postText">{post?.desc}</span>
+                    <span className="postText">{post.post_content}</span>
                     <img className="postImg" src={post.photo} alt="" />
                 </div>
                 <div className="postBottom">
