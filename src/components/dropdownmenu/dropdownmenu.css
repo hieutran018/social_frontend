@@ -9,6 +9,11 @@
   padding: 1rem;
   overflow: hidden;
   transition: height var(--speed) ease;
+  background-color: rgb(255, 255, 255);
+  border-color:black solid 5px ;
+}
+.textFunction{
+    color: black;
 }
 
 .menu-primary-enter {

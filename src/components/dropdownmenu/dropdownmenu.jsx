@@ -39,17 +39,17 @@ we always go back to main conyainer and we use secondary as name for more contai
         in this component props to next element and we add css to animate
         */}
                 <div className="menu">
-                    <DropdownItem>My Profile</DropdownItem>
+                    <DropdownItem><span className="textFunction">My Profile</span></DropdownItem>
                     {/* if this item is clicked then only CSSTransition component will be triggered if active === settings as given in in prop boolean */}
                     <DropdownItem
                         leftIcon={<SettingsIcon />}
                         goToMenu={"settings"}
                         setActive={setActive}
                     >
-                        Settings
+                        <span className="textFunction">Setting</span>
                     </DropdownItem>
                     <DropdownItem leftIcon="🦧" goToMenu="animals" setActive={setActive}>
-                        Animals
+                        <span className="textFunction">Animal</span>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -65,18 +65,19 @@ we always go back to main conyainer and we use secondary as name for more contai
                         leftIcon={<SettingsIcon />}
                         goToMenu={"main"}
                         setActive={setActive}
-                    />
-
-                    <DropdownItem leftIcon={<SettingsIcon />}>HTML</DropdownItem>
-                    <DropdownItem leftIcon={<SettingsIcon />}>CSS</DropdownItem>
-                    <DropdownItem leftIcon={<SettingsIcon />}>
-                        JavaScript
+                    >
+                        <h2 className="textFunction">Setting</h2>
                     </DropdownItem>
-                    <DropdownItem leftIcon={<SettingsIcon />}>
-                        Awesome!
+                    <DropdownItem leftIcon={<SettingsIcon />}><span className="textFunction">HTML</span></DropdownItem>
+                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}><span className="textFunction">CSS</span></DropdownItem>
+                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}>
+                        <span className="textFunction">JS</span>
+                    </DropdownItem>
+                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}>
+                        <span className="textFunction">PHP</span>
                     </DropdownItem>
                 </div>
-            </CSSTransition>
+            </CSSTransition >
             <CSSTransition
                 in={active === "animals"}
                 timeout={500}
@@ -90,15 +91,15 @@ we always go back to main conyainer and we use secondary as name for more contai
                         leftIcon={<SettingsIcon />}
                         setActive={setActive}
                     >
-                        <h2>Animals</h2>
+                        <h2 className="textFunction">Animals</h2>
                     </DropdownItem>
-                    <DropdownItem leftIcon="🦘">Kangaroo</DropdownItem>
-                    <DropdownItem leftIcon="🐸">Frog</DropdownItem>
-                    <DropdownItem leftIcon="🦋">Horse?</DropdownItem>
-                    <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
+                    <DropdownItem leftIcon="🦘"><span className="textFunction">Kangaroo</span></DropdownItem>
+                    <DropdownItem leftIcon="🐸"><span className="textFunction">Frog</span></DropdownItem>
+                    <DropdownItem leftIcon="🦋"><span className="textFunction">Horse? </span></DropdownItem>
+                    <DropdownItem leftIcon="🦔"><span className="textFunction">Hedgehog</span></DropdownItem>
                 </div>
             </CSSTransition>
-        </div>
+        </div >
     );
 };
 
