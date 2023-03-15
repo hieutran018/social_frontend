@@ -53,7 +53,7 @@ function Video({ post }) {
                             <span className="videoUsername">
                                 {Users.filter((u) => u.id === post?.userId)[0].username}
                             </span>
-                            <span className="postDate">{post.date}</span>
+                            <span className="videoDate">{post.date}</span>
                         </div>
                         <div className="postTopRight">
                             <MoreVert />

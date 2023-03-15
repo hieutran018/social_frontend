@@ -26,6 +26,7 @@
 .postTopLeft {
     display: flex;
     align-items: center;
+    padding-bottom: 0px;
 }
 
 .postProfileImg {
@@ -36,7 +37,7 @@
 }
 
 .postUsername {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 500;
     margin-top: -20px;
     margin-left: 10px;
@@ -44,7 +45,8 @@
 
 .postDate {
     font-size: 12px;
-    margin-left: 40px;
+    margin-left: 80px;
+    
 }
 
 .postCenter {
@@ -53,14 +55,11 @@
 }
 
 .postText{
-    display: -webkit-box;
-    max-height: 6.0rem;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    -webkit-line-clamp: 3;
-    line-height: 1.3rem;
+    width: 100%;
+}
+
+.postViewMore{
+    color: blue;
 }
 
 .postImg {

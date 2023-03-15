@@ -1,5 +1,9 @@
 import { MoreVert } from "@mui/icons-material";
 import PublicIcon from '@mui/icons-material/Public';
+import GroupIcon from '@mui/icons-material/Group';
+import LockIcon from '@mui/icons-material/Lock';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import ShowMoreText from "react-show-more-text";
 import { useState } from "react";
 import './post.css';
 
@@ -11,6 +15,11 @@ function Post({ post }) {
         setLike(isLiked ? like - 1 : like + 1)
         setIsLiked(!isLiked)
     }
+
+    const executeOnClick = (isExpanded) => {
+        console.log(isExpanded);
+    }
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -22,7 +31,7 @@ function Post({ post }) {
                             alt=""
                         />
                         <span className="postUsername">
-                            {post.user_id}
+                            {post.username}
                         </span>
 
                     </div>
@@ -31,12 +40,25 @@ function Post({ post }) {
                     </div>
                 </div>
                 <div className="postPrivacy">
-                    <span className="postDate">{post.created_at}  <PublicIcon className="postIconPrivacy" /></span>
+                    <span className="postDate">{post.created_at}
+                        {post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
 
                 </div>
                 <div className="postCenter">
 
-                    <div className="postText">{post.post_content} </div><div className="viewMoreText">xem them</div>
+                    <ShowMoreText
+                        /* Default options */
+                        lines={3}
+                        more="xem thêm"
+                        less="ẩn bớt"
+                        className="postText"
+                        anchorClass="postViewMore"
+                        onClick={executeOnClick}
+                        expanded={false}
+
+                        truncatedEndingComponent={"... "}
+                    >{post.post_content}
+                    </ShowMoreText>
 
                     <img className="postImg" src={post.photo} alt="" />
                 </div>
