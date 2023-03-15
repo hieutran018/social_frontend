@@ -27,7 +27,7 @@ function Post({ post }) {
                     <div className="postTopLeft">
                         <img
                             className="postProfileImg"
-                            src="assets/person/1.jpeg"
+                            src={post.avatarUser}
                             alt=""
                         />
                         <span className="postUsername">

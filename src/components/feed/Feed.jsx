@@ -1,6 +1,5 @@
 import Post from "../post/Post";
 import './feed.css';
-import { Posts } from "../../data";
 import Share from "../share/Share";
 import { useEffect, useState } from "react";
 

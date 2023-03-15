@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Search, Person, Chat, Notifications } from '@mui/icons-material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import NavItem from '../navitem/navitem';
+import DropdownMenu from '../dropdownmenu/dropdownmenu';
 import './topbar.css';
 
 
@@ -39,7 +42,10 @@ function Topbar() {
                         {/* <span className="topbarIconBadge">1</span> */}
                     </div>
                 </div>
-                <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
+
+                <NavItem icon={<ArrowDropDownIcon />}>
+                    <DropdownMenu />
+                </NavItem>
             </div>
         </div>
     );
