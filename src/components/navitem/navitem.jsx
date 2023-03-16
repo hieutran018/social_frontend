@@ -6,9 +6,9 @@ const NavItem = (props) => {
 
     return (
         <li className="nav-item">
-            <a className="icon-button" onClick={() => setOpen(!open)}>
+            <span className="icon-button" onClick={() => setOpen(!open)}>
                 {props.icon}
-            </a>
+            </span>
             {open && props.children}
         </li>
     );
