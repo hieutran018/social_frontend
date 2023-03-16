@@ -10,5 +10,9 @@
 }
 
 .menu-item:hover {
-  background-color: #2a2a2b;
+  background-color: #F2F2F2;
+}
+
+.icon-button{
+background-color: #D8DADF;
 }

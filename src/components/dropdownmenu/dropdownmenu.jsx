@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import DropdownItem from "../dropdownitem/dropdownitem";
 import SettingsIcon from '@mui/icons-material/Settings';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CSSTransition } from "react-transition-group";
+import { Link } from 'react-router-dom';
 import "./dropdownmenu.css";
 
 const DropdownMenu = () => {
@@ -9,11 +12,7 @@ const DropdownMenu = () => {
     const [active, setActive] = useState("main");
     const [menuHeight, setMenuHeight] = useState(null);
 
-    {
-        /*we use this function as a callback in CSSTransition onEnter prop which runs this callback when it is 
-    mounted to DOM
-    */
-    }
+
     function calcHeight(el) {
         // el.offsetHeight is height in pixels of that component. we use this in dropdown menu style height to set height
         const height = el.offsetHeight;
@@ -39,17 +38,17 @@ we always go back to main conyainer and we use secondary as name for more contai
         in this component props to next element and we add css to animate
         */}
                 <div className="menu">
-                    <DropdownItem><span className="textFunction">My Profile</span></DropdownItem>
+                    <Link to="/frofile" className="dropDownItemProfile"><DropdownItem leftIcon={<AccountCircleIcon />}><span className="textFunction">Trang cá nhân</span></DropdownItem></Link>
                     {/* if this item is clicked then only CSSTransition component will be triggered if active === settings as given in in prop boolean */}
                     <DropdownItem
                         leftIcon={<SettingsIcon />}
                         goToMenu={"settings"}
                         setActive={setActive}
                     >
-                        <span className="textFunction">Setting</span>
+                        <span className="textFunction">Cài đặt chung</span>
                     </DropdownItem>
                     <DropdownItem leftIcon="🦧" goToMenu="animals" setActive={setActive}>
-                        <span className="textFunction">Animal</span>
+                        <span className="textFunction">Thoát</span>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -62,11 +61,11 @@ we always go back to main conyainer and we use secondary as name for more contai
             >
                 <div className="menu">
                     <DropdownItem
-                        leftIcon={<SettingsIcon />}
+                        leftIcon={<ArrowBackIcon />}
                         goToMenu={"main"}
                         setActive={setActive}
                     >
-                        <h2 className="textFunction">Setting</h2>
+                        <h2 className="textFunction">Cài đặt chung</h2>
                     </DropdownItem>
                     <DropdownItem leftIcon={<SettingsIcon />}><span className="textFunction">HTML</span></DropdownItem>
                     <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}><span className="textFunction">CSS</span></DropdownItem>
@@ -88,7 +87,7 @@ we always go back to main conyainer and we use secondary as name for more contai
                 <div className="menu">
                     <DropdownItem
                         goToMenu="main"
-                        leftIcon={<SettingsIcon />}
+                        leftIcon={<ArrowBackIcon />}
                         setActive={setActive}
                     >
                         <h2 className="textFunction">Animals</h2>
