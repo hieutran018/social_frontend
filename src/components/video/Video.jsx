@@ -63,7 +63,7 @@ function Video({ post }) {
                         <span className="postText">{post?.desc}</span>
                         <video loop ref={videoRef} className="srcVideo" src="http://webcoban.vn/file/bunny.mp4" controls></video>
                     </div>
-                    <div className="postBottom">
+                    <div className="videoBottom">
                         <div className="postBottomLeft">
                             <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
                             <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />

@@ -9,27 +9,34 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import 'moment/locale/vi';
-import { useState } from "react";
+// import { useState } from "react";
 import './post.css';
 
-
-function srcset(image, size, rows = 1, cols = 1) {
-    return {
-        src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-        srcSet: `${image}?w=${size * cols}&h=${size * rows
-            }&fit=crop&auto=format&dpr=2 2x`,
-    };
-}
-
 function Post({ post }) {
-    const [like, setLike] = useState(post.like)
-    const [isLiked, setIsLiked] = useState(false)
+    // const [like, setLike] = useState(post.like)
+    // const [isLiked, setIsLiked] = useState(false)
 
-    const likeHandler = () => {
-        setLike(isLiked ? like - 1 : like + 1)
-        setIsLiked(!isLiked)
-    }
+    // const likeHandler = () => {
+    //     setLike(isLiked ? like - 1 : like + 1)
+    //     setIsLiked(!isLiked)
+    // }
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
@@ -67,11 +74,9 @@ function Post({ post }) {
                         anchorClass="postViewMore"
                         onClick={executeOnClick}
                         expanded={false}
-
                         truncatedEndingComponent={"... "}
                     >{post.post_content}
                     </ShowMoreText>
-
                     {post.totalMediaFile === 1 ?
                         <div>
                             <img className="postImg" src={post.mediafile[0].media_file_name} alt="" />
@@ -113,21 +118,46 @@ function Post({ post }) {
                                         </ImageListItem>
                                     ))}
                                 </ImageList>}
-
                 </div>
-
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
-                        <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
-                        <span className="postLikeCounter">{like}</span>
+
+                        <div className="postBottomButton"><button onClick={handleClickOpen} className="btn ">Thích </button></div>
+                        <div className="postBottomButton"><button className="btn ">Bình luận</button></div>
+                        <div className="postBottomButton"><button className="btn ">Chia sẻ</button></div>
+                        {/* <span className="postLikeCounter">{like}</span> */}
                     </div>
-                    <div className="postBottomRight">
+                    {/* <div className="postBottomRight">
                         <span className="postCommentText">{post.comment} bình luận</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <button onClick={handleClose}>Disagree</button>
+                        <button onClick={handleClose} autoFocus>
+                            Agree
+                        </button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </div>
+
     );
 }
 
