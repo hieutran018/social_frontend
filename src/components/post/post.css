@@ -69,6 +69,19 @@
     max-height: 500px;
     object-fit: fill;
 }
+.postBottomStatistical{
+    display:flex ;
+    justify-content: space-between;
+}
+.postTextStatistical{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.statisticalComment{
+    margin-right: 10px;
+}
 
 .postBottom {
     display: flex;
@@ -118,4 +131,20 @@
     cursor: pointer;
     border-bottom: 1px dashed gray;
     font-size: 15px;
+}
+.postTitle{
+    display: flex;
+    justify-content: space-around;
+}
+.dialoPostButtonClose{
+    display: flex;
+    justify-content: end;
+}
+
+.postTitleDialog{
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 1rem;
 }
