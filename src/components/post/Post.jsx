@@ -10,10 +10,13 @@ import moment from 'moment';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
+import Comment from "../comment/comment";
+import CommentBox from "../commentbox/commentbox";
 
 import 'moment/locale/vi';
-// import { useState } from "react";
+import { useState } from "react";
 import './post.css';
+
 
 function Post({ post }) {
     // const [like, setLike] = useState(post.like)
@@ -23,13 +26,33 @@ function Post({ post }) {
     //     setLike(isLiked ? like - 1 : like + 1)
     //     setIsLiked(!isLiked)
     // }
+    const [commentList, setCommentList] = useState([]);
 
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+
+    async function fetchCommentByIdPost(postId) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ postId: postId })
+        };
+        const requestURL = "http://127.0.0.1:8000/api/fetch-comment-by-post";
+        const response = await fetch(requestURL, requestOptions);
+        const responseJson = await response.json();
+        setCommentList(responseJson);
+
+
+    }
+
+
+    const handleClickOpen = (postId) => {
         setOpen(true);
+        fetchCommentByIdPost(postId);
+
     };
     const handleClose = () => {
+        console.log(commentList);
         setOpen(false);
     };
 
@@ -122,7 +145,7 @@ function Post({ post }) {
                 <div className="postBottom">
                     <div className="postBottomLeft">
                         <div className="postBottomButton"><button className="btn ">Thích </button></div>
-                        <div className="postBottomButton"><button onClick={handleClickOpen} className="btn ">Bình luận</button></div>
+                        <div className="postBottomButton"><button onClick={() => handleClickOpen(post.id)} className="btn ">Bình luận</button></div>
                         <div className="postBottomButton"><button className="btn ">Chia sẻ</button></div>
                         {/* <span className="postLikeCounter">{like}</span> */}
                     </div>
@@ -235,6 +258,16 @@ function Post({ post }) {
                                     {/* <span className="postLikeCounter">{like}</span> */}
                                 </div>
 
+                            </div>
+                            <div>
+                                {commentList.map((u) => (
+
+                                    <Comment key={u.id} comment={u} />
+
+                                ))}
+                            </div>
+                            <div>
+                                <CommentBox />
                             </div>
                         </div>
                     </div>
