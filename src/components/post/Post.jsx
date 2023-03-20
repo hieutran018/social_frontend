@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import PublicIcon from '@mui/icons-material/Public';
 import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
@@ -19,6 +20,7 @@ import './post.css';
 
 
 function Post({ post }) {
+    const navigate = useNavigate();
     // const [like, setLike] = useState(post.like)
     // const [isLiked, setIsLiked] = useState(false)
 
@@ -41,34 +43,33 @@ function Post({ post }) {
         const response = await fetch(requestURL, requestOptions);
         const responseJson = await response.json();
         setCommentList(responseJson);
-
-
     }
-
-
     const handleClickOpen = (postId) => {
         setOpen(true);
         fetchCommentByIdPost(postId);
 
     };
     const handleClose = () => {
-        console.log(commentList);
         setOpen(false);
-    };
 
+    };
+    const viewProfileUser = (userId) => {
+        const url = "/" + userId;
+        navigate(url);
+
+    }
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
-
     return (
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
-                    <div className="postTopLeft">
+                    <div onClick={() => viewProfileUser(post.user_id)} className="postTopLeft">
                         <img
                             className="postProfileImg"
                             src={post.avatarUser}
-                            alt=""
+                            alt={"Avatar user " + post.username}
                         />
                         <span className="postUsername">
                             {post.username}

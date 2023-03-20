@@ -38,3 +38,21 @@
     width: 100%;
     
 }
+
+.commentBottom{
+    margin-left: 2rem;
+    width: 15rem;
+    margin-bottom: 0.3rem;
+    margin-top: -0.2rem;
+   
+}
+
+.commentBottom{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.commentSubItem{
+    font-weight: 600;
+    color: #757576;
+}

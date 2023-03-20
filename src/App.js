@@ -20,7 +20,7 @@ function App() {
       <Route path='/video' element={<Videos />} />
       <Route path='/friend' element={<Friend />} />
       <Route path='/friend-suggestion' element={<FriendSuggestion />} />
-      <Route path='/frofile' element={<Profile />} />
+      <Route path='/:userId' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>
   );

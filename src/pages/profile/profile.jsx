@@ -1,10 +1,30 @@
 import './profile.css';
+import { useParams } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 // import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
+import { useEffect, useState } from 'react';
 
 function Profile() {
+    let { userId } = useParams();
+    const [profile, setProfile] = useState([]);
+    useEffect(() => {
+        async function fetchProfileUser() {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: userId })
+            };
+            const requestURL = "http://127.0.0.1:8000/api/profile-user";
+            const response = await fetch(requestURL, requestOptions);
+            const responseJson = await response.json();
+            setProfile(responseJson);
+        }
+        fetchProfileUser();
+
+    }, [userId]);
+
     return (
         <>
             <Topbar />
@@ -20,17 +40,19 @@ function Profile() {
                             />
                             <img
                                 className="profileUserImg"
-                                src="assets/person/7.jpeg"
+                                src={profile.avatar}
                                 alt=""
                             />
                         </div>
                         <div className="profileInfo">
-                            <h4 className="profileInfoName">Trần Dương Chí Hiếu</h4>
+                            <h4 className="profileInfoName">{profile.username}</h4>
                             <span className="profileInfoDesc">Doing!</span>
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed />
+                        <div className='profileFeed'>
+                            <Feed />
+                        </div>
                         <Rightbar profile />
                     </div>
                 </div>

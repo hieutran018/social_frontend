@@ -2,9 +2,13 @@
     flex: 5.5;
     height: 95vh;
     overflow-y: scroll;
+ 
 
 }
 
 .feedWrapper {
-    padding: 20px 100px 0px 100px;
+    padding: 0.5rem 5rem 0.1rem 5rem;
+    width: 50rem;
+    margin: auto;
+    
 }

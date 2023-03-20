@@ -1,5 +1,6 @@
 .profile {
     display: flex;
+    margin-top: 3rem;
 }
 
 .profileRight {
@@ -45,7 +46,9 @@
     font-weight: 300;
     padding-bottom: 20px;
 }
-
+.profileFeed{
+    padding: 0.5rem 2rem 0px 5rem;
+}
 .profileRightBottom {
     display: flex;
 }
