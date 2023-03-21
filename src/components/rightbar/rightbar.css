@@ -1,6 +1,7 @@
 .rightbar {
-    flex: 2;
+    flex: 1.5;
 }
+
 
 .rightbarWrapper {
     padding: 20px 20px 0 0;
@@ -73,7 +74,7 @@
 .rightbarFollowings {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 
 }
 
@@ -86,12 +87,23 @@
     width: 150px;
     height: 150px;
 }
+.rightbarContainerImgUser{
+    width: 10rem;
+    height: 10rem;
+}
 
 .rightbarFollowingImg {
-    width: 100px;
-    height: 100px;
+    width: 8rem;
+    height: 8rem;
     object-fit: cover;
     border-radius: 5px;
+    display: flex;
+    margin: auto;
+}
+.rightbarFollowingsCotainerNameUser{
+    height: 10rem;
+    display: flex;
+    margin: auto;
 }
 
 .rightbarFollowingName {
@@ -104,4 +116,6 @@
     white-space: normal;
     -webkit-line-clamp: 1;
     line-height: 1.6rem;
+    text-align: center;
+    margin: a;
 }

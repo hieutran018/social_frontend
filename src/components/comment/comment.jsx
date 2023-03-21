@@ -16,11 +16,11 @@ function Comment({ comment }) {
             <div className='comment'>
                 <div className="commentCard">
                     <div className="commentAvatarContainer">
-                        <img onClick={() => viewProfileUser(comment.userId)} className="commentAvatarProfile" src={comment.avatarUser} alt="" />
+                        <a href={"/" + comment.userId}><img className="commentAvatarProfile" src={comment.avatarUser} alt="" /></a>
                     </div>
                     <div className='commentMain'>
                         <div onClick={() => viewProfileUser(comment.userId)} className="commentUserNameContainer">
-                            <span className="commentUserName">{comment.username}</span>
+                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + comment.userId}>{comment.username}</a></span>
                         </div>
                         <div className="commentContent">
                             <span>{comment.comment_content}</span>

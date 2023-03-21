@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
 import PublicIcon from '@mui/icons-material/Public';
 import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
@@ -12,15 +11,12 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import Comment from "../comment/comment";
-import CommentBox from "../commentbox/commentbox";
-
 import 'moment/locale/vi';
 import { useState } from "react";
+import axios from "axios";
 import './post.css';
 
-
 function Post({ post }) {
-    const navigate = useNavigate();
     // const [like, setLike] = useState(post.like)
     // const [isLiked, setIsLiked] = useState(false)
 
@@ -31,7 +27,9 @@ function Post({ post }) {
     const [commentList, setCommentList] = useState([]);
 
     const [open, setOpen] = React.useState(false);
+    useEffect(() => {
 
+    })
 
     async function fetchCommentByIdPost(postId) {
         const requestOptions = {
@@ -53,29 +51,46 @@ function Post({ post }) {
         setOpen(false);
 
     };
-    const viewProfileUser = (userId) => {
-        const url = "/" + userId;
-        navigate(url);
-
-    }
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
+    }
+
+    const [inputComment, setInputComment] = useState('');
+    const handleClickPostComment = (postId) => {
+        const token = JSON.parse(sessionStorage.getItem('token'));
+        axios({
+            method: 'POST', //you can set what request you want to be
+            url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
+            data: { postId: postId, commentContent: inputComment },
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        setInputComment('');
+        fetchCommentByIdPost(postId)
     }
     return (
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
-                    <div onClick={() => viewProfileUser(post.user_id)} className="postTopLeft">
-                        <img
-                            className="postProfileImg"
-                            src={post.avatarUser}
-                            alt={"Avatar user " + post.username}
-                        />
+
+                    <div className="postTopLeft">
+                        <a href={"/" + post.user_id}>
+                            <img
+                                className="postProfileImg"
+                                src={post.avatarUser}
+                                alt={"Avatar user " + post.username}
+                            />
+                        </a>
+
                         <span className="postUsername">
-                            {post.username}
+                            <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                {post.username}
+                            </a>
                         </span>
 
                     </div>
+
                 </div>
                 <div className="postPrivacy">
                     <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
@@ -262,20 +277,26 @@ function Post({ post }) {
                             </div>
                             <div>
                                 {commentList.map((u) => (
-
                                     <Comment key={u.id} comment={u} />
-
                                 ))}
                             </div>
                             <div>
-                                <CommentBox />
+                                <div className="commentBox">
+                                    <img className="commentBoxAvatarProfile" src="assets/person/2.jpeg" alt="" />
+                                    <input onKeyDownCapture={
+                                        inputComment != null ? event => {
+                                            if (event.key === 'Enter') {
+                                                handleClickPostComment(post.id)
+                                            }
+                                        } : {}
+                                    } className="commentBoxInut" type="text" value={inputComment} onChange={(event) => setInputComment(event.target.value)} />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </Dialog>
             </div>
         </div>
-
     );
 }
 

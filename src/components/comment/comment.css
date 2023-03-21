@@ -23,6 +23,10 @@
     font-weight: 600;
     
 }
+.commentLinkProfileUser{
+    text-decoration: none;
+color: black;
+}
 .commentAvatarContainer{
     width: 55px;
     height: 55px;

@@ -46,14 +46,14 @@ function Profile() {
                         </div>
                         <div className="profileInfo">
                             <h4 className="profileInfoName">{profile.username}</h4>
-                            <span className="profileInfoDesc">Doing!</span>
+                            <span className="profileInfoDesc"></span>
                         </div>
                     </div>
                     <div className="profileRightBottom">
                         <div className='profileFeed'>
                             <Feed />
                         </div>
-                        <Rightbar profile />
+                        <Rightbar profile userProfile={profile} />
                     </div>
                 </div>
             </div>

@@ -1,9 +1,15 @@
 import "./rightbar.css";
 import { Users } from "../../data";
 import Online from "../online/Online";
+import { useEffect } from "react";
 
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ profile, userProfile }) {
+
+    useEffect(() => {
+
+    })
+
     const HomeRightbar = () => {
         return (
             <>
@@ -26,12 +32,12 @@ export default function Rightbar({ profile }) {
 
     const ProfileRightbar = () => {
         return (
-            <>
+            <div>
                 <h4 className="rightbarTitle">Giới thiệu</h4>
                 <div className="rightbarInfo">
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">Thành phố:</span>
-                        <span className="rightbarInfoValue">Hồ Chí Minh</span>
+                        <span className="rightbarInfoValue">{userProfile.address}</span>
                     </div>
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">Đến từ:</span>
@@ -45,55 +51,99 @@ export default function Rightbar({ profile }) {
                 <h4 className="rightbarTitle">Bạn bè</h4>
                 <div className="rightbarFollowings">
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/1.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <div className="rightbarFollowingsCotainerNameUser">
+                            <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
+                        </div>
+                    </div>
+                    <div className="rightbarFollowing">
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
                         <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/2.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
-                        <span className="rightbarFollowingName">Nguyễn Công Chính</span>
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/3.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
-                        <span className="rightbarFollowingName">Nguyễn Nhan Gia Bảo</span>
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/4.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
-                        <span className="rightbarFollowingName">Nguyễn Minh Hiếu</span>
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/5.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
-                        <span className="rightbarFollowingName">Trần Đình Thủ</span>
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                     <div className="rightbarFollowing">
-                        <img
-                            src="assets/person/6.jpeg"
-                            alt=""
-                            className="rightbarFollowingImg"
-                        />
-                        <span className="rightbarFollowingName">Huỳnh Nguyễn Vân Anh</span>
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
+                    </div>
+                    <div className="rightbarFollowing">
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
+                    </div>
+                    <div className="rightbarFollowing">
+                        <div className="rightbarContainerImgUser">
+                            <img
+                                src="assets/person/1.jpeg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                        </div>
+                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                 </div>
-            </>
+            </div>
         );
     };
     return (
