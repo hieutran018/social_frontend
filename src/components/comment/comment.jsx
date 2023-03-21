@@ -1,19 +1,25 @@
 import './comment.css';
 import moment from 'moment';
 import 'moment/locale/vi';
+import { useNavigate } from 'react-router-dom';
 
 
 function Comment({ comment }) {
+    const navigate = useNavigate();
+    const viewProfileUser = (userId) => {
+        const url = "/" + userId;
+        navigate(url);
+    }
 
     return (
         <div>
             <div className='comment'>
                 <div className="commentCard">
                     <div className="commentAvatarContainer">
-                        <img className="commentAvatarProfile" src="assets/person/2.jpeg" alt="" />
+                        <img onClick={() => viewProfileUser(comment.userId)} className="commentAvatarProfile" src={comment.avatarUser} alt="" />
                     </div>
                     <div className='commentMain'>
-                        <div className="commentUserNameContainer">
+                        <div onClick={() => viewProfileUser(comment.userId)} className="commentUserNameContainer">
                             <span className="commentUserName">{comment.username}</span>
                         </div>
                         <div className="commentContent">
