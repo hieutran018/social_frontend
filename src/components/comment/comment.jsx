@@ -10,7 +10,6 @@ function Comment({ comment }) {
         const url = "/" + userId;
         navigate(url);
     }
-
     return (
         <div>
             <div className='comment'>
@@ -28,7 +27,7 @@ function Comment({ comment }) {
                     </div>
                 </div>
             </div>
-            <div className='commentBottom'><span className="commentSubItem">Thích</span><span className="commentSubItem">Phản hồi</span><span className="commentSubItem">{moment(comment.created_at, 'YYYYMMDD h:mm:ss').fromNow()}</span></div>
+            <div className='commentBottom'><span className="commentSubItem">Thích</span><span className="commentSubItem">Phản hồi</span><span className="commentSubItem">{moment(comment.created_at, 'YYYYMMDD H:mm:ss').fromNow()}</span></div>
         </div>
 
     );
