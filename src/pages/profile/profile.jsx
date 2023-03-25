@@ -4,6 +4,7 @@ import Topbar from '../../components/topbar/Topbar';
 // import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
+import Share from '../../components/share/Share';
 import { useEffect, useState } from 'react';
 
 function Profile() {
@@ -51,6 +52,7 @@ function Profile() {
                     </div>
                     <div className="profileRightBottom">
                         <div className='profileFeed'>
+                            <Share />
                             <Feed />
                         </div>
                         <Rightbar profile userProfile={profile} />

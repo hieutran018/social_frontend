@@ -3,7 +3,7 @@ import Video from '../video/Video';
 import { Posts } from "../../data";
 
 function Watch() {
-    return (<div className="feed">
+    return (<div className="video">
         <div className="watchWrapper">
 
             {Posts.map((p) => (

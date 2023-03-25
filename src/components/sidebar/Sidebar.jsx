@@ -10,11 +10,11 @@ import {
     Diversity3,
     Cake,
     ReduceCapacity,
-    ArrowBack
 } from '@mui/icons-material';
 import './sidebar.css';
 import CloseFriend from '../closefriend/CloseFriend';
 import { Users } from "../../data";
+import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
 
 function Sidebar({ page }) {
 
@@ -135,32 +135,6 @@ function Sidebar({ page }) {
                 </ul>
             </>);
     };
-
-    const SidebarFriendSuggestion = () => {
-        return (
-            <>
-                <div className="titleFriendSuggestion">
-                    <Link to="/friend"><ArrowBack className='iconBack' />
-                    </Link> Gợi ý
-                </div>
-                <ul className="sidebarList">
-                    {Users.map((u) => (
-                        <li className="sidebarListItemFriendSuggestion">
-                            <img className='imageProfile' src={u.profilePicture} alt="" />
-                            <div className='profileInfo'>
-                                <div className="nameProfile">{u.username}</div>
-                                <div className="buttonAction">
-                                    <button className='buttonSuggesstionAccept'>Xác nhận</button>
-                                    <button className='buttonSuggesstionCancel'>Xóa</button>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </>
-        );
-    }
-
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
@@ -169,5 +143,6 @@ function Sidebar({ page }) {
         </div>
     );
 }
+
 
 export default Sidebar;

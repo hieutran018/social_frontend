@@ -89,20 +89,16 @@ color: black;
     margin-right: 10px;
 }
 
-.postBottom {
+.postDetailBottom {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    
+    justify-content: space-between;
 }
 
-/* .postBottomLeft {
-    display: flex;
-    justify-content: space-between; 
-} */
-.postBottomButton{
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 250px;
+.postDetailBottomButton{
+    
+    margin-bottom: 0.5rem;
+    width: 15rem;
 }
 .btn {
   border: none;

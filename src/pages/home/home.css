@@ -1,11 +1,12 @@
-.body{
-    overflow-y: hidden;
-}
+
 .homeContainer {
     display: flex;
-    width: 100vh;
-    margin: 0;
+    width: 100%;
+    position: relative;
     margin-top: 3rem;
-    position: fixed;
-
+}
+.homeFeed{
+    margin-top: 1rem;
+    
+    
 }

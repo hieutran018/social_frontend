@@ -12,7 +12,7 @@ export default function Rightbar({ profile, userProfile }) {
 
     const HomeRightbar = () => {
         return (
-            <>
+            <div className="homeRightbar">
                 <div className="birthdayContainer">
                     <img className="birthdayImg" src="assets/gift.png" alt="" />
                     <span className="birthdayText">
@@ -26,13 +26,13 @@ export default function Rightbar({ profile, userProfile }) {
                         <Online key={u.id} user={u} />
                     ))}
                 </ul>
-            </>
+            </div>
         );
     };
 
     const ProfileRightbar = () => {
         return (
-            <div>
+            <>
                 <h4 className="rightbarTitle">Giới thiệu</h4>
                 <div className="rightbarInfo">
                     <div className="rightbarInfoItem">
@@ -143,12 +143,12 @@ export default function Rightbar({ profile, userProfile }) {
                         <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
                     </div>
                 </div>
-            </div>
+            </>
         );
     };
     return (
         <div className="rightbar">
-            <div className="rightbarWrapper">
+            <div className={profile ? "profileRightbarWrapper" : "homeRightbarWrapper"}>
                 {profile ? <ProfileRightbar /> : <HomeRightbar />}
             </div>
         </div>

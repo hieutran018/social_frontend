@@ -7,7 +7,7 @@ function Videos() {
     return (
         <>
             <Topbar />
-            <div className="homeContainer">
+            <div className="videoContainer">
                 <Sidebar page={2} />
                 <Watch />
             </div>

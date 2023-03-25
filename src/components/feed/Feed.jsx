@@ -1,6 +1,6 @@
 import Post from "../post/Post";
 import './feed.css';
-import Share from "../share/Share";
+
 import { useEffect, useState } from "react";
 
 function Feed() {
@@ -18,7 +18,7 @@ function Feed() {
     // console.log("==SET POST LIST==", postList);
     return (<div className="feed">
         <div className="feedWrapper">
-            <Share />
+
             {postList.map((p) => (
                 <Post key={p.id} post={p} />
             ))}

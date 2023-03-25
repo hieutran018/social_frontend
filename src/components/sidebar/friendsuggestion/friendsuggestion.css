@@ -1,0 +1,24 @@
+.titleFriendSuggestion{
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+.frslinkProfile{
+    text-decoration: none;
+    color: black;
+}
+
+.frsContainnerImage{
+    margin-top: 5px;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50px;
+}
+
+.imageProfile{
+    margin-top: 5px;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50px;
+
+}
