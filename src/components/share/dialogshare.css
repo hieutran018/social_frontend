@@ -1,0 +1,248 @@
+.container{
+  width: 500px;
+  height: 480px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  transition: height 0.2s ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+
+
+.wrapper{
+  margin: 2rem;
+}
+
+.contaierHeader{
+    display: flex;
+    justify-content: center;
+}
+.shareTitle{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.shareImgAvatar{
+  
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50px;
+}
+.optionsContainer{
+    display: flex;
+    justify-content: space-between;
+    border: 1px ridge  #606266;
+    border-radius: 10px;
+}
+.shareDescrion{
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #606266;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+.options{
+    display: flex;
+    justify-content: space-evenly;
+}
+.shareButtonContainer{
+    margin-top: 0.5rem;
+}
+
+.shareButton{
+    width: 100%;
+    height: 3rem;
+    background-color: #1877F2;
+    font-size: 2rem;
+}
+
+div.details{
+  margin: -3px 0 0 12px;
+}
+
+.privacy{
+  display: flex;
+  height: 25px;
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 11px;
+  margin-top: 3px;
+  border-radius: 5px;
+  align-items: center;
+  width: 8rem;
+  background: #E4E6EB;
+  justify-content: space-between;
+}
+.content{
+    display: flex;
+    
+}
+.shareUserName{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.details .privacy span{
+  font-size: 13px;
+  margin-top: 1px;
+  font-weight: 500;
+}
+.details .privacy i:last-child{
+  font-size: 13px;
+  margin-left: 1px;
+}
+.previewFilesUpload{
+  display:flex;
+  margin-top: 50px;
+  flex-direction: column;   
+ 
+}
+.shareImageContainer{
+  display: flex;
+}
+
+.image{
+  width: 10rem;
+  height: 10rem;
+}
+div :where(textarea){
+  width: 100%;
+  height: 15rem;
+  outline: none;
+  border: none;
+}
+div textarea{
+  resize: none;
+  font-size: 18px;
+  margin-top: 30px;
+  min-height: 100px;
+}
+div textarea::placeholder{
+  color: #858585;
+}
+div textarea:focus::placeholder{
+  color: #b3b3b3;
+}
+div :where(.theme-emoji, .options){
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.theme-emoji img:last-child{
+  max-width: 24px;
+}
+
+
+.options .list li{
+  height: 42px;
+  width: 42px;
+  margin: 0 -1px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.options .list li:hover{
+  background: #f0f1f4;
+}
+.options .list li img{
+  width: 23px;
+}
+
+.container .audience{
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.container.active .audience{
+  opacity: 1;
+}
+.audience header{
+  padding: 17px 0;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid #bfbfbf;
+}
+.audience header .arrow-back{
+  position: absolute;
+  left: 25px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #747474;
+  border-radius: 50%;
+  background: #E4E6EB;
+}
+.audience header p{
+  font-size: 22px;
+  font-weight: 600;
+}
+.audience .content{
+  margin: 20px 25px 0;
+}
+.audience .content p{
+  font-size: 17px;
+  font-weight: 500;
+}
+.audience .content span{
+  font-size: 14px;
+  color: #65676B;
+}
+.audience .list{
+  margin: 15px 16px 20px;
+  list-style: none;
+}
+.audience .list li{
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 5px;
+  padding: 12px 10px;
+  border-radius: 7px;
+  align-items: center;
+  justify-content: space-between;
+}
+.list li.active,
+.audience .list li.active:hover{
+  background: #E5F1FF;
+}
+.audience .list li:hover{
+  background: #f0f1f4;
+}
+.audience .list li .column .icon{
+  height: 50px;
+  width: 50px;
+  color: #333;
+  font-size: 23px;
+  border-radius: 50%;
+  background: #E4E6EB;
+}
+.audience .list li.active .column .icon{
+  background: #cce4ff;
+}
+.audience .list li .column .details{
+  margin-left: 15px;
+}
+.list li .column .details p{
+  font-weight: 500;
+}
+.list li .column .details span{
+  font-size: 14px;
+  color: #65676B;
+}
+.list li .radio{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid #707070;
+}
+.list li.active .radio{
+  border: 2px solid #4599FF;
+}
+.list li .radio::before{
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: inherit;
+}
+.list li.active .radio::before{
+  background: #4599FF;
+}

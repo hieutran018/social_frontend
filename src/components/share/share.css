@@ -1,6 +1,6 @@
 .share {
-    width: 60rem;
-    height: 170px;
+    width: 50rem;
+    height: 8rem;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
     box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -10,7 +10,7 @@
 .shareWrapper {
     
     padding: 10px;
-    width: 50rem;
+
 }
 
 .shareTop {
@@ -19,8 +19,8 @@
 }
 
 .shareProfileImg {
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
@@ -28,12 +28,21 @@
 
 .shareInput {
     border: none;
-    width: 80%;
-    font-size: 20px;
+    width: 50rem;
+    height: 3rem;
+    border-radius: 50px;
+    background-color: #E4E6E9;
 }
 
-.shareInput:focus {
-    outline: none;
+.shareInputText{
+    display: flex;
+    line-height: 1rem;
+    margin: 1rem 1rem;
+    color: #606266;
+}
+
+.shareInput:hover {
+    background-color: #cfd0d2;
 }
 
 .shareHr {
@@ -43,18 +52,21 @@
 .shareBottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .shareOptions {
     display: flex;
-    margin-left: 20px;
+    
+    justify-content: space-around;
+
 }
 
 .shareOption {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 5rem;
+    margin-left: 5rem;
     cursor: pointer;
 }
 

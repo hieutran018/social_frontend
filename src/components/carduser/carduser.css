@@ -1,23 +1,26 @@
 .cardUser {
-    border-radius: 5px 5px 0px 0px;
-    max-width: 300px;
-    height: 300px;
+    border-radius: 5px 5px 5px 5px;
+    width: 12rem;
+    height: 20rem;
     margin: auto;
     text-align: center;
+    border: 1px solid #BEBDB9;
+    background-color: #FFFFFF;
 }
 .cardUserProfileImg{
     border-radius: 5px 5px 0px 0px;
-    width: 100%;
-    height: 160px;
-    max-height: 160px;
+    width: 12rem;
+    height: 10rem;
+    max-height: 17rem;
+    object-fit: cover;
 }
 .textName{
     font-size: 18px;
-    padding: 10px 0px 15px 0px;
+    padding: 10px 0px 0.2rem 0px;
 }
 
 .accept{
-    padding-top: 5px;  
+    padding-top: 0.1rem;  
 }
 .buttonAccept{
     border-radius: 5px;
@@ -29,7 +32,7 @@
     background-color: rgb(34,116,224);;
     text-align: center;
     cursor: pointer;
-    width: 100%;
+    width: 11rem;
     font-size: 18px;
 }
 .cancel{
@@ -46,7 +49,7 @@
     background-color: rgb(58,59,60);
     text-align: center;
     cursor: pointer;
-    width: 100%;
+    width: 11rem;
     font-size: 18px;
 }
 

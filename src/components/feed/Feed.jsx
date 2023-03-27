@@ -1,27 +1,29 @@
 import Post from "../post/Post";
 import './feed.css';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPost } from '../../redux/actions/postAction'
+import { selectPostStatus, selectPost } from '../../redux/selectors/postSelector'
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function Feed() {
-    const [postList, setPostList] = useState([]);
+    const dispatch = useDispatch()
+    const status = useSelector(selectPostStatus)
+    const posts = useSelector(selectPost)
+    // const [postList, setPostList] = useState([]);
     useEffect(() => {
-        async function fetchDataPost() {
-            const requestURL = "http://127.0.0.1:8000/api/fetch-post";
-            const response = await fetch(requestURL);
-            const responseJson = await response.json();
-            setPostList(responseJson);
-
-        }
-        fetchDataPost();
-    }, [])
-    // console.log("==SET POST LIST==", postList);
+        dispatch(fetchPost());
+    }, [dispatch])
+    // console.log("==SET POST LIST==", posts);
     return (<div className="feed">
         <div className="feedWrapper">
-
-            {postList.map((p) => (
-                <Post key={p.id} post={p} />
-            ))}
+            {
+                status === 'loading' ?
+                    <div>loading...</div>
+                    : status === 'succeeded' ? posts.map((p) => (
+                        <Post key={p.id} post={p} />
+                    )) : status === 'failed' ? <div>Fail!</div> : ""
+            }
         </div>
     </div>);
 }

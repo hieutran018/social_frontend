@@ -9,13 +9,17 @@
 }
 
 .profileRightbarWrapper{
-    padding: 20px 20px 0 0;
-    background-color: aliceblue;
+    
+    
     width: 35rem;
 }
 
+.homeRightbarWrapper{
+    position: fixed;
+}
+
 .homeRightbar{
-    height: calc(90vh + 20px);
+    height: calc(90vh + 40px);
     overflow-y: scroll; 
 }
 
@@ -43,10 +47,41 @@
     padding-left: 10px;
 }
 
+.rightbarTitleContent{
+    display: flex;
+    justify-content: space-between;
+}
+.rightbarLinkViewMoreFriend{
+    margin-top: 1.4rem;
+    
+    padding-bottom: 1rem;
+    /* font-size: 25px; */
+    /* font-weight: 500; */
+}
+
 .rightbarTitle {
-    margin-top: 10px;
+    margin-top: 1rem;
     padding-left: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
+    font-size: 25px;
+    font-weight: 500;
+    
+}
+.rightbarMargin{
+    margin-top: 1.5rem;
+}
+
+.rightbarContainer{
+    background-color: #FFFFFF;
+    width: 35rem;
+    border-radius: 10px;
+    border: 1px solid #D8DADF;
+}
+.rightbarInfo{
+    padding: 1rem;
+}
+.rightbarFriend{
+    padding: 1rem;
 }
 
 .rightbarFriendList {
@@ -55,12 +90,6 @@
     margin: 0;
     height: 100%;
    
-}
-
-.rightbarTitle {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
 }
 
 .rightbarInfo {
@@ -85,9 +114,30 @@
 .rightbarFollowings {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    margin-top: 1rem;
+    margin-left: 3rem;
+    margin-right: 2rem;
     
 
+}
+.rightbarImgs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-left: 2.2rem;
+    margin-right: 1rem;
+}
+.rightbarImage{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .rightbarFollowing {
@@ -104,6 +154,11 @@
     height: 10rem;
 }
 
+.rightbarContainerImg{
+    width: 12rem;
+    height: 12rem;
+}
+
 .rightbarFollowingImg {
     width: 8rem;
     height: 8rem;
@@ -111,6 +166,14 @@
     border-radius: 5px;
     display: flex;
     margin: auto;
+}
+.rightbarImg{
+    width: 10rem;
+    height: 10rem;
+    object-fit: fill;
+    border-radius: 5px;
+    display: flex;
+    
 }
 .rightbarFollowingsCotainerNameUser{
     height: 10rem;

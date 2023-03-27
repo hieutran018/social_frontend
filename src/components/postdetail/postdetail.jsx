@@ -121,42 +121,46 @@ function PostDetail({ post }) {
                         </ShowMoreText>
                         {post.totalMediaFile === 1 ?
                             <div>
-                                <img className="postImg" src={post.mediafile[0].media_file_name} alt="" />
+                                {
+                                    post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.mediafile[0].media_file_name} controls></video> :
+                                        <img className="postImg" src={post.mediafile[0].media_file_name} alt="" />
+                                }
+
                             </div>
                             : post.totalMediaFile === 2 ?
-                                <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                     {post.mediafile.map((item) => (
                                         <ImageListItem key={item.media_file_name}>
-                                            <img
+                                            {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
                                                 src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
                                                 srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                                 alt={item.title}
                                                 loading="lazy"
-                                            />
+                                            />}
                                         </ImageListItem>
                                     ))}
                                 </ImageList> : post.totalMediaFile === 3 ?
                                     <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                         {post.mediafile.map((item) => (
                                             <ImageListItem key={item.media_file_name}>
-                                                <img
+                                                {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
                                                     src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
                                                     srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                                     alt={item.title}
                                                     loading="lazy"
-                                                />
+                                                />}
                                             </ImageListItem>
                                         ))}
                                     </ImageList> :
                                     <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
                                         {post.mediafile.map((item) => (
                                             <ImageListItem key={item.media_file_name}>
-                                                <img
+                                                {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
                                                     src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
                                                     srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                                     alt={item.title}
                                                     loading="lazy"
-                                                />
+                                                />}
                                             </ImageListItem>
                                         ))}
                                     </ImageList>}

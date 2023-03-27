@@ -24,10 +24,7 @@ function Topbar() {
                 </div>
             </div>
             <div className="topbarRight">
-                <div className="topbarLinks">
-                    <span className="topbarLink">Trang chủ</span>
-                    <span className="topbarLink">Dòng thời gian</span>
-                </div>
+
                 <div className="topbarIcons">
                     <div className="topbarIconItem">
                         <Person />
