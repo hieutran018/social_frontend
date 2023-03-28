@@ -1,20 +1,22 @@
-.profile {
-    display: flex;
-    flex: 6.5;
-   
-}
+
 
 .viewProfile{
     display: flex;
-    width: 100%;
-    margin-top: 3.5rem;
+    width: 10rem;
+    margin-top: 3rem;
 
 }
+
 .viewProfileRightbar{
     display: flex;
     width: 100%;
-    margin-top: 3.5rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
     position: scroll;
+}
+.viewProfileFeed{
+    display: flex;
+    margin-left: 3rem;
 }
 
 .profileRight {
@@ -61,13 +63,15 @@
     padding-bottom: 20px;
 }
 
-.profileRightBottom {
+.viewprofileRightBottom {
     display: flex;
-    width: 95%;
+    justify-content: space-around;
+    
 }
 
-.viewProfileContainer {
-    flex: 6;
+.viewProfileWrapper {
+    
+    
     position: sticky;
-    width: 90rem;
+    width: 10rem;
 } 

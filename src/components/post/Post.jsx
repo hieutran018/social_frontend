@@ -60,7 +60,7 @@ function Post({ post }) {
                 <div className="postCenter">
                     <ShowMoreText
                         /* Default options */
-                        lines={3}
+                        lines={1}
                         more="xem thêm"
                         less="ẩn bớt"
                         className="postText"

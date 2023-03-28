@@ -8,7 +8,6 @@ import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 import Loading from './components/loading/Loading';
-import ViewProfile from './pages/viewprofile/ViewProfile';
 
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
       <Route path='/video' element={<Videos />} />
       <Route path='/friend' element={<Friend />} />
       <Route path='/friend-suggestion' element={<FriendSuggestion />} />
-      <Route path='/friend-suggestion/:Id' element={<ViewProfile />} />
+      <Route path='/friend-suggestion/:userId' element={<FriendSuggestion />} />
       <Route path='/:userId' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>

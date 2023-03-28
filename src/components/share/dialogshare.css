@@ -22,11 +22,19 @@
     font-size: 2rem;
     font-weight: 500;
 }
+
+.shareImgAvatarContainer{
+  width: 4rem;
+  height: 4rem;
+  margin-right: 10px;
+
+}
 .shareImgAvatar{
   
   width: 4rem;
   height: 4rem;
   border-radius: 50px;
+  object-fit: fill;
 }
 .optionsContainer{
     display: flex;
@@ -63,17 +71,23 @@ div.details{
 
 .privacy{
   display: flex;
-  height: 25px;
+  height: 2rem;
   cursor: pointer;
   padding: 0 10px;
   font-size: 11px;
-  margin-top: 3px;
+  margin-top: 0.3rem;
   border-radius: 5px;
   align-items: center;
-  width: 8rem;
+  width: 9rem;
   background: #E4E6EB;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
+.shareShowPrivacy{
+  display: flex;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
 .content{
     display: flex;
     
@@ -84,8 +98,11 @@ div.details{
 }
 .details .privacy span{
   font-size: 13px;
-  margin-top: 1px;
+  margin-top: 0.3rem;
+  margin-bottom: 0.2rem;
   font-weight: 500;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 .details .privacy i:last-child{
   font-size: 13px;

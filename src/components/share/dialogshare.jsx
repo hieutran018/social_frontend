@@ -77,13 +77,15 @@ function DialogShare() {
                 </div>
 
                 <div className="content">
-                    <div><img className='shareImgAvatar' src="assets/person/1.jpeg" alt="logo" /></div>
+                    <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src="assets/person/1.jpeg" alt="logo" /></div>
                     <div className="details">
                         <p className='shareUserName'>Trần Dương Chí Hiếu</p>
                         <div className='privacy' onClick={handleClick}>
-                            {privacy === 0 ? <PeopleAltIcon /> : privacy === 1 ? <LockPersonIcon /> : <PublicIcon />}
-                            <span>{privacy === 0 ? 'Bạn bè' : privacy === 1 ? 'Chỉ mình tôi' : 'Công khai'}</span>
-                            <ArrowDropDownIcon />
+                            <div className='shareShowPrivacy'>
+                                {privacy === 0 ? <PeopleAltIcon /> : privacy === 1 ? <LockPersonIcon /> : <PublicIcon />}
+                                <span className='shareShowPrivacyText'>{privacy === 0 ? 'Bạn bè' : privacy === 1 ? 'Chỉ mình tôi' : 'Công khai'}</span>
+                                <ArrowDropDownIcon />
+                            </div>
                         </div>
                     </div>
                 </div>

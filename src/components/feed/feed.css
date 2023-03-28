@@ -7,8 +7,42 @@
 }
 
 .feedWrapper {
-    padding: 0.5rem 5rem 0.1rem 5rem;
-    width: 50rem;
+    width: 45rem;
     margin: auto;
     
+}
+
+.skeleton{
+        width: 100%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 30px 0;
+}
+
+.skeletonTop{
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px;
+}
+.skeletonName{
+    margin-left: 0.5rem;
+}
+
+.skeletonAvatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    object-fit: cover;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+}
+.skeletonContainer{
+    
+    margin-left: 0.5rem;
+}
+.skeletonText{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

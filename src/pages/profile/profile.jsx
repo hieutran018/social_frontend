@@ -36,7 +36,7 @@ function Profile() {
                         <div className="profileCover">
                             <img
                                 className="profileCoverImg"
-                                src="assets/post/3.jpeg"
+                                src={profile.coverImage}
                                 alt=""
                             />
                             <img

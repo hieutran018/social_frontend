@@ -107,15 +107,14 @@ color: black;
     justify-content: space-between; 
 } */
 .postBottomButton{
-    margin-left: 1rem;
-    margin-right: 1rem;
+   
     width: 15rem;
 }
 .btn {
   border: none;
   background-color: inherit;
-  padding-left: 70px;
-  padding-right: 70px;
+  padding-left: 1.8rem;
+  padding-right: 1.8rem;
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 16px;

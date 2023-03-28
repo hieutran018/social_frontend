@@ -18,7 +18,7 @@ function SidebarFriendSuggestion() {
         fetchFriendSuggestion()
     }, [])
     return (
-        <>
+        <div className="sidebarFriendSuggestion">
             <div className="titleFriendSuggestion">
                 <Link to="/friend"><ArrowBack className='iconBack' />
                 </Link> Gợi ý
@@ -39,7 +39,7 @@ function SidebarFriendSuggestion() {
                     </Link>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 export default SidebarFriendSuggestion

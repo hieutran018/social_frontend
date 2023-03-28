@@ -10,9 +10,9 @@ function Topbar() {
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
-                <Link to="/" className="sidebarLogo">
+                <a href='/' className="sidebarLogo">
                     {<span className="logo">CKCS</span>}
-                </Link>
+                </a>
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
