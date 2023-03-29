@@ -1,59 +1,69 @@
-import { useEffect } from 'react';
+
+import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
-import Auth from '../../components/auth/auth';
-import Loading from '../../components/loading/Loading';
+import { Link, useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
 import './login.css';
 
 function Login() {
-    const { http, setToken, resetToken } = Auth();
+
+    const navigate = useNavigate();
+    console.log(Date.UTC(3600))
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [tokenString, setTokenString] = useState();
-    const [userString, setUserString] = useState();
-    const [isSuccess, setIsSuccess] = useState(true);
+
+    const [cookies, setCookie] = useCookies(['_tk']);
     const submitFormLLogin = () => {
-        setIsSuccess(false);
-        http.post('/login', { email: email, password: password }).then((response) => {
-            setToken(response.data.user, response.data.access_token)
-            setIsSuccess(true);
-        });
+        const res = axios.post('http://127.0.0.1:8000/api/auth/login', {
+            email: email,
+            password: password,
+        }).then((res) => {
+
+            setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            navigate('/')
+
+        }).catch((error) => alert(error));
+
+
+
     }
-    useEffect(() => {
-        if (sessionStorage.getItem('token') && sessionStorage.getItem('user')) {
-            setIsSuccess(false);
-            setTokenString(sessionStorage.getItem('token'));
-            setUserString(sessionStorage.getItem('user'));
-            resetToken(sessionStorage.getItem('user'), sessionStorage.getItem('token'));
-        }
-    }, [tokenString, userString, isSuccess, resetToken]);
+    // useEffect(() => {
+    //     if (sessionStorage.getItem('token') && sessionStorage.getItem('user')) {
+    //         setIsSuccess(false);
+    //         setTokenString(sessionStorage.getItem('token'));
+    //         setUserString(sessionStorage.getItem('user'));
+    //         resetToken(sessionStorage.getItem('user'), sessionStorage.getItem('token'));
+    //     }
+    // }, [tokenString, userString, isSuccess, resetToken]);
 
 
     return (
-        isSuccess ?
-            <div className="login">
-                <div className="loginWrapper">
-                    <div className="loginLeft">
-                        <h3 className="loginLogo">CKCS</h3>
-                        <span className="loginDesc">
-                            Kết nối với bạn bè và thế giới xung quanh bạn trên CKCS.
-                        </span>
-                    </div>
-                    <div className="loginRight">
-                        <div className="loginBox">
-                            <input placeholder="Email" className="loginInput" value={email} onChange={(event) => setEmail(event.target.value)} />
-                            <input placeholder="Password" className="loginInput" value={password} onChange={(event) => setPassword(event.target.value)} />
-                            <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
-                            <span className="loginForgot">Quên mật khẩu?</span>
 
-                            <Link to="/registration" className="loginRegisterButton">
-                                Tạo một tài khoản mới
-                            </Link>
+        <div className="login">
+            <div className="loginWrapper">
+                <div className="loginLeft">
+                    <h3 className="loginLogo">CKCS</h3>
+                    <span className="loginDesc">
+                        Kết nối với bạn bè và thế giới xung quanh bạn trên CKCS.
+                    </span>
+                </div>
+                <div className="loginRight">
+                    <div className="loginBox">
+                        <input placeholder="Email" className="loginInput" value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <input placeholder="Password" className="loginInput" value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
+                        <span className="loginForgot">Quên mật khẩu?</span>
 
-                        </div>
+                        <Link to="/registration" className="loginRegisterButton">
+                            Tạo một tài khoản mới
+                        </Link>
+
                     </div>
                 </div>
-            </div> : <Loading />
+            </div>
+        </div>
+
 
     );
 }

@@ -4,15 +4,17 @@ import Dialog from '@mui/material/Dialog';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAddPostStatus } from '../../redux/selectors/postSelector';
+
 import DialogShare from './dialogshare';
 
 
 
 function Share() {
+
     const [open, setOpen] = useState(false);
     const status = useSelector(selectAddPostStatus);
     const [close, setClose] = useState();
-    console.log(status);
+
     useEffect(() => {
         setClose(false);
         handleClose()

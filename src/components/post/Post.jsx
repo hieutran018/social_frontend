@@ -29,7 +29,7 @@ function Post({ post }) {
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
-    console.log(post);
+    // console.log(post);
     return (
         <div className="post">
             <div className="postWrapper">

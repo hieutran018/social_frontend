@@ -2,22 +2,39 @@ import React, { useState } from "react";
 import DropdownItem from "../dropdownitem/dropdownitem";
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CSSTransition } from "react-transition-group";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies, removeCookie } from "react-cookie";
+import axios from "axios";
 import "./dropdownmenu.css";
 
 const DropdownMenu = () => {
     // state for csstransition
     const [active, setActive] = useState("main");
     const [menuHeight, setMenuHeight] = useState(null);
-
+    const [cookies, setCookies, remove] = useCookies(["_tk"]);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const navigate = useNavigate();
 
     function calcHeight(el) {
         // el.offsetHeight is height in pixels of that component. we use this in dropdown menu style height to set height
         const height = el.offsetHeight;
         console.log(height);
         setMenuHeight(height);
+    }
+
+    const handleLogOut = () => {
+        console.log(1);
+        axios({
+            method: 'POST', //you can set what request you want to be
+            url: 'http://127.0.0.1:8000/api/auth/logout',
+
+            headers: {
+                Authorization: 'Bearer ' + cookies._tk
+            }
+        }).then(() => { remove('_tk'); localStorage.removeItem('user'); navigate('/login') }).catch((err) => { console.log(err.message); });
     }
 
     return (
@@ -38,7 +55,11 @@ we always go back to main conyainer and we use secondary as name for more contai
         in this component props to next element and we add css to animate
         */}
                 <div className="menu">
-                    <Link to="/frofile" className="dropDownItemProfile"><DropdownItem leftIcon={<AccountCircleIcon />}><span className="textFunction">Trang cá nhân</span></DropdownItem></Link>
+                    <Link to={"/" + user.id} className="dropDownItemProfile">
+                        <DropdownItem leftIcon={<AccountCircleIcon />}>
+                            <span className="textFunction">{user.first_name + ' ' + user.last_name}</span>
+                        </DropdownItem>
+                    </Link>
                     {/* if this item is clicked then only CSSTransition component will be triggered if active === settings as given in in prop boolean */}
                     <DropdownItem
                         leftIcon={<SettingsIcon />}
@@ -47,8 +68,8 @@ we always go back to main conyainer and we use secondary as name for more contai
                     >
                         <span className="textFunction">Cài đặt chung</span>
                     </DropdownItem>
-                    <DropdownItem leftIcon="🦧" goToMenu="animals" setActive={setActive}>
-                        <span className="textFunction">Thoát</span>
+                    <DropdownItem leftIcon={<LogoutIcon />}>
+                        <span onClick={handleLogOut} className="textFunction">Đăng xuất</span>
                     </DropdownItem>
                 </div>
             </CSSTransition>
@@ -77,27 +98,7 @@ we always go back to main conyainer and we use secondary as name for more contai
                     </DropdownItem>
                 </div>
             </CSSTransition >
-            <CSSTransition
-                in={active === "animals"}
-                timeout={500}
-                classNames="menu-secondary"
-                unmountOnExit
-                onEnter={calcHeight}
-            >
-                <div className="menu">
-                    <DropdownItem
-                        goToMenu="main"
-                        leftIcon={<ArrowBackIcon />}
-                        setActive={setActive}
-                    >
-                        <h2 className="textFunction">Animals</h2>
-                    </DropdownItem>
-                    <DropdownItem leftIcon="🦘"><span className="textFunction">Kangaroo</span></DropdownItem>
-                    <DropdownItem leftIcon="🐸"><span className="textFunction">Frog</span></DropdownItem>
-                    <DropdownItem leftIcon="🦋"><span className="textFunction">Horse? </span></DropdownItem>
-                    <DropdownItem leftIcon="🦔"><span className="textFunction">Hedgehog</span></DropdownItem>
-                </div>
-            </CSSTransition>
+
         </div >
     );
 };

@@ -51,6 +51,41 @@
     padding: 0.5rem 2rem 0px 5rem;
     flex: 2.5;
 }
+.profileTabBar{
+    width: 60rem;
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.profileTabBarButton{
+    
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profileTab{
+    width: 9rem;
+    height: 3rem;
+    /* border: 1px solid black; */
+    display: flex;
+    border-radius: 50px;
+}
+
+.profileTab:hover{
+    background-color: aliceblue;
+}
+.profileTab:active{
+    background-color: aqua;
+}
+.profileTextTab{
+    display: flex;
+    margin: auto;
+    font-size: 22px;
+}
+
 .profileRightBottom {
     display: flex;
+    margin: auto;
 }
+

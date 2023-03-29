@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShowMoreText from "react-show-more-text";
@@ -11,12 +12,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import Comment from "../comment/comment";
 import moment from 'moment';
+
 import './postdetail.css'
 
 
 
 function PostDetail({ post }) {
-
+    const cookies = useCookies('_tk');
     const [commentList, setCommentList] = useState([]);
     const [inputComment, setInputComment] = useState('');
     const [countComment, setCountComment] = useState(post.totalComment);
@@ -45,13 +47,13 @@ function PostDetail({ post }) {
 
 
     const handleClickPostComment = (postId) => {
-        const token = JSON.parse(sessionStorage.getItem('token'));
+
         axios({
             method: 'POST', //you can set what request you want to be
             url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
             data: { postId: postId, commentContent: inputComment },
             headers: {
-                Authorization: 'Bearer ' + token
+                Authorization: 'Bearer ' + cookies[0]._tk
             }
         }).then((res) => console.log(res))
         setInputComment('');

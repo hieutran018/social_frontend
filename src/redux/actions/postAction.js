@@ -38,8 +38,9 @@ export const fetchPost = () => {
 
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
-            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post')
-            dispatch(fetchPostSucceeded(res.data))
+            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post?page=1')
+
+            dispatch(fetchPostSucceeded(res.data.data))
         } catch (err) {
             dispatch(fetchPostFailed(err))
         }

@@ -14,7 +14,7 @@ function Loading() {
         <div>
             <img src={logo} alt="" className="logo-loading" />
             <div className="loading">
-                <div class="lds-roller">
+                <div className="lds-roller">
                     <div></div>
                     <div></div>
                     <div></div>
@@ -25,7 +25,7 @@ function Loading() {
                     <div></div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
