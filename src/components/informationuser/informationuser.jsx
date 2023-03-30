@@ -60,7 +60,7 @@ function InforMationUser({ idUser }) {
                     <div><hr className='informationUserHr' /></div>
                     <div className='informationUserDetailContainer'>
                         {
-                            JSON.parse(localStorage.getItem('userId')) === idUser ? <div className='informationButtonContainer'>
+                            JSON.parse(localStorage.getItem('user')).id === idUser ? <div className='informationButtonContainer'>
                                 <div onClick={() => handleClickOpen()} className='informationButton'> <div className='informationButtonEdit'><MoreHorizIcon /></div></div>
                             </div> : <div></div>
                         }

@@ -213,3 +213,21 @@ color: black;
     max-height: 45rem;
     object-fit: fill;
 }
+.shareOptionsMenuItems{
+    margin: 0.5rem;
+}
+
+.shareOptionsItem{
+    display: flex;
+    
+    width: 15rem;
+   
+}
+.shareOptionsTextContainer{
+    margin-left: 0.5rem;
+}
+
+.shareOptionsText{
+    font-size: 18px;
+    font-weight: 500;
+}

@@ -16,7 +16,7 @@ import { addNewPost } from '../../redux/actions/postAction'
 function DialogShare() {
     const cookies = useCookies('_tk');
     const [anchorEl, setAnchorEl] = useState(null);
-    const [privacy, setPrivacy] = useState(2);
+    const [privacy, setPrivacy] = useState(1);
     const [view, setView] = useState(false);
     const open = Boolean(anchorEl);
     const [files, setFiles] = useState([]);
@@ -61,16 +61,14 @@ function DialogShare() {
             return;
         }
 
-
-
-        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files));
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy));
         console.log(inputContentPost);
         setInputContentPost('');
 
     }
 
     return (
-        <div>
+        <div className='dialogShare'>
             <div className="wrapper">
 
                 <div className='contaierHeader'>
@@ -82,15 +80,15 @@ function DialogShare() {
                     <div className="details">
                         <p className='shareUserName'>Trần Dương Chí Hiếu</p>
                         <div className='privacy' onClick={handleClick}>
-                            <div className='shareShowPrivacy'>
-                                {privacy === 0 ? <PeopleAltIcon /> : privacy === 1 ? <LockPersonIcon /> : <PublicIcon />}
-                                <span className='shareShowPrivacyText'>{privacy === 0 ? 'Bạn bè' : privacy === 1 ? 'Chỉ mình tôi' : 'Công khai'}</span>
-                                <ArrowDropDownIcon />
-                            </div>
+                            {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
+                            <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
+                            <ArrowDropDownIcon />
                         </div>
                     </div>
                 </div>
-                <textarea aria-multiline onChange={handleChangeContent} className='shareContentPost' placeholder="Bạn đang nghĩ gì thế?"></textarea>
+                <div>
+                    <textarea aria-multiline onChange={handleChangeContent} className='shareContentPost' placeholder="Bạn đang nghĩ gì thế?"></textarea>
+                </div>
                 <div>
                     {view ?
                         <div className='previewFilesUpload'>
@@ -174,9 +172,9 @@ function DialogShare() {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Công khai</MenuItem>
-                        <MenuItem onClick={() => hanldeSelectPrivacy(0)} >Bạn bè</MenuItem>
-                        <MenuItem onClick={() => hanldeSelectPrivacy(1)}>Chỉ mình tôi</MenuItem>
+                        <MenuItem onClick={() => hanldeSelectPrivacy(1)} >Công khai</MenuItem>
+                        <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Bạn bè</MenuItem>
+                        <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                     </Menu>
 
                 </div>

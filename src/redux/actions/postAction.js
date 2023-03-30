@@ -47,7 +47,7 @@ export const fetchPost = () => {
     }
 }
 
-export const addNewPost = (token, contentPost, files) => {
+export const addNewPost = (token, contentPost, files, privacy) => {
     return async dispatch => {
         try {
             const requestURL = "http://127.0.0.1:8000/api/v1/create-post";
@@ -55,7 +55,7 @@ export const addNewPost = (token, contentPost, files) => {
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: requestURL,
-                data: { postContent: contentPost, files: files },
+                data: { postContent: contentPost, privacy: privacy, files: files },
                 headers: {
                     Authorization: 'Bearer ' + token,
                     "Content-Type": "multipart/form-data",

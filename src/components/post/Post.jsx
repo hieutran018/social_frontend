@@ -1,10 +1,15 @@
 import React from "react";
+import { useState } from "react";
 import PublicIcon from '@mui/icons-material/Public';
 import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import ReplyIcon from '@mui/icons-material/Reply';
+import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
 import Dialog from '@mui/material/Dialog';
@@ -17,8 +22,11 @@ import './post.css';
 
 function Post({ post }) {
     const cookies = useCookies('_tk');
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
+
+    const [anchor, setAnchor] = useState(null);
+    const openOptionShare = Boolean(anchor);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -27,6 +35,14 @@ function Post({ post }) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleClickOptionShare = (event) => {
+        setAnchor(event.currentTarget);
+    };
+    const handleCloseOptionShare = () => {
+        setAnchor(null);
+    };
+
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
@@ -40,6 +56,7 @@ function Post({ post }) {
                 Authorization: 'Bearer ' + cookies[0]._tk
             }
         })
+        setAnchor(null);
     }
 
     // console.log(post);
@@ -64,7 +81,11 @@ function Post({ post }) {
                             </span>
                             <div className="postPrivacy">
                                 <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                    {post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
+                                    {post.privacy === 0 ?
+                                        <LockIcon className="postIconPrivacy" /> :
+                                        post.privacy === 1 ? <PublicIcon className="postIconPrivacy" />
+                                            : <GroupIcon className="postIconPrivacy" />
+                                    }</span>
                             </div>
                         </div>
 
@@ -220,7 +241,7 @@ function Post({ post }) {
                                                 </span>
                                                 <div className="postPrivacy">
                                                     <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                                        {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
+                                                        {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,10 +278,50 @@ function Post({ post }) {
                     <div className="postBottomLeft">
                         <div className="postBottomButton"><button className="btn ">Thích </button></div>
                         <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn ">Bình luận</button></div>
-                        <div className="postBottomButton"><button onClick={() => handleClickSharePost(post.id)} className="btn ">Chia sẻ</button></div>
+                        <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn ">Chia sẻ</button></div>
                     </div>
 
                 </div>
+            </div>
+            <div>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchor}
+                    open={openOptionShare}
+                    onClose={handleCloseOptionShare}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                    }}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <div className="shareOptionsMenuItems">
+                        <MenuItem onClick={() => handleClickSharePost(post.id)} >
+                            <div className="shareOptionsItem">
+                                <div className="shareOptionsIcon">
+                                    <ReplyIcon />
+                                </div>
+                                <div className="shareOptionsTextContainer">
+                                    <span className="shareOptionsText">Chia sẻ ngay (Công khai)</span>
+                                </div>
+                            </div>
+                        </MenuItem>
+                        <MenuItem >
+                            <div className="shareOptionsItem">
+                                <div className="shareOptionsIcon">
+                                    <FeedIcon />
+                                </div>
+                                <div className="shareOptionsTextContainer">
+                                    <span className="shareOptionsText">Chia sẻ lên dòng thời gian</span>
+                                </div>
+                            </div>
+                        </MenuItem>
+
+                    </div>
+                </Menu>
+
             </div>
             <div>
                 <Dialog
