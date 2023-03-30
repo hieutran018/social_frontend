@@ -51,7 +51,7 @@ color: black;
 
 .postDate {
     font-size: 12px;
-    margin-left: 80px;
+    margin-left: 10px;
     
 }
 
@@ -183,4 +183,33 @@ color: black;
 }
 .commentBoxInut:focus{
     outline: none;
+}
+
+.postParent{
+    border: 0.1px solid #d0d2d5;
+    border-radius: 5px;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+}
+.postShareWrapper{
+    margin: 0.5rem;    
+}
+.postShareTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postShareCenter{
+    margin: 0px;
+}
+
+.postshareDate{
+    margin-left: 10px;
+}
+.postShareImg{
+    margin-top: 0.1rem;
+    width: 100%;
+    max-height: 45rem;
+    object-fit: fill;
 }

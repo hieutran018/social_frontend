@@ -6,7 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CSSTransition } from "react-transition-group";
 import { Link, useNavigate } from 'react-router-dom';
-import { useCookies, removeCookie } from "react-cookie";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 import "./dropdownmenu.css";
 
@@ -14,7 +14,7 @@ const DropdownMenu = () => {
     // state for csstransition
     const [active, setActive] = useState("main");
     const [menuHeight, setMenuHeight] = useState(null);
-    const [cookies, setCookies, remove] = useCookies(["_tk"]);
+    const [cookies, remove] = useCookies(["_tk"]);
     const user = JSON.parse(localStorage.getItem('user'));
     const navigate = useNavigate();
 
@@ -69,7 +69,10 @@ we always go back to main conyainer and we use secondary as name for more contai
                         <span className="textFunction">Cài đặt chung</span>
                     </DropdownItem>
                     <DropdownItem leftIcon={<LogoutIcon />}>
-                        <span onClick={handleLogOut} className="textFunction">Đăng xuất</span>
+                        <div style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }} onClick={handleLogOut}>
+                            <span className="textFunction">Đăng xuất</span>
+                        </div>
+
                     </DropdownItem>
                 </div>
             </CSSTransition>

@@ -2,4 +2,7 @@
     display: flex;
     /* width: 100vh; */
     margin: 0;
+    position: fixed;
 }
+
+

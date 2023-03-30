@@ -10,10 +10,11 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
+import { useCookies } from 'react-cookie';
 import { addNewPost } from '../../redux/actions/postAction'
 
 function DialogShare() {
-
+    const cookies = useCookies('_tk');
     const [anchorEl, setAnchorEl] = useState(null);
     const [privacy, setPrivacy] = useState(2);
     const [view, setView] = useState(false);
@@ -61,8 +62,8 @@ function DialogShare() {
         }
 
 
-        const token = JSON.parse(sessionStorage.getItem('token'));
-        dispatch(addNewPost(token, inputContentPost, files));
+
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files));
         console.log(inputContentPost);
         setInputContentPost('');
 

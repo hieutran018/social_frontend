@@ -9,7 +9,8 @@ import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 import Loading from './components/loading/Loading';
 import ProtectedRoutes from './components/protectedroute/protectedroute';
-import ProtectedLogin from './components/protectedroute/protectedislogined';
+
+
 
 
 
@@ -20,7 +21,7 @@ function App() {
   return (
 
     <Routes>
-      <Route path="/login" element={<ProtectedLogin children={< Login />} />} />
+      <Route path="/login" element={< Login />} />
       <Route path="/registration" element={<Register />} />
       <Route path="/" element={<ProtectedRoutes children={<Home />} />} />
       <Route path='/video' element={<Videos />} />

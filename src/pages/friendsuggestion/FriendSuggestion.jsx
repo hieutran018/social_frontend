@@ -6,7 +6,7 @@ import ViewProfile from '../viewprofile/ViewProfile';
 // import Profile from '../profile/profile';
 
 
-function FriendSuggestion() {
+function FriendSuggestion({ page }) {
     const { userId } = useParams()
     return (
         <div className='friendsuggestion'>
@@ -15,7 +15,7 @@ function FriendSuggestion() {
             </div>
             <div className="friendsuggestionContainer">
                 <div className='friendsuggestionSidebar'>
-                    <Sidebar page />
+                    <Sidebar page={4} isPages={true} />
                 </div>
                 {
                     userId ? <div className="friendSuggetstionViewProfile">

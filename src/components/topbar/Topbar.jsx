@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Search, Person, Chat, Notifications } from '@mui/icons-material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NavItem from '../navitem/navitem';

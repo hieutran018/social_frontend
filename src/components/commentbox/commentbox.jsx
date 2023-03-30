@@ -4,6 +4,7 @@ import './commentbox.css';
 
 function CommentBox({ postId }) {
     const [inputComment, setInputComment] = useState('');
+    const user = localStorage.getItem('user');
     const handleClickPostComment = () => {
         console.log('Press to enter')
         const token = JSON.parse(sessionStorage.getItem('token'));
@@ -19,7 +20,7 @@ function CommentBox({ postId }) {
     }
     return (
         <div className="commentBox">
-            <img className="commentBoxAvatarProfile" src="assets/person/2.jpeg" alt="" />
+            <img className="commentBoxAvatarProfile" src={user.avatar} alt="" />
             <input onKeyDownCapture={
                 event => {
                     if (event.key === 'Enter') {

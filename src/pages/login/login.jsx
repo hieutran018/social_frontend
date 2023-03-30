@@ -14,7 +14,7 @@ function Login() {
 
     const [cookies, setCookie] = useCookies(['_tk']);
     const submitFormLLogin = () => {
-        const res = axios.post('http://127.0.0.1:8000/api/auth/login', {
+        axios.post('http://127.0.0.1:8000/api/auth/login', {
             email: email,
             password: password,
         }).then((res) => {
@@ -51,7 +51,7 @@ function Login() {
                 <div className="loginRight">
                     <div className="loginBox">
                         <input placeholder="Email" className="loginInput" value={email} onChange={(event) => setEmail(event.target.value)} />
-                        <input placeholder="Password" className="loginInput" value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <input placeholder="Password" type={"password"} className="loginInput" value={password} onChange={(event) => setPassword(event.target.value)} />
                         <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
                         <span className="loginForgot">Quên mật khẩu?</span>
 

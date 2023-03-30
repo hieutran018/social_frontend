@@ -17,8 +17,8 @@ function Friends() {
                 <div className="friendMain" >
                     <Box sx={{ width: '100%' }}>
                         <Grid container rowSpacing={1.8} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-                            {Users.map((u) => (
-                                <Grid item md={2}>
+                            {Users.map((u, i) => (
+                                <Grid key={i} item md={2}>
                                     <CardUser key={u.id} user={u} />
                                 </Grid>
                             ))}

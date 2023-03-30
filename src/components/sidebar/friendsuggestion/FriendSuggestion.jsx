@@ -3,6 +3,7 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import {
     ArrowBack
 } from '@mui/icons-material';
@@ -10,13 +11,18 @@ import './friendsuggestion.css';
 
 function SidebarFriendSuggestion() {
     const [frs, setFrs] = useState([]);
+    const cookies = useCookies('_tk');
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            axios.get('http://127.0.0.1:8000/api/fetch-friend-suggestion').then((res) => setFrs(res.data)).catch((err) => console.log(err));
+            axios.get('http://127.0.0.1:8000/api/v1/fetch-friend-suggestion', {
+                headers: {
+                    'Authorization': 'Bearer ' + cookies[0]._tk
+                }
+            }).then((res) => setFrs(res.data)).catch((err) => console.log(err));
 
         }
         fetchFriendSuggestion()
-    }, [])
+    }, [cookies])
     return (
         <div className="sidebarFriendSuggestion">
             <div className="titleFriendSuggestion">

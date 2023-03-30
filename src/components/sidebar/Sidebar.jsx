@@ -89,7 +89,7 @@ function Sidebar({ page }) {
                         </li>
                     </ul>
 
-                    <hr className="sidebarHr" />
+
 
                 </>
             </>

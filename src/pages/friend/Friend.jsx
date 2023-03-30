@@ -13,6 +13,7 @@ function Friend() {
             <div className="friendContainer">
                 <Sidebar page={3} />
                 <Friends />
+
             </div>
         </>
     );

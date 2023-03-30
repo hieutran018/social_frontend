@@ -20,22 +20,23 @@
 }
 
 .shareProfileImgContainer{
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     margin-right: 10px;
 }
 
 .shareProfileImg {
-    width: 60px;
-    height: 60px;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
-    object-fit: fill;
+    object-fit:fill
+    ;
    
 }
 
 .shareInput {
     border: none;
-    width: 50rem;
+    width: 40rem;
     height: 3rem;
     border-radius: 50px;
     background-color: #E4E6E9;

@@ -10,7 +10,7 @@ import DialogShare from './dialogshare';
 
 
 function Share() {
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const [open, setOpen] = useState(false);
     const status = useSelector(selectAddPostStatus);
     const [close, setClose] = useState();
@@ -35,7 +35,7 @@ function Share() {
             <div className="shareWrapper">
                 <div className="shareTop">
                     <div className='shareProfileImgContainer'>
-                        <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+                        <img className="shareProfileImg" src={user.avatar} alt="" />
                     </div>
                     <div onClick={handleClickOpen} className='shareInput'>
                         <span className='shareInputText'>Bạn đang nghĩ gì thế?</span>
