@@ -1,7 +1,7 @@
 import {
     FETCH_POST_STARTED,
     FETCH_POST_SUCCEEDED,
-    FETCH_POST_FAILED, ADD_POST, ADD_POST_SUCCEEDED, ADD_POST_FAILED
+    FETCH_POST_FAILED, ADD_POST, ADD_POST_STARTED, ADD_POST_SUCCEEDED, ADD_POST_FAILED
 } from '../constants/postConstant'
 
 const initialState = []
@@ -11,6 +11,7 @@ export default function postReducer(state = initialState, action) {
         case FETCH_POST_STARTED: {
             return {
                 ...state,
+
                 status: 'loading'
             }
         }
@@ -27,6 +28,13 @@ export default function postReducer(state = initialState, action) {
                 status: 'failed',
                 posts: [],
                 error: action.error
+            }
+        }
+        case ADD_POST_STARTED: {
+            return {
+                ...state,
+                statusAdd: 'adding',
+
             }
         }
         case ADD_POST_SUCCEEDED: {

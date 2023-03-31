@@ -261,3 +261,10 @@ div :where(.theme-emoji, .options){
 .list li.active .radio::before{
   background: #4599FF;
 }
+
+.dialogshareLoading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25rem;
+}

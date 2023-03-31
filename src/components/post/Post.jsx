@@ -14,7 +14,9 @@ import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { sharePostToWall } from "../../redux/actions/postAction";
+// import axios from "axios";
 import 'moment/locale/vi';
 
 import PostDetail from "../postdetail/postdetail";
@@ -27,6 +29,8 @@ function Post({ post }) {
 
     const [anchor, setAnchor] = useState(null);
     const openOptionShare = Boolean(anchor);
+    const dispatch = useDispatch();
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -47,15 +51,9 @@ function Post({ post }) {
         console.log(isExpanded);
     }
 
-    const handleClickSharePost = (postId) => {
-        axios({
-            method: 'POST', //you can set what request you want to be
-            url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
-            data: { postId: postId, postContent: null },
-            headers: {
-                Authorization: 'Bearer ' + cookies[0]._tk
-            }
-        })
+    const handleClickSharePost = () => {
+        dispatch(sharePostToWall(post, cookies))
+
         setAnchor(null);
     }
 
@@ -298,7 +296,7 @@ function Post({ post }) {
                     }}
                 >
                     <div className="shareOptionsMenuItems">
-                        <MenuItem onClick={() => handleClickSharePost(post.id)} >
+                        <MenuItem onClick={() => handleClickSharePost()} >
                             <div className="shareOptionsItem">
                                 <div className="shareOptionsIcon">
                                     <ReplyIcon />

@@ -3,7 +3,7 @@ import { PermMedia, Room, EmojiEmotions } from "@mui/icons-material"
 import Dialog from '@mui/material/Dialog';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectAddPostStatus } from '../../redux/selectors/postSelector';
+import { selectAddPostStatus, selectPostStatus } from '../../redux/selectors/postSelector';
 
 import DialogShare from './dialogshare';
 
@@ -12,13 +12,19 @@ import DialogShare from './dialogshare';
 function Share() {
     const user = JSON.parse(localStorage.getItem('user'));
     const [open, setOpen] = useState(false);
-    const status = useSelector(selectAddPostStatus);
-    const [close, setClose] = useState();
+    const statusAdd = useSelector(selectAddPostStatus);
+    const statusFetch = useSelector(selectPostStatus);
+
 
     useEffect(() => {
-        setClose(false);
-        handleClose()
-    }, [status])
+
+        const handleClose = () => {
+            setOpen(false);
+        };
+        setTimeout(() => {
+            handleClose()
+        }, 1000)
+    }, [statusAdd, statusFetch])
     const handleClickOpen = () => {
         setOpen(true);
 
@@ -66,7 +72,7 @@ function Share() {
             </div>
             <div>
                 <Dialog
-                    open={close || open}
+                    open={open}
                     onClose={handleClose}
                     fullWidth
                     maxWidth="sm"

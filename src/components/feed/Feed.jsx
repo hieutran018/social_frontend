@@ -20,7 +20,7 @@ function Feed() {
         <div className="feedWrapper">
             {
                 status === 'loading' ?
-                    <div></div>
+                    <div>loading</div>
                     : status === 'succeeded' ? posts.map((p) => (
                         <Post key={p.id} post={p} />
                     )) : status === 'failed' ? <div>Fail!</div> : ""
