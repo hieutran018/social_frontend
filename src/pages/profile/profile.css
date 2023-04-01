@@ -84,6 +84,11 @@
     font-size: 22px;
 }
 
+.profileTextLink{
+    text-decoration: none;
+    color: black;
+}
+
 .profileRightBottom {
     display: flex;
     margin: auto;

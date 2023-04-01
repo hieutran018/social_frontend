@@ -41,16 +41,16 @@ export default function Rightbar({ profile, userProfile }) {
                             <h4 className="rightbarTitle">Giới thiệu</h4>
 
                             <div className="rightbarInfoItem">
-                                <span className="rightbarInfoKey">Thành phố:</span>
-                                <span className="rightbarInfoValue">{userProfile.address}</span>
+                                <span className="rightbarInfoKey">Sống tại:</span>
+                                <span className="rightbarInfoValue">{userProfile.live_in}</span>
                             </div>
                             <div className="rightbarInfoItem">
                                 <span className="rightbarInfoKey">Đến từ:</span>
-                                <span className="rightbarInfoValue">Vĩnh Long</span>
+                                <span className="rightbarInfoValue">{userProfile.went_to}</span>
                             </div>
                             <div className="rightbarInfoItem">
-                                <span className="rightbarInfoKey">Mối quan hệ:</span>
-                                <span className="rightbarInfoValue">Độc thân</span>
+                                <span className="rightbarInfoKey">Mối quan hệ: </span>
+                                <span className="rightbarInfoValue">{userProfile.relationship === 0 ? 'Độc thân' : userProfile.relationship === 1 ? 'Hẹn hò' : 'Kết hôn'}</span>
                             </div>
 
                         </div>

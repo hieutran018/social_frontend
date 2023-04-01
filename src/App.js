@@ -29,6 +29,7 @@ function App() {
       <Route path='/friend-suggestion' element={<ProtectedRoutes children={< FriendSuggestion />} />} />
       <Route path='/friend-suggestion/:userId' element={<ProtectedRoutes children={< FriendSuggestion />} />} />
       <Route path='/:userId' element={<Profile />} />
+      <Route path='/:userId/about' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>

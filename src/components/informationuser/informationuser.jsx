@@ -5,38 +5,63 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Dialog from '@mui/material/Dialog';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser } from '../../redux/actions/userAction';
+import { selectStatusupdate } from '../../redux/selectors/postSelector';
 
 
-function InforMationUser({ idUser }) {
-
+function InforMationUser({ user }) {
+    const { userId } = useParams();
+    const cookies = useCookies('_tk')
     const [open, setOpen] = useState(false);
-    const [user, setUser] = useState([]);
-
+    const [check, setCheck] = useState(true);
+    const [wentTo, setWentTo] = useState('');
+    const [liveIn, setliveIn] = useState('');
+    const [relationship, setRelationShip] = useState('');
+    const [phone, setPhone] = useState('');
+    const dispatch = useDispatch();
+    const status = useSelector(selectStatusupdate);
     useEffect(() => {
-        async function fetchInforUser() {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId: idUser })
-            };
-            const requestURL = "http://127.0.0.1:8000/api/profile-user";
-            const response = await fetch(requestURL, requestOptions);
 
-            const responseJson = await response.json();
-            setUser(responseJson);
-        }
-        fetchInforUser();
-    }, [idUser])
-    console.log('USER ======================', user);
+    }, [check])
+
 
     const handleClickOpen = () => {
         setOpen(true);
+
 
     };
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleSetliveIn = (event) => {
+        setliveIn(event.target.value);
+    }
+    const handleSetWentTo = (event) => {
+        setWentTo(event.target.value);
+    }
+    const handleSetRelationShip = (event) => {
+        setRelationShip(event.target.value);
+    }
+    const handleSetPhone = (event) => {
+        setPhone(event.target.value);
+    }
+
+    const Submit = () => {
+        console.log(wentTo, liveIn, relationship, phone);
+        dispatch(updateUser(cookies, wentTo, liveIn, relationship, phone));
+        setOpen(false);
+    };
+
+
+
+
+
+
 
     return (
         <div className='informationUser'>
@@ -58,29 +83,31 @@ function InforMationUser({ idUser }) {
                         </div>
                     </div>
                     <div><hr className='informationUserHr' /></div>
-                    <div className='informationUserDetailContainer'>
-                        {
-                            JSON.parse(localStorage.getItem('user')).id === idUser ? <div className='informationButtonContainer'>
-                                <div onClick={() => handleClickOpen()} className='informationButton'> <div className='informationButtonEdit'><MoreHorizIcon /></div></div>
-                            </div> : <div></div>
-                        }
-                        <div className='informationUserInforContainer'>
-                            <span className='informationUserInfor'> <LocationOnIcon /> Đến từ: {user.address}</span>
+                    {
+                        status === 'loading' ? <div></div> : status === 'success' || user ? <div className='informationUserDetailContainer'>
+                            {
+                                JSON.parse(localStorage.getItem('user')).id.toString() === userId ? <div className='informationButtonContainer'>
+                                    <div onClick={() => handleClickOpen()} className='informationButton'> <div className='informationButtonEdit'><MoreHorizIcon /></div></div>
+                                </div> : <div></div>
+                            }
+                            <div className='informationUserInforContainer'>
+                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ: {user.went_to}</span>
 
-                        </div>
-                        <div className='informationUserInforContainer'>
-                            <span className='informationUserInfor'> <HomeIcon /> Sống tại: Thành phố Hồ Chí Minh</span>
+                            </div>
+                            <div className='informationUserInforContainer'>
+                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: {user.live_in}</span>
 
-                        </div>
-                        <div className='informationUserInforContainer'>
-                            <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: Độc thân</span>
+                            </div>
+                            <div className='informationUserInforContainer'>
+                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: {user.relationship === 0 ? "Độc thân" : user.relationship === 1 ? "Hẹn Hò" : "Kết hôn"}</span>
 
-                        </div>
-                        <div className='informationUserInforContainer'>
-                            <span className='informationUserInfor'><PhoneIcon /> Số điện thoại: 01215487985</span>
+                            </div>
+                            <div className='informationUserInforContainer'>
+                                <span className='informationUserInfor'><PhoneIcon /> Số điện thoại: {user.phone ? user.phone : "Chưa cập nhật"}</span>
 
-                        </div>
-                    </div>
+                            </div>
+                        </div> : <div></div>
+                    }
                 </div>
             </div>
             <div>
@@ -98,19 +125,19 @@ function InforMationUser({ idUser }) {
                         <div className='informationUserDetailContainer'>
 
                             <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input className='informationDialogInput' value={user.address} type="text" />
+                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input onChange={handleSetWentTo} className='informationDialogInput' type="text" />
 
                             </div>
                             <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: </span><input className='informationDialogInput' type="text" />
+                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: </span><input onChange={handleSetliveIn} className='informationDialogInput' type="text" />
 
                             </div>
                             <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: </span> <input className='informationDialogInput' type="check" />
+                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: </span> <input onChange={handleSetRelationShip} className='informationDialogInput' type="text" />
 
                             </div>
                             <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'><PhoneIcon /> Số điện thoại:</span> <input au className='informationDialogInput' type="text" />
+                                <span className='informationUserInfor'><PhoneIcon /> Số điện thoại:</span> <input onChange={handleSetPhone} className='informationDialogInput' type="text" />
 
                             </div>
                         </div>
@@ -119,7 +146,7 @@ function InforMationUser({ idUser }) {
                                 <button onClick={handleClose} className='informationDialogButtonCancel'>Hủy</button>
 
 
-                                <button className='informationDialogButtonSubmit'>Lưu</button>
+                                <button onClick={Submit} className='informationDialogButtonSubmit'>Lưu</button>
                             </div>
                         </div>
                     </div>
