@@ -3,8 +3,6 @@ import './feed.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPost } from '../../redux/actions/postAction'
 import { selectPostStatus, selectPost } from '../../redux/selectors/postSelector'
-import Variants from "./postskeleton";
-
 import { useEffect } from "react";
 
 function Feed() {
@@ -15,12 +13,13 @@ function Feed() {
     useEffect(() => {
         dispatch(fetchPost());
     }, [dispatch])
-    // console.log("==SET POST LIST==", posts);
+    console.log("==SET STATUS LIST==", status);
+    console.log("==SET POST LIST==", posts);
     return (<div className="feed">
         <div className="feedWrapper">
             {
                 status === 'loading' ?
-                    <div>loading</div>
+                    <div></div>
                     : status === 'succeeded' ? posts.map((p) => (
                         <Post key={p.id} post={p} />
                     )) : status === 'failed' ? <div>Fail!</div> : ""

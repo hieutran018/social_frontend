@@ -5,7 +5,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Dialog from '@mui/material/Dialog';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
@@ -13,6 +12,7 @@ function InforMationUser({ idUser }) {
 
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState([]);
+
     useEffect(() => {
         async function fetchInforUser() {
             const requestOptions = {
@@ -98,7 +98,7 @@ function InforMationUser({ idUser }) {
                         <div className='informationUserDetailContainer'>
 
                             <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input className='informationDialogInput' type="text" />
+                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input className='informationDialogInput' value={user.address} type="text" />
 
                             </div>
                             <div className='informationDialogInforContainer'>

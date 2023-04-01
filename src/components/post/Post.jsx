@@ -7,7 +7,6 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ReplyIcon from '@mui/icons-material/Reply';
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
@@ -16,6 +15,7 @@ import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { sharePostToWall } from "../../redux/actions/postAction";
+import ShareOption from "../share/shareoptions/shareoption";
 // import axios from "axios";
 import 'moment/locale/vi';
 
@@ -25,12 +25,20 @@ import './post.css';
 function Post({ post }) {
     const cookies = useCookies('_tk');
     const [open, setOpen] = useState(false);
-
+    const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
 
     const [anchor, setAnchor] = useState(null);
     const openOptionShare = Boolean(anchor);
     const dispatch = useDispatch();
 
+
+    const handleClickOpenopenShareOptionToFeed = () => {
+        setOpenShareOptionToFeed(true);
+
+    };
+    const handleCloseopenShareOptionToFeed = () => {
+        setOpenShareOptionToFeed(false);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -306,7 +314,7 @@ function Post({ post }) {
                                 </div>
                             </div>
                         </MenuItem>
-                        <MenuItem >
+                        <MenuItem onClick={handleClickOpenopenShareOptionToFeed}>
                             <div className="shareOptionsItem">
                                 <div className="shareOptionsIcon">
                                     <FeedIcon />
@@ -329,6 +337,14 @@ function Post({ post }) {
                     maxWidth="md"
                 >
                     <PostDetail post={post} />
+                </Dialog>
+                <Dialog
+                    open={openShareOptionToFeed}
+                    onClose={handleCloseopenShareOptionToFeed}
+                    fullWidth
+                    maxWidth="md"
+                >
+                    <ShareOption post={post.parent_post !== null ? post.parent_post : post} />
                 </Dialog>
             </div>
         </div>

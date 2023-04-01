@@ -43,9 +43,9 @@ export const fetchPost = () => {
 
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
-            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post?page=1')
+            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post')
 
-            dispatch(fetchPostSucceeded(res.data.data))
+            dispatch(fetchPostSucceeded(res.data))
         } catch (err) {
             dispatch(fetchPostFailed(err))
         }
@@ -80,13 +80,13 @@ export const addNewPost = (token, contentPost, files, privacy) => {
     }
 }
 
-export const sharePostToWall = (post, cookies) => {
+export const sharePostToWall = (post, cookies, inputContent) => {
     return async dispatch => {
         try {
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
-                data: { postId: post.id, postContent: null },
+                data: { postId: post.id, postContent: inputContent },
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk
                 }
