@@ -68,8 +68,9 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log(response.data);
+            console.log("RES =========", response.data);
             dispatch(updateUserSuccess(response.data));
+            // dispatch(fetchUser())
 
         }).catch((error) => dispatch(updateUserFail(error.message)));
     }

@@ -4,13 +4,16 @@ import Online from "../online/Online";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { selectStatusupdate } from "../../redux/selectors/postSelector";
+import { useSelector } from "react-redux";
 
 
 export default function Rightbar({ profile, userProfile }) {
-
+    const status = useSelector(selectStatusupdate);
     useEffect(() => {
 
-    })
+    }, [status])
 
     const HomeRightbar = () => {
         return (
@@ -33,6 +36,7 @@ export default function Rightbar({ profile, userProfile }) {
     };
 
     const ProfileRightbar = () => {
+        console.log("PROFILE RIGHT BAR ========", userProfile);
         return (
             <>
                 <div className="rightbarContainer">
@@ -42,15 +46,15 @@ export default function Rightbar({ profile, userProfile }) {
 
                             <div className="rightbarInfoItem">
                                 <span className="rightbarInfoKey">Sống tại:</span>
-                                <span className="rightbarInfoValue">{userProfile.live_in}</span>
+                                <span className="rightbarInfoValue">{userProfile.live_in ? userProfile.live_in : " Chưa cập nhật"}</span>
                             </div>
                             <div className="rightbarInfoItem">
                                 <span className="rightbarInfoKey">Đến từ:</span>
-                                <span className="rightbarInfoValue">{userProfile.went_to}</span>
+                                <span className="rightbarInfoValue">{userProfile.went_to ? userProfile.went_to : " Chưa cập nhật"}</span>
                             </div>
                             <div className="rightbarInfoItem">
                                 <span className="rightbarInfoKey">Mối quan hệ: </span>
-                                <span className="rightbarInfoValue">{userProfile.relationship === 0 ? 'Độc thân' : userProfile.relationship === 1 ? 'Hẹn hò' : 'Kết hôn'}</span>
+                                <span className="rightbarInfoValue">{userProfile.relationship === '0' ? 'Độc thân' : userProfile.relationship === '1' ? 'Hẹn hò' : userProfile.relationship === '2' ? 'Kết hôn' : "Chưa cập nhật"}</span>
                             </div>
 
                         </div>
@@ -60,7 +64,7 @@ export default function Rightbar({ profile, userProfile }) {
                 <div className="rightbarContainer">
                     <div className="rightbarFriend">
                         <div className="rightbarFriendContent">
-                            <div className="rightbarTitleContent"><h4 className="rightbarTitle">Bạn bè</h4><a href="/#" className="rightbarLinkViewMoreFriend">Xem tất cả bạn bè</a></div>
+                            <div className="rightbarTitleContent"><h4 className="rightbarTitle">Bạn bè</h4><Link className="rightbarLinkViewMoreFriend" to={"/" + userProfile.id + "/friends"}><span className="rightbarLinkViewMoreFriend">Xem tất cả bạn bè</span></Link></div>
                             <div className="rightbarFriendContainer">
                                 <div className="rightbarFollowings">
                                     <Grid container rowSpacing={1.7} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>

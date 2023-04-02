@@ -7,31 +7,41 @@ import { useCookies } from "react-cookie";
 import {
     ArrowBack
 } from '@mui/icons-material';
-import './friendsuggestion.css';
+import '../friendsuggestion/friendsuggestion.css';
+import '../sidebar.css';
 
-function SidebarFriendSuggestion() {
+function FriendRequest() {
+
+
     const [frs, setFrs] = useState([]);
     const cookies = useCookies('_tk');
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            axios.get('http://127.0.0.1:8000/api/v1/fetch-friend-suggestion', {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friend-request-list';
+            axios({
+                method: 'POST', //you can set what request you want to be
+                url: requestURL,
                 headers: {
-                    'Authorization': 'Bearer ' + cookies[0]._tk
+                    Authorization: 'Bearer ' + cookies[0]._tk,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
                 }
-            }).then((res) => setFrs(res.data)).catch((err) => console.log(err));
+            }).then((response) => {
+                console.log("RES =========", response.data);
+                setFrs(response.data);
+            }).catch((error) => console.log(error.message));
 
         }
         fetchFriendSuggestion()
-
     }, [])
 
-    const hanldeClickSendAddFriend = (userId) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
-
+    const hanldeClickAcceptAddFriend = (userId) => {
+        const requestURL = "http://127.0.0.1:8000/api/v1/accept-friend-request";
+        console.log(userId);
         axios({
             method: 'POST',
             url: requestURL,
-            data: { userIdAccept: userId },
+            data: { userIdRequest: userId },
             headers: {
                 Authorization: 'Bearer ' + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -53,7 +63,7 @@ function SidebarFriendSuggestion() {
                 {frs.map((u) => (
 
                     <li key={u.id} className="sidebarListItemFriendSuggestion">
-                        <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >
+                        <Link className="frslinkProfile" to={"/friend-request/" + u.id} >
                             <div className="frsContainnerImage"><img className='imageProfile' src={u.avatar} alt="" /></div>
                         </Link>
                         <div className='profileInfo'>
@@ -61,7 +71,7 @@ function SidebarFriendSuggestion() {
                                 <div className="nameProfile">{u.username}</div>
                             </Link>
                             <div className="buttonAction">
-                                <button onClick={() => hanldeClickSendAddFriend(u.id)} className='buttonSuggesstionAccept'>Thêm bạn bè</button>
+                                <button onClick={() => hanldeClickAcceptAddFriend(u.user_request)} className='buttonSuggesstionAccept'>Đồng ý</button>
                                 <button className='buttonSuggesstionCancel'>Xóa, gỡ bỏ</button>
                             </div>
                         </div>
@@ -70,6 +80,7 @@ function SidebarFriendSuggestion() {
                 ))}
             </ul>
         </div >
-    );
+    )
 }
-export default SidebarFriendSuggestion
+
+export default FriendRequest;

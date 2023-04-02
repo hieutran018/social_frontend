@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
 .profile {
     display: flex;
     margin-top: 3rem;
@@ -69,14 +73,14 @@
     height: 3rem;
     /* border: 1px solid black; */
     display: flex;
-    border-radius: 50px;
+    border-radius: 5px;
 }
 
 .profileTab:hover{
     background-color: aliceblue;
 }
 .profileTab:active{
-    background-color: aqua;
+    background-color: liceblue;
 }
 .profileTextTab{
     display: flex;
@@ -92,5 +96,10 @@
 .profileRightBottom {
     display: flex;
     margin: auto;
+}
+
+.active{
+    border-bottom: 0.2rem solid turquoise;
+
 }
 

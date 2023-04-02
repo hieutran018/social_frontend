@@ -6,7 +6,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Dialog from '@mui/material/Dialog';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../redux/actions/userAction';
@@ -24,9 +24,6 @@ function InforMationUser({ user }) {
     const [phone, setPhone] = useState('');
     const dispatch = useDispatch();
     const status = useSelector(selectStatusupdate);
-    useEffect(() => {
-
-    }, [check])
 
 
     const handleClickOpen = () => {
@@ -46,6 +43,7 @@ function InforMationUser({ user }) {
     }
     const handleSetRelationShip = (event) => {
         setRelationShip(event.target.value);
+        setCheck(false);
     }
     const handleSetPhone = (event) => {
         setPhone(event.target.value);
@@ -83,6 +81,7 @@ function InforMationUser({ user }) {
                         </div>
                     </div>
                     <div><hr className='informationUserHr' /></div>
+
                     {
                         status === 'loading' ? <div></div> : status === 'success' || user ? <div className='informationUserDetailContainer'>
                             {
@@ -91,15 +90,15 @@ function InforMationUser({ user }) {
                                 </div> : <div></div>
                             }
                             <div className='informationUserInforContainer'>
-                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ: {user.went_to}</span>
+                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ: {user.went_to ? user.went_to : " Chưa cập nhật"}</span>
 
                             </div>
                             <div className='informationUserInforContainer'>
-                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: {user.live_in}</span>
+                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: {user.live_in ? user.live_in : " Chưa cập nhật"}</span>
 
                             </div>
                             <div className='informationUserInforContainer'>
-                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: {user.relationship === 0 ? "Độc thân" : user.relationship === 1 ? "Hẹn Hò" : "Kết hôn"}</span>
+                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: {user.relationship === '0' ? "Độc thân" : user.relationship === '1' ? "Hẹn Hò" : user.relationship === '2' ? "Kết hôn" : "Chưa cập nhật"}</span>
 
                             </div>
                             <div className='informationUserInforContainer'>
@@ -108,6 +107,7 @@ function InforMationUser({ user }) {
                             </div>
                         </div> : <div></div>
                     }
+
                 </div>
             </div>
             <div>
@@ -118,35 +118,42 @@ function InforMationUser({ user }) {
                     maxWidth="md"
                 >
                     <div className='informationDialog'>
-                        <div className='informatioDialogTitleContainer'>
-                            <span className='informatioDialogTitle'>Cập nhật thông tin Tổng quan</span>
-                        </div>
-                        <hr className='infomationDialogHr' />
-                        <div className='informationUserDetailContainer'>
-
-                            <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input onChange={handleSetWentTo} className='informationDialogInput' type="text" />
-
+                        <div className='informationUserForm'>
+                            <div className='informatioDialogTitleContainer'>
+                                <span className='informatioDialogTitle'>Cập nhật thông tin Tổng quan</span>
                             </div>
-                            <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'> <HomeIcon /> Sống tại: </span><input onChange={handleSetliveIn} className='informationDialogInput' type="text" />
+                            <hr className='infomationDialogHr' />
+                            <div className='informationUserDetailContainer'>
 
+                                <div className='informationDialogInforContainer'>
+                                    <span className='informationUserInfor'> <LocationOnIcon /> Đến từ:</span> <input onChange={handleSetWentTo} className='informationDialogInput' type="text" />
+
+                                </div>
+                                <div className='informationDialogInforContainer'>
+                                    <span className='informationUserInfor'> <HomeIcon /> Sống tại: </span><input onChange={handleSetliveIn} className='informationDialogInput' type="text" />
+
+                                </div>
+                                <div className='informationDialogInforContainer'>
+                                    <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: </span> <select onChange={handleSetRelationShip} className='informationDialogInput'>
+                                        <option value="0">Độc thân</option>
+                                        <option value="1">Hẹn Hò</option>
+                                        <option value="2">Đã kết hôn</option>
+
+                                    </select>
+
+                                </div>
+                                <div className='informationDialogInforContainer'>
+                                    <span className='informationUserInfor'><PhoneIcon /> Số điện thoại:</span> <input onChange={handleSetPhone} className='informationDialogInput' type="text" />
+
+                                </div>
                             </div>
-                            <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: </span> <input onChange={handleSetRelationShip} className='informationDialogInput' type="text" />
-
-                            </div>
-                            <div className='informationDialogInforContainer'>
-                                <span className='informationUserInfor'><PhoneIcon /> Số điện thoại:</span> <input onChange={handleSetPhone} className='informationDialogInput' type="text" />
-
-                            </div>
-                        </div>
-                        <div className='informationDialogBottom'>
-                            <div className='informationDialogButtonBottom'>
-                                <button onClick={handleClose} className='informationDialogButtonCancel'>Hủy</button>
+                            <div className='informationDialogBottom'>
+                                <div className='informationDialogButtonBottom'>
+                                    <button onClick={handleClose} className='informationDialogButtonCancel'>Hủy</button>
 
 
-                                <button onClick={Submit} className='informationDialogButtonSubmit'>Lưu</button>
+                                    <button onClick={Submit} disabled={check ? true : false} className='informationDialogButtonSubmit'>Lưu</button>
+                                </div>
                             </div>
                         </div>
                     </div>

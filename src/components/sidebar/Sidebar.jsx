@@ -15,6 +15,7 @@ import './sidebar.css';
 import CloseFriend from '../closefriend/CloseFriend';
 import { Users } from "../../data";
 import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
+import FriendRequest from './friendrequest/friendrequest';
 
 function Sidebar({ page }) {
 
@@ -66,8 +67,10 @@ function Sidebar({ page }) {
                             <span className="sidebarListItemText">Trang Chủ </span>
                         </li>
                         <li className="sidebarListItem">
-                            <RecordVoiceOver className="sidebarIcon" />
-                            <span className="sidebarListItemText">Lời mời kết bạn</span>
+                            <Link to="/friend-request" className="sidebarListItemText">
+                                <RecordVoiceOver className="sidebarIcon" />
+                                <span className="sidebarListItemText">Lời mời kết bạn</span>
+                            </Link>
                         </li>
                         <li className="sidebarListItem">
                             <Link to="/friend-suggestion" className="sidebarListItemText">
@@ -138,7 +141,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page == 4 ? <FriendRequest /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

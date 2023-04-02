@@ -8,7 +8,8 @@ import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 import Loading from './components/loading/Loading';
-import ProtectedRoutes from './components/protectedroute/protectedroute';
+// import ProtectedRoutes from './components/protectedroute/protectedroute';
+import FriendRequest from './pages/friendrequest/friendrequest';
 
 
 
@@ -23,13 +24,15 @@ function App() {
     <Routes>
       <Route path="/login" element={< Login />} />
       <Route path="/registration" element={<Register />} />
-      <Route path="/" element={<ProtectedRoutes children={<Home />} />} />
+      <Route path="/" element={<Home />} />
       <Route path='/video' element={<Videos />} />
       <Route path='/friend' element={<Friend />} />
-      <Route path='/friend-suggestion' element={<ProtectedRoutes children={< FriendSuggestion />} />} />
-      <Route path='/friend-suggestion/:userId' element={<ProtectedRoutes children={< FriendSuggestion />} />} />
+      <Route path='/friend-suggestion' element={< FriendSuggestion />} />
+      <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} />
+      <Route path='/friend-request' element={< FriendRequest />} />
+      <Route path='/friend-request/:userId' element={< FriendRequest />} />
       <Route path='/:userId' element={<Profile />} />
-      <Route path='/:userId/about' element={<Profile />} />
+      <Route path='/:userId/:page' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>

@@ -1,12 +1,10 @@
-import './friendsuggestion.css';
+import '../friendsuggestion/friendsuggestion.css';
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from '../../components/sidebar/Sidebar';
 import { useParams } from 'react-router-dom';
 import ViewProfile from '../viewprofile/ViewProfile';
-// import Profile from '../profile/profile';
 
-
-function FriendSuggestion({ page }) {
+function FriendRequest() {
     const { userId } = useParams()
     return (
         <div className='friendsuggestion'>
@@ -15,7 +13,7 @@ function FriendSuggestion({ page }) {
             </div>
             <div className="friendsuggestionContainer">
                 <div className='friendsuggestionSidebar'>
-                    <Sidebar page={5} isPages={true} />
+                    <Sidebar page={4} isPages={true} />
                 </div>
                 {
                     userId ? <div className="friendSuggetstionViewProfile">
@@ -29,4 +27,4 @@ function FriendSuggestion({ page }) {
     );
 }
 
-export default FriendSuggestion;
+export default FriendRequest;

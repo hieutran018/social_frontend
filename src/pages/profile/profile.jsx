@@ -5,15 +5,16 @@ import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Share from '../../components/share/Share';
 import InforMationUser from '../../components/informationuser/informationuser';
-import { useEffect, useState } from 'react';
+import FriendList from '../../components/Friends/friendlist/friendlist';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatusUser, selectUser } from '../../redux/selectors/postSelector';
 import { fetchUser } from '../../redux/actions/userAction';
 
 
 function Profile() {
-    let { userId } = useParams();
-    const [tab, setTab] = useState(1);
+    const { userId } = useParams();
+    const { page } = useParams();
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     const status = useSelector(selectStatusUser);
@@ -23,9 +24,7 @@ function Profile() {
 
     }, [userId, dispatch]);
 
-    const hanleClickSelectTab = (tabIndex) => {
-        setTab(tabIndex)
-    }
+
 
     return (
         <>
@@ -34,13 +33,13 @@ function Profile() {
                 status === 'loading' ?
                     <div></div> : status === 'success' ?
                         <div className="profile">
-                            {/* <Sidebar /> */}
+
                             <div className="profileRight">
                                 <div className="profileRightTop">
                                     <div className="profileCover">
                                         <img
                                             className="profileCoverImg"
-                                            src={user.coverImage}
+                                            src={status === "loading" ? user.coverImage : user.coverImage}
                                             alt=""
                                         />
                                         <img
@@ -56,26 +55,28 @@ function Profile() {
                                 </div>
                                 <div className='profileTabBar'>
                                     <div className='profileTabBarButton'>
-                                        <Link className='profileTextLink' to={"/" + userId}><div onClick={() => hanleClickSelectTab(1)} className='profileTab'> <span className='profileTextTab'>Bài viết</span></div></Link>
-                                        <div onClick={() => hanleClickSelectTab(2)} className='profileTab'> <span className='profileTextTab'>Giới thiệu</span></div>
-                                        <div onClick={() => hanleClickSelectTab(3)} className='profileTab'> <span className='profileTextTab'>Bạn bè</span></div>
-                                        <div onClick={() => hanleClickSelectTab(4)} className='profileTab'> <span className='profileTextTab'>Ảnh</span></div>
-                                        <div onClick={() => hanleClickSelectTab(5)} className='profileTab'> <span className='profileTextTab'>Video</span></div>
+                                        <Link className='profileTextLink' to={"/" + userId}><div className={page ? 'profileTab' : 'profileTab active'}> <span className='profileTextTab'>Bài viết</span></div></Link>
+                                        <Link className='profileTextLink' to={"/" + userId + "/about"}><div className={page === 'about' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Giới thiệu</span></div></Link>
+                                        <Link className='profileTextLink' to={"/" + userId + "/friends"}><div className={page === 'friends' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Bạn bè</span></div></Link>
+                                        <Link className='profileTextLink' to={"/" + userId + "/photos"}><div className={page === 'photos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Ảnh</span></div> </Link>
+                                        <Link className='profileTextLink' to={"/" + userId + "/videos"}><div className={page === 'videos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Video</span></div></Link>
                                     </div>
                                 </div>
                                 {
-                                    tab === 1 ?
-                                        <div className="profileRightBottom">
-                                            <div className='profileFeed'>
-                                                <Share />
-                                                <Feed />
-                                            </div>
-                                            <Rightbar profile userProfile={user} />
-                                        </div>
-                                        : tab === 2 ? <div className="profileRightBottom"><InforMationUser user={user} /></div>
-                                            : tab === 3 ? <div className="profileRightBottom"> <span>TAB 3</span></div>
-                                                : tab === 4 ? <div className="profileRightBottom"> <span>TAB 4</span></div>
-                                                    : <div className="profileRightBottom"> <span>TAB 5</span></div>
+                                    page === 'about' ?
+                                        <div className="profileRightBottom"><InforMationUser user={user} /></div>
+
+                                        : page === 'friends' ? <div className="profileRightBottom"> <FriendList /></div>
+                                            : page === 'photos' ? <div className="profileRightBottom"> <span>TAB PHOTOS</span></div>
+                                                : page === 'videos' ? <div className="profileRightBottom"> <span>TAB VIDEOS</span></div>
+                                                    :
+                                                    <div className="profileRightBottom">
+                                                        <div className='profileFeed'>
+                                                            <Share />
+                                                            <Feed />
+                                                        </div>
+                                                        <Rightbar profile userProfile={user} />
+                                                    </div>
                                 }
                             </div>
                         </div> : <div></div>
