@@ -77,3 +77,19 @@
     display: flex;
     justify-content: right;
 }
+.friendCardButtonUnfriend{
+    display: flex;
+    justify-content: right;
+
+    width: 100%;
+    height: 1.5rem;
+}
+
+.friendButtonUnFriend{
+    border-radius: 5px;
+    width: 9rem;
+    height: 2.5rem;
+    background-color: rgb(198, 200, 202);
+    border: 0.2px solid whitesmoke;
+    font-size: 1.2rem;
+}

@@ -7,6 +7,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 
 
@@ -15,6 +16,7 @@ import axios from 'axios';
 function FriendList() {
     const { userId } = useParams();
     const [fr, setFr] = useState([]);
+    const cookies = useCookies('_tk');
     useEffect(() => {
         const requestURL = "http://127.0.0.1:8000/api/fetch-friend-by-user-id";
         console.log(userId);
@@ -35,6 +37,26 @@ function FriendList() {
         }).catch((error) => console.log(error.message));
         console.log(fr);
     }, [userId])
+
+    const unFriend = (userId) => {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/unfriend';
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: { userId: userId },
+            headers: {
+                Authorization: 'Bearer ' + cookies[0]._tk,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+
+        }).then((response) => {
+            console.log(response.data)
+
+        }).catch((error) => console.log(error.message));
+        console.log(fr);
+
+    }
 
 
     return (
@@ -73,6 +95,9 @@ function FriendList() {
                                                                     <div>
                                                                         <div className='informationButtonEdit'><MoreHorizIcon /></div>
                                                                     </div>
+                                                                </div>
+                                                                <div className='friendCardButtonUnfriend' >
+                                                                    <button onClick={() => unFriend(u.friendId)} className='friendButtonUnFriend'>Hủy kết bạn</button>
                                                                 </div>
                                                             </div>
 
