@@ -141,7 +141,7 @@ export default function Rightbar({ profile, userProfile }) {
                 <div className="rightbarContainer">
                     <div className="rightbarFriend">
                         <div className="rightbarFriendContent">
-                            <div className="rightbarTitleContent"><h4 className="rightbarTitle">Ảnh</h4><a href="/#" className="rightbarLinkViewMoreFriend">Xem tất cả ảnh</a></div>
+                            <div className="rightbarTitleContent"><h4 className="rightbarTitle">Ảnh</h4><Link className="rightbarLinkViewMoreFriend" to={"/" + userProfile.id + "/photos/photos_of"}><span>Xem tất cả ảnh</span></Link></div>
                             <div className="rightbarFriendContainer">
                                 <div className="rightbarImgs">
                                     <Box sx={{ width: '100%' }}>
