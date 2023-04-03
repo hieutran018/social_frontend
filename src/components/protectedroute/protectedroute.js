@@ -7,7 +7,6 @@ function ProtectedRoutes({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState();
     const navigate = useNavigate()
     useEffect(() => {
-
         axios({
             method: 'POST', //you can set what request you want to be
             url: 'http://127.0.0.1:8000/api/auth/me',
@@ -16,8 +15,6 @@ function ProtectedRoutes({ children }) {
                 Authorization: 'Bearer ' + cookies[0]._tk
             }
         }).then((res) => setIsLoggedIn(true)).catch((err) => { console.log(err.message); setIsLoggedIn(false); navigate('/login') });
-
-
     })
 
     if (isLoggedIn) {

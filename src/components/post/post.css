@@ -20,6 +20,7 @@
 .postIconPrivacy{
     margin-top: 0px;
     margin-bottom: -10px;
+    margin-left: 0.5rem;
     color: #808080;
 }
 
@@ -40,7 +41,7 @@
     font-size: 19px;
     font-weight: 500;
     margin-top: -20px;
-    margin-left: 10px;
+    margin-left: 1rem;
     
 }
 
@@ -49,9 +50,15 @@ text-decoration: none;
 color: black;
 }
 
+.postPrivacy{
+    display: flex;
+    justify-content: left;
+    margin-top: 0.5rem;
+}
+
 .postDate {
     font-size: 12px;
-    margin-left: 10px;
+    margin-left: 1rem;
     
 }
 
@@ -198,7 +205,8 @@ color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .postShareCenter{
@@ -206,7 +214,7 @@ color: black;
 }
 
 .postshareDate{
-    margin-left: 10px;
+    margin-left: 1rem;
 }
 .postShareImg{
     margin-top: 0.1rem;
@@ -257,4 +265,8 @@ color: black;
    
     align-items: center;
     
+}
+
+.postShareUser{
+    margin-top: 0.5rem;
 }

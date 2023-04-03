@@ -11,7 +11,7 @@ function Friend() {
             </div>
 
             <div className="friendContainer">
-                <div >
+                <div>
                     <Sidebar page={3} />
                 </div>
                 <div className='friendMainContainer'>

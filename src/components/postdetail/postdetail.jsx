@@ -102,13 +102,13 @@ function PostDetail({ post }) {
                             </a>
 
                             <div>
-                                <span className="postUsername">
+                                <span className="postDetailUsername">
                                     <a className="postLinkProfileUser" href={"/" + post.user_id}>
                                         {post.username}
                                     </a>
                                 </span>
-                                <div className="postPrivacy">
-                                    <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                <div className="postDetailPrivacy">
+                                    <span className="postDetailDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
                                         {post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
                                 </div>
                             </div>

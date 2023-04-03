@@ -16,6 +16,11 @@
     align-items: center;
     justify-content: space-between;
 }
+.postDetailPrivacy{
+    display: flex;
+    justify-content: left;
+    margin-top: 0.5rem;
+}
 
 .postIconPrivacy{
     margin-top: 0px;
@@ -36,11 +41,11 @@
     object-fit: cover;
 }
 
-.postUsername {
+.postDetailUsername {
     font-size: 19px;
     font-weight: 500;
     margin-top: -20px;
-    margin-left: 10px;
+    margin-left: 1rem;
     
 }
 
@@ -49,9 +54,9 @@ text-decoration: none;
 color: black;
 }
 
-.postDate {
+.postDetailDate {
     font-size: 12px;
-    margin-left: 80px;
+    margin-left: 1rem;
     
 }
 

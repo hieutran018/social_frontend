@@ -1,7 +1,7 @@
 import './carduser.css'
 
 function CardUser({ user }) {
-    console.log(user)
+
     return (
         <div className='cardUser'>
             <img className="cardUserProfileImg" src={user.avatar} alt="" />

@@ -107,7 +107,7 @@ function ShareOption({ post }) {
                                                     }
 
                                                 </div>
-                                                : post.parent_post.totalMediaFile === 2 ?
+                                                : post.totalMediaFile === 2 ?
                                                     <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                                         {post.mediafile.map((item) => (
                                                             <ImageListItem key={item.media_file_name}>
@@ -119,7 +119,7 @@ function ShareOption({ post }) {
                                                                 />}
                                                             </ImageListItem>
                                                         ))}
-                                                    </ImageList> : post.parent_post.totalMediaFile === 3 ?
+                                                    </ImageList> : post.totalMediaFile === 3 ?
                                                         <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                             {post.mediafile.map((item) => (
                                                                 <ImageListItem key={item.media_file_name}>
