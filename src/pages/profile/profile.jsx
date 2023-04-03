@@ -6,6 +6,7 @@ import Rightbar from '../../components/rightbar/Rightbar';
 import Share from '../../components/share/Share';
 import InforMationUser from '../../components/informationuser/informationuser';
 import FriendList from '../../components/Friends/friendlist/friendlist';
+import Photos from '../../components/photos/photos';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatusUser, selectUser } from '../../redux/selectors/postSelector';
@@ -67,7 +68,7 @@ function Profile() {
                                         <div className="profileRightBottom"><InforMationUser user={user} /></div>
 
                                         : page === 'friends' ? <div className="profileRightBottom"> <FriendList /></div>
-                                            : page === 'photos' ? <div className="profileRightBottom"> <span>TAB PHOTOS</span></div>
+                                            : page === 'photos' ? <div className="profileRightBottom"> <Photos /></div>
                                                 : page === 'videos' ? <div className="profileRightBottom"> <span>TAB VIDEOS</span></div>
                                                     :
                                                     <div className="profileRightBottom">

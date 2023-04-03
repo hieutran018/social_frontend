@@ -1,9 +1,10 @@
 import './carduser.css'
 
 function CardUser({ user }) {
+    console.log(user)
     return (
         <div className='cardUser'>
-            <img className="cardUserProfileImg" src={user.profilePicture} alt="" />
+            <img className="cardUserProfileImg" src={user.avatar} alt="" />
             <h1 className='textName'>{user.username}</h1>
 
             <div className='accept'>

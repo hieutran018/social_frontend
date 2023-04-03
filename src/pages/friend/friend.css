@@ -3,6 +3,13 @@
     /* width: 100vh; */
     margin: 0;
     position: fixed;
+   
+    display: flex;
+    width: 100%;
+}
+
+.friendMainContainer{
+    width: 100%;
 }
 
 

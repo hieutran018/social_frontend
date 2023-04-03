@@ -145,3 +145,7 @@
 .sidebarListItemFriendSuggestion:hover{
     background-color: rgb(241,243,245);
 }
+
+.sidebarFriend{
+    width: 20rem;
+}

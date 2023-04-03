@@ -33,6 +33,7 @@ function App() {
       <Route path='/friend-request/:userId' element={< FriendRequest />} />
       <Route path='/:userId' element={<Profile />} />
       <Route path='/:userId/:page' element={<Profile />} />
+      <Route path='/:userId/:page/:category' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>

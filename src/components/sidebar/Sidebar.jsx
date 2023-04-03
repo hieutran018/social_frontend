@@ -59,43 +59,43 @@ function Sidebar({ page }) {
 
     const SideBarFriend = () => {
         return (
-            <>
-                <>
-                    <ul className="sidebarList">
-                        <li className="sidebarListItem">
-                            <GroupOutlined className="sidebarIcon" />
-                            <span className="sidebarListItemText">Trang Chủ </span>
-                        </li>
-                        <li className="sidebarListItem">
-                            <Link to="/friend-request" className="sidebarListItemText">
-                                <RecordVoiceOver className="sidebarIcon" />
-                                <span className="sidebarListItemText">Lời mời kết bạn</span>
-                            </Link>
-                        </li>
-                        <li className="sidebarListItem">
-                            <Link to="/friend-suggestion" className="sidebarListItemText">
-                                <PersonAddAlt1 className="sidebarIcon" />
-                                <span className="sidebarListItemText">Gợi ý</span>
-                            </Link>
-                        </li>
-                        <li className="sidebarListItem">
-                            <Diversity3 className="sidebarIcon" />
-                            <span className="sidebarListItemText">Tất cả bạn bè</span>
-                        </li>
-                        <li className="sidebarListItem">
-                            <Cake className="sidebarIcon" />
-                            <span className="sidebarListItemText">Sinh nhật</span>
-                        </li>
-                        <li className="sidebarListItem">
-                            <ReduceCapacity className="sidebarIcon" />
-                            <span className="sidebarListItemText">Danh sách tùy chỉnh</span>
-                        </li>
-                    </ul>
+
+            <div className='sidebarFriend'>
+                <ul className="sidebarList">
+                    <li className="sidebarListItem">
+                        <GroupOutlined className="sidebarIcon" />
+                        <span className="sidebarListItemText">Trang Chủ </span>
+                    </li>
+                    <li className="sidebarListItem">
+                        <Link to="/friend-request" className="sidebarListItemText">
+                            <RecordVoiceOver className="sidebarIcon" />
+                            <span className="sidebarListItemText">Lời mời kết bạn</span>
+                        </Link>
+                    </li>
+                    <li className="sidebarListItem">
+                        <Link to="/friend-suggestion" className="sidebarListItemText">
+                            <PersonAddAlt1 className="sidebarIcon" />
+                            <span className="sidebarListItemText">Gợi ý</span>
+                        </Link>
+                    </li>
+                    <li className="sidebarListItem">
+                        <Diversity3 className="sidebarIcon" />
+                        <span className="sidebarListItemText">Tất cả bạn bè</span>
+                    </li>
+                    <li className="sidebarListItem">
+                        <Cake className="sidebarIcon" />
+                        <span className="sidebarListItemText">Sinh nhật</span>
+                    </li>
+                    <li className="sidebarListItem">
+                        <ReduceCapacity className="sidebarIcon" />
+                        <span className="sidebarListItemText">Danh sách tùy chỉnh</span>
+                    </li>
+                </ul>
 
 
 
-                </>
-            </>
+            </div>
+
         );
     }
 
@@ -141,7 +141,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page == 4 ? <FriendRequest /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

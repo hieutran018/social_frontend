@@ -8,6 +8,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ReplyIcon from '@mui/icons-material/Reply';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
@@ -26,10 +28,13 @@ function Post({ post }) {
     const cookies = useCookies('_tk');
     const [open, setOpen] = useState(false);
     const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
+    const [openViewImage, setopenViewImage] = useState(false);
 
     const [anchor, setAnchor] = useState(null);
     const openOptionShare = Boolean(anchor);
+    const [item, setItem] = useState(0);
     const dispatch = useDispatch();
+
 
 
     const handleClickOpenopenShareOptionToFeed = () => {
@@ -65,7 +70,35 @@ function Post({ post }) {
         setAnchor(null);
     }
 
-    // console.log(post);
+    const handleOpenViewMedia = () => {
+        setopenViewImage(true);
+        setItem(0);
+        console.log(openViewImage);
+    }
+
+    const handleCloseViewMedia = () => {
+        setopenViewImage(false);
+        console.log(openViewImage);
+    }
+
+    const handleNextMediaItem = () => {
+        if (post.totalMediaFile - 1 === item) {
+            setItem(0);
+        }
+        else {
+            setItem(item + 1)
+        }
+    }
+    const handlePreMediaItem = () => {
+        if (item === 0) {
+            setItem(post.totalMediaFile - 1);
+        }
+        else {
+            setItem(item - 1)
+        }
+    }
+
+    console.log(item);
     return (
         <div className="post">
             <div className="postWrapper">
@@ -131,28 +164,17 @@ function Post({ post }) {
                                     truncatedEndingComponent={"... "}
                                 ><p>{post.post_content}</p>
                                 </ShowMoreText>
-                                {post.totalMediaFile === 1 ?
-                                    <div>
-                                        {
-                                            post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.mediafile[0].media_file_name} controls></video> :
-                                                <img className="postImg" src={post.mediafile[0].media_file_name} alt="" />
-                                        }
+                                <div onClick={handleOpenViewMedia}>
+                                    {post.totalMediaFile === 1 ?
+                                        <div>
+                                            {
+                                                post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.mediafile[0].media_file_name} controls></video> :
+                                                    <img className="postImg" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />
+                                            }
+                                        </div>
 
-                                    </div>
-                                    : post.totalMediaFile === 2 ?
-                                        <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
-                                            {post.mediafile.map((item) => (
-                                                <ImageListItem key={item.media_file_name}>
-                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
-                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
-                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                                        alt={item.title}
-                                                        loading="lazy"
-                                                    />}
-                                                </ImageListItem>
-                                            ))}
-                                        </ImageList> : post.totalMediaFile === 3 ?
-                                            <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                        : post.totalMediaFile === 2 ?
+                                            <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                                 {post.mediafile.map((item) => (
                                                     <ImageListItem key={item.media_file_name}>
                                                         {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -163,24 +185,37 @@ function Post({ post }) {
                                                         />}
                                                     </ImageListItem>
                                                 ))}
-                                            </ImageList> :
-                                            <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
-                                                {post.mediafile.map((item) => (
-                                                    <ImageListItem key={item.media_file_name}>
-                                                        {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
-                                                            src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
-                                                            srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                                            alt={item.title}
-                                                            loading="lazy"
-                                                        />}
-                                                    </ImageListItem>
-                                                ))}
-                                            </ImageList>}
+                                            </ImageList> : post.totalMediaFile === 3 ?
+                                                <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                    {post.mediafile.map((item) => (
+                                                        <ImageListItem key={item.media_file_name}>
+                                                            {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                alt={item.title}
+                                                                loading="lazy"
+                                                            />}
+                                                        </ImageListItem>
+                                                    ))}
+                                                </ImageList> :
+                                                <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                                    {post.mediafile.map((item) => (
+                                                        <ImageListItem key={item.media_file_name}>
+                                                            {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                alt={item.title}
+                                                                loading="lazy"
+                                                            />}
+                                                        </ImageListItem>
+                                                    ))}
+                                                </ImageList>
+                                    }</div>
                             </div> :
                             <div className="postParent">
                                 <div className="postShareWrapper">
                                     <div className="postShareCenter">
-                                        <div>
+                                        <div onClick={handleOpenViewMedia}>
                                             {post.parent_post.totalMediaFile === 1 ?
                                                 <div>
                                                     {
@@ -345,6 +380,24 @@ function Post({ post }) {
                     maxWidth="md"
                 >
                     <ShareOption post={post.parent_post !== null ? post.parent_post : post} />
+                </Dialog>
+
+                <Dialog
+                    open={openViewImage}
+                    onClose={handleCloseViewMedia}
+                    fullWidth
+                    maxWidth="md"
+                >
+                    <div className="dialogViewMediaFile">
+                        <div style={{ margin: 'auto' }}>
+                            {
+                                post.totalMediaFile === 1 ? <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><div className="dialogButton"><ArrowBackIosNewIcon /></div> {post.mediafile[0].media_type === 'mp4' ? <video loop className="dialogViewImage" src={post.mediafile[0].media_file_name} controls></video> :
+                                    <img className="dialogViewImage" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />}<div className="dialogButton"><ArrowForwardIosIcon /></div> </div>
+                                    : post.totalMediaFile === 0 ? <div></div> : <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><div onClick={handlePreMediaItem} className="dialogButton"><ArrowBackIosNewIcon /></div> {post.mediafile[item].media_type === 'mp4' ? <video loop className="dialogViewImage" src={post.mediafile[item].media_file_name} controls></video> :
+                                        <img className="dialogViewImage" src={post.mediafile[item].media_file_name} alt="" srcSet={post.mediafile[item].media_file_name} />}<div onClick={handleNextMediaItem} className="dialogButton"><ArrowForwardIosIcon /></div> </div>
+                            }
+                        </div>
+                    </div>
                 </Dialog>
             </div>
         </div>

@@ -11,8 +11,12 @@ function Friend() {
             </div>
 
             <div className="friendContainer">
-                <Sidebar page={3} />
-                <Friends />
+                <div >
+                    <Sidebar page={3} />
+                </div>
+                <div className='friendMainContainer'>
+                    <Friends />
+                </div>
 
             </div>
         </>
