@@ -23,6 +23,7 @@ import { selectAddPostStatus } from '../../../redux/selectors/postSelector';
 function ShareOption({ post }) {
 
     const cookies = useCookies('_tk');
+    const userCurrent = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = useState(null);
     const [privacy, setPrivacy] = useState(1);
 
@@ -59,7 +60,7 @@ function ShareOption({ post }) {
     const submitPost = () => {
 
         setCheckClick(false);
-        dispatch(sharePostToWall(post, cookies, inputContentPost))
+        dispatch(sharePostToWall(post, cookies, inputContentPost, privacy))
         console.log(inputContentPost);
         setInputContentPost('');
 
@@ -68,11 +69,13 @@ function ShareOption({ post }) {
 
     return (
         <div className='dialogShare'>
+            <div className='contaierHeader'>
+                <span className='shareTitle'>Tạo bài viết</span>
+            </div>
+            <div className='dialogShareHr'></div>
             <div className="wrapper">
 
-                <div className='contaierHeader'>
-                    <span className='shareTitle'>Tạo bài viết</span>
-                </div>
+
 
                 {
                     statusAdd === 'adding' ?
@@ -82,9 +85,9 @@ function ShareOption({ post }) {
                             </Box>
                         </div> : (statusAdd === 'succeeded' || !statusAdd) && checkClick ? <div>
                             <div className="content">
-                                <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src="assets/person/1.jpeg" alt="logo" /></div>
+                                <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={userCurrent.avatar} alt="logo" /></div>
                                 <div className="details">
-                                    <p className='shareUserName'>Trần Dương Chí Hiếu</p>
+                                    <p className='shareUserName'>{userCurrent.first_name + " " + userCurrent.last_name}</p>
                                     <div className='privacy' onClick={handleClick}>
                                         {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                         <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>

@@ -14,11 +14,19 @@ function SidebarFriendSuggestion() {
     const cookies = useCookies('_tk');
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            axios.get('http://127.0.0.1:8000/api/v1/fetch-friend-suggestion', {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friends-suggestion';
+            axios({
+                method: 'GET', //you can set what request you want to be
+                url: requestURL,
                 headers: {
-                    'Authorization': 'Bearer ' + cookies[0]._tk
+                    Authorization: 'Bearer ' + cookies[0]._tk,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
                 }
-            }).then((res) => setFrs(res.data)).catch((err) => console.log(err));
+            }).then((response) => {
+                console.log("RES =========", response.data);
+                setFrs(response.data);
+            }).catch((error) => console.log(error.message));
 
         }
         fetchFriendSuggestion()

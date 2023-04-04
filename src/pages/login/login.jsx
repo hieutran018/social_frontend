@@ -8,11 +8,10 @@ import './login.css';
 function Login() {
 
     const navigate = useNavigate();
-    console.log(Date.UTC(3600))
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    const [cookies, setCookie] = useCookies(['_tk']);
+    const [, setCookie] = useCookies(['_tk']);
     const submitFormLLogin = () => {
         axios.post('http://127.0.0.1:8000/api/auth/login', {
             email: email,

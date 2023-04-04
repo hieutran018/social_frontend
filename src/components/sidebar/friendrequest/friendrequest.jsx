@@ -11,12 +11,11 @@ import '../friendsuggestion/friendsuggestion.css';
 import '../sidebar.css';
 
 function FriendRequest() {
-
-
     const [frs, setFrs] = useState([]);
     const cookies = useCookies('_tk');
+
     useEffect(() => {
-        const fetchFriendSuggestion = () => {
+        const fetchFriendRequest = () => {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friend-request-list';
             axios({
                 method: 'POST', //you can set what request you want to be
@@ -32,7 +31,7 @@ function FriendRequest() {
             }).catch((error) => console.log(error.message));
 
         }
-        fetchFriendSuggestion()
+        fetchFriendRequest()
     }, [])
 
     const hanldeClickAcceptAddFriend = (userId) => {

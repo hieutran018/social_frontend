@@ -65,7 +65,7 @@ function Post({ post }) {
     }
 
     const handleClickSharePost = () => {
-        dispatch(sharePostToWall(post, cookies))
+        dispatch(sharePostToWall(post, cookies, null, 1))
 
         setAnchor(null);
     }
@@ -73,12 +73,12 @@ function Post({ post }) {
     const handleOpenViewMedia = () => {
         setopenViewImage(true);
         setItem(0);
-        console.log(openViewImage);
+
     }
 
     const handleCloseViewMedia = () => {
         setopenViewImage(false);
-        console.log(openViewImage);
+
     }
 
     const handleNextMediaItem = () => {
@@ -98,7 +98,7 @@ function Post({ post }) {
         }
     }
 
-    console.log(item);
+
     return (
         <div className="post">
             <div className="postWrapper">

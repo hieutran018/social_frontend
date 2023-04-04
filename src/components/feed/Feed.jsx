@@ -12,9 +12,10 @@ function Feed() {
     // const [postList, setPostList] = useState([]);
     useEffect(() => {
         dispatch(fetchPost());
+        console.log("==SET STATUS LIST==", status);
+        console.log("==SET POST LIST==", posts);
     }, [dispatch])
-    console.log("==SET STATUS LIST==", status);
-    console.log("==SET POST LIST==", posts);
+
     return (<div className="feed">
         <div className="feedWrapper">
             {

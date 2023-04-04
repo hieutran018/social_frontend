@@ -14,10 +14,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useCookies } from 'react-cookie';
 import { addNewPost } from '../../redux/actions/postAction'
-import { selectAddPostStatus, selectPostStatus } from '../../redux/selectors/postSelector';
+import { selectAddPostStatus } from '../../redux/selectors/postSelector';
 
 function DialogShare() {
     const cookies = useCookies('_tk');
+    const user = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = useState(null);
     const [privacy, setPrivacy] = useState(1);
     const [view, setView] = useState(false);
@@ -28,7 +29,7 @@ function DialogShare() {
     const statusAdd = useSelector(selectAddPostStatus);
     const [checkClick, setCheckClick] = useState(true);
 
-    const [inputContentPost, setInputContentPost] = useState('');
+    const [inputContentPost, setInputContentPost] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFIles = [];
@@ -58,7 +59,8 @@ function DialogShare() {
         setInputContentPost(e.target.value)
 
     }
-    console.log(files)
+
+    console.log(inputContentPost === '' && !files.length === 0, !inputContentPost === '', !files.length === 0)
 
     const submitPost = () => {
         if (inputContentPost === '' && files == null) {
@@ -77,11 +79,11 @@ function DialogShare() {
 
     return (
         <div className='dialogShare'>
+            <div className='contaierHeader'>
+                <span className='shareTitle'>Tạo bài viết</span>
+            </div>
+            <div className='dialogShareHr'></div>
             <div className="wrapper">
-
-                <div className='contaierHeader'>
-                    <span className='shareTitle'>Tạo bài viết</span>
-                </div>
 
                 {
                     statusAdd === 'adding' ?
@@ -91,9 +93,10 @@ function DialogShare() {
                             </Box>
                         </div> : (statusAdd === 'succeeded' || !statusAdd) && checkClick ? <div>
                             <div className="content">
-                                <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src="assets/person/1.jpeg" alt="logo" /></div>
+                                <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={user.avatar} alt="logo" /></div>
+
                                 <div className="details">
-                                    <p className='shareUserName'>Trần Dương Chí Hiếu</p>
+                                    <p className='shareUserName'>{user.first_name + " " + user.last_name}</p>
                                     <div className='privacy' onClick={handleClick}>
                                         {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                         <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -157,22 +160,22 @@ function DialogShare() {
                                     : <div></div>}
                             </div>
                             <div className="optionsContainer">
-                                <div><p className='shareDescrion'>Thêm vào bài viết của bạn</p></div>
+                                <div className='shareDescriptionContainer'><p className='shareDescrion'>Thêm vào bài viết của bạn</p></div>
                                 <div className="options">
 
-                                    <label htmlFor='uploadFiles' onChange={handleFileChange}><input type="file" multiple id="uploadFiles" hidden /><PermMedia style={{ fontSize: "40" }} htmlColor="tomato" className="shareIcon" /></label>
+                                    <label htmlFor='uploadFiles' onChange={handleFileChange}><input type="file" multiple id="uploadFiles" hidden /><PermMedia style={{ fontSize: "35" }} htmlColor="tomato" className="shareIcon" /></label>
 
 
-                                    <div><Room style={{ fontSize: "40" }} htmlColor="green" className="shareIcon" /></div>
+                                    <div><Room style={{ fontSize: "35" }} htmlColor="green" className="shareIcon" /></div>
 
 
-                                    <div><EmojiEmotions style={{ fontSize: "40" }} htmlColor="goldenrod" className="shareIcon" /></div>
+                                    <div><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="shareIcon" /></div>
 
 
                                 </div>
                             </div>
                             <div className='shareButtonContainer'>
-                                <button onClick={submitPost} className="shareButton">Đăng</button>
+                                <button onClick={submitPost} disabled={!inputContentPost && files.length === 0} className={!inputContentPost && files.length === 0 ? "shareButton disablebutton" : "shareButton"} >Đăng</button>
                             </div>
 
 

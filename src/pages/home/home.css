@@ -3,10 +3,13 @@
     display: flex;
     width: 100%;
     position: relative;
-    margin-top: 3rem;
+    margin-top: 4.3rem;
 }
 .homeFeed{
     margin-top: 1rem;
     flex: 4;
     
+}
+.homeTopbar{
+    display: flex;
 }

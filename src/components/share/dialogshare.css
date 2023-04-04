@@ -9,15 +9,25 @@
 }
 
 .wrapper{
-  margin: 2rem;
+  margin: 1rem;
+  
 }
 
 .contaierHeader{
     display: flex;
     justify-content: center;
+    margin-bottom:1rem ;
+    margin-top: 1rem;
 }
+
+.dialogShareHr{
+  width: 100%;
+  height: 0.1px;
+  background-color: #C8C8C8;
+}
+
 .shareTitle{
-    font-size: 2rem;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -37,20 +47,25 @@
 .optionsContainer{
     display: flex;
     justify-content: space-between;
-    border: 1px ridge  #606266;
-    border-radius: 10px;
+    border: 1px solid  #898a8b72;
+    border-radius: 15px;
+    height: 3.5rem;
+}
+.shareDescriptionContainer{
+  display: flex;
+  align-items: center;
 }
 .shareDescrion{
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: 300;
     color: #606266;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
     margin-left: 1rem;
 }
 .options{
     display: flex;
+    width: 40%;
     justify-content: space-evenly;
+    align-items: center;
 }
 .shareButtonContainer{
     margin-top: 0.5rem;
@@ -59,8 +74,20 @@
 .shareButton{
     width: 100%;
     height: 3rem;
-    background-color: #1877F2;
-    font-size: 2rem;
+    font-size: 20px;
+    border: none;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: green;
+    font-weight: 500;
+    /* margin-right: 20px; */
+    cursor: pointer;
+    color: white;
+}
+
+.disablebutton{
+  background-color: #E4E6EB;
+
 }
 
 div.details{
@@ -91,7 +118,7 @@ div.details{
     
 }
 .shareUserName{
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: 500;
 }
 .details .privacy span{

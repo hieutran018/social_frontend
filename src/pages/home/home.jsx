@@ -7,8 +7,8 @@ import Share from "../../components/share/Share";
 
 function Home() {
     return (
-        <>
-            <div>
+        <div>
+            <div className="homeTopbar">
                 <Topbar />
             </div>
             <div className="homeContainer">
@@ -20,7 +20,7 @@ function Home() {
 
                 <Rightbar />
             </div>
-        </>
+        </div>
     );
 }
 

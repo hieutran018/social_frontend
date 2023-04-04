@@ -80,13 +80,14 @@ export const addNewPost = (token, contentPost, files, privacy) => {
     }
 }
 
-export const sharePostToWall = (post, cookies, inputContent) => {
+export const sharePostToWall = (post, cookies, inputContent, privacy) => {
     return async dispatch => {
         try {
+
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
-                data: { postId: post.id, postContent: inputContent },
+                data: { postId: post.id, postContent: inputContent, privacy: privacy },
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk
                 }

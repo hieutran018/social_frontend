@@ -1,4 +1,4 @@
-import { Search, Person, Chat, Notifications } from '@mui/icons-material';
+import { Search, Chat, Notifications } from '@mui/icons-material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NavItem from '../navitem/navitem';
 import DropdownMenu from '../dropdownmenu/dropdownmenu';
@@ -25,16 +25,13 @@ function Topbar() {
             <div className="topbarRight">
 
                 <div className="topbarIcons">
+
                     <div className="topbarIconItem">
-                        <Person />
-                        {/* <span className="topbarIconBadge">1</span> */}
-                    </div>
-                    <div className="topbarIconItem">
-                        <Chat />
+                        <Chat fontSize='25' />
                         {/* <span className="topbarIconBadge">2</span> */}
                     </div>
                     <div className="topbarIconItem">
-                        <Notifications />
+                        <Notifications fontSize='25' />
                         {/* <span className="topbarIconBadge">1</span> */}
                     </div>
                 </div>
