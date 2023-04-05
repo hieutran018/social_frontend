@@ -1,0 +1,109 @@
+.updateAvatarHr{
+    width: 100%;
+    height: 0.1px;
+    background-color: #C8C8C8;
+}
+
+.updateAvatarTitleContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom:1rem ;
+    margin-top: 1rem;
+}
+
+.updateAvatarTile{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.updateAvatarWrapper{
+    margin: 1rem;
+    
+}
+
+.updateAvatarUpload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #DBE7F2;
+    border: none;
+    border-radius: 5px;
+    color: blue;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.updateAvatarUploadedContainer{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+}
+.updateAvatarUploaded{
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+.updateAvatarUploadeTitle{
+    font-size: 20px;
+    font-weight: 500;
+   
+}
+
+.updateAvatarImageItem{
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 3px;
+}
+
+.updateAvatarViewMore{
+    width: 100%;
+    height: 2.5rem;
+    background-color: #cfd3d7;
+    border: none;
+    border-radius: 5px;
+    color: rgb(110, 110, 113);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.updateAvatarPreViewUpload{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.updateAvatarButtonCancel{
+    width: 5rem;
+    height: 2rem;
+    border: none;
+    background-color: #f6f8fa;
+    font-size: 16px;
+    color: #1A6ED8;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+.updateAvatarButtonCancel:hover{
+    background-color: #f1eeee;
+}
+
+.updateAvatarButtonSave{
+    width: 6rem;
+    height: 2rem;
+    background-color: #1A6ED8;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-left: 0.5rem;
+}
+.updateAvatarButtonPreviewUpload{
+    display: flex;
+    justify-content: right;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+.updateAvatarButtonSave:hover{
+    background-color: #4493f3;
+}

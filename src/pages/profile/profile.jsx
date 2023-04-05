@@ -29,6 +29,7 @@ function Profile() {
     const status = useSelector(selectStatusUser);
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);
+    const [openUpdateAvatar, setOpenUpdateAvatar] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -40,15 +41,22 @@ function Profile() {
 
     const handleOpenViewAvatar = () => {
         setAnchorEl(null);
-
         setOpenViewAvatar(true);
-
-
     }
 
     const handleCloseViewAvatar = () => {
         setOpenViewAvatar(false);
     }
+
+    const handleOpenUpdateAvatar = () => {
+        setAnchorEl(null);
+        setOpenUpdateAvatar(true);
+    }
+
+    const handleCloseUpdateAvatar = () => {
+        setOpenUpdateAvatar(false);
+    }
+
     useEffect(() => {
         dispatch(fetchUser(userId));
 
@@ -119,7 +127,7 @@ function Profile() {
                                             <MenuItem onClick={handleOpenViewAvatar}>
                                                 <div className='profileOptionAvatar'><RxAvatar size={30} />  <span className='profileOptionAvatarText'>Xem ảnh đại diện</span></div>
                                             </MenuItem>
-                                            <MenuItem onClick={handleClose}>
+                                            <MenuItem onClick={handleOpenUpdateAvatar}>
                                                 <div className='profileOptionAvatar'><AiOutlineCloudUpload size={30} /><span className='profileOptionAvatarText'>Cập nhật ảnh đại diện</span></div>
                                             </MenuItem>
 
@@ -169,14 +177,14 @@ function Profile() {
                                     <img className='profileViewAvatarDialog' src={user.avatar} alt="" />
                                 </div>
                             </Dialog>
-                            {/* <Dialog
-                                open={openViewAvatar}
-                                onClose={handleCloseViewAvatar}
+                            <Dialog
+                                open={openUpdateAvatar}
+                                onClose={handleCloseUpdateAvatar}
                                 fullWidth
                                 maxWidth="sm"
                             >
                                 <UpdateAvatar />
-                            </Dialog> */}
+                            </Dialog>
                         </div> : <div></div>
             }
 

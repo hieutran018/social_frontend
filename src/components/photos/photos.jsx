@@ -2,6 +2,7 @@ import './photos.css';
 import Grid from '@mui/material/Grid';
 import { Link, useParams } from 'react-router-dom';
 import Album from './album/album';
+import PhotoBy from './photosby/photoby';
 
 function Photos() {
 
@@ -44,7 +45,7 @@ function Photos() {
 
 
                             </Grid>
-                        </Grid> : category === 'album' ? <Album /> : <div></div>}
+                        </Grid> : category === 'album' ? <Album /> : <PhotoBy />}
 
                 </div>
             </div>
