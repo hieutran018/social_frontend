@@ -12,7 +12,6 @@ function Feed() {
     // const [postList, setPostList] = useState([]);
     useEffect(() => {
         dispatch(fetchPost());
-
     }, [dispatch])
 
     return (<div className="feed">

@@ -8,6 +8,7 @@ function CommentBox({ postId }) {
     const handleClickPostComment = () => {
         console.log('Press to enter')
         const token = JSON.parse(sessionStorage.getItem('token'));
+        console.log(token);
         axios({
             method: 'POST', //you can set what request you want to be
             url: 'http://127.0.0.1:8000/api/v1/create-comment-post',

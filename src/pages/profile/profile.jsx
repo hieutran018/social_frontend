@@ -11,17 +11,19 @@ import Photos from '../../components/photos/photos';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatusUser, selectUser } from '../../redux/selectors/postSelector';
-import { fetchUser } from '../../redux/actions/userAction';
+import { fetchUser, updateCoverImage } from '../../redux/actions/userAction';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import Dialog from '@mui/material/Dialog';
 import { RxAvatar } from 'react-icons/rx/';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
+import { useCookies } from 'react-cookie';
 
 
 function Profile() {
     const { userId } = useParams();
+    const cookies = useCookies('_tk')[0]._tk;
     const userCurrent = JSON.parse(localStorage.getItem('user'));
     const { page } = useParams();
     const dispatch = useDispatch();
@@ -30,6 +32,7 @@ function Profile() {
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);
     const [openUpdateAvatar, setOpenUpdateAvatar] = useState(false);
+    const [uploadCover, setUploadCover] = useState();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -57,6 +60,21 @@ function Profile() {
         setOpenUpdateAvatar(false);
     }
 
+    const handleChangeCoverImage = (e) => {
+        setUploadCover(e.target.files)
+        console.log(e.target.files)
+    }
+
+    const handleClickCancelUploadCoverImage = () => {
+        setUploadCover(null);
+    }
+
+    const handleSubmitUpload = () => {
+        dispatch(updateCoverImage(cookies, uploadCover))
+        setUploadCover(null);
+
+    }
+
     useEffect(() => {
         dispatch(fetchUser(userId));
 
@@ -75,12 +93,34 @@ function Profile() {
                             <div className="profileRight">
                                 <div className="profileRightTop">
                                     <div className="profileCover">
-                                        <img
-                                            className="profileCoverImg"
-                                            src={status === "loading" ? user.coverImage : user.coverImage}
-                                            alt=""
-                                        />
+                                        <div className='profileCoverContainer' style={{ height: '18rem' }}>
+                                            <img
+                                                className="profileCoverImg"
+                                                src={!uploadCover ? (status === "loading" ? user.coverImage : user.coverImage) : URL.createObjectURL(uploadCover[0])}
+                                                alt=""
+                                            />
 
+                                            {
+                                                userCurrent.id.toString() === userId ?
+                                                    <div className='profileCoverInput'>
+                                                        {
+                                                            uploadCover ? <div onClick={handleClickCancelUploadCoverImage} className='profileCoverCancel'>
+                                                                <span >Hủy</span>
+                                                            </div> : <></>
+                                                        }
+                                                        {
+                                                            uploadCover ? <div onClick={handleSubmitUpload} htmlFor="profileUploadCover" className='profileCoverInput'>
+                                                                <span >Lưu thay đổi</span>
+                                                            </div> : <label htmlFor="profileUploadCover" className='profileCoverInput'>
+                                                                <input onChange={handleChangeCoverImage} id="profileUploadCover" type="file" hidden />
+
+                                                                <span >Cập nhật ảnh bìa</span>
+                                                            </label>
+                                                        }
+                                                    </div> : <></>
+                                            }
+
+                                        </div>
                                         {
                                             userCurrent.id.toString() === userId ?
                                                 <img
@@ -178,7 +218,7 @@ function Profile() {
                             >
                                 <UpdateAvatar />
                             </Dialog>
-                        </div> : <div></div>
+                        </div > : <div></div>
             }
 
 

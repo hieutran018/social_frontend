@@ -47,6 +47,7 @@
     height: 11.95rem;
     border: 0.1px solid #D8DADF;
     border-radius: 3px;
+    object-fit: cover;
 }
 
 .photosLinkTab{

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from "axios";
 import { useCookies } from 'react-cookie';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -12,6 +11,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import Comment from "../comment/comment";
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { commentPost } from '../../redux/actions/postAction';
 
 import './postdetail.css'
 
@@ -23,6 +24,8 @@ function PostDetail({ post }) {
     const [commentList, setCommentList] = useState([]);
     const [inputComment, setInputComment] = useState('');
     const [countComment, setCountComment] = useState(post.totalComment);
+
+    const dispatch = useDispatch();
 
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
@@ -48,15 +51,8 @@ function PostDetail({ post }) {
 
 
     const handleClickPostComment = (postId) => {
+        dispatch(commentPost(cookies[0]._tk, postId, inputComment))
 
-        axios({
-            method: 'POST', //you can set what request you want to be
-            url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
-            data: { postId: postId, commentContent: inputComment },
-            headers: {
-                Authorization: 'Bearer ' + cookies[0]._tk
-            }
-        }).then((res) => console.log(res))
         setInputComment('');
         async function fetchCommentByIdPost(postId) {
             const requestOptions = {
@@ -69,7 +65,6 @@ function PostDetail({ post }) {
             const responseJson = await response.json();
             setCommentList(responseJson);
             setCountComment(countComment + 1);
-
         }
         fetchCommentByIdPost(postId)
     }

@@ -6,7 +6,8 @@ import {
     ADD_POST,
     ADD_POST_STARTED,
     ADD_POST_SUCCEEDED,
-    ADD_POST_FAILED
+    ADD_POST_FAILED,
+    COUNT_COMMENT_POST
 } from '../constants/postConstant'
 
 export const fetchPostStarted = () => ({
@@ -35,6 +36,11 @@ export const addNewPostSucceeded = post => ({
 export const fetchPostFailed = error => ({
     type: FETCH_POST_FAILED,
     error
+})
+
+export const countComment = comments => ({
+    type: COUNT_COMMENT_POST,
+    comments
 })
 
 export const fetchPost = () => {
@@ -68,7 +74,7 @@ export const addNewPost = (token, contentPost, files, privacy) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                console.log('redux', response.data);
+                // console.log('redux', JSON.stringify(response.data), 'RES', response.data);
                 dispatch(addNewPostSucceeded(response.data));
                 // dispatch(fetchPost())
 
@@ -102,6 +108,24 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
             dispatch(fetchPostFailed(error))
         }
     };
+}
+
+export const commentPost = (cookies, postId, commentContent) => {
+    return async dispatch => {
+        try {
+            axios({
+                method: 'POST', //you can set what request you want to be
+                url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
+                data: { postId: postId, commentContent: commentContent },
+                headers: {
+                    Authorization: 'Bearer ' + cookies
+                }
+            }).then((res) => console.log(res))
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export const addPost = (post) => ({

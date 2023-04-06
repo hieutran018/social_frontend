@@ -36,13 +36,14 @@ function Post({ post }) {
     const [item, setItem] = useState(0);
     const dispatch = useDispatch();
     const statusAdd = useSelector(selectAddPostStatus);
-
     useEffect(() => {
+
         if (selectAddPostStatus) {
             setOpenShareOptionToFeed(false);
             setAnchor(null);
         }
-    }, [statusAdd])
+
+    }, [statusAdd, dispatch,])
 
     const handleClickOpenopenShareOptionToFeed = () => {
         setOpenShareOptionToFeed(true);
@@ -127,9 +128,9 @@ function Post({ post }) {
                             </span>
                             <div className="postPrivacy">
                                 <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                    {post.privacy === 0 ?
+                                    {post.privacy.toString() === "0" ?
                                         <LockIcon className="postIconPrivacy" /> :
-                                        post.privacy === 1 ? <PublicIcon className="postIconPrivacy" />
+                                        post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
                                             : <GroupIcon className="postIconPrivacy" />
                                     }</span>
                             </div>

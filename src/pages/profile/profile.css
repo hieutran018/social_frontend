@@ -127,4 +127,49 @@
 .profileOptionAvatarText{
     margin-left: 0.6rem;
 }
+.profileCoverContainer{
+    position: relative;
+  width: 100%;
+  
+}
 
+.profileCoverContainer >.profileCoverInput{
+    position: absolute;
+  top: 90%;
+  left: 90%;
+  transform: translate(5%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.profileCoverCancel{
+        position: absolute;
+  top: 90%;
+  left: 85%;
+  transform: translate(-265%, -90%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+/* .profileUploadCoverContainer{
+    position: absolute;
+    top: 90%;
+    left: 80%;
+    transform: translate(5%, -50%);
+     -ms-transform: translate(-50%, -50%); */
+/* } */

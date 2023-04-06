@@ -5,12 +5,14 @@ import userReducer from './reducers/userReducer'
 
 
 
+
 // Automatically adds the thunk middleware and the Redux DevTools extension
 const store = configureStore({
     // Automatically calls `combineReducers`
     reducer: {
         posts: postReducer,
-        users: userReducer
+        users: userReducer,
+
 
 
     }
