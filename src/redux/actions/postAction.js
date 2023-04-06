@@ -68,9 +68,9 @@ export const addNewPost = (token, contentPost, files, privacy) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-
+                console.log('redux', response.data);
                 dispatch(addNewPostSucceeded(response.data));
-                dispatch(fetchPost())
+                // dispatch(fetchPost())
 
 
             }).catch((error) => addNewPostFailed(error.message));
@@ -83,7 +83,7 @@ export const addNewPost = (token, contentPost, files, privacy) => {
 export const sharePostToWall = (post, cookies, inputContent, privacy) => {
     return async dispatch => {
         try {
-
+            dispatch(addNewPostStarted());
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
@@ -92,8 +92,9 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
                     Authorization: 'Bearer ' + cookies[0]._tk
                 }
             }).then((response) => {
-                dispatch(addPost(response.data));
-                dispatch(fetchPost())
+                console.log('redux postshare', response.data)
+                dispatch(addNewPostSucceeded(response.data));
+
 
 
             }).catch((error) => addNewPostFailed(error.message));

@@ -106,20 +106,13 @@ function Profile() {
                                             MenuListProps={{
                                                 'aria-labelledby': 'basic-button',
                                             }}
-                                            transformOrigin={{
-                                                horizontal: 'bottom',
 
-                                                vertical: 'left'
-                                            }}
                                             style={{
-                                                left: '-15px'
+                                                left: '-30px'
                                             }}
                                             anchorEl={anchorEl}
                                             open={open}
-                                            anchorOrigin={{
-                                                vertical: 'bottom',
 
-                                            }}
 
                                             onClose={handleClose}
                                             TransitionComponent={Fade}

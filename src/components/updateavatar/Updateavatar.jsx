@@ -4,9 +4,12 @@ import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { updateAvatar } from '../../redux/actions/userAction'
 
 function UpdateAvatar() {
     const { userId } = useParams();
+    const dispatch = useDispatch();
     const [imgUploaded, setImgUploaded] = useState([]);
     const cookies = useCookies('_tk')[0]._tk;
     const [file, setFile] = useState([]);
@@ -29,11 +32,18 @@ function UpdateAvatar() {
     }, [cookies, userId])
 
     const hanldeChangeFileUpload = (e) => {
+        console.log(e.target.files);
         setFile(e.target.files);
         setIsUpload(false);
     }
 
     const handleCancelChangeFile = () => {
+        setFile([]);
+        setIsUpload(true);
+    }
+
+    const handleSubmitUpload = () => {
+        dispatch(updateAvatar(cookies, file))
         setFile([]);
         setIsUpload(true);
     }
@@ -106,7 +116,7 @@ function UpdateAvatar() {
                         </div>
                         <div className='updateAvatarButtonPreviewUpload'>
                             <button onClick={handleCancelChangeFile} className='updateAvatarButtonCancel'>Hủy</button>
-                            <button className='updateAvatarButtonSave'>Lưu</button>
+                            <button onClick={handleSubmitUpload} className='updateAvatarButtonSave'>Lưu</button>
                         </div>
                     </div>
                 }

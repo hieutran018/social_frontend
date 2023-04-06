@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import PublicIcon from '@mui/icons-material/Public';
 import GroupIcon from '@mui/icons-material/Group';
@@ -15,8 +15,9 @@ import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sharePostToWall } from "../../redux/actions/postAction";
+import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
 // import axios from "axios";
 import 'moment/locale/vi';
@@ -34,8 +35,14 @@ function Post({ post }) {
     const openOptionShare = Boolean(anchor);
     const [item, setItem] = useState(0);
     const dispatch = useDispatch();
+    const statusAdd = useSelector(selectAddPostStatus);
 
-
+    useEffect(() => {
+        if (selectAddPostStatus) {
+            setOpenShareOptionToFeed(false);
+            setAnchor(null);
+        }
+    }, [statusAdd])
 
     const handleClickOpenopenShareOptionToFeed = () => {
         setOpenShareOptionToFeed(true);

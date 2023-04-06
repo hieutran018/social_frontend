@@ -41,7 +41,7 @@ export default function postReducer(state = initialState, action) {
             return {
                 ...state,
                 statusAdd: 'succeeded',
-                posts: action.post
+                posts: [action.post, ...state.posts]
             }
         }
         case ADD_POST_FAILED: {

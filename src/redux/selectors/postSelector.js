@@ -5,4 +5,5 @@ export const selectAddPostStatus = state => state.posts.statusAdd
 export const selectStatusUser = state => state.users.status
 export const selectUser = state => state.users.users
 export const selectStatusupdate = state => state.users.statusUpdate
+export const selectStatusUpload = state => state.users.statusUpload
 

@@ -7,7 +7,10 @@ import {
     FETCH_USER_FAILED,
     UPDATE_USER_STARTED,
     UPDATE_USER_FAILED,
-    UPDATE_USER_SUCCESSED
+    UPDATE_USER_SUCCESSED,
+    UPDATE_AVATAR_STARTED,
+    UPDATE_AVATAR_SUCCESSED,
+    UPDATE_AVATAR_FAILED
 } from '../constants/userContant';
 
 export const fetchUserStart = () => ({
@@ -37,6 +40,19 @@ export const updateUserFail = error => ({
     error
 })
 
+export const updateAvatarUserStart = () => ({
+    type: UPDATE_AVATAR_STARTED,
+})
+
+export const updateAvatarUserSuccess = users => ({
+    type: UPDATE_AVATAR_SUCCESSED,
+    users
+})
+export const updateAvatarUserFail = error => ({
+    type: UPDATE_AVATAR_FAILED,
+    error
+})
+
 export const fetchUser = (userId) => {
     return async dispatch => {
 
@@ -57,7 +73,7 @@ export const fetchUser = (userId) => {
 export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
     return async dispatch => {
         const requestURL = "http://127.0.0.1:8000/api/v1/edit-information-user";
-        dispatch(updateUserStart());
+        dispatch(updateAvatarUserStart());
         axios({
             method: 'POST', //you can set what request you want to be
             url: requestURL,
@@ -73,5 +89,23 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
             // dispatch(fetchUser())
 
         }).catch((error) => dispatch(updateUserFail(error.message)));
+    }
+}
+
+export const updateAvatar = (cokkie, file) => {
+    return async dispatch => {
+        dispatch(updateAvatarUserStart());
+        const requestURL = 'http://127.0.0.1:8000/api/v1/upload-avatar';
+
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: { file: file },
+            headers: {
+                Authorization: 'Bearer ' + cokkie,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then(res => { console.log(res.data); dispatch(updateAvatarUserSuccess(res.data)); localStorage.setItem('user', JSON.stringify(res.data)) }).catch(err => dispatch(updateAvatarUserFail(err.message)));
     }
 }

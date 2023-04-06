@@ -4,7 +4,10 @@ import {
     FETCH_USER_FAILED,
     UPDATE_USER_STARTED,
     UPDATE_USER_FAILED,
-    UPDATE_USER_SUCCESSED
+    UPDATE_USER_SUCCESSED,
+    UPDATE_AVATAR_STARTED,
+    UPDATE_AVATAR_SUCCESSED,
+    UPDATE_AVATAR_FAILED
 } from '../constants/userContant';
 
 const initialState = []
@@ -49,6 +52,26 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 users: state,
                 statusUpdate: 'failed'
+            }
+        }
+        case UPDATE_AVATAR_STARTED: {
+            return {
+                ...state,
+                statusUpload: 'loading'
+            }
+        }
+        case UPDATE_AVATAR_SUCCESSED: {
+            return {
+                ...state,
+                users: action.users,
+                statusUpload: 'success'
+            }
+        }
+        case UPDATE_AVATAR_FAILED: {
+            return {
+                ...state,
+                users: state,
+                statusUpload: 'failed'
             }
         }
         default: return state;
