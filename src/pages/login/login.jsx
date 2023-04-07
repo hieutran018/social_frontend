@@ -3,29 +3,69 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
+import isEmpty from 'validator/lib/isEmpty';
 import './login.css';
 
 function Login() {
 
     const navigate = useNavigate();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+
+    const [password, setPassword] = useState('');
+    const [validateMsg, setValidateMsg] = useState({});
 
     const [, setCookie] = useCookies(['_tk']);
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const validate = () => {
+        const msg = {}
+
+        if (!isValidEmail(email)) {
+            msg.email = 'Định dạng email không hợp lệ!'
+        }
+        if (isEmpty(email)) {
+            msg.email = 'Email không được bỏ trống!'
+        }
+        if (isEmpty(password)) {
+            msg.password = 'Mật khẩu không được bỏ trống!'
+        }
+        setValidateMsg(msg);
+        if (Object.keys(msg).length > 0) {
+            return false;
+        }
+        return true;
+    }
+
     const submitFormLLogin = () => {
-        axios.post('http://127.0.0.1:8000/api/auth/login', {
-            email: email,
-            password: password,
-        }).then((res) => {
+        const isValid = validate();
+        console.log(!isValid)
+        if (!isValid) {
+            return;
+        } else {
+            axios.post('http://127.0.0.1:8000/api/auth/login', {
+                email: email,
+                password: password,
+            }).then((res) => {
 
-            setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            navigate('/')
+                setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
+                localStorage.setItem('user', JSON.stringify(res.data.user));
+                navigate('/')
 
-        }).catch((error) => alert(error));
+            }).catch((error) => alert(error));
+        }
 
 
+    }
 
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value);
+        setValidateMsg({})
+    }
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value);
     }
     // useEffect(() => {
     //     if (sessionStorage.getItem('token') && sessionStorage.getItem('user')) {
@@ -35,7 +75,6 @@ function Login() {
     //         resetToken(sessionStorage.getItem('user'), sessionStorage.getItem('token'));
     //     }
     // }, [tokenString, userString, isSuccess, resetToken]);
-
 
     return (
 
@@ -49,10 +88,12 @@ function Login() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                        <input placeholder="Email" className="loginInput" value={email} onChange={(event) => setEmail(event.target.value)} />
-                        <input placeholder="Password" type={"password"} className="loginInput" value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <input placeholder="Email" className="loginInput" onChange={handleChangeEmail} />
+                        <span className='loginErrorMsg'>{validateMsg.email}</span>
+                        <input placeholder="Password" type={"password"} className="loginInput" onChange={handleChangePassword} />
+                        <span className='loginErrorMsg'>{validateMsg.password}</span>
                         <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
-                        <span className="loginForgot">Quên mật khẩu?</span>
+                        <Link className="loginForgot" to="/forget-password"><span className="loginForgot">Quên mật khẩu?</span></Link>
 
                         <Link to="/registration" className="loginRegisterButton">
                             Tạo một tài khoản mới

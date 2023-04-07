@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from "axios";
+import isEmpty from 'validator/lib/isEmpty';
 import './register.css';
 
 function Register() {
@@ -9,26 +10,69 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [validateMsg, setValidateMsg] = useState({});
 
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const validtate = () => {
+        const msg = {}
+        if (!isValidEmail(email)) {
+            msg.email = 'Định dạng email không hợp lệ!'
+        }
+        if (isEmpty(email)) {
+            msg.email = 'Email không được bỏ trống!'
+        }
+        if (isEmpty(firstName)) {
+            msg.firstName = 'Họ tên không được bỏ trống!'
+        }
+        if (isEmpty(lastName)) {
+            msg.lastName = 'Tên không được bỏ trống!'
+        }
+        if (isEmpty(password)) {
+            msg.password = 'Mật khẩu không được bỏ trống!'
+        }
+        if (isEmpty(confirmPassword)) {
+            msg.confirmPassword = 'Mật khẩu không được bỏ trống!'
+        }
+        if (!password === confirmPassword) {
+            msg.confirmPassword = 'Xác nhận mật khẩu và mật khẩu không khớp!'
+        }
+
+        setValidateMsg(msg);
+        if (Object.keys(msg).length > 0) {
+            return false;
+        }
+        return true;
+
+
+    }
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post('http://127.0.0.1:8000/api/auth/register', {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(function (response) {
-                console.log(response.data);
+        const isValid = validtate();
+
+        if (!isValid) {
+            return
+        } else {
+            axios.post('http://127.0.0.1:8000/api/auth/register', {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     };
 
     return (<div className="register">
@@ -43,15 +87,15 @@ function Register() {
                 <div className="registerBox">
 
                     <input placeholder="Họ" className="registerInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
-                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <span className='textError'>{validateMsg.firstName}</span>
                     <input placeholder="Tên" className="registerInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
-                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <span className='textError'>{validateMsg.lastName}</span>
                     <input placeholder="Email" className="registerInput" value={email} onChange={(event) => setEmail(event.target.value)} />
-                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <span className='textError'>{validateMsg.email}</span>
                     <input placeholder="Mật khẩu" className="registerInput" value={password} onChange={(event) => setPassword(event.target.value)} />
-                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <span className='textError'>{validateMsg.password}</span>
                     <input placeholder="Xác nhận mật khẩu" className="registerInput" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
-                    <span className='textError'>Họ không được bỏ trống!</span>
+                    <span className='textError'>{validateMsg.confirmPassword}</span>
                     <button onClick={handleFormSubmit} className="submitRegisterButton">Đăng ký</button>
 
                     <Link to="/login" className="registerButton">
