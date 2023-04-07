@@ -13,6 +13,7 @@ function Login() {
 
     const [password, setPassword] = useState('');
     const [validateMsg, setValidateMsg] = useState({});
+    const [unAuthorized, setUnAuthorized] = useState();
 
     const [, setCookie] = useCookies(['_tk']);
 
@@ -45,16 +46,31 @@ function Login() {
         if (!isValid) {
             return;
         } else {
-            axios.post('http://127.0.0.1:8000/api/auth/login', {
-                email: email,
-                password: password,
-            }).then((res) => {
+            try {
+                axios.post('http://127.0.0.1:8000/api/auth/login', {
+                    email: email,
+                    password: password,
+                }).then((res) => {
 
-                setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                navigate('/')
+                    if (!res.statusText === 'OK') {
+                        setUnAuthorized('Email hoặc mật khẩu không đúng');
+                        return;
+                    } else {
+                        console.log(res);
+                        setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
+                        localStorage.setItem('user', JSON.stringify(res.data.user));
+                        navigate('/')
+                    }
 
-            }).catch((error) => alert(error));
+
+                }).catch((error) => setUnAuthorized('Email hoặc mật khẩu không đúng'));
+
+
+
+            } catch (error) {
+                setUnAuthorized('Email hoặc mật khẩu không đúng');
+                console.log(error);
+            }
         }
 
 
@@ -63,6 +79,7 @@ function Login() {
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
         setValidateMsg({})
+
     }
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
@@ -88,6 +105,7 @@ function Login() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
+                        <span className='loginErrorMsg'>{unAuthorized && unAuthorized}</span>
                         <input placeholder="Email" className="loginInput" onChange={handleChangeEmail} />
                         <span className='loginErrorMsg'>{validateMsg.email}</span>
                         <input placeholder="Password" type={"password"} className="loginInput" onChange={handleChangePassword} />
