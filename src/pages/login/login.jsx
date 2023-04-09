@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 import isEmpty from 'validator/lib/isEmpty';
+import { FcGoogle } from 'react-icons/fc';
+import { FaFacebook } from 'react-icons/fa';
+import { auth, googleProvider } from '../../firebase/firebaseconfig';
+import { signInWithPopup } from "firebase/auth";
 import './login.css';
 
 function Login() {
@@ -14,6 +18,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [validateMsg, setValidateMsg] = useState({});
     const [unAuthorized, setUnAuthorized] = useState();
+    const [errorSocial, setErrorSocial] = useState('')
 
     const [, setCookie] = useCookies(['_tk']);
 
@@ -63,7 +68,7 @@ function Login() {
                     }
 
 
-                }).catch((error) => setUnAuthorized('Email hoặc mật khẩu không đúng'));
+                }).catch((error) => { setUnAuthorized('Email hoặc mật khẩu không đúng'); setErrorSocial('') });
 
 
 
@@ -74,6 +79,28 @@ function Login() {
         }
 
 
+    }
+
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, googleProvider).then((result) => {
+            console.log({ "RESULT": result });
+            console.log("USER", result.providerId, "==", result.user.email, "==",
+                result._tokenResponse.firstName, "==", result._tokenResponse.lastName);
+            const requestURL = "http://127.0.0.1:8000/api/auth/login-with-google";
+            axios.post(requestURL, {
+                email: result.user.email,
+                firstName: result._tokenResponse.firstName,
+                lastName: result._tokenResponse.lastName,
+                provider: result.providerId,
+                uid: result.user.uid
+            }).then((res) => {
+                setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
+                localStorage.setItem('user', JSON.stringify(res.data.user));
+                navigate('/')
+            }).catch((err) => { setErrorSocial('Địa chỉ email này hiện đã được đăng ký sử dụng!'); setUnAuthorized('') });
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     const handleChangeEmail = (e) => {
@@ -105,12 +132,22 @@ function Login() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                        <span className='loginErrorMsg'>{unAuthorized && unAuthorized}</span>
+                        <div className='loginErrorMsgTopContainer'>
+                            <span className='loginErrorMsgTop'>{unAuthorized && unAuthorized}</span>
+                            <span className='loginErrorMsgTop'>{errorSocial && errorSocial}</span>
+                        </div>
                         <input placeholder="Email" className="loginInput" onChange={handleChangeEmail} />
                         <span className='loginErrorMsg'>{validateMsg.email}</span>
                         <input placeholder="Password" type={"password"} className="loginInput" onChange={handleChangePassword} />
                         <span className='loginErrorMsg'>{validateMsg.password}</span>
                         <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
+                        <div className='loginOptionLogin'>
+                            <span className='loginTextSpan'>Đăng nhập với</span>
+                        </div>
+                        <div className='loginButtonSocial'>
+                            <div onClick={signInWithGoogle}><FcGoogle size={40} /></div>
+                            <div><FaFacebook size={40} color='blue' /></div>
+                        </div>
                         <Link className="loginForgot" to="/forget-password"><span className="loginForgot">Quên mật khẩu?</span></Link>
 
                         <Link to="/registration" className="loginRegisterButton">

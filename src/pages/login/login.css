@@ -34,7 +34,7 @@
 }
 
 .loginBox {
-    height: 300px;
+    height: 100%;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -49,6 +49,8 @@
     border: 1px solid gray;
     font-size: 18px;
     padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .loginInput:focus {
@@ -102,4 +104,33 @@
     color: red;
     font-size: 15px;
     font-weight: 500;
+
+}
+
+.loginErrorMsgTopContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginErrorMsgTop{
+    color: red;
+    font-size: 18px;
+    font-weight: 500;
+    
+}
+
+.loginOptionLogin{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+.loginTextSpan{
+    font-size: 16px;
+    font-weight: 400;
+}
+.loginButtonSocial{
+   
+    display: flex;
+    justify-content: space-around;
 }

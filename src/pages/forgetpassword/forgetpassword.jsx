@@ -1,13 +1,27 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import './forgetpassword.css';
 
 function ForgetPassword() {
 
 
     const [email, setEmail] = useState();
+    const [error, setError] = useState('')
+    const navigate = useNavigate();
 
-
+    const submitMailForgotPassword = () => {
+        const requestURL = 'http://127.0.0.1:8000/api/auth/forgot-password';
+        axios.post(requestURL, {
+            email: email,
+        }).then((res) => {
+            navigate('/confirm-forgot-password')
+        }).catch((err) => {
+            if (err.response.status == 404) {
+                setError('Không tìm thấy địa chỉ email này!')
+            }
+        });
+    }
 
     return (
 
@@ -21,9 +35,10 @@ function ForgetPassword() {
                 </div>
                 <div className="forgetPasswordRight">
                     <div className="forgetPasswordBox">
+                        <span style={{ fontSize: "18px", color: "red", display: "flex", justifyContent: "center" }}>{error && error}</span>
                         <span className='forgetPasswordTextDescription'>Nhập đia chỉ email của tài khoản</span>
                         <input placeholder="Email" className="forgetPasswordInput" value={email} onChange={(event) => setEmail(event.target.value)} />
-                        <button className="forgetSendRessetPasswordButton">Xác nhận</button>
+                        <button onClick={submitMailForgotPassword} className="forgetSendRessetPasswordButton">Xác nhận</button>
 
 
                         <Link to="/login" className="forgetPasswordButton">
