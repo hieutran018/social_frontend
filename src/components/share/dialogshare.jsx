@@ -4,6 +4,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ImageList from '@mui/material/ImageList';
@@ -170,6 +171,7 @@ function DialogShare() {
 
 
                                     <div><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="shareIcon" /></div>
+                                    <div><LocalOfferIcon style={{ fontSize: "35" }} htmlColor="blue" className="shareIcon" /></div>
 
 
                                 </div>

@@ -1,5 +1,6 @@
 import './share.css';
 import { PermMedia, Room, EmojiEmotions } from "@mui/icons-material"
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Dialog from '@mui/material/Dialog';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -65,6 +66,10 @@ function Share() {
                     <div className="shareOption">
                         <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
                         <span className="shareOptionText">Trạng thái</span>
+                    </div>
+                    <div className="shareOption">
+                        <LocalOfferIcon htmlColor="blue" className="shareIcon" />
+                        <span className="shareOptionText">Gắn thẻ</span>
                     </div>
 
 
