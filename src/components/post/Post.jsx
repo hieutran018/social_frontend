@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
@@ -19,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sharePostToWall } from "../../redux/actions/postAction";
 import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
+import axios from "axios";
 // import axios from "axios";
 import 'moment/locale/vi';
 
@@ -36,6 +38,9 @@ function Post({ post }) {
     const [item, setItem] = useState(0);
     const dispatch = useDispatch();
     const statusAdd = useSelector(selectAddPostStatus);
+    const [isLike, setIsLike] = useState(post.isLike)
+    const [like, setLike] = useState(post.totalLike)
+    console.log(post)
     useEffect(() => {
 
         if (selectAddPostStatus) {
@@ -43,7 +48,19 @@ function Post({ post }) {
             setAnchor(null);
         }
 
-    }, [statusAdd, dispatch,])
+    }, [statusAdd, dispatch])
+
+    const handleLike = () => {
+        setIsLike(!isLike)
+        const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post/' + post.id;
+
+        axios.get(requestURL, {
+            headers: {
+                Authorization: 'Bearer ' + cookies[0]._tk
+            }
+        })
+        setLike(!isLike ? like + 1 : like - 1)
+    }
 
     const handleClickOpenopenShareOptionToFeed = () => {
         setOpenShareOptionToFeed(true);
@@ -74,19 +91,16 @@ function Post({ post }) {
 
     const handleClickSharePost = () => {
         dispatch(sharePostToWall(post, cookies, null, 1))
-
         setAnchor(null);
     }
 
     const handleOpenViewMedia = () => {
         setopenViewImage(true);
         setItem(0);
-
     }
 
     const handleCloseViewMedia = () => {
         setopenViewImage(false);
-
     }
 
     const handleNextMediaItem = () => {
@@ -317,17 +331,17 @@ function Post({ post }) {
                     }
                 </div>
                 <div className="postBottomStatistical">
-                    <span className="postTextStatistical">20k lượt thích</span>
+                    <span className="postTextStatistical">{like === 0 ? "" : like + " lượt thích"}</span>
                     <div>
                         <span className="postTextStatistical statisticalComment">{post.totalComment === 0 ? "" : post.totalComment + " bình luận"}</span>
-                        <span className="postTextStatistical">20k lượt chia sẻ</span>
+                        <span className="postTextStatistical">{post.totalShare === 0 ? "" : post.totalShare + " lượt chia sẻ"}</span>
                     </div>
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <div className="postBottomButton"><button className="btn ">Thích </button></div>
-                        <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn ">Bình luận</button></div>
-                        <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn ">Chia sẻ</button></div>
+                        <div className="postBottomButton"><button onClick={handleLike} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
+                        <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn "><AiOutlineComment size={25} /></button></div>
+                        <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn "><AiOutlineShareAlt size={25} /></button></div>
                     </div>
 
                 </div>

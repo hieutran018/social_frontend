@@ -43,14 +43,18 @@ export const countComment = comments => ({
     comments
 })
 
-export const fetchPost = () => {
+export const fetchPost = (token) => {
     return async dispatch => {
         dispatch(fetchPostStarted())
 
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
-            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post')
-
+            const res = await axios.get('http://127.0.0.1:8000/api/v1/fetch-post', {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+            console.log(res.data);
             dispatch(fetchPostSucceeded(res.data))
         } catch (err) {
             dispatch(fetchPostFailed(err))

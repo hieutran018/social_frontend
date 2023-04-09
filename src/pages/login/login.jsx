@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import isEmpty from 'validator/lib/isEmpty';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
-import { auth, googleProvider } from '../../firebase/firebaseconfig';
+import { auth, googleProvider, facebookProvider } from '../../firebase/firebaseconfig';
 import { signInWithPopup } from "firebase/auth";
 import './login.css';
 
@@ -103,6 +103,17 @@ function Login() {
         });
     }
 
+    const signIntWithFaceBook = () => {
+        signInWithPopup(auth, facebookProvider).then((result) => {
+            const user = result.user;
+            const credential = facebookProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+            console.log(user, credential, accessToken);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
         setValidateMsg({})
@@ -146,7 +157,7 @@ function Login() {
                         </div>
                         <div className='loginButtonSocial'>
                             <div onClick={signInWithGoogle}><FcGoogle size={40} /></div>
-                            <div><FaFacebook size={40} color='blue' /></div>
+                            <div onClick={signIntWithFaceBook}><FaFacebook size={40} color='blue' /></div>
                         </div>
                         <Link className="loginForgot" to="/forget-password"><span className="loginForgot">Quên mật khẩu?</span></Link>
 

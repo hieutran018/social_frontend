@@ -287,14 +287,14 @@ function PostDetail({ post }) {
                         }
                     </div>
                     <div className="postBottomStatistical">
-                        <span className="postTextStatistical">20k lượt thích</span> <div><span className="postTextStatistical statisticalComment">{countComment + " bình luận"}</span><span className="postTextStatistical">20k lượt chia sẻ</span></div>
+                        <span className="postTextStatistical">{post.totalLike === 0 ? "" : post.totalLike + " lượt thích"}</span> <div><span className="postTextStatistical statisticalComment">{countComment === 0 ? "" : countComment + " bình luận"}</span><span className="postTextStatistical">{post.totalShare === 0 ? "" : post.totalShare + " lượt chia sẻ"}</span></div>
                     </div>
                     <div className="postDetailBottom">
 
                         <div className="postDetailBottomButton"><button className="btn ">Thích </button></div>
                         <div className="postDetailBottomButton"><button className="btn ">Bình luận</button></div>
                         <div className="postDetailBottomButton"><button className="btn ">Chia sẻ</button></div>
-                        {/* <span className="postLikeCounter">{like}</span> */}
+
 
 
                     </div>
