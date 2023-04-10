@@ -79,8 +79,8 @@ color: black;
 .postImg {
     margin-top: 20px;
     width: 100%;
-    max-height: 45rem;
-    object-fit: fill;
+    max-height: 40rem;
+    object-fit: cover;
     
     
 }
