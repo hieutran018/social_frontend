@@ -39,8 +39,9 @@ function Post({ post }) {
     const dispatch = useDispatch();
     const statusAdd = useSelector(selectAddPostStatus);
     const [isLike, setIsLike] = useState(post.isLike)
-    const [like, setLike] = useState(post.totalLike)
-    console.log(post)
+    const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
+    const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
+
     useEffect(() => {
 
         if (selectAddPostStatus) {
@@ -91,6 +92,7 @@ function Post({ post }) {
 
     const handleClickSharePost = () => {
         dispatch(sharePostToWall(post, cookies, null, 1))
+        setShare(share + 1)
         setAnchor(null);
     }
 
@@ -333,8 +335,8 @@ function Post({ post }) {
                 <div className="postBottomStatistical">
                     <span className="postTextStatistical">{like === 0 ? "" : like + " lượt thích"}</span>
                     <div>
-                        <span className="postTextStatistical statisticalComment">{post.totalComment === 0 ? "" : post.totalComment + " bình luận"}</span>
-                        <span className="postTextStatistical">{post.totalShare === 0 ? "" : post.totalShare + " lượt chia sẻ"}</span>
+                        <span className="postTextStatistical statisticalComment">{post.totalComment === 0 || !post.totalComment ? "" : post.totalComment + " bình luận"}</span>
+                        <span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span>
                     </div>
                 </div>
                 <div className="postBottom">

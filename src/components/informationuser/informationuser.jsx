@@ -17,10 +17,9 @@ function InforMationUser({ user }) {
     const { userId } = useParams();
     const cookies = useCookies('_tk')
     const [open, setOpen] = useState(false);
-    const [check, setCheck] = useState(true);
     const [wentTo, setWentTo] = useState('');
     const [liveIn, setliveIn] = useState('');
-    const [relationship, setRelationShip] = useState('');
+    const [relationship, setRelationShip] = useState(3);
     const [phone, setPhone] = useState('');
     const dispatch = useDispatch();
     const status = useSelector(selectStatusupdate);
@@ -43,7 +42,6 @@ function InforMationUser({ user }) {
     }
     const handleSetRelationShip = (event) => {
         setRelationShip(event.target.value);
-        setCheck(false);
     }
     const handleSetPhone = (event) => {
         setPhone(event.target.value);
@@ -135,9 +133,11 @@ function InforMationUser({ user }) {
                                 </div>
                                 <div className='informationDialogInforContainer'>
                                     <span className='informationUserInfor'><FavoriteIcon /> Tình trạng: </span> <select onChange={handleSetRelationShip} className='informationDialogInput'>
+                                        <option value="3">Không cập nhật</option>
                                         <option value="0">Độc thân</option>
                                         <option value="1">Hẹn Hò</option>
                                         <option value="2">Đã kết hôn</option>
+
 
                                     </select>
 
@@ -152,7 +152,7 @@ function InforMationUser({ user }) {
                                     <button onClick={handleClose} className='informationDialogButtonCancel'>Hủy</button>
 
 
-                                    <button onClick={Submit} disabled={check ? true : false} className='informationDialogButtonSubmit'>Lưu</button>
+                                    <button onClick={Submit} className='informationDialogButtonSubmit'>Lưu</button>
                                 </div>
                             </div>
                         </div>

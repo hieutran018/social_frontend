@@ -12,8 +12,7 @@ import {
     ReduceCapacity,
 } from '@mui/icons-material';
 import './sidebar.css';
-import CloseFriend from '../closefriend/CloseFriend';
-import { Users } from "../../data";
+import SidebarHomePage from './home/home';
 import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
 import FriendRequest from './friendrequest/friendrequest';
 
@@ -99,45 +98,7 @@ function Sidebar({ page }) {
         );
     }
 
-    const SidebarHomePage = () => {
-        return (
-            <>
-                <ul className="sidebarList">
-                    <li className="sidebarListItem">
-                        <RssFeed className="sidebarIcon" />
-                        <span className="sidebarListItemText">Bảng tin</span>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link to="/friend" className="sidebarListItemText">
-                            <GroupOutlined className="sidebarIcon" />
-                            <span className="sidebarListItemText">Bạn bè</span>
-                        </Link>
 
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link to="/video" className="sidebarListItemText">
-                            <PlayCircleFilledOutlined className="sidebarIcon" />
-                            <span className="sidebarListItemText">Thước phim</span>
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Groups3TwoTone className="sidebarIcon" />
-                        <span className="sidebarListItemText">Nhóm</span>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Event className="sidebarIcon" />
-                        <span className="sidebarListItemText">Sự kiện</span>
-                    </li>
-                </ul>
-                <button className="sidebarButton">Xem thêm</button>
-                <hr className="sidebarHr" />
-                <ul className="sidebarFriendList">
-                    {Users.map((u) => (
-                        <CloseFriend key={u.id} user={u} />
-                    ))}
-                </ul>
-            </>);
-    };
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">

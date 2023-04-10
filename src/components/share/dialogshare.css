@@ -18,6 +18,7 @@
     justify-content: center;
     margin-bottom:1rem ;
     margin-top: 1rem;
+    /* position: fixed; */
 }
 
 .dialogShareHr{
@@ -294,4 +295,10 @@ div :where(.theme-emoji, .options){
   justify-content: center;
   align-items: center;
   height: 25rem;
+}
+.dialogshareTagUserAvatar{
+  width: 65px;
+  height: 65px;
+  margin-right: 20px;
+
 }

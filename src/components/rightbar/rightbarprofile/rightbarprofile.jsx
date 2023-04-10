@@ -10,20 +10,48 @@ import { useCookies } from 'react-cookie';
 function RightbarProfile({ user }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [photoBy, setPhotoBy] = useState([]);
+    const [friends, setFriends] = useState([]);
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + user.id + '/6';
-        axios({
-            method: 'GET', //you can set what request you want to be
-            url: requestURL,
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => {
-            console.log("RES PHOTO =========", response.data);
-            setPhotoBy(response.data);
-        }).catch((error) => console.log(error.message));
+
+        const fetchListFriendById = () => {
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + user.id + "/6";
+
+            axios({
+                method: 'GET',
+                url: requestURL,
+                data: { userId: user.id },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+
+            }).then((response) => {
+                console.log(response.data)
+                setFriends(response.data);
+
+
+            }).catch((error) => console.log(error.message));
+
+        }
+
+        const fetchImageById = () => {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + user.id + '/6';
+            axios({
+                method: 'GET', //you can set what request you want to be
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log("RES PHOTO =========", response.data);
+                setPhotoBy(response.data);
+            }).catch((error) => console.log(error.message));
+        }
+        fetchListFriendById();
+        fetchImageById();
     }, [user.id, cookies])
     return (
         <div>
@@ -54,73 +82,29 @@ function RightbarProfile({ user }) {
                     <div className="rightbarFriendContent">
                         <div className="rightbarTitleContent"><h4 className="rightbarTitle">Bạn bè</h4><Link className="rightbarLinkViewMoreFriend" to={"/" + user.id + "/friends"}><span className="rightbarLinkViewMoreFriend">Xem tất cả bạn bè</span></Link></div>
                         <div className="rightbarFriendContainer">
-                            <div className="rightbarFollowings">
-                                <Grid container rowSpacing={1.7} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <div className="rightbarFollowingsCotainerNameUser">
-                                            <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                        </div>
-                                    </div>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                    </div>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                    </div>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                    </div>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                    </div>
-                                    <div className="rightbarFollowing">
-                                        <div className="rightbarContainerImgUser">
-                                            <img
-                                                src="assets/person/1.jpeg"
-                                                alt=""
-                                                className="rightbarFollowingImg"
-                                            />
-                                        </div>
-                                        <span className="rightbarFollowingName">Dương Nghĩa Hiệp</span>
-                                    </div>
+                            <Grid sx={{ flexGrow: 1 }} container spacing={0.5}>
+                                <Grid item xs={12}>
+                                    <Grid container justifyContent="left" spacing={0.5}>
+                                        {friends.map((item) => (
+                                            <Grid key={item.id} item>
+                                                <div className="rightbarFollowing">
+                                                    <div className="rightbarContainerImgUser">
+                                                        <img
+                                                            src={item.avatar}
+                                                            alt=""
+                                                            className="rightbarFollowingImg"
+                                                        />
+                                                    </div>
+                                                    <span className="rightbarFollowingName">{item.username}</span>
+                                                </div>
+                                            </Grid>
+
+                                        ))}
+                                    </Grid>
+
 
                                 </Grid>
-                            </div>
+                            </Grid>
                         </div>
                     </div>
                 </div>

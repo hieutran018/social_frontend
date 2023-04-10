@@ -114,7 +114,7 @@
 .rightbarFollowings {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    justify-content: center;
     margin-top: 1rem;
     margin-left: 3rem;
     margin-right: 2rem;
@@ -144,12 +144,14 @@
     margin-bottom: 20px;
     cursor: pointer;
     /* padding: 5px 5px 5px 5px; */
-    width: 150px;
-    height: 150px;
+    width: 10.8rem;
+    height: 10.8rem;
 }
 .rightbarContainerImgUser{
-    width: 10rem;
+    width: 100%;
     height: 10rem;
+    display: flex;
+    justify-content: center;
 }
 
 .rightbarContainerImg{
@@ -158,12 +160,12 @@
 }
 
 .rightbarFollowingImg {
-    width: 8rem;
-    height: 8rem;
+    width: 100%;
+    height: 9rem;
     object-fit: cover;
     border-radius: 5px;
     display: flex;
-    margin: auto;
+
 }
 .rightbarImg{
     width: 10rem;
@@ -171,6 +173,7 @@
     object-fit: fill;
     border-radius: 5px;
     display: flex;
+    justify-content: center;
     
 }
 .rightbarFollowingsCotainerNameUser{

@@ -92,4 +92,14 @@
     background-color: rgb(198, 200, 202);
     border: 0.2px solid whitesmoke;
     font-size: 1.2rem;
+    cursor: pointer;
+}
+.friendReSendAddFriend{
+        border-radius: 5px;
+    width: 9rem;
+    height: 2.5rem;
+    background-color: #1877F2;
+    border: 0.2px solid whitesmoke;
+    font-size: 1.2rem;
+     cursor: pointer;
 }

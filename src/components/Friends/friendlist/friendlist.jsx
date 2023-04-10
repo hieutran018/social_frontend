@@ -16,27 +16,29 @@ import { useCookies } from 'react-cookie';
 function FriendList() {
     const { userId } = useParams();
     const [fr, setFr] = useState([]);
-    const cookies = useCookies('_tk');
+    const cookies = useCookies('_tk')[0]._tk;
+    const [isFriend, setIsFriend] = useState(true);
     useEffect(() => {
-        const requestURL = "http://127.0.0.1:8000/api/fetch-friend-by-user-id";
-        console.log(userId);
+        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + userId;
+
         axios({
-            method: 'POST',
+            method: 'GET',
             url: requestURL,
-            data: { userId: userId },
+
             headers: {
+                Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
 
         }).then((response) => {
             console.log(response.data)
-            setFr(response.data)
-            console.log(fr)
+            setFr(response.data);
+
 
         }).catch((error) => console.log(error.message));
-        console.log(fr);
-    }, [userId])
+
+    }, [userId, cookies])
 
     const unFriend = (userId) => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/unfriend';
@@ -45,7 +47,7 @@ function FriendList() {
             url: requestURL,
             data: { userId: userId },
             headers: {
-                Authorization: 'Bearer ' + cookies[0]._tk,
+                Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
@@ -97,6 +99,7 @@ function FriendList() {
                                                                     </div>
                                                                 </div>
                                                                 <div className='friendCardButtonUnfriend' >
+
                                                                     <button onClick={() => unFriend(u.friendId)} className='friendButtonUnFriend'>Hủy kết bạn</button>
                                                                 </div>
                                                             </div>

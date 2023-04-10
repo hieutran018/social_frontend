@@ -91,14 +91,9 @@ we always go back to main conyainer and we use secondary as name for more contai
                     >
                         <h2 className="textFunction">Cài đặt chung</h2>
                     </DropdownItem>
-                    <DropdownItem leftIcon={<SettingsIcon />}><span className="textFunction">HTML</span></DropdownItem>
-                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}><span className="textFunction">CSS</span></DropdownItem>
-                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}>
-                        <span className="textFunction">JS</span>
-                    </DropdownItem>
-                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}>
-                        <span className="textFunction">PHP</span>
-                    </DropdownItem>
+                    <DropdownItem leftIcon={<SettingsIcon />}><span className="textFunction">Thông tin cá nhân</span></DropdownItem>
+                    <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}><span className="textFunction">Đổi mật khẩu</span></DropdownItem>
+
                 </div>
             </CSSTransition >
 
