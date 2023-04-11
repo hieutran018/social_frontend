@@ -1,18 +1,56 @@
 import './album.css'
 
 import Grid from '@mui/material/Grid';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { IoMdAdd } from 'react-icons/io';
+import { useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 function Album() {
+    const userId = useParams().userId;
+    const cookies = useCookies('_tk')[0]._tk;
+    const [albums, setAlbums] = useState([]);
+    useEffect(() => {
+        const fetchAlbum = () => {
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-album-by-userid/userId=" + userId;
+            axios({
+                method: 'GET',
+                url: requestURL,
+
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+
+            }).then((response) => {
+                console.log("RES ALBUM", response.data)
+                setAlbums(response.data);
+
+
+            }).catch((error) => console.log(error.message));
+        }
+        fetchAlbum();
+    }, [userId, cookies]);
+
+
     return (
         <div className='album'>
             <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                 <Grid item xs={12}>
                     <Grid container justifyContent="left" spacing={1}>
-                        {[0, 1, 2].map((value) => (
-                            <Grid key={value} item>
-                                <img className='photosImageItem' src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/87857085_844273819374433_4021419020736528384_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_ohc=t5JmVLMCzkEAX8rgSs8&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAe8QAb5ZDvCPdDV7WYJyjOfQK00MgZiFU-8OZhBOyNQg&oe=6451D36C" alt="" />
-                                <div className='albumNameContainer'><span className='albumName'>{value === 0 ? 'Ảnh đại diện' : value === 1 ? 'Tên tùy chọn' : 'Ảnh bìa'}</span></div>
+
+                        <Grid item>
+                            <div className='photosIConAdd'><IoMdAdd /></div>
+                            <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
+                        </Grid>
+                        {albums.map((album) => (
+                            <Grid key={album.id} item>
+                                <img className='photosImageItem' src={album.thumnail} alt="" />
+                                <div className='albumNameContainer'><span className='albumName'>{album.album_name}</span></div>
                             </Grid>
                         ))}
+
                     </Grid>
 
 

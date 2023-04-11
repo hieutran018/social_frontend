@@ -42,6 +42,8 @@
 .friendCardUserName{
     font-size: 1.5rem;
     font-weight: 500;
+    text-decoration: none;
+    color: black;
 }
 
 .friendCardUserAvatar{
@@ -93,13 +95,4 @@
     border: 0.2px solid whitesmoke;
     font-size: 1.2rem;
     cursor: pointer;
-}
-.friendReSendAddFriend{
-        border-radius: 5px;
-    width: 9rem;
-    height: 2.5rem;
-    background-color: #1877F2;
-    border: 0.2px solid whitesmoke;
-    font-size: 1.2rem;
-     cursor: pointer;
 }

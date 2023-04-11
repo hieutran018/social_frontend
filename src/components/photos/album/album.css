@@ -4,3 +4,17 @@
 .albumName{
     font-size: 1.1rem;
 }
+
+.photosIConAdd{
+    width: 11.95rem;
+    height: 11.95rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1px solid #D8DADF;
+    border-radius: 3px;
+}
+.photosIConAdd:hover{
+    background-color: #D8DADF;
+    cursor: pointer;
+}

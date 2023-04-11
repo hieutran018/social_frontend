@@ -18,13 +18,13 @@ function Variants() {
 
                 <div className='skeletonContainer'>
                     <div>
-                        <Skeleton className='skeletonText' variant="rectangular" width={750} height={15} />
-                    </div>
-                    <div>
                         <Skeleton className='skeletonText' variant="rectangular" width={700} height={15} />
                     </div>
                     <div>
                         <Skeleton className='skeletonText' variant="rectangular" width={650} height={15} />
+                    </div>
+                    <div>
+                        <Skeleton className='skeletonText' variant="rectangular" width={600} height={15} />
                     </div>
                 </div>
 
