@@ -11,18 +11,23 @@ import PublicIcon from '@mui/icons-material/Public';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoMdAdd } from 'react-icons/io';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import ViewImageInAlbum from './viewalbum';
 
 function Album() {
     const userId = useParams().userId;
+    const albumId = useParams().albumId;
     const cookies = useCookies('_tk')[0]._tk;
     const [albums, setAlbums] = useState([]);
     const [open, setOpen] = useState(false);
     const [privacy, setPrivacy] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
-
+    const [files, setFiles] = useState([]);
+    const [images, setImages] = useState([]);
+    const [view, setView] = useState(false);
+    const [albumName, setAlbumName] = useState('');
     const handleClickOpen = () => {
         setOpen(true);
 
@@ -40,6 +45,49 @@ function Album() {
     const handleClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
     }
+
+    const handleChangeFiles = (event) => {
+        if (event.target.files) {
+            const selectedFIles = [];
+            const targetFiles = event.target.files;
+            const targetFilesObject = [...targetFiles]
+            targetFilesObject.map((file) => {
+                return selectedFIles.push(URL.createObjectURL(file))
+            })
+            setFiles(event.target.files);
+            setImages(selectedFIles);
+            setView(true)
+        }
+
+    }
+
+    const handleChangeAlbumName = (e) => {
+        setAlbumName(e.target.value)
+
+    }
+
+    const handleSubmitCreateAlbum = () => {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/create-album';
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: { albumName: albumName, privacy: privacy, files: files },
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+
+        }).then((response) => {
+
+            setOpen(false)
+
+        }).catch((error) => console.log(error));
+    }
+
+
+
+
 
     useEffect(() => {
         const fetchAlbum = () => {
@@ -63,35 +111,47 @@ function Album() {
         }
         fetchAlbum();
     }, [userId, cookies]);
+    console.log(albumId);
 
 
     return (
         <div className='album'>
-            <Grid sx={{ flexGrow: 1 }} container spacing={1}>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="left" spacing={1}>
+            {
+                !albumId ? <Grid sx={{ flexGrow: 1 }} container spacing={1}>
+                    <Grid item xs={12}>
+                        <Grid container justifyContent="left" spacing={1}>
 
-                        <Grid onClick={handleClickOpen} item>
-                            <div className='photosIConAdd'><IoMdAdd /></div>
-                            <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
-                        </Grid>
-                        {albums.map((album) => (
-                            <Grid key={album.id} item>
-                                <img className='photosImageItem' src={album.thumnail} alt="" />
-                                <div className='albumNameContainer'>
-                                    <div className='albumInforAlbum'>
-                                        <span className='albumName'>{album.album_name}</span>
-                                        <span className='albumCount'>{album.totalImage + " ảnh"}</span>
-                                    </div>
-                                </div>
+                            <Grid onClick={handleClickOpen} item>
+                                <div className='photosIConAdd'><IoMdAdd /></div>
+                                <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
                             </Grid>
-                        ))}
+                            {albums.map((album) => (
+
+                                <Grid key={album.id} item>
+
+                                    <Link to={"/" + userId + "/photos/album/" + album.id}>
+                                        {album.thumnail === null ? <div style={{
+                                            backgroundColor: "#D8DADF", width: "11.95rem",
+                                            height: "11.95rem"
+                                        }}></div> : <img className='photosImageItem' src={album.thumnail} alt="" />}
+                                    </Link>
+
+                                    <div className='albumNameContainer'>
+                                        <div className='albumInforAlbum'>
+                                            <span className='albumName'>{album.album_name}</span>
+                                            <span className='albumCount'>{album.totalImage + " ảnh"}</span>
+                                        </div>
+                                    </div>
+                                </Grid>
+
+                            ))}
+
+                        </Grid>
+
 
                     </Grid>
-
-
-                </Grid>
-            </Grid>
+                </Grid> : <ViewImageInAlbum />
+            }
             <div>
                 <Dialog
                     open={open}
@@ -115,27 +175,51 @@ function Album() {
                                             </div>
                                         </div>
                                         <div className='albumDialogContainerAlbumName marginItem'>
-                                            <input placeholder='Tên album...' className='albumDialogInputAlbumName' type="text" />
+                                            <input placeholder='Tên album...' className='albumDialogInputAlbumName' onChange={handleChangeAlbumName} type="text" />
                                         </div>
-                                        <label htmlFor="albumDialogInputFiles" className='albumDialogInputFiles marginItem'>
-                                            <input hidden id='albumDialogInputFiles' type="file" />
+                                        <label onChange={handleChangeFiles} htmlFor="albumDialogInputFiles" className='albumDialogInputFiles marginItem'>
+                                            <input multiple hidden id='albumDialogInputFiles' type="file" />
                                             <span >Tải ảnh lên</span>
                                         </label>
                                     </div>
                                     <div className='albumDialogLeftBottom '>
                                         <div className='albumDialogContainerSubmit marginItem'>
-                                            <button className='albumDialogButtonSubmit '>
+                                            <button onClick={handleSubmitCreateAlbum} className='albumDialogButtonSubmit '>
                                                 Đăng
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='albumDialogRight'>
-                                    <div className='albumDialogRightDescriptionContainer'>
-                                        <span className='albumDialogRigthDescription'>Bạn đã sẵn sàng thêm gì đó chưa?</span>
-                                    </div>
 
-                                </div>
+                                {
+                                    view ?
+                                        <div className='albumDialogPreview'>
+                                            <div className='albumDialogPreviewContainer'>
+                                                <Grid sx={{ flexGrow: 1 }} container spacing={1.2}>
+                                                    <Grid item xs={12}>
+                                                        <Grid container justifyContent="left" spacing={1}>
+                                                            {images.map((item, index) => (
+                                                                <Grid key={index} item>
+                                                                    <img className='albumDialogPreviewItem' src={item} alt="" />
+                                                                </Grid>
+
+                                                            ))}
+                                                        </Grid>
+
+
+                                                    </Grid>
+                                                </Grid>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className='albumDialogRight'>
+                                            <div className='albumDialogRightDescriptionContainer'>
+                                                <span className='albumDialogRigthDescription'>Bạn đã sẵn sàng thêm gì đó chưa?</span>
+                                            </div>
+                                        </div>
+                                }
+
+
                             </div>
                         </div>
                         <div>

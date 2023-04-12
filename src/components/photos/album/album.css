@@ -159,5 +159,28 @@
     font-weight: 600;
     
 }
+.albumDialogPreviewContainer{
+    display: flex;
+   
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1.3rem;
+    padding-right: auto;
+   
+}
+
+.albumDialogPreview{
+    display: flex;
+    justify-content: left;
+    width: 75%;
+    height: 790px;
+    max-height: 800px;
+
+}
+
+.albumDialogPreviewItem{
+    width: 13.2rem;
+    height: 13.2rem;
+}
 
 /* ALBUM DIALOG END */

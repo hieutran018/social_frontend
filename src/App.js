@@ -38,6 +38,7 @@ function App() {
       <Route path='/:userId' element={<Profile />} />
       <Route path='/:userId/:page' element={<Profile />} />
       <Route path='/:userId/:page/:category' element={<Profile />} />
+      <Route path='/:userId/:page/:category/:albumId' element={<Profile />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>
