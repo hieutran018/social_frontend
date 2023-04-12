@@ -18,3 +18,146 @@
     background-color: #D8DADF;
     cursor: pointer;
 }
+.albumInforAlbum{
+    display: grid;
+    
+}
+
+.albumCount{
+    font-size: 16px;
+    font-weight: 400;
+    color: gray;
+}
+
+/* ALBUM DIALOG START */
+
+.albumHeaderDialogTitle{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-bottom:1rem ;
+    margin-top: 1rem;
+}
+.albumDialogHr{
+    height: 0.1rem;
+}
+
+.albumDialogContainer{
+    display: flex;
+    /* justify-content: space-around; */
+}
+.albumDialogLeft{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #008000;
+}
+.albumDialogRight{
+    
+    width: 75%;
+    height: 790px;
+    max-height: 800px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+   
+}
+
+.albumDialogContainerPrivacy{
+    width: 100%;
+    display: flex;
+    
+
+}
+.albumPrivacy{
+    margin-left:22px;
+    display: flex;
+    height: 2rem;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 11px;
+    border-radius: 5px;
+    align-items: center;
+    width: 9rem;
+    background: #E4E6EB;
+    justify-content: space-evenly;
+}
+.marginItem{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.albumDialogContainerAlbumName{
+    width: 90%;
+    height: 40px;
+}
+
+.albumDialogInputAlbumName{
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.albumDialogInputFiles{
+    border-radius: 5px;
+    width: 85.2%;
+    height: 40px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.albumDialogLabelInputFiles{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+}
+.albumDialogContainerSubmit{
+    width: 90%;
+}
+
+.albumDialogButtonSubmit{
+    background-color: #008000;
+    width: 100%;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 7px;
+    border-radius: 10px;
+   
+    font-weight: 500;
+    cursor: pointer;
+   
+}
+
+.albumDialogRightDescriptionContainer{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.albumDialogRigthDescription{
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+/* ALBUM DIALOG END */
