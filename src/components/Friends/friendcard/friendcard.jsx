@@ -68,7 +68,7 @@ function FriendCard({ friend }) {
             setIsSend(true);
         }).catch((error) => console.log(error.message));
     }
-
+    console.log(friend)
     return (
         <div className='friendCard'>
             <Paper
@@ -88,7 +88,7 @@ function FriendCard({ friend }) {
                         <Grid item xs container direction="column" spacing={2}>
                             <div className='friendCardRight'>
                                 <div className='friendCardRightContainer'>
-                                    <Link className='friendCardUserName' to={"/" + friend.id}>
+                                    <Link className='friendCardUserName' to={"/" + friend.friendId}>
                                         <div>
                                             <span className='friendCardUserName'>{friend.username}</span>
                                         </div>

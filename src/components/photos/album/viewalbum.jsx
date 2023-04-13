@@ -1,8 +1,7 @@
 import Grid from '@mui/material/Grid';
-import { IoMdAdd } from 'react-icons/io'
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,10 +13,10 @@ import PublicIcon from '@mui/icons-material/Public';
 import axios from "axios";
 
 function ViewImageInAlbum() {
+    const navigate = useNavigate();
     const albumId = useParams().albumId;
     const userId = useParams().userId;
     const cookies = useCookies('_tk')[0]._tk;
-    const user = JSON.parse(localStorage.getItem('user')).id;
     const [albumName, setAlbumName] = useState('');
     const [images, setImages] = useState([]);
 
@@ -87,6 +86,25 @@ function ViewImageInAlbum() {
 
         }).catch((error) => console.log(error.message));
     }
+
+    const handleDeleteAlbum = () => {
+        const requestURl = "http://127.0.0.1:8000/api/v1/delete-album";
+
+        axios({
+            method: "POST",
+            url: requestURl,
+            data: { albumId: albumId },
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then((response) => {
+            navigate('/' + userId + '/photos/album');
+
+            console.log(response.data);
+        }).catch((error) => console.log(error));
+    }
     useEffect(() => {
         const fetchImageAlbum = () => {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-album/' + userId + '/' + albumId;
@@ -110,7 +128,7 @@ function ViewImageInAlbum() {
             }).catch((error) => console.log(error.message));
         }
         fetchImageAlbum()
-    }, [albumId, cookies])
+    }, [albumId, cookies, userId])
 
     return (
         <div className="imageAlbum">
@@ -124,14 +142,6 @@ function ViewImageInAlbum() {
                 <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="left" spacing={1}>
-                            {
-                                user.toString() === userId ? <Grid item>
-                                    <div className='imageAlbumAdd'>
-                                        <IoMdAdd />
-                                        <div className='albumNameContainer'><span className='albumName'>Thêm ảnh</span></div>
-                                    </div>
-                                </Grid> : <></>
-                            }
                             {images.map((image) => (
                                 <Grid key={image.id} item>
                                     <img className='photosImageItem' src={image.media_file_name} alt="" />
@@ -174,7 +184,7 @@ function ViewImageInAlbum() {
                                             <span >Tải ảnh lên</span>
                                         </label>
                                         <div className='albumDialogContainerSubmit marginItem'>
-                                            <button className='albumDialogButtonDelete'>
+                                            <button onClick={handleDeleteAlbum} className='albumDialogButtonDelete'>
                                                 Xóa Album
                                             </button>
                                         </div>
