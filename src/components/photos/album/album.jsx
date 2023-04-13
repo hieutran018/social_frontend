@@ -19,6 +19,7 @@ function Album() {
     const userId = useParams().userId;
     const albumId = useParams().albumId;
     const cookies = useCookies('_tk')[0]._tk;
+    const user = JSON.parse(localStorage.getItem('user')).id;
     const [albums, setAlbums] = useState([]);
     const [open, setOpen] = useState(false);
     const [privacy, setPrivacy] = useState(1);
@@ -58,7 +59,6 @@ function Album() {
             setImages(selectedFIles);
             setView(true)
         }
-
     }
 
     const handleChangeAlbumName = (e) => {
@@ -111,8 +111,6 @@ function Album() {
         }
         fetchAlbum();
     }, [userId, cookies]);
-    console.log(albumId);
-
 
     return (
         <div className='album'>
@@ -120,11 +118,13 @@ function Album() {
                 !albumId ? <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="left" spacing={1}>
+                            {
+                                user.toString() === userId ? <Grid onClick={handleClickOpen} item>
+                                    <div className='photosIConAdd'><IoMdAdd /></div>
+                                    <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
+                                </Grid> : <></>
+                            }
 
-                            <Grid onClick={handleClickOpen} item>
-                                <div className='photosIConAdd'><IoMdAdd /></div>
-                                <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
-                            </Grid>
                             {albums.map((album) => (
 
                                 <Grid key={album.id} item>

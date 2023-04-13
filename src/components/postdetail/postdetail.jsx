@@ -50,6 +50,7 @@ function PostDetail({ post }) {
 
 
 
+
     const handleClickPostComment = (postId) => {
         dispatch(commentPost(cookies[0]._tk, postId, inputComment))
 
