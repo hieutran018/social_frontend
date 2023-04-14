@@ -25,7 +25,7 @@ function Feed() {
                 status === 'loading' ?
                     <div><Variants /></div>
                     : status === 'succeeded' ? posts.map((p) => (
-                        <Post key={p.id} post={p} />
+                        <Post key={p.id} post={p} groups={true} />
                     )) : status === 'failed' ?
                         <div>
                             <div style={{ display: "flex", justifyContent: "center" }}>

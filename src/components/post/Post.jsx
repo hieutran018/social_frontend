@@ -21,13 +21,12 @@ import { sharePostToWall } from "../../redux/actions/postAction";
 import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
 import axios from "axios";
-// import axios from "axios";
 import 'moment/locale/vi';
 
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
 
-function Post({ post }) {
+function Post({ post, groups }) {
     const cookies = useCookies('_tk');
     const [open, setOpen] = useState(false);
     const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
@@ -41,6 +40,9 @@ function Post({ post }) {
     const [isLike, setIsLike] = useState(post.isLike)
     const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
     const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
+
+    // BÀI VIẾT THUỘC MỘT GROUP
+    const [group,] = useState(!groups);
 
     useEffect(() => {
 
@@ -127,32 +129,67 @@ function Post({ post }) {
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
-                    <div className="postTopLeft">
-                        <a href={"/" + post.user_id}>
-                            <img
-                                className="postProfileImg"
-                                src={post.avatarUser}
-                                alt={"Avatar user " + post.username}
-                            />
-                        </a>
-
-                        <div>
-                            <span className="postUsername">
-                                <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                    {post.username}
+                    {
+                        !group ?
+                            <div className="postTopLeft">
+                                <a href={"/" + post.user_id}>
+                                    <img
+                                        className="postProfileImgGroup"
+                                        src={post.avatarUser}
+                                        alt={"Avatar user " + post.username}
+                                    />
                                 </a>
-                            </span>
-                            <div className="postPrivacy">
-                                <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                    {post.privacy.toString() === "0" ?
-                                        <LockIcon className="postIconPrivacy" /> :
-                                        post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
-                                            : <GroupIcon className="postIconPrivacy" />
-                                    }</span>
-                            </div>
-                        </div>
 
-                    </div>
+                                <div>
+                                    <span className="postUsername">
+                                        <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                            {post.username}
+                                        </a>
+                                    </span>
+                                    <div className="postPrivacy">
+                                        <span className="postMemberGroup">
+                                            <a className="postLinkProfileMemberGroup" href={"/" + post.user_id}>
+                                                {post.username}
+                                            </a>
+                                        </span>
+                                        <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                            {post.privacy.toString() === "0" ?
+                                                <LockIcon className="postIconPrivacy" /> :
+                                                post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                    : <GroupIcon className="postIconPrivacy" />
+                                            }</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            :
+                            <div className="postTopLeft">
+                                <a href={"/" + post.user_id}>
+                                    <img
+                                        className="postProfileImg"
+                                        src={post.avatarUser}
+                                        alt={"Avatar user " + post.username}
+                                    />
+                                </a>
+
+                                <div>
+                                    <span className="postUsername">
+                                        <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                            {post.username}
+                                        </a>
+                                    </span>
+                                    <div className="postPrivacy">
+                                        <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                            {post.privacy.toString() === "0" ?
+                                                <LockIcon className="postIconPrivacy" /> :
+                                                post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                    : <GroupIcon className="postIconPrivacy" />
+                                            }</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                    }
 
                 </div>
 

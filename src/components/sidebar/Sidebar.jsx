@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import {
     RssFeed,
-    PlayCircleFilledOutlined,
-    Groups3TwoTone,
-    Event,
     GroupOutlined,
     RecordVoiceOver,
     PersonAddAlt1,
@@ -15,6 +12,7 @@ import './sidebar.css';
 import SidebarHomePage from './home/home';
 import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
 import FriendRequest from './friendrequest/friendrequest';
+import SideBarGroup from './group/sidebargroup';
 
 function Sidebar({ page }) {
 
@@ -102,7 +100,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

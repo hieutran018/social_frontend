@@ -1,0 +1,19 @@
+.groupTopBar{
+    display: flex;
+}
+
+.groupContainer {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 4.3rem;
+}
+.groupFeed{
+    margin-top: 1rem;
+    flex: 4;
+}
+.groupFeedTitle{
+    font-size: 20px;
+    font-weight: 500;
+    
+}

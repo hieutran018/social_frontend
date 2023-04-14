@@ -149,3 +149,17 @@
 .sidebarFriend{
     width: 20rem;
 }
+
+.sidebarGroupCreateButton{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #DBE7F2;
+    border-radius: 5px;
+    color: #1877f2;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

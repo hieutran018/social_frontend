@@ -36,6 +36,13 @@
     border-radius: 70%;
     object-fit: cover;
 }
+.postProfileImgGroup{
+     width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    object-fit: cover;
+    border-radius: 5px;
+}
 
 .postUsername {
     font-size: 20px;
@@ -43,6 +50,26 @@
     margin-top: -20px;
     margin-left: 1rem;
     
+}
+
+.postMemberGroup{
+    font-size: 12px;
+    font-weight: 500;
+   
+    margin-top: -5px;
+    margin-left: 1rem;
+}
+
+.postLinkProfileMemberGroup{
+    font-weight: 500;
+    font-size: 14px;
+    color: #7f7e7e;
+    text-decoration: none;
+}
+.postDateGroup{
+    margin-top: -7px;
+    font-size: 12px;
+    margin-left: 0.5rem;
 }
 
 .postLinkProfileUser{

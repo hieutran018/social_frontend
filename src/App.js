@@ -9,6 +9,7 @@ import Videos from './pages/videos/Videos';
 import Profile from './pages/profile/profile';
 import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
+import Group from './pages/groups/group';
 import Loading from './components/loading/Loading';
 // import ProtectedRoutes from './components/protectedroute/protectedroute';
 import FriendRequest from './pages/friendrequest/friendrequest';
@@ -39,6 +40,7 @@ function App() {
       <Route path='/:userId/:page' element={<Profile />} />
       <Route path='/:userId/:page/:category' element={<Profile />} />
       <Route path='/:userId/:page/:category/:albumId' element={<Profile />} />
+      <Route path='/groups' element={<Group />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>

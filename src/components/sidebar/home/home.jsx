@@ -6,11 +6,6 @@ import {
     Groups3TwoTone,
     Event,
     GroupOutlined,
-    RecordVoiceOver,
-    PersonAddAlt1,
-    Diversity3,
-    Cake,
-    ReduceCapacity,
 } from '@mui/icons-material';
 import CloseFriend from '../../closefriend/CloseFriend';
 import { Users } from "../../../data";
@@ -36,8 +31,10 @@ const SidebarHomePage = () => {
                     </Link>
                 </li>
                 <li className="sidebarListItem">
-                    <Groups3TwoTone className="sidebarIcon" />
-                    <span className="sidebarListItemText">Nhóm</span>
+                    <Link to="/groups" className="sidebarListItemText">
+                        <Groups3TwoTone className="sidebarIcon" />
+                        <span className="sidebarListItemText">Nhóm</span>
+                    </Link>
                 </li>
                 <li className="sidebarListItem">
                     <Event className="sidebarIcon" />
