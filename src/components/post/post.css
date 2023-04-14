@@ -109,10 +109,10 @@ color: black;
     justify-content: center;
 }
 
-/* .postBottomLeft {
+.postBottomLeft {
     display: flex;
     justify-content: space-between; 
-} */
+}
 .postBottomButton{
    
     width: 15rem;

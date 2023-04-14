@@ -1,6 +1,7 @@
 import './video.css';
-import { MoreVert } from "@mui/icons-material";
+// import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../data";
+import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
 
 import { useState, useRef, useEffect } from "react";
 
@@ -43,35 +44,46 @@ function Video({ post }) {
         <>
             <div className="post">
                 <div className="postWrapper">
-                    <div className="postTop">
-                        <div className="postTopLeft">
+                    <div className="videoPostTop">
+                        <div className="videoPostTopLeft">
                             <img
                                 className="videoProfileImg"
                                 src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
                                 alt=""
                             />
-                            <span className="videoUsername">
-                                {Users.filter((u) => u.id === post?.userId)[0].username}
-                            </span>
-                            <span className="videoDate">{post.date}</span>
+                            <div className='videoPostUser'>
+                                <span className="videoUsername">
+                                    {Users.filter((u) => u.id === post?.userId)[0].username}
+                                </span>
+                                <div className="videoDate">{post.date}</div>
+                            </div>
                         </div>
-                        <div className="postTopRight">
+                        {/* <div className="postTopRight">
                             <MoreVert />
+                        </div> */}
+                    </div>
+                    <div className="videoCenter">
+
+                        <div className="videoText">{post?.desc}</div>
+
+                        <div className='videoSrcVideo'>
+                            <video ref={videoRef} className="srcVideo" src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" controls></video>
                         </div>
                     </div>
-                    <div className="postCenter">
-                        <span className="postText">{post?.desc}</span>
-                        <video loop ref={videoRef} className="srcVideo" src="http://webcoban.vn/file/bunny.mp4" controls></video>
+                    <div className="videoBottomStatistical">
+                        <span className="videoTextStatistical">1k lượt thích</span>
+                        <div>
+                            <span className="videoTextStatistical statisticalComment">1k bình luận</span>
+                            <span className="videoTextStatistical">1k lượt chia sẻ</span>
+                        </div>
                     </div>
                     <div className="videoBottom">
-                        <div className="postBottomLeft">
-                            <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
-                            <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
-                            <span className="postLikeCounter">{like}</span>
+                        <div className="videoBottomLeft">
+                            <div className="videoBottomButton"><button className="videoBtn "><AiOutlineLike size={25} /> </button></div>
+                            <div className="videoBottomButton"><button className="videoBtn "><AiOutlineComment size={25} /></button></div>
+                            <div className="videoBottomButton"><button className="videoBtn "><AiOutlineShareAlt size={25} /></button></div>
                         </div>
-                        <div className="postBottomRight">
-                            <span className="postCommentText">{post.comment} bình luận</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
