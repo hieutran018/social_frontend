@@ -1,6 +1,7 @@
-.video {
+.watch {
     flex: 5.5;
     overflow-y: scroll;
+    margin-top: 3rem;
 
 }
 

@@ -1,19 +1,12 @@
 import './video.css';
 // import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../data";
-import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
+import { AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 
 function Video({ post }) {
-    const [like, setLike] = useState(post.like)
-    const [isLiked, setIsLiked] = useState(false)
-
-    const likeHandler = () => {
-        setLike(isLiked ? like - 1 : like + 1)
-        setIsLiked(!isLiked)
-    }
 
     // const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
@@ -42,8 +35,8 @@ function Video({ post }) {
 
     return (
         <>
-            <div className="post">
-                <div className="postWrapper">
+            <div className="video">
+                <div className="videoWrapper">
                     <div className="videoPostTop">
                         <div className="videoPostTopLeft">
                             <img
