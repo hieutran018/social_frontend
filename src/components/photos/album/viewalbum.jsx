@@ -162,7 +162,7 @@ function ViewImageInAlbum() {
                     maxWidth="sx"
                 >
                     <div className='albumDialog'>
-                        <div className='albumHeaderDialogTitle'>Tạo Album</div>
+                        <div className='albumHeaderDialogTitle'>Chỉnh sửa album</div>
 
                         <hr className='albumDialogHr' />
                         <div className='albumDialogWraaper'>
