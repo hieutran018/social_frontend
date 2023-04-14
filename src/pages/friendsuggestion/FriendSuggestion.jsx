@@ -15,7 +15,7 @@ function FriendSuggestion({ page }) {
             </div>
             <div className="friendsuggestionContainer">
                 <div className='friendsuggestionSidebar'>
-                    <Sidebar page={5} isPages={true} />
+                    <Sidebar />
                 </div>
                 {
                     userId ? <div className="friendSuggetstionViewProfile">
