@@ -1,0 +1,207 @@
+.groupCreateGroup{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-bottom:1rem ;
+    margin-top: 1rem;
+}
+.groupCreateGroupHr{
+    height: 0.1rem;
+}
+.groupCreateContainer{
+    display: flex;
+}
+.groupCreateLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
+    height: 790px;
+    max-height: 800px;
+    border-right: 1px solid;
+}
+
+/* .groupCreateLeftContainer{
+    margin-left: auto;
+    margin-right: auto;
+} */
+.groupCreateRight{
+    
+    
+    width: 75%;
+    
+}
+.groupCreateAdminGroup{
+    display: flex;
+    width: 90%;
+    margin: 1rem;
+}
+.groupCreateAvatarAdminContainer{
+    width: 60px;
+    height: 60px;
+}
+.groupCreateInforAdmin{
+    flex-direction: column;
+    display: flex;
+    margin-left: 1rem;
+}
+.groupCreateAvatarAdimin{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.groupCreateNameAdmin{
+    font-size: 16px;
+    font-weight: 500;
+}
+.groupCreatePositionAdmin{
+    margin-top: 0.5rem;
+}
+.groupCreateGroupNameContainer{
+    width: 90%;
+    height: 40px;
+}
+.groupCreateGroupName{
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+.groupCreateGroupContainerPrivacy{
+    width: 90%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.groupCreateGroupPrivacy{
+    width: 100%;
+    height: 40px;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-left: 1rem;
+    border: 0.1px solid #D8DADF;
+}
+
+.groupCreateMenuPrivacy{
+    width: 350px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    
+}
+.groupLeftItem{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.groupCreateGroupPrivacyOption{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.groupCreateTextDescriptionPrivacy{
+    width: 90%;
+    font-size: 15px;
+}
+
+.groupCreateContainerSubmit{
+     width: 90%;
+}
+.groupCreateButtonSubmit{
+    background-color: #008000;
+    width: 100%;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 7px;
+    border-radius: 10px;
+   
+    font-weight: 500;
+    cursor: pointer;
+}
+.groupCreatePreviewContainer{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    
+    
+}
+.groupPreviewMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0.1px solid #D8DADF;
+}
+
+.groupCreatePreview{
+    /* background-color: aqua; */
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 30px 0;
+}
+.groupPreviewGroup{
+    border: 0.1px solid #D8DADF;
+}
+.preViewContainerGroup{
+    width: 98%;
+    display: flex;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+.groupCreatePreviewTitleContainer{
+    
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.groupCreatePreviewGroupContainer{
+    display: flex;
+    justify-content: center;
+}
+.groupCreatePreviewGroup{
+    width: 100%;
+    height: 320px;
+    max-height: 340px; 
+}
+
+.groupCreatePreviewGroupNameContainer{
+    font-size: 30px;
+    font-weight: 600;
+}
+.groupCreatePreviewPrivacyContainer{
+    font-size: 20px;
+    font-weight: 400;
+}
+.groupCreateItemTab{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 15%;
+    font-size: 20px;
+}
+.groupPreviewContainerFeed{
+    width: 100%;
+    height: 200px;
+    background-color: #b5b6b9;
+}
+

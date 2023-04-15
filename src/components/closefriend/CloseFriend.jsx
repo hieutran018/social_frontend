@@ -1,11 +1,13 @@
 import './closefriend.css';
 
-function CloseFriend({ user }) {
+function CloseFriend({ group }) {
     return (
-        <li className="sidebarFriend">
-            <img className="sidebarFriendImg" src={user.profilePicture} alt="" />
-            <span className="sidebarFriendName">{user.username}</span>
-        </li>
+        <div className="sidebarFriend">
+            <div className='sidebarGroupContainer'>
+                <img className="sidebarFriendImg" src={group.avatar} alt="" />
+                <span className="sidebarFriendName">{group.group_name}</span>
+            </div>
+        </div>
     );
 }
 

@@ -4,6 +4,9 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 
 function Group() {
+
+
+
     return (
         <div>
             <div className='groupTopBar'>
@@ -16,6 +19,7 @@ function Group() {
                     <Feed />
                 </div>
             </div>
+
         </div>
     );
 }

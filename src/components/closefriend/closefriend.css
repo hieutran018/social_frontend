@@ -2,6 +2,18 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    height: 80px;
+    border-radius: 5px;
+    
+}
+.sidebarGroupContainer{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+.sidebarFriend:hover{
+    background-color: #D8DADF;
+
 }
 
 .sidebarFriendImg {

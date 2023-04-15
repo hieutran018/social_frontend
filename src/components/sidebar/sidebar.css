@@ -37,6 +37,8 @@
 
 .sidebarIcon {
     margin-right: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .sidebarButton {
@@ -59,7 +61,11 @@
 
 .sidebarListItemText {
     text-decoration: none;
-
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .sidebarListItemText:active {
@@ -162,4 +168,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+   
+}
+.sidebarGroupCreateButton:hover{
+    background-color: #cee4f9;
 }

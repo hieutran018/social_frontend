@@ -43,11 +43,7 @@ const SidebarHomePage = () => {
             </ul>
             <button className="sidebarButton">Xem thêm</button>
             <hr className="sidebarHr" />
-            <ul className="sidebarFriendList">
-                {Users.map((u) => (
-                    <CloseFriend key={u.id} user={u} />
-                ))}
-            </ul>
+
         </>);
 };
 
