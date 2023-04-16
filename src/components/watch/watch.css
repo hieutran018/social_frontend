@@ -1,8 +1,8 @@
 .watch {
-    flex: 5.5;
+    flex: 2;
     overflow-y: scroll;
     margin-top: 3rem;
-
+    width: 70%;
 }
 
 .watchWrapper {

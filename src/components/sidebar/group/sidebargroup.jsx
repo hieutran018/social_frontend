@@ -19,6 +19,7 @@ import default_cover from '../../../groups-default-cover-photo-2x.png';
 import axios from 'axios';
 
 function SideBarGroup() {
+    const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
     const [groups, SetGroups] = useState([]);
     const [open, setOpen] = useState(false);
@@ -120,6 +121,14 @@ function SideBarGroup() {
 
             </ul>
             <hr className="sidebarHr" />
+            <div className='sidebarGroupJoined'>Nhóm do bạn quản lý</div>
+            <div className="sidebarFriendList">
+                {groups.map((group) => (
+                    <CloseFriend key={group.id} group={group} />
+                ))}
+            </div>
+            <hr className="sidebarHr" />
+            <div className='sidebarGroupJoined'>Nhóm đã tham gia</div>
             <div className="sidebarFriendList">
                 {groups.map((group) => (
                     <CloseFriend key={group.id} group={group} />
@@ -143,11 +152,11 @@ function SideBarGroup() {
 
                                     <div className='groupCreateAdminGroup '>
                                         <div className='groupCreateAvatarAdminContainer '>
-                                            <img className='groupCreateAvatarAdimin' src="assets/person/2.jpeg" alt="" />
+                                            <img className='groupCreateAvatarAdimin' src={user.avatar} alt="" />
                                         </div>
                                         <div className='groupCreateInforAdmin'>
                                             <div className='groupCreateNameAdmin'>
-                                                Trần Dương Chí Hiếu
+                                                {user.first_name + ' ' + user.last_name}
                                             </div>
                                             <div className='groupCreatePositionAdmin'>Quản trị viên</div>
                                         </div>

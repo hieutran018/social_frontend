@@ -6,7 +6,7 @@ import { AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/
 import { useRef, useEffect } from "react";
 
 
-function Video({ post }) {
+function Video({ video }) {
 
     // const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
@@ -21,6 +21,7 @@ function Video({ post }) {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     videoRef.current.play();
+
                 } else {
                     videoRef.current.pause();
                 }
@@ -41,14 +42,14 @@ function Video({ post }) {
                         <div className="videoPostTopLeft">
                             <img
                                 className="videoProfileImg"
-                                src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+                                src={video.avatarUser}
                                 alt=""
                             />
                             <div className='videoPostUser'>
                                 <span className="videoUsername">
-                                    {Users.filter((u) => u.id === post?.userId)[0].username}
+                                    {video.userName}
                                 </span>
-                                <div className="videoDate">{post.date}</div>
+                                <div className="videoDate">{video.created_at}</div>
                             </div>
                         </div>
                         {/* <div className="postTopRight">
@@ -57,10 +58,10 @@ function Video({ post }) {
                     </div>
                     <div className="videoCenter">
 
-                        <div className="videoText">{post?.desc}</div>
+                        {/* <div className="videoText">{post?.desc}</div> */}
 
                         <div className='videoSrcVideo'>
-                            <video ref={videoRef} className="srcVideo" src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" controls></video>
+                            <video ref={videoRef} className="srcVideo" src={video.media_file_name} controls></video>
                         </div>
                     </div>
                     <div className="videoBottomStatistical">
