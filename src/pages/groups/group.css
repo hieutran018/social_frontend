@@ -17,3 +17,8 @@
     font-weight: 500;
     
 }
+
+.groupDetail{
+    margin-top: 1rem;
+    flex: 4;
+}

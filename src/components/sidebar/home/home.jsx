@@ -31,7 +31,7 @@ const SidebarHomePage = () => {
                     </Link>
                 </li>
                 <li className="sidebarListItem">
-                    <Link to="/groups" className="sidebarListItemText">
+                    <Link to="/groups/feeds" className="sidebarListItemText">
                         <Groups3TwoTone className="sidebarIcon" />
                         <span className="sidebarListItemText">Nhóm</span>
                     </Link>

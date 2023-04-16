@@ -1,0 +1,255 @@
+.groupPageAvatarContainer{
+    width: 100%;
+    height: 500px;
+    max-height: 550px;
+    border-radius: 10px;
+}
+
+.groupPageAvatar{
+    width: 100%;
+    height: 500px;
+    max-height: 550px;
+    border-radius: 10px;
+}
+.groupPageInforContainer{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5rem;
+}
+
+.groupPageInviteUser{
+    background-color: #1877F2;
+    color: white;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;font-weight: 500;
+}
+.groupPageSetting{
+    margin-left: 1rem;
+    border:1px solid #1877F2;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;font-weight: 500;
+}
+.groupPageIconAdd{
+    color: aliceblue;
+}
+
+.groupPageGroupNameContainer{
+    margin-left: 2rem;
+}
+.groupPageGroupName{
+    font-size: 30px;
+    font-weight: 600;
+}
+.groupPageTabMenu{
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.groupPageMenuTab{
+    width: 170px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.groupPageMenuTab:hover{
+    background-color: #f6f7f8;
+}
+.avtiveTab{
+    border-bottom: 2px solid #1877F2;
+}
+
+.groupPageMenuTabText{
+    font-size: 20px;
+    font-weight: 500;
+}
+.groupPageMainContainer{
+    display: flex;
+    margin-top: 1rem;
+
+}
+.groupPageFeeds{
+    margin-left: 2rem;
+}
+.groupPageIntroduceGroupContainer{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 0rem 5rem;
+    display: flex;
+    height: 200px;
+    max-height: 210px;
+    flex-direction: column;
+}
+.groupPageMediFileGroupContainer{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 2rem 5rem;
+    display: flex;
+    height: 200px;
+    max-height: 210px;
+    flex-direction: column;
+}
+.groupPageRightContainer{
+    width: 35%;
+    
+}
+.groupPageIntroduceContainer{
+    margin: 1rem;
+}
+
+.groupPageIntroduce{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.groupPageIntroduceGroupNameContainer{
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.groupPageIntroduceGroupName{
+    font-size: 20px;
+    font-weight: 400;
+}
+.groupPageIntroduceGroupPrivacyContainer{
+    margin: 1rem;
+    
+}
+.groupPageIntroduceGroupPrivacy{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* DIALOG INVITE START */
+.dialogInviteFriendToGroupTitle{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-bottom:1rem ;
+    margin-top: 1rem;
+}
+.dialogInviteFriendToGroupHr{
+    margin: 20px 0;
+}
+.dialogInviteFriendToGroupListFriend{
+    height: 500px;
+    max-height: 600px;
+}
+
+.dialogGroupInviteFriendAvatar{
+    width: 65px;
+    height: 65px;
+    margin-right: 20px;
+    border-radius: 50px;
+}
+
+.dialogSendInviteGroupButton{
+    background-color: #1877F2;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.dialogSendInviteGroupButton:hover{
+background-color: #81b0ef;
+}
+.dialogSendInviteGroup{
+    
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* DIALOG INVITE END */
+/* DIALOG SETTING START */
+.dialogSettingGroupPage{
+    display: flex;
+    justify-content: center;
+    height: 570px;
+    max-height: 700px; 
+}
+.dialogSettingGroupPageWrapper{
+    width: 90%;
+}
+
+.dialogSettingGroupNameContainer{
+    margin-top: 2rem;
+    width: 99%;
+}
+.dialogSettingGroupLabel{
+    font-size: 20px;
+    font-weight: 500;
+}
+.dialogSettingInputGroupName{
+    
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    outline: none;
+    
+}
+.dialogSettingGroupPrivacyContainer{
+    
+    width: 101%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.dialogSettingGroupPrivacyOption{
+    width: 100%;
+    height: 40px;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-left: 1rem;
+    border: 0.1px solid #D8DADF;
+}
+.dialogGroupMenuPrivacy{
+    width: 490px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+.dialogSettingGroup{
+
+    border-radius: 5px;
+    width: 97%;
+    height: 40px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+/* DIALOG SETTING END */

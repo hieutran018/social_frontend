@@ -1,9 +1,10 @@
 .sidebarGroupCard {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    height: 80px;
+    margin-bottom: 5px;
+    height: 70px;
     border-radius: 5px;
+    justify-content: space-between;
     
 }
 .sidebarGroupContainer{
@@ -12,7 +13,7 @@
     margin-left: 1rem;
 }
 .sidebarGroupCard:hover{
-    background-color: #D8DADF;
+    background-color: #f6f7f8;
 
 }
 
@@ -26,4 +27,22 @@
 .sidebarFriendName{
     font-size: 16px;
     font-weight: 500;
+}
+.sidebarGroupButton{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.sidebarGroupButtonNext{
+    background-color: #e5e7ea;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+.sidebarGroupButtonNext:hover{
+    background-color: #c8dcf9;
 }

@@ -11,10 +11,10 @@ import { HiOutlineUserGroup } from 'react-icons/hi'
 import { IoMdAdd } from 'react-icons/io'
 import { Link } from 'react-router-dom';
 import CloseFriend from '../../closefriend/CloseFriend';
-import { Users } from "../../../data";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { MdOutlinePublic } from 'react-icons/md';
 import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
+import { TiGroupOutline } from 'react-icons/ti';
 import default_cover from '../../../groups-default-cover-photo-2x.png';
 import axios from 'axios';
 
@@ -104,7 +104,7 @@ function SideBarGroup() {
                     </Link>
                 </li>
                 <li className="sidebarListItem">
-                    <Link to="/" className="sidebarListItemText">
+                    <Link to="/groups/feeds" className="sidebarListItemText">
                         <VscFeedback size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Bảng tin của bạn</span>
                     </Link>
@@ -113,6 +113,12 @@ function SideBarGroup() {
                     <Link to="" className="sidebarListItemText">
                         <HiOutlineUserGroup size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Nhóm của bạn</span>
+                    </Link>
+                </li>
+                <li className="sidebarListItem">
+                    <Link to="" className="sidebarListItemText">
+                        <TiGroupOutline size={25} className="sidebarIcon" />
+                        <span className="sidebarListItemText">Lời mời vào nhóm</span>
                     </Link>
                 </li>
                 <li className="sidebarListItem">
