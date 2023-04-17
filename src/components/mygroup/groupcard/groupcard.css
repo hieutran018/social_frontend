@@ -1,0 +1,55 @@
+.groupCardAvatarroup{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 5px;
+}
+
+.groupCardRight{
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1rem;
+}
+.groupCardRightContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.groupCardUserName{
+    font-size: 1.5rem;
+    
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+.groupCardButtonViewContainer{    
+    display: flex;
+    justify-content: right;
+
+    width: 100%;
+    height: 1.5rem;
+}
+.groupCardButtonAccept{
+    border-radius: 5px;
+    width: 50%;
+    height: 2.5rem;
+    background-color: #1877F2;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.groupCardButtonCancel{
+    margin-left: 1rem;
+    border-radius: 5px;
+    width: 50%;
+    height: 2.5rem;
+    background-color: #969697;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}

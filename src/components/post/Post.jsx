@@ -41,9 +41,6 @@ function Post({ post, groups }) {
     const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
     const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
 
-    // BÀI VIẾT THUỘC MỘT GROUP
-    const [group,] = useState(!groups);
-
     useEffect(() => {
 
         if (selectAddPostStatus) {
@@ -124,26 +121,26 @@ function Post({ post, groups }) {
         }
     }
 
-
+    console.log(post)
     return (
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
                     {
-                        !group ?
+                        groups || post.group_id ?
                             <div className="postTopLeft">
-                                <a href={"/" + post.user_id}>
+                                <a href={"/" + post.group_id}>
                                     <img
                                         className="postProfileImgGroup"
-                                        src={post.avatarUser}
-                                        alt={"Avatar user " + post.username}
+                                        src={post.groupAvatar}
+                                        alt={"Avatar user " + post.groupName}
                                     />
                                 </a>
 
                                 <div>
                                     <span className="postUsername">
                                         <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                            {post.username}
+                                            {post.groupName}
                                         </a>
                                     </span>
                                     <div className="postPrivacy">
@@ -258,8 +255,7 @@ function Post({ post, groups }) {
                                                             />}
                                                         </ImageListItem>
                                                     ))}
-                                                </ImageList> :
-                                                <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                                </ImageList> : post.totalMediaFile === 0 ? <></> : <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                     {post.mediafile.map((item) => (
                                                         <ImageListItem key={item.media_file_name}>
                                                             {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -271,6 +267,7 @@ function Post({ post, groups }) {
                                                         </ImageListItem>
                                                     ))}
                                                 </ImageList>
+
                                     }</div>
                             </div> :
                             <div className="postParent">
@@ -321,7 +318,8 @@ function Post({ post, groups }) {
                                                                     />}
                                                                 </ImageListItem>
                                                             ))}
-                                                        </ImageList>}
+                                                        </ImageList>
+                                            }
                                         </div>
 
                                     </div>

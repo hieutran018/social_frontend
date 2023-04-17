@@ -3,6 +3,7 @@ import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import GroupPage from '../../components/group/group';
+import MyGroup from '../../components/mygroup/mygroup';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -17,32 +18,33 @@ function Group() {
     console.log(pages, groupId);
 
 
-    function fetchGroupByIdGroup() {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
 
-        axios({
-            method: "GET",
-            url: requestURL,
-            headers: {
-                Authorization: "Bearer " + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => {
-            console.log(response.data);
-            setGroup(response.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
     useEffect(() => {
         if (groupId) {
+            function fetchGroupByIdGroup() {
+                const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
+
+                axios({
+                    method: "GET",
+                    url: requestURL,
+                    headers: {
+                        Authorization: "Bearer " + cookies,
+                        "Content-Type": "multipart/form-data",
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    console.log(response.data);
+                    setGroup(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }
             fetchGroupByIdGroup();
         }
 
 
 
-    }, [groupId])
+    }, [groupId, cookies])
 
     return (
         <div>
@@ -57,6 +59,8 @@ function Group() {
                         <Feed />
                     </div> : pages === 'group' && groupId ? <div className="groupDetail">
                         <GroupPage group={group} />
+                    </div> : pages === 'my_group' ? <div className="myGroup">
+                        <MyGroup />
                     </div> : <></>
                 }
             </div>

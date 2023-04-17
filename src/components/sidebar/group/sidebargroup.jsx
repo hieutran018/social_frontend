@@ -48,7 +48,6 @@ function SideBarGroup() {
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
-
     function fetchGroupJoined() {
         const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
 
@@ -68,9 +67,28 @@ function SideBarGroup() {
         }).catch((error) => console.log(error.message));
     }
 
+
     useEffect(() => {
+        function fetchGroupJoined() {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
+
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+
+            }).then((response) => {
+                console.log("FETCH GROUP?", response.data[0].groups)
+                SetGroups(response.data[0].groups);
+
+            }).catch((error) => console.log(error.message));
+        }
         fetchGroupJoined()
-    }, [])
+    }, [cookies])
 
     const handleSubmitCreateGroup = () => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/create-group';
@@ -110,7 +128,7 @@ function SideBarGroup() {
                     </Link>
                 </li>
                 <li className="sidebarListItem">
-                    <Link to="" className="sidebarListItemText">
+                    <Link to="/groups/my_group" className="sidebarListItemText">
                         <HiOutlineUserGroup size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Nhóm của bạn</span>
                     </Link>

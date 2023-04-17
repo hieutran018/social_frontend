@@ -1,8 +1,8 @@
 import './group.css';
 import Dialog from '@mui/material/Dialog';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -12,6 +12,7 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import Share from '../share/Share';
 import Feed from '../feed/Feed';
+import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -23,10 +24,12 @@ function GroupPage({ group }) {
     const [open, setOpen] = useState(false);
     const [openSetting, setOpenSetting] = useState(false);
     const [friends, setFriends] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [privacy, setPrivacy] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const [groupName, setGroupName] = useState('');
+
     const handleClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
     }
@@ -59,6 +62,30 @@ function GroupPage({ group }) {
     const handleChangeFiles = (event) => {
 
     }
+    useEffect(() => {
+        function fetchPostByGroupId() {
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + group.id;
+            axios({
+                method: 'GET',
+                url: requestURL,
+
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+
+            }).then((response) => {
+                console.log(response.data)
+                setPosts(response.data);
+
+
+
+            }).catch((error) => console.log(error.message));
+        }
+        fetchPostByGroupId()
+
+    }, [group.id, cookies])
 
     function fetchListFriend() {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
@@ -80,6 +107,7 @@ function GroupPage({ group }) {
 
         }).catch((error) => console.log(error.message));
     }
+
 
     function editInformationGroup() {
         const requestURL = 'http://127.0.0.1:8000/api/v1/edit-information-group';
@@ -104,21 +132,7 @@ function GroupPage({ group }) {
         }).catch((error) => console.log(error.message));
     }
 
-    function sendInviteJoinGroup(userId) {
-        const requestUrl = 'http://127.0.0.1:8000/api/v1/send-invite-to-group';
-        axios({
-            method: 'POST',
-            url: requestUrl,
-            data: {
-                userId: userId, groupId: group.id
-            },
-            headers: {
-                Authorization: "Bearer " + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => console.log(response.data)).catch((error) => console.log(error.message));
-    }
+
     return (
         <div className='groupPage'>
             <div className='groupPageAvatarContainer'>
@@ -153,7 +167,7 @@ function GroupPage({ group }) {
             <div className='groupPageMainContainer'>
                 <div className='groupPageFeeds'>
                     <Share />
-                    <Feed />
+                    <Feed post={posts} isGroup={true} />
                 </div>
                 <div className='groupPageRightContainer'>
                     <div className='groupPageIntroduceGroupContainer'>
@@ -204,13 +218,7 @@ function GroupPage({ group }) {
                             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                 {
                                     friends.map((friend) => (
-                                        <ListItem>
-                                            <img className='dialogGroupInviteFriendAvatar' src={friend.avatar} alt="" />
-                                            <ListItemText className='dialogGroupInviteFriendName' primary={friend.username} secondary="" />
-                                            <div onClick={() => sendInviteJoinGroup(friend.friendId)} className='dialogSendInviteGroupButton'>
-                                                <div className='dialogSendInviteGroup'>Mời bạn bè</div>
-                                            </div>
-                                        </ListItem>
+                                        <FriendCard key={friend.id} friend={friend} />
                                     ))
                                 }
 

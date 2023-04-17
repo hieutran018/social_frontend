@@ -9,7 +9,7 @@ import Lottie from 'react-lottie-player'
 import Variants from './postskeleton';
 import LoadingFailAnimationJSON from '../../lottiefiles/loading_fail.json'
 
-function Feed() {
+function Feed({ post, isGroup }) {
     const cookies = useCookies('_tk')[0]._tk;
     const dispatch = useDispatch()
     const status = useSelector(selectPostStatus)
@@ -18,26 +18,30 @@ function Feed() {
     useEffect(() => {
         dispatch(fetchPost(cookies));
     }, [dispatch, cookies])
+    console.log(post)
 
     return (<div className="feed">
         <div className="feedWrapper">
             {
-                status === 'loading' ?
-                    <div><Variants /></div>
-                    : status === 'succeeded' ? posts.map((p) => (
-                        <Post key={p.id} post={p} groups={true} />
-                    )) : status === 'failed' ?
-                        <div>
-                            <div style={{ display: "flex", justifyContent: "center" }}>
-                                <Lottie
-                                    loop
-                                    animationData={LoadingFailAnimationJSON}
-                                    play
-                                    style={{ width: 500, height: 500 }}
-                                />
-                            </div>
-                            <div style={{ display: "flex", justifyContent: "center" }}><span style={{ color: "red", fontSize: "20px", fontWeight: "500" }}>Có lỗi xảy ra, vui lòng thử lại!</span></div>
-                        </div> : ""
+                post ? post.map((p) => (
+                    <Post key={p.id} post={p} groups={true} />
+                )) :
+                    status === 'loading' ?
+                        <div><Variants /></div>
+                        : status === 'succeeded' ? posts.map((p) => (
+                            <Post key={p.id} post={p} groups={isGroup} />
+                        )) : status === 'failed' ?
+                            <div>
+                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                    <Lottie
+                                        loop
+                                        animationData={LoadingFailAnimationJSON}
+                                        play
+                                        style={{ width: 500, height: 500 }}
+                                    />
+                                </div>
+                                <div style={{ display: "flex", justifyContent: "center" }}><span style={{ color: "red", fontSize: "20px", fontWeight: "500" }}>Có lỗi xảy ra, vui lòng thử lại!</span></div>
+                            </div> : ""
             }
         </div>
     </div>);
