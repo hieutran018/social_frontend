@@ -211,3 +211,45 @@
     font-weight: 500;
 }
 
+/* SKELETON GROUP START */
+.skeletonGroupCard{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    height: 70px;
+    border-radius: 5px;
+    justify-content: space-between;
+    border: 0.1px solid #D8DADF;
+    background-color: #fafafa;
+}
+.skeletonGroupContainer{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    /* justify-content: space-between; */
+}
+
+.skeletonFriendImg{
+    width: 60px;
+    height: 60px;
+    background-color: #D8DADF;
+}
+.skeletonFriendName{
+    width: 50%;
+    height: 20px;
+    background-color: #D8DADF;
+    margin-left: 5%;
+}
+.skeletonGroupButton{
+    width: 35px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    border-radius: 30px;
+    background-color: #D8DADF;
+}
+/* SKELETON GROUP END */

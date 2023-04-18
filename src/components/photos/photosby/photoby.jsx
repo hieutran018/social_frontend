@@ -1,41 +1,34 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStatusMediaFile, selectMediaFile } from "../../../redux/selectors/mediafileSelector";
+import { fetchMediaFile } from "../../../redux/actions/mediafileAction";
+import SkeletonPhotoBy from './skeletonPhotoBy';
 import Grid from '@mui/material/Grid';
 
 function PhotoBy() {
-    const userId = useParams();
+    const userId = useParams().userId;
     const cookies = useCookies('_tk')[0]._tk;
-    const [photoBy, setPhotoBy] = useState([]);
+    const dispatch = useDispatch();
+    const photos = useSelector(selectMediaFile);
+    const status = useSelector(selectStatusMediaFile);
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + userId.userId;
-        axios({
-            method: 'GET', //you can set what request you want to be
-            url: requestURL,
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => {
-            console.log("RES =========", response.data);
-            setPhotoBy(response.data);
-        }).catch((error) => console.log(error.message));
-
-    }, [cookies, userId.userId])
+        dispatch(fetchMediaFile(cookies, userId));
+    }, [cookies, userId, dispatch])
 
     return (
         <div className="photoBy">
             <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                 <Grid item xs={12}>
                     <Grid container justifyContent="left" spacing={1}>
-                        {photoBy.map((item) => (
-                            <Grid key={item.id} item>
-                                <img className='photosImageItem' src={item.media_file_name} alt="" />
-                            </Grid>
+                        {status === 'loading' ? <SkeletonPhotoBy /> : status === 'succeeded' ?
+                            photos.map((item) => (
+                                <Grid key={item.id} item>
+                                    <img className='photosImageItem' src={item.media_file_name} alt="" />
+                                </Grid>
 
-                        ))}
+                            )) : <SkeletonPhotoBy />}
                     </Grid>
 
 

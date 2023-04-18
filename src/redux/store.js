@@ -2,6 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import postReducer from './reducers/postReducer'
 import userReducer from './reducers/userReducer'
+import groupReducer from './reducers/groupReducer'
+import albumReducer from './reducers/albumReducer'
+import mediafileReducer from './reducers/mediafileReducer'
 
 
 
@@ -12,7 +15,9 @@ const store = configureStore({
     reducer: {
         posts: postReducer,
         users: userReducer,
-
+        groups: groupReducer,
+        albums: albumReducer,
+        mediafiles: mediafileReducer
 
 
     }

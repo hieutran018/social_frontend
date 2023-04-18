@@ -5,6 +5,7 @@
     font-size: 1.1rem;
 }
 
+
 .photosIConAdd{
     width: 11.95rem;
     height: 11.95rem;
@@ -230,3 +231,18 @@
 }
 
 /* ALBUM DIALOG END */
+
+/* SKELETON ALBUM START */
+.skeletonAlbumNameContainer{
+    margin-top: 0.5rem;
+}
+.skeletonAlbumInforAlbum{
+    display: gird;
+}
+.skeletonAlbumName{
+    background-color: #D8DADF;
+}
+.skeletonAlbumCount{
+    background-color: #D8DADF;
+    margin-top: 5px;
+}

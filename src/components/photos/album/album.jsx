@@ -8,19 +8,23 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { Link, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAlbum, createNewAlbum } from '../../../redux/actions/albumAction';
+import { selectAlbum, selectStatusAlbum } from '../../../redux/selectors/albumSelector';
 import ViewImageInAlbum from './viewalbum';
+import SkeletonAlbum from './skeletonAlbum';
+
+
 
 function Album() {
     const userId = useParams().userId;
     const albumId = useParams().albumId;
     const cookies = useCookies('_tk')[0]._tk;
     const user = JSON.parse(localStorage.getItem('user')).id;
-    const [albums, setAlbums] = useState([]);
     const [open, setOpen] = useState(false);
     const [privacy, setPrivacy] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -29,6 +33,9 @@ function Album() {
     const [images, setImages] = useState([]);
     const [view, setView] = useState(false);
     const [albumName, setAlbumName] = useState('');
+    const dispatch = useDispatch();
+    const status = useSelector(selectStatusAlbum);
+    const albums = useSelector(selectAlbum);
     const handleClickOpen = () => {
         setOpen(true);
 
@@ -67,22 +74,8 @@ function Album() {
     }
 
     const handleSubmitCreateAlbum = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/create-album';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { albumName: albumName, privacy: privacy, files: files },
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-
-        }).then((response) => {
-
-            setOpen(false)
-
-        }).catch((error) => console.log(error));
+        dispatch(createNewAlbum(cookies, albumName, privacy, files));
+        setOpen(false);
     }
 
 
@@ -90,67 +83,48 @@ function Album() {
 
 
     useEffect(() => {
-        const fetchAlbum = () => {
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-album-by-userid/userId=" + userId;
-            axios({
-                method: 'GET',
-                url: requestURL,
-
-                headers: {
-                    Authorization: 'Bearer ' + cookies,
-                    "Content-Type": "multipart/form-data",
-                    'Access-Control-Allow-Origin': '*',
-                }
-
-            }).then((response) => {
-                console.log("RES ALBUM", response.data)
-                setAlbums(response.data);
-
-
-            }).catch((error) => console.log(error.message));
-        }
-        fetchAlbum();
-    }, [userId, cookies]);
+        dispatch(fetchAlbum(cookies, userId))
+    }, [userId, cookies, dispatch]);
 
     return (
         <div className='album'>
             {
-                !albumId ? <Grid sx={{ flexGrow: 1 }} container spacing={1}>
-                    <Grid item xs={12}>
-                        <Grid container justifyContent="left" spacing={1}>
-                            {
-                                user.toString() === userId ? <Grid onClick={handleClickOpen} item>
-                                    <div className='photosIConAdd'><IoMdAdd /></div>
-                                    <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
-                                </Grid> : <></>
-                            }
+                !albumId ?
+                    <Grid sx={{ flexGrow: 1 }} container spacing={1}>
+                        <Grid item xs={12}>
+                            <Grid container justifyContent="left" spacing={1}>
+                                {
+                                    user.toString() === userId ? <Grid onClick={handleClickOpen} item>
+                                        <div className='photosIConAdd'><IoMdAdd /></div>
+                                        <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
+                                    </Grid> : <></>
+                                }
 
-                            {albums.map((album) => (
+                                {
+                                    status === 'loading' ? <SkeletonAlbum /> : status === 'succeeded' ?
+                                        albums.map((album) => (
+                                            <Grid key={album.id} item>
 
-                                <Grid key={album.id} item>
+                                                <Link to={"/" + userId + "/photos/album/" + album.id}>
+                                                    {album.thumnail === null ? <div style={{
+                                                        backgroundColor: "#D8DADF", width: "11.95rem",
+                                                        height: "11.95rem"
+                                                    }}></div> : <img className='photosImageItem' src={album.thumnail} alt="" />}
+                                                </Link>
 
-                                    <Link to={"/" + userId + "/photos/album/" + album.id}>
-                                        {album.thumnail === null ? <div style={{
-                                            backgroundColor: "#D8DADF", width: "11.95rem",
-                                            height: "11.95rem"
-                                        }}></div> : <img className='photosImageItem' src={album.thumnail} alt="" />}
-                                    </Link>
-
-                                    <div className='albumNameContainer'>
-                                        <div className='albumInforAlbum'>
-                                            <span className='albumName'>{album.album_name}</span>
-                                            <span className='albumCount'>{album.totalImage + " ảnh"}</span>
-                                        </div>
-                                    </div>
-                                </Grid>
-
-                            ))}
-
+                                                <div className='albumNameContainer'>
+                                                    <div className='albumInforAlbum'>
+                                                        <span className='albumName'>{album.album_name}</span>
+                                                        <span className='albumCount'>{album.totalImage + " ảnh"}</span>
+                                                    </div>
+                                                </div>
+                                            </Grid>
+                                        ))
+                                        : <SkeletonAlbum />
+                                }
+                            </Grid>
                         </Grid>
-
-
-                    </Grid>
-                </Grid> : <ViewImageInAlbum />
+                    </Grid> : <ViewImageInAlbum />
             }
             <div>
                 <Dialog

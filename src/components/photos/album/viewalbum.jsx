@@ -11,6 +11,7 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
 
 import axios from "axios";
+import SkeletonPhotoBy from '../photosby/skeletonPhotoBy';
 
 function ViewImageInAlbum() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function ViewImageInAlbum() {
     const cookies = useCookies('_tk')[0]._tk;
     const [albumName, setAlbumName] = useState('');
     const [images, setImages] = useState([]);
-
+    const [status, setStatus] = useState(false);
     const [open, setOpen] = useState(false);
     const [privacy, setPrivacy] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -107,6 +108,7 @@ function ViewImageInAlbum() {
     }
     useEffect(() => {
         const fetchImageAlbum = () => {
+
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-album/' + userId + '/' + albumId;
             axios({
                 method: 'GET',
@@ -123,7 +125,7 @@ function ViewImageInAlbum() {
                 setAlbumName(response.data.album_name);
                 setAlbum(response.data.album_name);
                 setImages(response.data.media_files);
-
+                setStatus(true);
 
             }).catch((error) => console.log(error.message));
         }
@@ -142,12 +144,13 @@ function ViewImageInAlbum() {
                 <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="left" spacing={1}>
-                            {images.map((image) => (
-                                <Grid key={image.id} item>
-                                    <img className='photosImageItem' src={image.media_file_name} alt="" />
-                                </Grid>
-
-                            ))}
+                            {status ?
+                                images.map((image) => (
+                                    <Grid key={image.id} item>
+                                        <img className='photosImageItem' src={image.media_file_name} alt="" />
+                                    </Grid>
+                                )) :
+                                <SkeletonPhotoBy />}
                         </Grid>
 
 

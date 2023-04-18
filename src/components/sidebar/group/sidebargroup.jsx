@@ -11,17 +11,23 @@ import { HiOutlineUserGroup } from 'react-icons/hi'
 import { IoMdAdd } from 'react-icons/io'
 import { Link } from 'react-router-dom';
 import CloseFriend from '../../closefriend/CloseFriend';
+import SkeletonGroup from './skeletonGroup';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { MdOutlinePublic } from 'react-icons/md';
 import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
 import { TiGroupOutline } from 'react-icons/ti';
 import default_cover from '../../../groups-default-cover-photo-2x.png';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGroup, createNewGroup } from '../../../redux/actions/groupAction';
+import { selectStatusGroup, selectGroup } from '../../../redux/selectors/groupSelector';
 
 function SideBarGroup() {
+    const dispatch = useDispatch();
+    const status = useSelector(selectStatusGroup);
+    const groups = useSelector(selectGroup);
     const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
-    const [groups, SetGroups] = useState([]);
+    // const [groups, SetGroups] = useState([]);
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -48,68 +54,13 @@ function SideBarGroup() {
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
-    function fetchGroupJoined() {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
-
-        axios({
-            method: 'GET',
-            url: requestURL,
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-
-        }).then((response) => {
-            console.log("FETCH GROUP?", response.data[0].groups)
-            SetGroups(response.data[0].groups);
-
-        }).catch((error) => console.log(error.message));
-    }
-
 
     useEffect(() => {
-        function fetchGroupJoined() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
-
-            axios({
-                method: 'GET',
-                url: requestURL,
-                headers: {
-                    Authorization: 'Bearer ' + cookies,
-                    "Content-Type": "multipart/form-data",
-                    'Access-Control-Allow-Origin': '*',
-                }
-
-            }).then((response) => {
-                console.log("FETCH GROUP?", response.data[0].groups)
-                SetGroups(response.data[0].groups);
-
-            }).catch((error) => console.log(error.message));
-        }
-        fetchGroupJoined()
-    }, [cookies])
+        dispatch(fetchGroup(cookies));
+    }, [cookies, dispatch])
 
     const handleSubmitCreateGroup = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/create-group';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { groupName: groupName, privacy: privacy },
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-
-        }).then((response) => {
-            console.log("CREATE GROUP?", response.data)
-            fetchGroupJoined();
-            setOpen(false);
-
-
-
-        }).catch((error) => console.log(error.message));
+        dispatch(createNewGroup(cookies, groupName, privacy));
     }
 
     return (
@@ -145,18 +96,13 @@ function SideBarGroup() {
 
             </ul>
             <hr className="sidebarHr" />
-            <div className='sidebarGroupJoined'>Nhóm do bạn quản lý</div>
-            <div className="sidebarFriendList">
-                {groups.map((group) => (
-                    <CloseFriend key={group.id} group={group} />
-                ))}
-            </div>
-            <hr className="sidebarHr" />
+
+
             <div className='sidebarGroupJoined'>Nhóm đã tham gia</div>
             <div className="sidebarFriendList">
-                {groups.map((group) => (
+                {status === 'loading' ? <SkeletonGroup /> : status === 'succeeded' ? groups.map((group) => (
                     <CloseFriend key={group.id} group={group} />
-                ))}
+                )) : <></>}
             </div>
             <div>
                 <Dialog
