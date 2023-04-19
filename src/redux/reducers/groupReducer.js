@@ -2,7 +2,8 @@ import {
     FETCH_GROUP_STARTED,
     FETCH_GROUP_SUCCEEDED,
     FETCH_GROUP_FAILED,
-    CREATE_GROUP
+    CREATE_GROUP,
+    UPDATE_GROUP
 } from '../constants/groupConstant'
 
 const initialState = []
@@ -35,6 +36,18 @@ export default function groupReducer(state = initialState, action) {
             return {
                 ...state,
                 groups: [action.group, ...state.groups]
+            }
+        }
+        case UPDATE_GROUP: {
+            return {
+                ...state,
+                groups: state.groups.map(group => {
+                    if (group.id === action.group.id) {
+                        return group = action.group
+                    } else {
+                        return group
+                    }
+                })
             }
         }
         default:

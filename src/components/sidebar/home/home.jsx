@@ -1,45 +1,40 @@
 import '../sidebar.css';
 import { Link } from 'react-router-dom';
-import {
-    RssFeed,
-    PlayCircleFilledOutlined,
-    Groups3TwoTone,
-    Event,
-    GroupOutlined,
-} from '@mui/icons-material';
-import CloseFriend from '../../closefriend/CloseFriend';
-import { Users } from "../../../data";
+import { AiFillHome } from 'react-icons/ai';
+import { FaUserFriends } from 'react-icons/fa';
+import { RiVideoFill } from 'react-icons/ri';
+import { TiGroup } from 'react-icons/ti';
 const SidebarHomePage = () => {
     return (
         <>
             <ul className="sidebarList">
                 <li className="sidebarListItem">
-                    <RssFeed className="sidebarIcon" />
+                    <AiFillHome size={25} className="sidebarIcon" />
                     <span className="sidebarListItemText">Bảng tin</span>
                 </li>
                 <li className="sidebarListItem">
                     <Link to="/friend" className="sidebarListItemText">
-                        <GroupOutlined className="sidebarIcon" />
+                        <FaUserFriends size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Bạn bè</span>
                     </Link>
 
                 </li>
                 <li className="sidebarListItem">
                     <Link to="/video" className="sidebarListItemText">
-                        <PlayCircleFilledOutlined className="sidebarIcon" />
+                        <RiVideoFill size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Thước phim</span>
                     </Link>
                 </li>
                 <li className="sidebarListItem">
                     <Link to="/groups/feeds" className="sidebarListItemText">
-                        <Groups3TwoTone className="sidebarIcon" />
+                        <TiGroup size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Nhóm</span>
                     </Link>
                 </li>
-                <li className="sidebarListItem">
+                {/* <li className="sidebarListItem">
                     <Event className="sidebarIcon" />
                     <span className="sidebarListItemText">Sự kiện</span>
-                </li>
+                </li> */}
             </ul>
             <button className="sidebarButton">Xem thêm</button>
             <hr className="sidebarHr" />

@@ -38,3 +38,28 @@ export const fetchMemberGroup = (cookies, groupId) => {
         }
     }
 }
+
+export const addMemberToAdminGroup = (cookies, userId, groupId) => {
+    return async dispatch => {
+        try {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/add-admin-group';
+            axios({
+                method: 'POST',
+                url: requestURL,
+                data: {
+                    userId: userId, groupId: groupId
+                },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log(response.data);
+            }).catch((error) => { console.log(error); });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

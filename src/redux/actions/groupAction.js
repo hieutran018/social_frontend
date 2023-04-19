@@ -1,6 +1,6 @@
 import {
     FETCH_GROUP_STARTED,
-    FETCH_GROUP_SUCCEEDED, FETCH_GROUP_FAILED, CREATE_GROUP
+    FETCH_GROUP_SUCCEEDED, FETCH_GROUP_FAILED, CREATE_GROUP, UPDATE_GROUP
 } from '../constants/groupConstant';
 import axios from 'axios';
 
@@ -18,6 +18,10 @@ export const fetchGroupFailed = error => ({
 })
 export const createGroup = group => ({
     type: CREATE_GROUP,
+    group
+})
+export const updateGroup = group => ({
+    type: UPDATE_GROUP,
     group
 })
 
@@ -72,6 +76,37 @@ export const createNewGroup = (cookies, groupName, privacy) => {
             }).catch((error) => console.log(error));
         } catch (err) {
             console.log(err);
+        }
+    }
+}
+
+export const editGroup = (cookies, groupId, groupName, privacy) => {
+    return async dispatch => {
+        try {
+
+            const requestURL = 'http://127.0.0.1:8000/api/v1/edit-information-group';
+            axios({
+                method: 'POST',
+                url: requestURL,
+                data: {
+                    groupId: groupId, groupName: groupName, privacy: privacy
+                },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+
+            }).then((response) => {
+                console.log(response.data)
+                dispatch(updateGroup(response.data))
+
+
+
+            }).catch((error) => console.log(error.message));
+
+        } catch (error) {
+
         }
     }
 }

@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import Dialog from '@mui/material/Dialog';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiFillHome } from 'react-icons/ai';
 import { VscFeedback } from 'react-icons/vsc';
 import { HiOutlineUserGroup } from 'react-icons/hi'
 import { IoMdAdd } from 'react-icons/io'
@@ -68,7 +68,7 @@ function SideBarGroup() {
             <ul className="sidebarList">
                 <li className="sidebarListItem">
                     <Link to="/" className="sidebarListItemText">
-                        <AiOutlineHome size={25} className="sidebarIcon" />
+                        <AiFillHome size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Trang Chủ </span>
                     </Link>
                 </li>

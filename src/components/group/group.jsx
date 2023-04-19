@@ -16,16 +16,19 @@ import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { editGroup } from '../../redux/actions/groupAction';
 import Member from './members/member';
 
 
-function GroupPage({ group }) {
+function GroupPage({ groupId }) {
 
     const groupTab = useParams().groupTab;
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cookies = useCookies('_tk')[0]._tk;
-    const user = JSON.parse(localStorage.getItem('user'));
+    const [update, setUpdate] = useState(false);
     const [open, setOpen] = useState(false);
     const [openSetting, setOpenSetting] = useState(false);
     const [friends, setFriends] = useState([]);
@@ -34,6 +37,7 @@ function GroupPage({ group }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const [groupName, setGroupName] = useState('');
+    const [group, setGroup] = useState([])
 
     const handleClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -68,8 +72,27 @@ function GroupPage({ group }) {
 
     }
     useEffect(() => {
+        function fetchGroupByIdGroup() {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
+
+            axios({
+                method: "GET",
+                url: requestURL,
+                headers: {
+                    Authorization: "Bearer " + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log("CHECK ADMIN", response.data)
+                setGroup(response.data)
+                setUpdate(false);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
         function fetchPostByGroupId() {
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + group.id;
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId;
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -81,16 +104,17 @@ function GroupPage({ group }) {
                 }
 
             }).then((response) => {
-                console.log(response.data)
+
                 setPosts(response.data);
 
 
 
             }).catch((error) => console.log(error.message));
         }
+        fetchGroupByIdGroup()
         fetchPostByGroupId()
 
-    }, [group.id, cookies])
+    }, [groupId, cookies, update])
 
     function fetchListFriend() {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
@@ -115,26 +139,8 @@ function GroupPage({ group }) {
 
 
     function editInformationGroup() {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/edit-information-group';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                groupId: group.id, groupName: groupName, privacy: privacy
-            },
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-
-        }).then((response) => {
-            console.log(response.data)
-
-
-
-
-        }).catch((error) => console.log(error.message));
+        dispatch(editGroup(cookies, groupId, groupName, privacy));
+        setUpdate(true);
     }
     const handleClickTab = (istab) => {
         navigate('/groups/group/' + group.id + '/' + istab)
@@ -157,7 +163,7 @@ function GroupPage({ group }) {
 
                     </div>
                     {
-                        group.isAdminGroup === user.id ?
+                        group.isAdminGroup ?
                             <div onClick={handleClickOpenSetting} className='groupPageSetting'>
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                     <BiDotsHorizontalRounded />
