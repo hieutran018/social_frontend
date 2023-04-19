@@ -1,0 +1,140 @@
+.member{
+    width: 50rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 30px 0;
+    display:flex;
+    justify-content: center;
+    
+}
+
+.memberWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.memberHeader{
+    display: flex;
+    margin: 1rem 0 0 1rem;
+}
+.memberTitle{
+    font-size: 20px;
+    font-weight: 600px;
+}
+.memberCountMember{
+    display: flex;
+    align-items: center;
+}
+.memberDescriptionTitle{
+    font-size: 16px;
+    font-weight: 400;
+    margin:0.5rem 0 0 1rem;
+}
+.memberInputSearchMemberContainer{
+    display: flex;
+    width: 46rem;
+    margin: 1rem;
+    border-radius: 20px;
+    border: 0.1px solid #D8DADF;
+    font-size: 20px;
+    align-items: center;
+}
+.memberSearchIcon{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: #6d6d6e;
+}
+.memberInputSearchMember{
+    width: 92%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    line-height: 20px;
+}
+.memberHr{
+    width: 96%;
+    display: flex;
+    justify-content: center;
+    
+}
+.memberList{
+    margin: 1rem 0 0 1rem;
+}
+
+/* MEMBER CARD START  */
+.memberCard{
+    margin: 1rem 0 0 0;
+    display: flex;
+}
+.memberCardMemberAvatar{
+    width: 60px;
+    height: 60px;
+}
+.memberCardAvatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+.memberCardMemberInformation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5rem;
+}
+.memberCardMemberName{
+    font-size: 20px;
+    font-weight: 500;
+}
+.memberCardMemberPosition{
+    width: 100px;
+    font-size: 16px;
+    color: #1771E6;
+    background-color: #DBE7F2;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin-left: 0.5rem;
+}
+.memberCardJoinedAt{
+    margin-left: 1.5rem;
+    font-size: 16px;
+    font-weight: 400;
+    color:#6d6d6e;
+}
+/* MEMBER CARD END  */
+
+/* SKELETON MEMBER CARD START  */
+
+.skeletonMemberCard{
+    display: flex;
+    margin: 1rem 0 0 0;
+    display: flex;
+    width: 98%;
+    height: 70px;
+    
+    align-items: center;
+}
+
+.skeletonMemberCardMemberAvatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: aliceblue;
+    margin-left: 1rem;
+}
+.skeletonMemberCardMemberInformation{
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5rem;
+    width: 250px;
+    height: 25px;
+    background-color: aliceblue;
+}
+.skeletonMemberCardJoinedAt{
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    width: 150px;
+    height: 16px;
+    background-color: aliceblue;
+}

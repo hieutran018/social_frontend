@@ -29,7 +29,6 @@ export const fetchGroup = (cookies) => {
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
-
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -70,7 +69,7 @@ export const createNewGroup = (cookies, groupName, privacy) => {
 
 
 
-            }).catch((error) => console.log(error.message));
+            }).catch((error) => console.log(error));
         } catch (err) {
             console.log(err);
         }

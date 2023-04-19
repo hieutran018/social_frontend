@@ -15,10 +15,15 @@ import Feed from '../feed/Feed';
 import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import Member from './members/member';
 
 
 function GroupPage({ group }) {
 
+    const groupTab = useParams().groupTab;
+
+    const navigate = useNavigate();
     const cookies = useCookies('_tk')[0]._tk;
     // const user = JSON.parse(localStorage.getItem('user'));
     const [open, setOpen] = useState(false);
@@ -131,7 +136,9 @@ function GroupPage({ group }) {
 
         }).catch((error) => console.log(error.message));
     }
-
+    const handleClickTab = (istab) => {
+        navigate('/groups/group/' + group.id + '/' + istab)
+    }
 
     return (
         <div className='groupPage'>
@@ -159,51 +166,58 @@ function GroupPage({ group }) {
             </div>
             <hr className="sidebarHr" />
             <div className='groupPageTabMenu'>
-                <div className='groupPageMenuTab avtiveTab'><span className='groupPageMenuTabText'>Bài viết</span></div>
-                <div className='groupPageMenuTab'><span className='groupPageMenuTabText'>Mọi người</span></div>
-                <div className='groupPageMenuTab'><span className='groupPageMenuTabText'>Bài viết</span></div>
-                <div className='groupPageMenuTab'><span className='groupPageMenuTabText'>File phương tiện</span></div>
+                <div onClick={() => handleClickTab('')} className={groupTab === undefined ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>Bài viết</span></div>
+                <div onClick={() => handleClickTab('member')} className={groupTab === 'member' ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>Mọi người</span></div>
+                <div onClick={() => handleClickTab('mediafiles')} className={groupTab === 'mediafiles' ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>File phương tiện</span></div>
             </div>
-            <div className='groupPageMainContainer'>
-                <div className='groupPageFeeds'>
-                    <Share />
-                    <Feed post={posts} isGroup={true} />
-                </div>
-                <div className='groupPageRightContainer'>
-                    <div className='groupPageIntroduceGroupContainer'>
-                        <div style={{ margin: "1rem" }}>
-                            <span className='groupPageIntroduce'> Giới thiệu</span>
+            {
+                groupTab === 'member' ?
+                    <div className='groupPageMainContainer groupMember'>
+
+                        <Member />
+
+                    </div> :
+                    <div className='groupPageMainContainer'>
+                        <div className='groupPageFeeds'>
+                            <Share />
+                            <Feed post={posts} isGroup={true} />
                         </div>
-                        <div className='groupPageIntroduceGroupNameContainer'>
-                            <span className='groupPageIntroduceGroupName'>{group.group_name}</span>
-                        </div>
-                        <div className='groupPageIntroduceGroupPrivacyContainer'>
-                            <div className='groupPageIntroduceGroupPrivacy'>
-                                {
-                                    group.privacy === 1 ? <MdOutlinePublic size={25} /> : <RiGitRepositoryPrivateLine size={25} />
-                                }
-                                <span style={{ marginLeft: "20px" }}>{group.privacy === 1 ? 'Nhóm công khai' : "Nhóm riêng tư"}</span>
+                        <div className='groupPageRightContainer'>
+                            <div className='groupPageIntroduceGroupContainer'>
+                                <div style={{ margin: "1rem" }}>
+                                    <span className='groupPageIntroduce'> Giới thiệu</span>
+                                </div>
+                                <div className='groupPageIntroduceGroupNameContainer'>
+                                    <span className='groupPageIntroduceGroupName'>{group.group_name}</span>
+                                </div>
+                                <div className='groupPageIntroduceGroupPrivacyContainer'>
+                                    <div className='groupPageIntroduceGroupPrivacy'>
+                                        {
+                                            group.privacy === 1 ? <MdOutlinePublic size={25} /> : <RiGitRepositoryPrivateLine size={25} />
+                                        }
+                                        <span style={{ marginLeft: "20px" }}>{group.privacy === 1 ? 'Nhóm công khai' : "Nhóm riêng tư"}</span>
+                                    </div>
+                                    <div>
+                                        <span style={{ marginLeft: "45px" }}>{
+                                            group.privacy === 1 ? "Bất kỳ ai cũng có thể nhìn thấy mọi người trong nhóm và những gì họ đăng." : "Chỉ thành viên mới nhìn thấy mọi người trong nhóm và những gì họ đăng."
+                                        }</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='groupPageMediFileGroupContainer'>
+                                <div style={{ margin: "1rem" }}>
+                                    <span className='groupPageIntroduce'> File phương tiện được chia sẻ</span>
+                                </div>
+                                <div className='groupPageMediFileGroupMainContainer'>
+
+                                </div>
                             </div>
                             <div>
-                                <span style={{ marginLeft: "45px" }}>{
-                                    group.privacy === 1 ? "Bất kỳ ai cũng có thể nhìn thấy mọi người trong nhóm và những gì họ đăng." : "Chỉ thành viên mới nhìn thấy mọi người trong nhóm và những gì họ đăng."
-                                }</span>
+
                             </div>
                         </div>
                     </div>
-                    <div className='groupPageMediFileGroupContainer'>
-                        <div style={{ margin: "1rem" }}>
-                            <span className='groupPageIntroduce'> File phương tiện được chia sẻ</span>
-                        </div>
-                        <div className='groupPageMediFileGroupMainContainer'>
-
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
+            }
             <div>
                 <Dialog
                     open={open}

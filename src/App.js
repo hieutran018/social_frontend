@@ -42,6 +42,7 @@ function App() {
       <Route path='/:userId/:page/:category/:albumId' element={<Profile />} />
       <Route path='/groups/:pages' element={<Group />} />
       <Route path='/groups/:pages/:groupId' element={<Group />} />
+      <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} />
       <Route path="/loading" element={<Loading />} />
 
     </Routes>

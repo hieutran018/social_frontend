@@ -82,8 +82,16 @@
     margin-top: 1rem;
 
 }
+.groupMember{
+   
+    justify-content: center;
+}
 .groupPageFeeds{
     margin-left: 2rem;
+}
+.groupPageMember{
+    display: flex;
+    justify-content: center;
 }
 .groupPageIntroduceGroupContainer{
     width: 100%;
