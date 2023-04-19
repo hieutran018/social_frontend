@@ -25,7 +25,7 @@ function GroupPage({ group }) {
 
     const navigate = useNavigate();
     const cookies = useCookies('_tk')[0]._tk;
-    // const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const [open, setOpen] = useState(false);
     const [openSetting, setOpenSetting] = useState(false);
     const [friends, setFriends] = useState([]);
@@ -156,11 +156,15 @@ function GroupPage({ group }) {
                         </div>
 
                     </div>
-                    <div onClick={handleClickOpenSetting} className='groupPageSetting'>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <BiDotsHorizontalRounded />
-                        </div>
-                    </div>
+                    {
+                        group.isAdminGroup === user.id ?
+                            <div onClick={handleClickOpenSetting} className='groupPageSetting'>
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <BiDotsHorizontalRounded />
+                                </div>
+                            </div> :
+                            <></>
+                    }
                 </div>
 
             </div>
@@ -174,7 +178,7 @@ function GroupPage({ group }) {
                 groupTab === 'member' ?
                     <div className='groupPageMainContainer groupMember'>
 
-                        <Member />
+                        <Member auth={group.isAdminGroup} />
 
                     </div> :
                     <div className='groupPageMainContainer'>

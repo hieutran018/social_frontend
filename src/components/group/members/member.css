@@ -66,6 +66,7 @@
 .memberCard{
     margin: 1rem 0 0 0;
     display: flex;
+    justify-content: space-between;
 }
 .memberCardMemberAvatar{
     width: 60px;
@@ -101,6 +102,25 @@
     font-size: 16px;
     font-weight: 400;
     color:#6d6d6e;
+}
+.memberAdvanceOption{
+    width: 30px;
+    height: 30px;
+    
+}
+.memberCardItem{
+    display: flex;
+    justify-content: center;
+    
+}
+.memberCardIcon{
+    display: flex;
+    align-items: center;
+}
+.memberCardTextContainer{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
 }
 /* MEMBER CARD END  */
 

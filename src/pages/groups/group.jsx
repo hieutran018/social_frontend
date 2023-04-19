@@ -33,7 +33,7 @@ function Group() {
                         'Access-Control-Allow-Origin': '*',
                     }
                 }).then((response) => {
-                    console.log(response.data);
+                    console.log("CHECK ADMIN", response.data)
                     setGroup(response.data);
                 }).catch((error) => {
                     console.log(error);

@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import SkeletonMemberCard from './skeletonMember';
 
-function Member() {
+function Member({ auth }) {
     const cookies = useCookies('_tk')[0]._tk;
     const groupId = useParams().groupId;
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function Member() {
                         status === 'loading' ? <SkeletonMemberCard /> :
                             status === 'succeeded' ?
                                 members.map((member) => (
-                                    <MemberCard key={member.id} member={member} />
+                                    <MemberCard key={member.id} member={member} auth={auth} />
                                 )) :
                                 <>FAILED</>
                     }
