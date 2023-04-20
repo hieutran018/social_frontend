@@ -43,6 +43,33 @@ export const countComment = comments => ({
     comments
 })
 
+export const fetchPostGroup = (cookies) => {
+    return async dispatch => {
+        dispatch(fetchPostStarted())
+
+        try {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group'
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                // console.log('redux', JSON.stringify(response.data), 'RES', response.data);
+                dispatch(fetchPostSucceeded(response.data))
+                // dispatch(fetchPost())
+
+
+            }).catch((error) => dispatch(fetchPostFailed(error)));
+        } catch (err) {
+            dispatch(fetchPostFailed(err))
+        }
+    }
+}
+
 export const fetchPost = (token) => {
     return async dispatch => {
         dispatch(fetchPostStarted())

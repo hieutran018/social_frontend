@@ -37,7 +37,9 @@ function GroupPage({ groupId }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const [groupName, setGroupName] = useState('');
-    const [group, setGroup] = useState([])
+    const [group, setGroup] = useState([]);
+    const [file, setFile] = useState();
+
 
     const handleClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -69,12 +71,14 @@ function GroupPage({ groupId }) {
         setOpenSetting(false);
     };
     const handleChangeFiles = (event) => {
-
+        const avatar = event.target.files[0];
+        avatar.preview = URL.createObjectURL(avatar);
+        setFile(event.target.files[0])
+        // console.log(avatar)
     }
     useEffect(() => {
         function fetchGroupByIdGroup() {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
-
             axios({
                 method: "GET",
                 url: requestURL,
@@ -96,25 +100,22 @@ function GroupPage({ groupId }) {
             axios({
                 method: 'GET',
                 url: requestURL,
-
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
-
             }).then((response) => {
-
                 setPosts(response.data);
-
-
-
             }).catch((error) => console.log(error.message));
         }
         fetchGroupByIdGroup()
         fetchPostByGroupId()
+        return () => {
+            file && URL.revokeObjectURL(file.preview)
+        }
 
-    }, [groupId, cookies, update])
+    }, [groupId, cookies, update, file])
 
     function fetchListFriend() {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
@@ -139,8 +140,10 @@ function GroupPage({ groupId }) {
 
 
     function editInformationGroup() {
-        dispatch(editGroup(cookies, groupId, groupName, privacy));
+        dispatch(editGroup(cookies, groupId, groupName, privacy, file));
         setUpdate(true);
+        setFile();
+
     }
     const handleClickTab = (istab) => {
         navigate('/groups/group/' + group.id + '/' + istab)
@@ -304,11 +307,16 @@ function GroupPage({ groupId }) {
                                 <div className='dialogSettingGroupNameContainer'>
                                     <span className='dialogSettingGroupLabel'>Ảnh nhóm</span>
                                     <label onChange={handleChangeFiles} htmlFor='dialogSettingGroup' className='dialogSettingGroup'>
-                                        <input multiple hidden id='dialogSettingGroup' type="file" />
+                                        <input hidden id='dialogSettingGroup' type="file" />
                                         <span >Tải ảnh lên</span>
                                     </label>
                                 </div>
                                 <div style={{ width: "100%", height: "200px" }}>
+
+                                    {
+                                        file ? <img style={{ width: "100%", height: "200px" }} src={file.preview} alt="" /> :
+                                            <></>
+                                    }
 
                                 </div>
                                 <div className='shareButtonContainer'>

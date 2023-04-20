@@ -26,7 +26,7 @@ import 'moment/locale/vi';
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
 
-function Post({ post, groups }) {
+function Post({ post }) {
     const cookies = useCookies('_tk');
     const [open, setOpen] = useState(false);
     const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
@@ -127,7 +127,7 @@ function Post({ post, groups }) {
             <div className="postWrapper">
                 <div className="postTop">
                     {
-                        groups || post.group_id ?
+                        post.group_id ?
                             <div className="postTopLeft">
                                 <a href={"/" + post.group_id}>
                                     <img

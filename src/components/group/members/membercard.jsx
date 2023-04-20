@@ -5,11 +5,12 @@ import { SlLogout } from 'react-icons/sl';
 import { CgProfile } from 'react-icons/cg';
 import { MdGroupRemove } from 'react-icons/md';
 import { GrUserAdmin } from 'react-icons/gr';
+import { MdRemoveModerator } from 'react-icons/md';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addMemberToAdminGroup } from '../../../redux/actions/memberAction';
+import { addMemberToAdminGroup, removeAdminToGroup } from '../../../redux/actions/memberAction';
 import { useCookies } from 'react-cookie';
 
 function MemberCard({ member, auth }) {
@@ -33,6 +34,9 @@ function MemberCard({ member, auth }) {
 
     const handleAddMemberToAdminGroup = (userId) => {
         dispatch(addMemberToAdminGroup(cookies, userId, groupId))
+    }
+    const handleRemoveAdminToGroup = (userId) => {
+        dispatch(removeAdminToGroup(cookies, userId, groupId))
     }
 
     return (
@@ -84,7 +88,7 @@ function MemberCard({ member, auth }) {
                                 </div>
                             </MenuItem>
                             {
-                                auth && user.id !== member.user_id ?
+                                auth && user.id !== member.user_id && member.isAdminGroup === 0 ?
                                     <MenuItem onClick={() => handleAddMemberToAdminGroup(member.user_id)} >
                                         <div className="memberCardItem">
                                             <div className="memberCardIcon">
@@ -95,7 +99,16 @@ function MemberCard({ member, auth }) {
                                             </div>
                                         </div>
                                     </MenuItem> :
-                                    <></>
+                                    <MenuItem onClick={() => handleRemoveAdminToGroup(member.user_id)} >
+                                        <div className="memberCardItem">
+                                            <div className="memberCardIcon">
+                                                <MdRemoveModerator size={25} />
+                                            </div>
+                                            <div className="memberCardTextContainer">
+                                                <span className="memberCardText">Xóa quyền quản trị viên</span>
+                                            </div>
+                                        </div>
+                                    </MenuItem>
                             }
                             {
                                 auth && user.id !== member.user_id ?

@@ -48,7 +48,7 @@ function Member({ auth }) {
                                 members.map((member) => (
                                     <MemberCard key={member.id} member={member} auth={auth} />
                                 )) :
-                                <>FAILED</>
+                                <SkeletonMemberCard />
                     }
                 </div>
             </div>

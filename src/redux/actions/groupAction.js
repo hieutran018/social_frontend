@@ -80,7 +80,7 @@ export const createNewGroup = (cookies, groupName, privacy) => {
     }
 }
 
-export const editGroup = (cookies, groupId, groupName, privacy) => {
+export const editGroup = (cookies, groupId, groupName, privacy, file) => {
     return async dispatch => {
         try {
 
@@ -89,7 +89,7 @@ export const editGroup = (cookies, groupId, groupName, privacy) => {
                 method: 'POST',
                 url: requestURL,
                 data: {
-                    groupId: groupId, groupName: groupName, privacy: privacy
+                    groupId: groupId, groupName: groupName, privacy: privacy, file: file
                 },
                 headers: {
                     Authorization: 'Bearer ' + cookies,
@@ -103,7 +103,7 @@ export const editGroup = (cookies, groupId, groupName, privacy) => {
 
 
 
-            }).catch((error) => console.log(error.message));
+            }).catch((error) => console.log(error));
 
         } catch (error) {
 

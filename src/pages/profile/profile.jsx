@@ -19,6 +19,8 @@ import Dialog from '@mui/material/Dialog';
 import { RxAvatar } from 'react-icons/rx/';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useCookies } from 'react-cookie';
+import { fetchPost } from "../../redux/actions/postAction";
+import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
 
 
 function Profile() {
@@ -29,6 +31,13 @@ function Profile() {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     const status = useSelector(selectStatusUser);
+
+    const statusPost = useSelector(selectPostStatus);
+    const posts = useSelector(selectPost);
+
+    useEffect(() => {
+        dispatch(fetchPost(cookies));
+    }, [cookies, dispatch])
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);
     const [openUpdateAvatar, setOpenUpdateAvatar] = useState(false);
@@ -194,7 +203,13 @@ function Profile() {
                                                     <div className="profileRightBottom">
                                                         <div className='profileFeed'>
                                                             <Share />
-                                                            <Feed />
+                                                            {
+                                                                statusPost === 'loading' ? <>LOADING</> :
+                                                                    statusPost === 'succeeded' ? <Feed post={posts} /> :
+                                                                        statusPost === 'failed' ? <>FAILED</> :
+                                                                            <></>
+                                                            }
+
                                                         </div>
                                                         <Rightbar profile userProfile={user} />
                                                     </div>
