@@ -174,7 +174,7 @@ function SideBarGroup() {
                                             <span>Xem trước</span>
                                         </div>
                                         <div className='groupPreviewGroup'>
-                                            <div class='groupCreatePreviewGroupContainer '>
+                                            <div className='groupCreatePreviewGroupContainer '>
                                                 <img className='groupCreatePreviewGroup' src={default_cover} alt="" />
                                             </div>
                                             <div className='groupCreatePreviewGroupNameContainer preViewContainerGroup'>

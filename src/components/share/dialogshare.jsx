@@ -21,7 +21,7 @@ import { useCookies } from 'react-cookie';
 import { addNewPost } from '../../redux/actions/postAction'
 import { selectAddPostStatus } from '../../redux/selectors/postSelector';
 
-function DialogShare() {
+function DialogShare({ group }) {
     const cookies = useCookies('_tk');
     const user = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = useState(null);
@@ -68,14 +68,14 @@ function DialogShare() {
     }
 
     console.log(inputContentPost === '' && !files.length === 0, !inputContentPost === '', !files.length === 0)
-
+    console.log(group);
     const submitPost = () => {
         if (inputContentPost === '' && files == null) {
             console.log("======= NO FILE =======")
             return;
         }
         setCheckClick(false);
-        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy));
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, group));
         console.log(inputContentPost);
         setInputContentPost('');
         setFiles([]);

@@ -10,12 +10,12 @@ import DialogShare from './dialogshare';
 
 
 
-function Share() {
+function Share({ group }) {
     const user = JSON.parse(localStorage.getItem('user'));
     const [open, setOpen] = useState(false);
     const statusAdd = useSelector(selectAddPostStatus);
     const statusFetch = useSelector(selectPostStatus);
-
+    console.log(group)
 
     useEffect(() => {
 
@@ -82,7 +82,7 @@ function Share() {
                     fullWidth
                     maxWidth="sm"
                 >
-                    <DialogShare />
+                    <DialogShare group={group} />
                 </Dialog>
             </div>
         </div >

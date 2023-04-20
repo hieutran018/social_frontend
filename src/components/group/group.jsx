@@ -1,8 +1,6 @@
 import './group.css';
 import Dialog from '@mui/material/Dialog';
 import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -22,7 +20,7 @@ import Member from './members/member';
 
 
 function GroupPage({ groupId }) {
-
+    console.log(groupId);
     const groupTab = useParams().groupTab;
 
     const navigate = useNavigate();
@@ -74,7 +72,7 @@ function GroupPage({ groupId }) {
         const avatar = event.target.files[0];
         avatar.preview = URL.createObjectURL(avatar);
         setFile(event.target.files[0])
-        // console.log(avatar)
+
     }
     useEffect(() => {
         function fetchGroupByIdGroup() {
@@ -90,6 +88,8 @@ function GroupPage({ groupId }) {
             }).then((response) => {
                 console.log("CHECK ADMIN", response.data)
                 setGroup(response.data)
+                setGroupName(response.data.group_name);
+                setPrivacy(response.data.privacy)
                 setUpdate(false);
             }).catch((error) => {
                 console.log(error);
@@ -141,6 +141,7 @@ function GroupPage({ groupId }) {
 
     function editInformationGroup() {
         dispatch(editGroup(cookies, groupId, groupName, privacy, file));
+        setOpenSetting(false);
         setUpdate(true);
         setFile();
 
@@ -192,7 +193,7 @@ function GroupPage({ groupId }) {
                     </div> :
                     <div className='groupPageMainContainer'>
                         <div className='groupPageFeeds'>
-                            <Share />
+                            <Share group={groupId} />
                             <Feed post={posts} isGroup={true} />
                         </div>
                         <div className='groupPageRightContainer'>
@@ -269,7 +270,7 @@ function GroupPage({ groupId }) {
                                 <div className='dialogSettingGroupNameContainer'>
                                     <span className='dialogSettingGroupLabel'>Tên và mô tả  </span>
                                     <div>
-                                        <input onChange={handleChangeGroupName} className='dialogSettingInputGroupName' type="text" />
+                                        <input value={groupName} onChange={handleChangeGroupName} className='dialogSettingInputGroupName' type="text" />
                                     </div>
                                 </div>
                                 <div className='dialogSettingGroupNameContainer'>

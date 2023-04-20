@@ -38,6 +38,7 @@ text-decoration: none;
     border-radius: 30px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .searchIcon {
@@ -47,7 +48,11 @@ text-decoration: none;
 
 .searchInput {
     border: none;
-    width: 70%;
+    width: 92%;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 20px;
+    font-size: 20px;
 }
 
 .searchInput:focus {
@@ -105,4 +110,90 @@ text-decoration: none;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
+}
+.dataResult{
+    margin-top: 23.3rem;
+    width: 100%;
+    height: 330px;
+    background-color: white;
+    position: absolute;
+    border-radius: 10px;
+    border: 0.1px solid #D8DADF;
+    display: flex;
+    justify-content: center;
+}
+.dataResultContainer{
+    width: 96%;
+    margin-top: 1rem;
+    
+   
+}
+
+/* CARD DATA START */
+.dataCard{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    
+}
+.dataCard:hover{
+    background-color: #D8DADF;
+}
+.dataCardLeft{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+.dataCardRight{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2rem;
+}
+.dataAvatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+    
+}
+.dataName{
+    font-size: 20px;
+    font-weight: 500px;
+   
+}
+.dataButtonNextSearch{
+    margin-right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color:#e7e8eb;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dataIconSearchFor{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    background-color: #e7e8eb;
+    border-radius: 60px;
+    width: 50px;
+    height: 50px;
+}
+.dataCardSearchFor{
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    height: 60px;
+}
+.dataCardSearchFor:hover{
+    background-color: #D8DADF;
+}
+.dataNameSearchFor{
+    color: #1877f2;
+    font-size: 20px;
+    font-weight: 500px;
 }

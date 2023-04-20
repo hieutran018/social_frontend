@@ -1,11 +1,56 @@
-import { Search, Chat, Notifications } from '@mui/icons-material';
+import { Chat, Notifications } from '@mui/icons-material';
+import { BsSearch } from 'react-icons/bs';
+import { GrLinkNext } from 'react-icons/gr';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NavItem from '../navitem/navitem';
 import DropdownMenu from '../dropdownmenu/dropdownmenu';
 import './topbar.css';
+import { useRef, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Topbar() {
+    const cookies = useCookies('_tk')[0]._tk;
+
+    const [data, setData] = useState([]);
+    const typingTimeOutRef = useRef(null);
+
+
+    const handleChangeSearch = (event) => {
+        if (!event.target.value) {
+            setData([])
+        } else {
+            //? ĐẶT LẠI THỜI GIAN ĐỢI CHO VIỆC GÕ
+            if (typingTimeOutRef.current) {
+                clearTimeout(typingTimeOutRef.current);
+            }
+            typingTimeOutRef.current = setTimeout(() => {
+
+                searchData(event.target.value);
+            }, 300)
+        }
+
+    }
+    function searchData(input) {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/' + input;
+
+        axios({
+            method: "GET",
+            url: requestURL,
+            headers: {
+                Authorization: "Bearer " + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then((response) => {
+            setData(response.data);
+            console.log(response.data);
+        }).catch((error) => console.log(error));
+    }
+
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -15,13 +60,52 @@ function Topbar() {
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-                    <Search className="searchIcon" />
+
+                    <BsSearch size={25} className="searchIcon" />
                     <input
+                        onChange={handleChangeSearch}
                         placeholder="Tìm kiếm bạn bè..."
                         className="searchInput"
                     />
+                    {
+                        data.length === 0 ?
+                            <></> :
+                            <div className='dataResult'>
+                                <div className='dataResultContainer'>
+                                    {
+                                        data.map((item) => (
+                                            <div key={item.id} className='dataCard'>
+                                                <div className='dataCardLeft'>
+                                                    <img className='dataAvatar' src={item.avatar} alt="" />
+                                                </div>
+                                                <div className='dataCardRight'>
+                                                    <div className='dataName'>{item.username}</div>
+                                                    <Link to={'/' + item.id}>
+                                                        <div className='dataButtonNextSearch'>
+                                                            <GrLinkNext size={25} />
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                    <div className='dataCardSearchFor'>
+                                        <div className='dataIconSearchFor'>
+                                            <BsSearch size={25} className="searchIcon" />
+                                        </div>
+                                        <div className='dataCardRight'>
+                                            <div className='dataNameSearchFor'>Tìm kiếm kết quả cho </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    }
                 </div>
+
+
             </div>
+
             <div className="topbarRight">
 
                 <div className="topbarIcons">

@@ -89,7 +89,7 @@ export const fetchPost = (token) => {
     }
 }
 
-export const addNewPost = (token, contentPost, files, privacy) => {
+export const addNewPost = (token, contentPost, files, privacy, group) => {
     return async dispatch => {
         try {
             dispatch(addNewPostStarted());
@@ -98,14 +98,14 @@ export const addNewPost = (token, contentPost, files, privacy) => {
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: requestURL,
-                data: { postContent: contentPost, privacy: privacy, files: files },
+                data: { postContent: contentPost, privacy: privacy, files: files, groupId: group },
                 headers: {
                     Authorization: 'Bearer ' + token,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                // console.log('redux', JSON.stringify(response.data), 'RES', response.data);
+                console.log("POST POST GROUP", response.data);
                 dispatch(addNewPostSucceeded(response.data));
                 // dispatch(fetchPost())
 
