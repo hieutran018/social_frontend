@@ -14,13 +14,13 @@ import axios from 'axios';
 function Topbar() {
     const cookies = useCookies('_tk')[0]._tk;
     const [inputSearch, setInputSearch] = useState('');
-    const [data, setData] = useState([]);
+    const [dataUsers, setDataUsers] = useState([]);
     const typingTimeOutRef = useRef(null);
 
 
     const handleChangeSearch = (event) => {
         if (!event.target.value) {
-            setData([])
+            setDataUsers([])
         } else {
             setInputSearch(event.target.value);
             //? ĐẶT LẠI THỜI GIAN ĐỢI CHO VIỆC GÕ
@@ -46,8 +46,8 @@ function Topbar() {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            setData(response.data);
-            console.log(response.data);
+            setDataUsers(response.data.users);
+            console.log(response.data.users);
         }).catch((error) => console.log(error));
     }
 
@@ -69,12 +69,12 @@ function Topbar() {
                         className="searchInput"
                     />
                     {
-                        data.length === 0 ?
+                        dataUsers.length === 0 ?
                             <></> :
                             <div className='dataResult'>
                                 <div className='dataResultContainer'>
                                     {
-                                        data.map((item) => (
+                                        dataUsers.map((item) => (
                                             <div key={item.id} className='dataCard'>
                                                 <div className='dataCardLeft'>
                                                     <img className='dataAvatar' src={item.avatar} alt="" />
@@ -90,18 +90,20 @@ function Topbar() {
                                             </div>
                                         ))
                                     }
-                                    <div className='dataCardSearchFor'>
-                                        <div className='dataIconSearchFor'>
-                                            <BsSearch size={25} className="searchIcon" />
-                                        </div>
-                                        <Link style={{ textDecoration: "none", }} to={"/search/" + inputSearch}>
+                                    <Link className='dataCardLink' style={{ textDecoration: "none" }} to={"/search/" + inputSearch}>
+                                        <div className='dataCardSearchFor'>
+                                            <div className='dataIconSearchFor'>
+                                                <BsSearch size={25} className="searchIcon" />
+                                            </div>
+
                                             <div className='dataCardRight'>
                                                 <div className='dataNameSearchFor'>Tìm kiếm kết quả cho "{inputSearch}"</div>
 
                                             </div>
-                                        </Link>
 
-                                    </div>
+
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                     }

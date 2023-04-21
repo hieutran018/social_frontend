@@ -72,13 +72,11 @@ export const updateCoverUserFail = error => ({
 export const fetchUser = (userId) => {
     return async dispatch => {
 
-        const requestURL = "http://127.0.0.1:8000/api/profile-user";
+        const requestURL = "http://127.0.0.1:8000/api/profile-user/userId=" + userId;
         dispatch(fetchUserStart());
         axios({
-            method: 'POST',
+            method: 'GET',
             url: requestURL,
-            data: { userId: userId }
-
         }).then((response) => {
             dispatch(fetchUserSuccessed(response.data))
         }).catch((error) => dispatch(fetchUserFail(error.message)));

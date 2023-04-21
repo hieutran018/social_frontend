@@ -182,7 +182,7 @@ function GroupPage({ groupId }) {
             <div className='groupPageTabMenu'>
                 <div onClick={() => handleClickTab('')} className={groupTab === undefined ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>Bài viết</span></div>
                 <div onClick={() => handleClickTab('member')} className={groupTab === 'member' ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>Mọi người</span></div>
-                <div onClick={() => handleClickTab('mediafiles')} className={groupTab === 'mediafiles' ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>File phương tiện</span></div>
+                <div onClick={() => handleClickTab('mediafiles')} className={groupTab === 'mediafiles' ? 'groupPageMenuTab avtiveTab' : 'groupPageMenuTab'}><span className='groupPageMenuTabText'>Files</span></div>
             </div>
             {
                 groupTab === 'member' ?
