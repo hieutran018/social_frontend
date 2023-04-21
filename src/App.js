@@ -13,6 +13,7 @@ import Group from './pages/groups/group';
 import Loading from './components/loading/Loading';
 // import ProtectedRoutes from './components/protectedroute/protectedroute';
 import FriendRequest from './pages/friendrequest/friendrequest';
+import Search from './pages/search/search';
 
 
 
@@ -43,8 +44,8 @@ function App() {
       <Route path='/groups/:pages' element={<Group />} />
       <Route path='/groups/:pages/:groupId' element={<Group />} />
       <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} />
+      <Route path='/search/:result' element={<Search />} />
       <Route path="/loading" element={<Loading />} />
-
     </Routes>
   );
 }

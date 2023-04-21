@@ -13,7 +13,7 @@ import axios from 'axios';
 
 function Topbar() {
     const cookies = useCookies('_tk')[0]._tk;
-
+    const [inputSearch, setInputSearch] = useState('');
     const [data, setData] = useState([]);
     const typingTimeOutRef = useRef(null);
 
@@ -22,6 +22,7 @@ function Topbar() {
         if (!event.target.value) {
             setData([])
         } else {
+            setInputSearch(event.target.value);
             //? ĐẶT LẠI THỜI GIAN ĐỢI CHO VIỆC GÕ
             if (typingTimeOutRef.current) {
                 clearTimeout(typingTimeOutRef.current);
@@ -93,10 +94,13 @@ function Topbar() {
                                         <div className='dataIconSearchFor'>
                                             <BsSearch size={25} className="searchIcon" />
                                         </div>
-                                        <div className='dataCardRight'>
-                                            <div className='dataNameSearchFor'>Tìm kiếm kết quả cho </div>
+                                        <Link style={{ textDecoration: "none", }} to={"/search/" + inputSearch}>
+                                            <div className='dataCardRight'>
+                                                <div className='dataNameSearchFor'>Tìm kiếm kết quả cho "{inputSearch}"</div>
 
-                                        </div>
+                                            </div>
+                                        </Link>
+
                                     </div>
                                 </div>
                             </div>

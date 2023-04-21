@@ -8,11 +8,13 @@ import {
     Cake,
     ReduceCapacity,
 } from '@mui/icons-material';
+
 import './sidebar.css';
 import SidebarHomePage from './home/home';
 import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
 import FriendRequest from './friendrequest/friendrequest';
 import SideBarGroup from './group/sidebargroup';
+import SidebarSearch from './search/sidebarsearch'
 
 function Sidebar({ page }) {
 
@@ -28,8 +30,9 @@ function Sidebar({ page }) {
                     </li>
                     {/* <li className="sidebarListItem">
                         <Chat className="sidebarIcon" />
-                        <span className="sidebarListItemText">Tin nhắn</span>
-                    </li>
+                        <span className="sidebarListItemText">Mọi người</span>
+                    </li> */}
+                    {/*
                     <li className="sidebarListItem">
                         <PlayCircleFilledOutlined className="sidebarIcon" />
                         <span className="sidebarListItemText">Thước phim</span>
@@ -100,7 +103,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

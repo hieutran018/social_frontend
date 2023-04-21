@@ -1,0 +1,122 @@
+
+.searchResult{
+    flex: 5.5;
+    display: flex;
+    justify-content: center;
+    
+}
+.searchResultWrapper{
+    width: 45rem;
+    
+    
+}
+.searchResultData{
+    width: 45rem;
+     display: flex;
+}
+
+.searchResultUser{
+    width: 50rem;
+}
+.searchResultTitleBox{
+    font-size: 25px;
+    font-weight: 600;
+    margin: 1rem;
+}
+
+.searchResultUserCard{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    border-radius: 5px;
+    
+    
+}
+.searchResultCard:hover{
+    background-color: #D8DADF;
+}
+.searchResultCardLeft{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+.searchResultCardRight{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2rem;
+}
+.searchResultAvatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    object-fit: cover;
+    
+}
+.searchResultName{
+    font-size: 25px;
+    font-weight: 500px;
+   
+}
+.searchResultButtonAction{
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: #DBE7F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #177FEA;
+}
+.searchReusltLoadMore{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+   
+    
+}
+.searchResultButtonLoadMore{
+    width: 96%;
+    height: 50px;
+    background-color: #D8DADF;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.searchResultButtonLoadMore:hover{
+    background-color: #c1c2c5;
+}
+.searchResultData{
+    
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);  
+}
+.margin{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.searchResultAvatarGroup{
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.searchResultGroupName{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.searchResultButtonAction:hover{
+    background-color: #cee0f1;
+}
+
+
+
