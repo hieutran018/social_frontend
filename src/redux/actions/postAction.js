@@ -10,8 +10,9 @@ import {
     COUNT_COMMENT_POST
 } from '../constants/postConstant'
 
-export const fetchPostStarted = () => ({
-    type: FETCH_POST_STARTED
+export const fetchPostStarted = posts => ({
+    type: FETCH_POST_STARTED,
+    posts
 })
 
 export const fetchPostSucceeded = posts => ({
@@ -45,7 +46,7 @@ export const countComment = comments => ({
 
 export const fetchPostGroup = (cookies) => {
     return async dispatch => {
-        dispatch(fetchPostStarted())
+        dispatch(fetchPostStarted([]))
 
         try {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group'
@@ -58,7 +59,7 @@ export const fetchPostGroup = (cookies) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                // console.log('redux', JSON.stringify(response.data), 'RES', response.data);
+                console.log('FEEDS GROUP', response.data);
                 dispatch(fetchPostSucceeded(response.data))
                 // dispatch(fetchPost())
 
@@ -72,7 +73,7 @@ export const fetchPostGroup = (cookies) => {
 
 export const fetchPost = (token) => {
     return async dispatch => {
-        dispatch(fetchPostStarted())
+        dispatch(fetchPostStarted([]))
 
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
@@ -139,6 +140,29 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
             dispatch(fetchPostFailed(error))
         }
     };
+}
+
+export const fetchPostGroupByIdGroup = (cookies, groupId) => {
+    return async dispatch => {
+        try {
+            dispatch(fetchPostStarted([]));
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId;
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                dispatch(fetchPostSucceeded(response.data));
+                console.log("POST GROUP " + groupId, response.data)
+            }).catch((error) => console.log(error.message));
+        } catch (error) {
+            dispatch(fetchPostFailed(error))
+        }
+    }
 }
 
 export const commentPost = (cookies, postId, commentContent) => {

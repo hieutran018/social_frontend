@@ -1,4 +1,5 @@
 import './searchresult.css';
+import Post from '../post/Post';
 import { BsDot } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
@@ -10,6 +11,7 @@ function SearchResult() {
     const cookies = useCookies('_tk')[0]._tk;
     const [dataUsers, setDataUsers] = useState([]);
     const [dataGroups, setDataGroups] = useState([]);
+    const [dataPosts, setDataPosts] = useState([]);
     useEffect(() => {
         function searchData() {
             const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/' + result;
@@ -25,6 +27,7 @@ function SearchResult() {
             }).then((response) => {
                 setDataUsers(response.data.users);
                 setDataGroups(response.data.groups);
+                setDataPosts(response.data.posts);
                 console.log(response.data.users);
                 console.log(response.data.groups);
             }).catch((error) => console.log(error));
@@ -93,6 +96,12 @@ function SearchResult() {
                                 </div>
                             </div>
                         </div>
+                }
+                {
+                    dataPosts.length === 0 ? <></> :
+                        dataPosts.map((post) => (
+                            <Post key={post.id} post={post} />
+                        ))
                 }
 
             </div>

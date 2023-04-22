@@ -43,7 +43,7 @@ export const fetchGroup = (cookies) => {
                 }
 
             }).then((response) => {
-                console.log("FETCH GROUP?", response.data[0].groups)
+
                 dispatch(fetchGroupSucceeded(response.data[0].groups));
 
             }).catch((error) => dispatch(fetchGroupFailed(error.message)));
@@ -68,7 +68,7 @@ export const createNewGroup = (cookies, groupName, privacy) => {
                 }
 
             }).then((response) => {
-                console.log("CREATE GROUP?", response.data)
+
                 dispatch(createGroup(response.data));
 
 
@@ -98,7 +98,7 @@ export const editGroup = (cookies, groupId, groupName, privacy, file) => {
                 }
 
             }).then((response) => {
-                console.log(response.data)
+
                 dispatch(updateGroup(response.data))
 
 

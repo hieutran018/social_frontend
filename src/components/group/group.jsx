@@ -14,23 +14,27 @@ import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editGroup } from '../../redux/actions/groupAction';
+import { fetchPostGroupByIdGroup } from '../../redux/actions/postAction';
 import Member from './members/member';
+import { selectPost, selectPostStatus } from '../../redux/selectors/postSelector';
+import Variants from '../feed/postskeleton';
 
 
 function GroupPage({ groupId }) {
-    console.log(groupId);
     const groupTab = useParams().groupTab;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const posts = useSelector(selectPost);
+    const statusPosts = useSelector(selectPostStatus);
     const cookies = useCookies('_tk')[0]._tk;
     const [update, setUpdate] = useState(false);
     const [open, setOpen] = useState(false);
     const [openSetting, setOpenSetting] = useState(false);
     const [friends, setFriends] = useState([]);
-    const [posts, setPosts] = useState([]);
+
     const [privacy, setPrivacy] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -75,6 +79,7 @@ function GroupPage({ groupId }) {
 
     }
     useEffect(() => {
+        console.log("CHECK GROUP ID CURRENT", groupId)
         function fetchGroupByIdGroup() {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
             axios({
@@ -95,27 +100,13 @@ function GroupPage({ groupId }) {
                 console.log(error);
             })
         }
-        function fetchPostByGroupId() {
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId;
-            axios({
-                method: 'GET',
-                url: requestURL,
-                headers: {
-                    Authorization: 'Bearer ' + cookies,
-                    "Content-Type": "multipart/form-data",
-                    'Access-Control-Allow-Origin': '*',
-                }
-            }).then((response) => {
-                setPosts(response.data);
-            }).catch((error) => console.log(error.message));
-        }
         fetchGroupByIdGroup()
-        fetchPostByGroupId()
+        dispatch(fetchPostGroupByIdGroup(cookies, groupId))
         return () => {
             file && URL.revokeObjectURL(file.preview)
         }
 
-    }, [groupId, cookies, update, file])
+    }, [groupId, cookies, update, file, dispatch])
 
     function fetchListFriend() {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
@@ -194,7 +185,20 @@ function GroupPage({ groupId }) {
                     <div className='groupPageMainContainer'>
                         <div className='groupPageFeeds'>
                             <Share group={groupId} />
-                            <Feed post={posts} isGroup={true} />
+                            {
+                                statusPosts === 'loading' ?
+                                    [0, 1].map((item) => (
+                                        <Variants key={item} />
+                                    )) :
+                                    statusPosts === 'succeeded' ? <Feed post={posts} isGroup={true} /> :
+                                        statusPosts === 'failed' ? [0, 1].map((item) => (
+                                            <Variants key={item} />
+                                        )) :
+                                            [0, 1].map((item) => (
+                                                <Variants key={item} />
+                                            ))
+                            }
+
                         </div>
                         <div className='groupPageRightContainer'>
                             <div className='groupPageIntroduceGroupContainer'>

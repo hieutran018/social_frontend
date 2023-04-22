@@ -15,10 +15,13 @@ function Topbar() {
     const cookies = useCookies('_tk')[0]._tk;
     const [inputSearch, setInputSearch] = useState('');
     const [dataUsers, setDataUsers] = useState([]);
+    const [searchTemp, setSearchTemp] = useState('');
     const typingTimeOutRef = useRef(null);
 
 
+
     const handleChangeSearch = (event) => {
+        setSearchTemp(event.target.value);
         if (!event.target.value) {
             setDataUsers([])
         } else {
@@ -28,8 +31,8 @@ function Topbar() {
                 clearTimeout(typingTimeOutRef.current);
             }
             typingTimeOutRef.current = setTimeout(() => {
-
                 searchData(event.target.value);
+
             }, 300)
         }
 
@@ -50,6 +53,9 @@ function Topbar() {
             console.log(response.data.users);
         }).catch((error) => console.log(error));
     }
+    const handleCloseData = () => {
+        setDataUsers([]);
+    }
 
 
     return (
@@ -64,6 +70,7 @@ function Topbar() {
 
                     <BsSearch size={25} className="searchIcon" />
                     <input
+                        value={searchTemp}
                         onChange={handleChangeSearch}
                         placeholder="Tìm kiếm bạn bè..."
                         className="searchInput"
@@ -81,7 +88,7 @@ function Topbar() {
                                                 </div>
                                                 <div className='dataCardRight'>
                                                     <div className='dataName'>{item.username}</div>
-                                                    <Link to={'/' + item.id}>
+                                                    <Link onClick={handleCloseData} to={'/' + item.id}>
                                                         <div className='dataButtonNextSearch'>
                                                             <GrLinkNext size={25} />
                                                         </div>
@@ -90,7 +97,7 @@ function Topbar() {
                                             </div>
                                         ))
                                     }
-                                    <Link className='dataCardLink' style={{ textDecoration: "none" }} to={"/search/" + inputSearch}>
+                                    <Link className='dataCardLink' onClick={handleCloseData} style={{ textDecoration: "none" }} to={"/search/" + inputSearch}>
                                         <div className='dataCardSearchFor'>
                                             <div className='dataIconSearchFor'>
                                                 <BsSearch size={25} className="searchIcon" />

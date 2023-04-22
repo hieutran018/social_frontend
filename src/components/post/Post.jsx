@@ -52,14 +52,25 @@ function Post({ post }) {
 
     const handleLike = () => {
         setIsLike(!isLike)
-        const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post/' + post.id;
+        const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post';
 
-        axios.get(requestURL, {
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: {
+                postId: post.id,
+            },
             headers: {
-                Authorization: 'Bearer ' + cookies[0]._tk
+                Authorization: "Bearer " + cookies[0]._tk,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+
             }
-        })
-        setLike(!isLike ? like + 1 : like - 1)
+        }).then((response) => {
+            console.log(response.data);
+            setLike(!isLike ? like + 1 : like - 1)
+        }).catch((error) => console.log(error));
+
     }
 
     const handleClickOpenopenShareOptionToFeed = () => {
@@ -120,8 +131,6 @@ function Post({ post }) {
             setItem(item - 1)
         }
     }
-
-    console.log(post)
     return (
         <div className="post">
             <div className="postWrapper">
