@@ -129,7 +129,7 @@ function DialogShare({ group }) {
                                     <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={user.avatar} alt="logo" /></div>
 
                                     <div className="details">
-                                        <p className='shareUserName'>{user.first_name + " " + user.last_name}</p>
+                                        <p className='shareUserName'>{user.displayName}</p>
                                         <div className='privacy' onClick={handleClick}>
                                             {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                             <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -245,7 +245,7 @@ function DialogShare({ group }) {
                                             listFr.map((fr) => (
                                                 <ListItem>
                                                     <img className='dialogshareTagUserAvatar' src={fr.avatar} alt="" />
-                                                    <ListItemText primary={fr.username} secondary="" />
+                                                    <ListItemText primary={fr.displayName} secondary="" />
                                                 </ListItem>
                                             ))
                                         }

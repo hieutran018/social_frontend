@@ -95,7 +95,7 @@ function RightbarProfile({ user }) {
                                                             className="rightbarFollowingImg"
                                                         />
                                                     </div>
-                                                    <span className="rightbarFollowingName">{item.username}</span>
+                                                    <span className="rightbarFollowingName">{item.displayName}</span>
                                                 </div>
                                             </Grid>
 

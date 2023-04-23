@@ -15,7 +15,6 @@ function Share({ group }) {
     const [open, setOpen] = useState(false);
     const statusAdd = useSelector(selectAddPostStatus);
     const statusFetch = useSelector(selectPostStatus);
-    console.log(group)
 
     useEffect(() => {
 

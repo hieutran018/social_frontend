@@ -155,7 +155,7 @@ function Post({ post }) {
                                     <div className="postPrivacy">
                                         <span className="postMemberGroup">
                                             <a className="postLinkProfileMemberGroup" href={"/" + post.user_id}>
-                                                {post.username}
+                                                {post.displayName}
                                             </a>
                                         </span>
                                         <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
@@ -174,14 +174,14 @@ function Post({ post }) {
                                     <img
                                         className="postProfileImg"
                                         src={post.avatarUser}
-                                        alt={"Avatar user " + post.username}
+                                        alt={"Avatar user " + post.displayName}
                                     />
                                 </a>
 
                                 <div>
                                     <span className="postUsername">
                                         <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                            {post.username}
+                                            {post.displayName}
                                         </a>
                                     </span>
                                     <div className="postPrivacy">
@@ -338,14 +338,14 @@ function Post({ post }) {
                                                 <img
                                                     className="postProfileImg"
                                                     src={post.parent_post.avatarUser}
-                                                    alt={"Avatar user " + post.parent_post.username}
+                                                    alt={"Avatar user " + post.parent_post.displayName}
                                                 />
                                             </a>
 
                                             <div>
                                                 <span className="postUsername">
                                                     <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
-                                                        {post.parent_post.username}
+                                                        {post.parent_post.displayName}
                                                     </a>
                                                 </span>
                                                 <div className="postPrivacy">

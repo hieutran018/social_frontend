@@ -29,7 +29,7 @@ function Comment({ comment }) {
                     </div>
                     <div className='commentMain'>
                         <div onClick={() => viewProfileUser(comment.userId)} className="commentUserNameContainer">
-                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + comment.userId}>{comment.username}</a></span>
+                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + comment.userId}>{comment.displayName}</a></span>
                         </div>
                         <div className="commentContent">
                             <span>{comment.comment_content}</span>
@@ -53,7 +53,7 @@ function Comment({ comment }) {
                                     </div>
                                     <div className='commentMain'>
                                         <div onClick={() => viewProfileUser(reply.userId)} className="commentUserNameContainer">
-                                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + reply.userId}>{reply.username}</a></span>
+                                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + reply.userId}>{reply.displayName}</a></span>
                                         </div>
                                         <div className="commentContent">
                                             <span>{reply.comment_content}</span>

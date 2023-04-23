@@ -11,7 +11,7 @@ import './friendsuggestion.css';
 
 function SidebarFriendSuggestion() {
     const [frs, setFrs] = useState([]);
-    const cookies = useCookies('_tk');
+    const cookies = useCookies('_tk')[0]._tk;
     useEffect(() => {
         const fetchFriendSuggestion = () => {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friends-suggestion';
@@ -19,19 +19,19 @@ function SidebarFriendSuggestion() {
                 method: 'GET', //you can set what request you want to be
                 url: requestURL,
                 headers: {
-                    Authorization: 'Bearer ' + cookies[0]._tk,
+                    Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
                 console.log("RES =========", response.data);
                 setFrs(response.data);
-            }).catch((error) => console.log(error.message));
+            }).catch((error) => console.log(error));
 
         }
         fetchFriendSuggestion()
 
-    }, [])
+    }, [cookies])
 
     const hanldeClickSendAddFriend = (userId) => {
         const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
@@ -41,14 +41,14 @@ function SidebarFriendSuggestion() {
             url: requestURL,
             data: { userIdAccept: userId },
             headers: {
-                Authorization: 'Bearer ' + cookies[0]._tk,
+                Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
 
         }).then((response) => {
             console.log(response.data);
-        }).catch((error) => console.log(error.message));
+        }).catch((error) => console.log(error));
     }
 
     return (
@@ -66,7 +66,7 @@ function SidebarFriendSuggestion() {
                         </Link>
                         <div className='profileInfo'>
                             <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >
-                                <div className="nameProfile">{u.username}</div>
+                                <div className="nameProfile">{u.displayName}</div>
                             </Link>
                             <div className="buttonAction">
                                 <button onClick={() => hanldeClickSendAddFriend(u.id)} className='buttonSuggesstionAccept'>Thêm bạn bè</button>

@@ -47,7 +47,7 @@ function Video({ video }) {
                             />
                             <div className='videoPostUser'>
                                 <span className="videoUsername">
-                                    {video.userName}
+                                    {video.displayName}
                                 </span>
                                 <div className="videoDate">{video.created_at}</div>
                             </div>

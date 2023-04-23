@@ -53,7 +53,7 @@ function FriendCard({ friend }) {
     return (
         <ListItem>
             <img className='dialogGroupInviteFriendAvatar' src={friend.avatar} alt="" />
-            <ListItemText className='dialogGroupInviteFriendName' primary={friend.username} secondary="" />
+            <ListItemText className='dialogGroupInviteFriendName' primary={friend.displayName} secondary="" />
             {
                 isInvite ?
                     <div onClick={() => cancelInviteJoinGroup(friend.friendId)} className='dialogcanelInvieGroupButton '>

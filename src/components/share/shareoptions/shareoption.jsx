@@ -87,7 +87,7 @@ function ShareOption({ post }) {
                             <div className="content">
                                 <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={userCurrent.avatar} alt="logo" /></div>
                                 <div className="details">
-                                    <p className='shareUserName'>{userCurrent.first_name + " " + userCurrent.last_name}</p>
+                                    <p className='shareUserName'>{userCurrent.displayName}</p>
                                     <div className='privacy' onClick={handleClick}>
                                         {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                         <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -156,14 +156,14 @@ function ShareOption({ post }) {
                                                 <img
                                                     className="postProfileImg"
                                                     src={post.avatarUser}
-                                                    alt={"Avatar user " + post.username}
+                                                    alt={"Avatar user " + post.displayName}
                                                 />
                                             </a>
 
                                             <div>
                                                 <span className="postUsername">
                                                     <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                                        {post.username}
+                                                        {post.displayName}
                                                     </a>
                                                 </span>
                                                 <div className="postPrivacy">

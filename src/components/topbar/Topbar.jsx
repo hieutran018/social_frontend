@@ -87,7 +87,7 @@ function Topbar() {
                                                     <img className='dataAvatar' src={item.avatar} alt="" />
                                                 </div>
                                                 <div className='dataCardRight'>
-                                                    <div className='dataName'>{item.username}</div>
+                                                    <div className='dataName'>{item.displayName}</div>
                                                     <Link onClick={handleCloseData} to={'/' + item.id}>
                                                         <div className='dataButtonNextSearch'>
                                                             <GrLinkNext size={25} />

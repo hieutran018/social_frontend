@@ -1,7 +1,9 @@
 import {
     FETCH_POST_STARTED,
     FETCH_POST_SUCCEEDED,
-    FETCH_POST_FAILED, ADD_POST, ADD_POST_STARTED, ADD_POST_SUCCEEDED, ADD_POST_FAILED, COUNT_COMMENT_POST
+    FETCH_POST_FAILED, ADD_POST, ADD_POST_STARTED, ADD_POST_SUCCEEDED, ADD_POST_FAILED,
+    LOAD_MORE_POST,
+    COUNT_COMMENT_POST
 } from '../constants/postConstant'
 
 const initialState = []
@@ -12,14 +14,15 @@ export default function postReducer(state = initialState, action) {
             return {
                 ...state,
                 posts: action.posts,
-                status: 'loading'
+                status: 'loading',
             }
         }
         case FETCH_POST_SUCCEEDED: {
             return {
                 ...state,
                 status: 'succeeded',
-                posts: action.posts
+                page: action.page,
+                posts: action.posts,
             }
         }
         case FETCH_POST_FAILED: {
@@ -50,6 +53,12 @@ export default function postReducer(state = initialState, action) {
                 statusAdd: 'failed',
                 posts: state.posts,
                 error: action.error
+            }
+        }
+        case LOAD_MORE_POST: {
+            return {
+                ...state,
+                posts: [...state.posts, ...action.posts]
             }
         }
         case COUNT_COMMENT_POST: {

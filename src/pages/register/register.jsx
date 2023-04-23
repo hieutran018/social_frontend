@@ -5,8 +5,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import './register.css';
 
 function Register() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [displayName, setdisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,11 +24,8 @@ function Register() {
         if (isEmpty(email)) {
             msg.email = 'Email không được bỏ trống!'
         }
-        if (isEmpty(firstName)) {
-            msg.firstName = 'Họ tên không được bỏ trống!'
-        }
-        if (isEmpty(lastName)) {
-            msg.lastName = 'Tên không được bỏ trống!'
+        if (isEmpty(displayName)) {
+            msg.displayName = 'Họ tên không được bỏ trống!'
         }
         if (isEmpty(password)) {
             msg.password = 'Mật khẩu không được bỏ trống!'
@@ -59,8 +55,7 @@ function Register() {
         } else {
             try {
                 axios.post('http://127.0.0.1:8000/api/auth/register', {
-                    firstName: firstName,
-                    lastName: lastName,
+                    displayName: displayName,
                     email: email,
                     password: password,
                     confirmPassword: confirmPassword,
@@ -102,10 +97,8 @@ function Register() {
             <div className="registerRight">
                 <div className="registerBox">
 
-                    <input placeholder="Họ" className="registerInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
-                    <span className='textError'>{validateMsg.firstName}</span>
-                    <input placeholder="Tên" className="registerInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
-                    <span className='textError'>{validateMsg.lastName}</span>
+                    <input placeholder="Tên hiển thị" className="registerInput" value={displayName} onChange={(event) => setdisplayName(event.target.value)} />
+                    <span className='textError'>{validateMsg.displayName}</span>
                     <input placeholder="Email" className="registerInput" value={email} onChange={(event) => { setEmail(event.target.value); setUseEmail('') }} />
                     <span className='textError'>{validateMsg.email}</span>
                     <span className='textError'>{useEmail && useEmail}</span>

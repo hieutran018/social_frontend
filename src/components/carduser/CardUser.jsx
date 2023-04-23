@@ -5,7 +5,7 @@ function CardUser({ user }) {
     return (
         <div className='cardUser'>
             <img className="cardUserProfileImg" src={user.avatar} alt="" />
-            <h1 className='textName'>{user.username}</h1>
+            <h1 className='textName'>{user.displayName}</h1>
 
             <div className='accept'>
                 <button className='buttonAccept'>Xác nhận</button>

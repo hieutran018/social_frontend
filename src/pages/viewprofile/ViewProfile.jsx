@@ -15,6 +15,7 @@ function ViewProfile() {
         axios.post('http://127.0.0.1:8000/api/profile-user', {
             userId: userId,
         }).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
+
         window.scrollTo(0, 0)
     }, [userId])
     return (
@@ -36,13 +37,13 @@ function ViewProfile() {
                             />
                         </div>
                         <div className="profileInfo">
-                            <h4 className="profileInfoName">{user.username}</h4>
+                            <h4 className="profileInfoName">{user.displayName}</h4>
                             <span className="profileInfoDesc">Doing!</span>
                         </div>
                     </div>
                     <div className="viewprofileRightBottom">
                         <div className='viewProfileFeed'>
-                            <Feed />
+                            {/* <Feed /> */}
                         </div>
                         <div className='viewProfileRightbar'>
                             <Rightbar profile userProfile={user} />

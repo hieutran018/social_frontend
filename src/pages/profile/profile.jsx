@@ -176,7 +176,7 @@ function Profile() {
                                         </Menu>
                                     </div>
                                     <div className="profileInfo">
-                                        <h4 className="profileInfoName">{user.username}</h4>
+                                        <h4 className="profileInfoName">{user.displayName}</h4>
                                         <span className="profileInfoDesc">Hi</span>
                                     </div>
 

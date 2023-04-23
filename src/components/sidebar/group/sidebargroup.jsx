@@ -126,7 +126,7 @@ function SideBarGroup() {
                                         </div>
                                         <div className='groupCreateInforAdmin'>
                                             <div className='groupCreateNameAdmin'>
-                                                {user.first_name + ' ' + user.last_name}
+                                                {user.displayName}
                                             </div>
                                             <div className='groupCreatePositionAdmin'>Quản trị viên</div>
                                         </div>

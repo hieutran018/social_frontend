@@ -9,18 +9,33 @@ import Share from "../../components/share/Share";
 import Variants from '../../components/feed/postskeleton';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../../redux/actions/postAction";
-import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
+import { selectPost, selectPostStatus, selectPage } from "../../redux/selectors/postSelector";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 function Home() {
     const cookies = useCookies('_tk')[0]._tk;
     const dispatch = useDispatch();
     const status = useSelector(selectPostStatus);
     const posts = useSelector(selectPost);
+    const page = useSelector(selectPage);
+    const [nextPage, setNextPage] = useState(1);
+    const handleScroll = async () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop !==
+            document.documentElement.offsetHeight
+
+        )
+            return;
+        setNextPage(nextPage === page ? page : nextPage + 1);
+    };
 
     useEffect(() => {
-        dispatch(fetchPost(cookies));
-    }, [cookies, dispatch])
+        dispatch(fetchPost(cookies, nextPage));
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [cookies, dispatch, nextPage,])
+    console.log("PAGE NUMBER", nextPage);
     return (
         <div>
             <div className="homeTopbar">

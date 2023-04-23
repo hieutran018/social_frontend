@@ -90,7 +90,7 @@ function FriendCard({ friend }) {
                                 <div className='friendCardRightContainer'>
                                     <Link className='friendCardUserName' to={"/" + friend.friendId}>
                                         <div>
-                                            <span className='friendCardUserName'>{friend.username}</span>
+                                            <span className='friendCardUserName'>{friend.displayName}</span>
                                         </div>
                                     </Link>
                                     <div>

@@ -57,7 +57,7 @@ we always go back to main conyainer and we use secondary as name for more contai
                 <div className="menu">
                     <Link to={"/" + user.id} className="dropDownItemProfile">
                         <DropdownItem leftIcon={<AccountCircleIcon />}>
-                            <span className="textFunction">{user.first_name + ' ' + user.last_name}</span>
+                            <span className="textFunction">{user.displayName}</span>
                         </DropdownItem>
                     </Link>
                     {/* if this item is clicked then only CSSTransition component will be triggered if active === settings as given in in prop boolean */}

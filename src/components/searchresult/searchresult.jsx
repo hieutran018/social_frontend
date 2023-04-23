@@ -51,7 +51,7 @@ function SearchResult() {
                                             <img className='searchResultAvatar' src={data.avatar} alt="" />
                                         </div>
                                         <div className='searchResultCardRight'>
-                                            <div className='searchResultName'>{data.username}</div>
+                                            <div className='searchResultName'>{data.displayName}</div>
                                             <div className='searchResultButtonAction'>Kết bạn</div>
                                         </div>
                                     </div></Link>

@@ -6,8 +6,7 @@ import {
     ADD_POST,
     ADD_POST_STARTED,
     ADD_POST_SUCCEEDED,
-    ADD_POST_FAILED,
-    COUNT_COMMENT_POST
+    ADD_POST_FAILED, LOAD_MORE_POST,
 } from '../constants/postConstant'
 
 export const fetchPostStarted = posts => ({
@@ -15,9 +14,10 @@ export const fetchPostStarted = posts => ({
     posts
 })
 
-export const fetchPostSucceeded = posts => ({
+export const fetchPostSucceeded = (posts, page) => ({
     type: FETCH_POST_SUCCEEDED,
-    posts
+    posts,
+    page
 })
 
 export const addNewPostFailed = error => ({
@@ -38,11 +38,11 @@ export const fetchPostFailed = error => ({
     type: FETCH_POST_FAILED,
     error
 })
-
-export const countComment = comments => ({
-    type: COUNT_COMMENT_POST,
-    comments
+export const loadMorePost = posts => ({
+    type: LOAD_MORE_POST,
+    posts
 })
+
 
 export const fetchPostGroup = (cookies) => {
     return async dispatch => {
@@ -71,19 +71,25 @@ export const fetchPostGroup = (cookies) => {
     }
 }
 
-export const fetchPost = (token) => {
+export const fetchPost = (token, page) => {
     return async dispatch => {
-        dispatch(fetchPostStarted([]))
-
+        if (page >= 0 && page < 2) {
+            dispatch(fetchPostStarted([]))
+        }
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
-            const res = await axios.get('http://127.0.0.1:8000/api/v1/fetch-post', {
+            const res = await axios.get('http://127.0.0.1:8000/api/v1/fetch-post?page=' + page, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             })
-            console.log(res.data);
-            dispatch(fetchPostSucceeded(res.data))
+
+
+            if (page >= 0 && page < 2) {
+                dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
+            } else {
+                dispatch(loadMorePost(res.data.data))
+            }
         } catch (err) {
             dispatch(fetchPostFailed(err))
         }

@@ -77,7 +77,7 @@ function PostDetail({ post }) {
                     <div className="postTitle">
                         <div style={{ width: "10%" }}></div>
                         <div>
-                            <span className="postTitleDialog">Bài viết của {post.username}</span>
+                            <span className="postTitleDialog">Bài viết của {post.displayName}</span>
                         </div>
                         <div className="dialoPostButtonClose" style={{ width: "10%" }}>
                             <IconButton className="buttonClose" aria-label="delete" size="large">
@@ -93,14 +93,14 @@ function PostDetail({ post }) {
                                 <img
                                     className="postProfileImg"
                                     src={post.avatarUser}
-                                    alt={"Avatar user " + post.username}
+                                    alt={"Avatar user " + post.displayName}
                                 />
                             </a>
 
                             <div>
                                 <span className="postDetailUsername">
                                     <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                        {post.username}
+                                        {post.displayName}
                                     </a>
                                 </span>
                                 <div className="postDetailPrivacy">
@@ -249,14 +249,14 @@ function PostDetail({ post }) {
                                                     <img
                                                         className="postProfileImg"
                                                         src={post.parent_post.avatarUser}
-                                                        alt={"Avatar user " + post.parent_post.username}
+                                                        alt={"Avatar user " + post.parent_post.displayName}
                                                     />
                                                 </a>
 
                                                 <div>
                                                     <span className="postUsername">
                                                         <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
-                                                            {post.parent_post.username}
+                                                            {post.parent_post.displayName}
                                                         </a>
                                                     </span>
                                                     <div className="postPrivacy">

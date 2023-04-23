@@ -48,7 +48,7 @@ function MemberCard({ member, auth }) {
                 <div className='memberCardRight'>
                     <div className="memberCardMemberInformation">
                         <div className='memberCardMemberName'>
-                            {member.username}
+                            {member.displayName}
                         </div>
                         {
                             member.isAdminGroup === 1 ? <div className='memberCardMemberPosition'>Quản trị viên</div> : <></>
