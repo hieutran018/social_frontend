@@ -18,7 +18,7 @@ function Home() {
     const status = useSelector(selectPostStatus);
     const posts = useSelector(selectPost);
     const page = useSelector(selectPage);
-    const [nextPage, setNextPage] = useState(1);
+    const [nextPage, setNextPage] = useState(0);
     const handleScroll = async () => {
         if (
             window.innerHeight + document.documentElement.scrollTop !==
@@ -26,16 +26,18 @@ function Home() {
 
         )
             return;
+
         setNextPage(nextPage === page ? page : nextPage + 1);
+        console.log("PAGE NEXT", nextPage, "TOTAL PAGE", page);
     };
 
     useEffect(() => {
         dispatch(fetchPost(cookies, nextPage));
-
         window.addEventListener("scroll", handleScroll);
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, [cookies, dispatch, nextPage,])
-    console.log("PAGE NUMBER", nextPage);
+
     return (
         <div>
             <div className="homeTopbar">

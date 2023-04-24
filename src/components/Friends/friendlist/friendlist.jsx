@@ -31,8 +31,8 @@ function FriendList() {
             }
 
         }).then((response) => {
-            console.log("RES FRIEND", response.data)
-            setFr(response.data);
+            console.log("RES FRIEND", response.data.data)
+            setFr(response.data.data);
 
 
         }).catch((error) => console.log(error.message));

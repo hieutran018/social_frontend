@@ -13,8 +13,9 @@ export default function postReducer(state = initialState, action) {
         case FETCH_POST_STARTED: {
             return {
                 ...state,
-                posts: action.posts,
+                posts: [],
                 status: 'loading',
+                page: 0
             }
         }
         case FETCH_POST_SUCCEEDED: {

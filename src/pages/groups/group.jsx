@@ -19,11 +19,13 @@ function Group() {
             <div className='groupContainer'>
                 <Sidebar page={5} />
                 {
-                    pages === 'feeds' ? <NewsFeedGroup groupId={groupId} /> : pages === 'group' && groupId ? <div className="groupDetail">
-                        <GroupPage groupId={groupId} />
-                    </div> : pages === 'my_group' ? <div className="myGroup">
-                        <MyGroup />
-                    </div> : <></>
+                    pages === 'feeds' ? <NewsFeedGroup groupId={groupId} /> : pages === 'group' && groupId ?
+                        <div className="groupDetail">
+                            <GroupPage groupId={groupId} />
+                        </div> :
+                        pages === 'my_group' ? <div className="myGroup">
+                            <MyGroup />
+                        </div> : <></>
                 }
             </div>
 

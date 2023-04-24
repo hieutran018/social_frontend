@@ -36,7 +36,7 @@ function Profile() {
     const posts = useSelector(selectPost);
 
     useEffect(() => {
-        dispatch(fetchPost(cookies));
+        dispatch(fetchPost(cookies, 1));
     }, [cookies, dispatch])
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);

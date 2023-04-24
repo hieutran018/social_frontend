@@ -44,12 +44,15 @@ export const loadMorePost = posts => ({
 })
 
 
-export const fetchPostGroup = (cookies) => {
+export const fetchPostGroup = (cookies, page) => {
     return async dispatch => {
-        dispatch(fetchPostStarted([]))
+
+        if (page + 1 === 1) {
+            dispatch(fetchPostStarted([]))
+        }
 
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group'
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group?page=' + page
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -59,9 +62,12 @@ export const fetchPostGroup = (cookies) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                console.log('FEEDS GROUP', response.data);
-                dispatch(fetchPostSucceeded(response.data))
-                // dispatch(fetchPost())
+
+                if (page >= 0 && page < 2) {
+                    dispatch(fetchPostSucceeded(response.data.data, response.data.last_page))
+                } else {
+                    dispatch(loadMorePost(response.data.data))
+                }
 
 
             }).catch((error) => dispatch(fetchPostFailed(error)));
@@ -73,11 +79,11 @@ export const fetchPostGroup = (cookies) => {
 
 export const fetchPost = (token, page) => {
     return async dispatch => {
-        if (page >= 0 && page < 2) {
+
+        if (page + 1 === 1) {
             dispatch(fetchPostStarted([]))
         }
         try {
-            // Axios is common, but also `fetch`, or your own "API service" layer
             const res = await axios.get('http://127.0.0.1:8000/api/v1/fetch-post?page=' + page, {
                 headers: {
                     Authorization: 'Bearer ' + token
@@ -148,11 +154,15 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
     };
 }
 
-export const fetchPostGroupByIdGroup = (cookies, groupId) => {
+export const fetchPostGroupByIdGroup = (cookies, groupId, page) => {
     return async dispatch => {
+        console.log(page);
+
         try {
-            dispatch(fetchPostStarted([]));
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId;
+            if (page + 1 === 1) {
+                dispatch(fetchPostStarted([]));
+            }
+            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId + "?page=" + page;
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -162,8 +172,13 @@ export const fetchPostGroupByIdGroup = (cookies, groupId) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                dispatch(fetchPostSucceeded(response.data));
-                console.log("POST GROUP " + groupId, response.data)
+                if (page >= 0 && page < 2) {
+                    dispatch(fetchPostSucceeded(response.data.data, response.data.last_page))
+                } else {
+                    console.log(response.data.data);
+                    dispatch(loadMorePost(response.data.data))
+                }
+
             }).catch((error) => console.log(error.message));
         } catch (error) {
             dispatch(fetchPostFailed(error))

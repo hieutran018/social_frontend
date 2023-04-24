@@ -19,7 +19,7 @@ const store = configureStore({
         groups: groupReducer,
         albums: albumReducer,
         mediafiles: mediafileReducer,
-        members: memberReducer
+        members: memberReducer,
 
 
     }

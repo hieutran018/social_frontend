@@ -9,25 +9,29 @@ import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import Share from '../share/Share';
-import Feed from '../feed/Feed';
+
 import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editGroup } from '../../redux/actions/groupAction';
+import Feed from '../../components/feed/Feed';
+import Variants from '../../components/feed/postskeleton';
+import { selectPost, selectPostStatus, selectPage } from '../../redux/selectors/postSelector';
 import { fetchPostGroupByIdGroup } from '../../redux/actions/postAction';
 import Member from './members/member';
-import { selectPost, selectPostStatus } from '../../redux/selectors/postSelector';
-import Variants from '../feed/postskeleton';
 
 
-function GroupPage({ groupId }) {
+
+function GroupPage() {
     const groupTab = useParams().groupTab;
-
+    const groupId = useParams().groupId;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const posts = useSelector(selectPost);
+    const page = useSelector(selectPage);
+    const [nextPage, setNextPage] = useState(0);
     const statusPosts = useSelector(selectPostStatus);
     const cookies = useCookies('_tk')[0]._tk;
     const [update, setUpdate] = useState(false);
@@ -78,8 +82,16 @@ function GroupPage({ groupId }) {
         setFile(event.target.files[0])
 
     }
+    const handleScroll = async () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop !==
+            document.documentElement.offsetHeight
+
+        )
+            return;
+        setNextPage(nextPage === page ? page : nextPage + 1);
+    };
     useEffect(() => {
-        console.log("CHECK GROUP ID CURRENT", groupId)
         function fetchGroupByIdGroup() {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
             axios({
@@ -101,12 +113,15 @@ function GroupPage({ groupId }) {
             })
         }
         fetchGroupByIdGroup()
-        dispatch(fetchPostGroupByIdGroup(cookies, groupId))
+        dispatch(fetchPostGroupByIdGroup(cookies, groupId, nextPage))
+        window.addEventListener("scroll", handleScroll);
+
         return () => {
-            file && URL.revokeObjectURL(file.preview)
+            file && URL.revokeObjectURL(file.preview);
+
         }
 
-    }, [groupId, cookies, update, file, dispatch])
+    }, [groupId, cookies, update, file, dispatch, nextPage])
 
     function fetchListFriend() {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
