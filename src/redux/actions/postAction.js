@@ -102,7 +102,7 @@ export const fetchPost = (token, page) => {
     }
 }
 
-export const addNewPost = (token, contentPost, files, privacy, group) => {
+export const addNewPost = (token, contentPost, files, privacy, tags, group) => {
     return async dispatch => {
         try {
             dispatch(addNewPostStarted());
@@ -111,7 +111,7 @@ export const addNewPost = (token, contentPost, files, privacy, group) => {
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: requestURL,
-                data: { postContent: contentPost, privacy: privacy, files: files, groupId: group },
+                data: { postContent: contentPost, privacy: privacy, files: files, tags: tags, groupId: group },
                 headers: {
                     Authorization: 'Bearer ' + token,
                     "Content-Type": "multipart/form-data",

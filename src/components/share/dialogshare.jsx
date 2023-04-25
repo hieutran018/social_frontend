@@ -9,6 +9,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import { IoMdClose } from 'react-icons/io';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ImageList from '@mui/material/ImageList';
@@ -35,7 +36,8 @@ function DialogShare({ group }) {
     const [checkClick, setCheckClick] = useState(true);
     const [tab, setTab] = useState(0);
     const [listFr, setListFr] = useState([]);
-
+    const [taggingList, setTaggingList] = useState([]);
+    const [taggingId, setTaggingId] = useState([]);
     const [inputContentPost, setInputContentPost] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -64,7 +66,6 @@ function DialogShare({ group }) {
 
     const handleChangeContent = (e) => {
         setInputContentPost(e.target.value)
-
     }
 
     console.log(inputContentPost === '' && !files.length === 0, !inputContentPost === '', !files.length === 0)
@@ -75,15 +76,33 @@ function DialogShare({ group }) {
             return;
         }
         setCheckClick(false);
-        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, group));
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group));
         console.log(inputContentPost);
         setInputContentPost('');
         setFiles([]);
         setImages([]);
-
-
     }
 
+    const handleTaggingUser = (friend) => {
+        setTaggingList([...taggingList, friend])
+        setTaggingId([...taggingId, friend.id])
+        setListFr((listFr) =>
+            listFr.filter((fr) => fr.id !== friend.id)
+        );
+    }
+    const handlUndoTaggingUser = (friend) => {
+        console.log(friend);
+        setTaggingList((taggingList) =>
+            taggingList.filter((tagging) => tagging.id !== friend.id)
+        );
+        setTaggingId((taddingId) =>
+            taddingId.filter((tagging) => tagging !== friend.id)
+        );
+        setListFr([...listFr, friend])
+    }
+    const handleCloseTag = () => {
+        setTab(0)
+    }
     const handleClickTag = () => {
 
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + user.id;
@@ -91,7 +110,6 @@ function DialogShare({ group }) {
         axios({
             method: 'GET',
             url: requestURL,
-
             headers: {
                 Authorization: 'Bearer ' + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -99,14 +117,9 @@ function DialogShare({ group }) {
             }
 
         }).then((response) => {
-            console.log(response.data)
-            setListFr(response.data);
+            setListFr(response.data.data);
             setTab(1);
-
-
         }).catch((error) => console.log(error.message));
-
-
     }
 
     return (
@@ -129,7 +142,7 @@ function DialogShare({ group }) {
                                     <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={user.avatar} alt="logo" /></div>
 
                                     <div className="details">
-                                        <p className='shareUserName'>{user.displayName}</p>
+                                        <p className='shareUserName'>{user.displayName} {taggingList.length === 0 ? "" : <span className='shareWithText'> cùng với <span className='shareUserName'>{taggingList.length + " người khác"}</span></span>}</p>
                                         <div className='privacy' onClick={handleClick}>
                                             {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                             <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -236,14 +249,38 @@ function DialogShare({ group }) {
                                 </Box>
                             </div> : tab === 1 ?
                             <div>
-                                <div>
+                                <div className='dialogShareTaggingTitle'>
                                     <span style={{ fontSize: "20px", fontWeight: "500" }}>Gắn thẻ người khác</span>
+                                    <div className='dialogShareDoneTagging'>
+                                        <button onClick={handleCloseTag} className='dialogShareDoneTaggingButton'>Xong</button>
+                                    </div>
                                 </div>
+                                {
+                                    taggingList.length === 0 ? <></> :
+                                        <div>
+                                            <div className='dialogShareUserTagging'>
+                                                {
+                                                    taggingList.map((friend, index) => (
+                                                        <div key={index} className='dialogShareTaggingUser'>
+                                                            <div>
+                                                                {
+                                                                    friend.displayName
+                                                                }
+                                                            </div>
+                                                            <div onClick={() => handlUndoTaggingUser(friend)} className='dialogShareUndoTaggingUser'>
+                                                                <IoMdClose size={20} />
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
+                                        </div>
+                                }
                                 <div>
                                     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             listFr.map((fr) => (
-                                                <ListItem>
+                                                <ListItem onClick={() => handleTaggingUser(fr)} className='dialogShareTagUserCard'>
                                                     <img className='dialogshareTagUserAvatar' src={fr.avatar} alt="" />
                                                     <ListItemText primary={fr.displayName} secondary="" />
                                                 </ListItem>

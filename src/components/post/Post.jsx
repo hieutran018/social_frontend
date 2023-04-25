@@ -181,7 +181,7 @@ function Post({ post }) {
                                 <div>
                                     <span className="postUsername">
                                         <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                            {post.displayName}
+                                            {post.displayName} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                         </a>
                                     </span>
                                     <div className="postPrivacy">

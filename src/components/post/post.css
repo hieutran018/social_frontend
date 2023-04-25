@@ -51,7 +51,12 @@
     margin-left: 1rem;
     
 }
-
+.postWithText{
+    font-weight: 400;
+}
+.postTagUser{
+    font-weight: 500;
+}
 .postMemberGroup{
     font-size: 12px;
     font-weight: 500;
