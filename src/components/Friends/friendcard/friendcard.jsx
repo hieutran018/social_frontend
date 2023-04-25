@@ -68,7 +68,6 @@ function FriendCard({ friend }) {
             setIsSend(true);
         }).catch((error) => console.log(error.message));
     }
-    console.log(friend)
     return (
         <div className='friendCard'>
             <Paper

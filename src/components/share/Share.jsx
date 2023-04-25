@@ -66,10 +66,14 @@ function Share({ group }) {
                         <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
                         <span className="shareOptionText">Trạng thái</span>
                     </div>
-                    <div className="shareOption">
-                        <LocalOfferIcon htmlColor="blue" className="shareIcon" />
-                        <span className="shareOptionText">Gắn thẻ</span>
-                    </div>
+                    {
+                        !group ?
+                            <div className="shareOption">
+                                <LocalOfferIcon htmlColor="blue" className="shareIcon" />
+                                <span className="shareOptionText">Gắn thẻ</span>
+                            </div> :
+                            <></>
+                    }
 
 
                 </div>

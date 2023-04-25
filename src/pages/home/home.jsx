@@ -30,7 +30,6 @@ function Home() {
         setNextPage(nextPage === page ? page : nextPage + 1);
         console.log("PAGE NEXT", nextPage, "TOTAL PAGE", page);
     };
-
     useEffect(() => {
         dispatch(fetchPost(cookies, nextPage));
         window.addEventListener("scroll", handleScroll);

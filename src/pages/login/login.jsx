@@ -85,19 +85,19 @@ function Login() {
         signInWithPopup(auth, googleProvider).then((result) => {
             console.log({ "RESULT": result });
             console.log("USER", result.providerId, "==", result.user.email, "==",
-                result._tokenResponse.firstName, "==", result._tokenResponse.lastName);
+                result);
             const requestURL = "http://127.0.0.1:8000/api/auth/login-with-google";
+
             axios.post(requestURL, {
                 email: result.user.email,
-                firstName: result._tokenResponse.firstName,
-                lastName: result._tokenResponse.lastName,
+                displayName: result.user.displayName,
                 provider: result.providerId,
                 uid: result.user.uid
             }).then((res) => {
                 setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 navigate('/')
-            }).catch((err) => { setErrorSocial('Địa chỉ email này hiện đã được đăng ký sử dụng!'); setUnAuthorized('') });
+            }).catch((err) => { console.log(err); setErrorSocial('Địa chỉ email này hiện đã được đăng ký sử dụng!'); setUnAuthorized('') });
         }).catch((error) => {
             console.log(error);
         });

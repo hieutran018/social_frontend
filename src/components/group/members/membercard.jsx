@@ -10,10 +10,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addMemberToAdminGroup, removeAdminToGroup } from '../../../redux/actions/memberAction';
+import { addMemberToAdminGroup, removeAdminToGroup, removeMemberFromGroup } from '../../../redux/actions/memberAction';
 import { useCookies } from 'react-cookie';
 
 function MemberCard({ member, auth }) {
+    console.log(member);
     const cookies = useCookies('_tk')[0]._tk;
     const groupId = useParams().groupId;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -27,16 +28,23 @@ function MemberCard({ member, auth }) {
     const handleClickCloseAdvanceOption = () => {
         setAnchor(null);
     };
-    console.log("MEMBER", member.user_id, auth)
     const handleNavigate = () => {
         navigate('/' + member.user_id);
     }
 
     const handleAddMemberToAdminGroup = (userId) => {
         dispatch(addMemberToAdminGroup(cookies, userId, groupId))
+        setAnchor(null)
+
     }
     const handleRemoveAdminToGroup = (userId) => {
         dispatch(removeAdminToGroup(cookies, userId, groupId))
+        setAnchor(null)
+    }
+    const handleRemoveMemberFromGroup = (userId) => {
+        dispatch(removeMemberFromGroup(cookies, userId, groupId));
+        setAnchor(null)
+
     }
 
     return (
@@ -98,21 +106,23 @@ function MemberCard({ member, auth }) {
                                                 <span className="memberCardText">Thăng cấp quản trị viên</span>
                                             </div>
                                         </div>
-                                    </MenuItem> :
-                                    <MenuItem onClick={() => handleRemoveAdminToGroup(member.user_id)} >
-                                        <div className="memberCardItem">
-                                            <div className="memberCardIcon">
-                                                <MdRemoveModerator size={25} />
-                                            </div>
-                                            <div className="memberCardTextContainer">
-                                                <span className="memberCardText">Xóa quyền quản trị viên</span>
-                                            </div>
+                                    </MenuItem> : <></>
+                            }
+                            {auth && user.id !== member.user_id && member.isAdminGroup === 1 ?
+                                <MenuItem onClick={() => handleRemoveAdminToGroup(member.user_id)} >
+                                    <div className="memberCardItem">
+                                        <div className="memberCardIcon">
+                                            <MdRemoveModerator size={25} />
                                         </div>
-                                    </MenuItem>
+                                        <div className="memberCardTextContainer">
+                                            <span className="memberCardText">Xóa quyền quản trị viên</span>
+                                        </div>
+                                    </div>
+                                </MenuItem> : <></>
                             }
                             {
                                 auth && user.id !== member.user_id ?
-                                    <MenuItem >
+                                    <MenuItem onClick={() => handleRemoveMemberFromGroup(member.user_id)} >
                                         <div className="memberCardItem">
                                             <div className="memberCardIcon">
                                                 <MdGroupRemove size={25} />
@@ -127,7 +137,7 @@ function MemberCard({ member, auth }) {
 
                             {
                                 user.id === member.user_id ?
-                                    <MenuItem >
+                                    <MenuItem onClick={() => handleRemoveMemberFromGroup(member.user_id)} >
                                         <div className="memberCardItem">
                                             <div className="memberCardIcon">
                                                 <SlLogout size={25} />

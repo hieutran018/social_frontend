@@ -67,17 +67,12 @@ function DialogShare({ group }) {
     const handleChangeContent = (e) => {
         setInputContentPost(e.target.value)
     }
-
-    console.log(inputContentPost === '' && !files.length === 0, !inputContentPost === '', !files.length === 0)
-    console.log(group);
     const submitPost = () => {
         if (inputContentPost === '' && files == null) {
-            console.log("======= NO FILE =======")
             return;
         }
         setCheckClick(false);
         dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group));
-        console.log(inputContentPost);
         setInputContentPost('');
         setFiles([]);
         setImages([]);
@@ -91,7 +86,6 @@ function DialogShare({ group }) {
         );
     }
     const handlUndoTaggingUser = (friend) => {
-        console.log(friend);
         setTaggingList((taggingList) =>
             taggingList.filter((tagging) => tagging.id !== friend.id)
         );
@@ -119,7 +113,7 @@ function DialogShare({ group }) {
         }).then((response) => {
             setListFr(response.data.data);
             setTab(1);
-        }).catch((error) => console.log(error.message));
+        }).catch((error) => console.log(error));
     }
 
     return (
@@ -151,7 +145,7 @@ function DialogShare({ group }) {
                                     </div>
                                 </div>
                                 <div>
-                                    <textarea aria-multiline onChange={handleChangeContent} className='shareContentPost' placeholder="Bạn đang nghĩ gì thế?"></textarea>
+                                    <textarea value={inputContentPost} aria-multiline onChange={handleChangeContent} className='shareContentPost' placeholder="Bạn đang nghĩ gì thế?"></textarea>
                                 </div>
                                 <div>
                                     {view ?
@@ -216,7 +210,9 @@ function DialogShare({ group }) {
 
 
                                         <div><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="shareIcon" /></div>
-                                        <div onClick={handleClickTag}><LocalOfferIcon style={{ fontSize: "35" }} htmlColor="blue" className="shareIcon" /></div>
+                                        {
+                                            group ? <></> : <div onClick={handleClickTag}><LocalOfferIcon style={{ fontSize: "35" }} htmlColor="blue" className="shareIcon" /></div>
+                                        }
 
 
                                     </div>
