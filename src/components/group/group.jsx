@@ -13,7 +13,7 @@ import Share from '../share/Share';
 import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editGroup } from '../../redux/actions/groupAction';
 import Feed from '../../components/feed/Feed';
@@ -21,6 +21,8 @@ import Variants from '../../components/feed/postskeleton';
 import { selectPost, selectPostStatus, selectPage } from '../../redux/selectors/postSelector';
 import { fetchPostGroupByIdGroup } from '../../redux/actions/postAction';
 import Member from './members/member';
+import FileList from './files/files';
+import FileTab from './files/filetab';
 
 
 
@@ -197,59 +199,75 @@ function GroupPage() {
                         <Member auth={group.isAdminGroup} />
 
                     </div> :
-                    <div className='groupPageMainContainer'>
-                        <div className='groupPageFeeds'>
-                            <Share group={groupId} />
-                            {
-                                statusPosts === 'loading' ?
-                                    [0, 1].map((item) => (
-                                        <Variants key={item} />
-                                    )) :
-                                    statusPosts === 'succeeded' ? <Feed post={posts} isGroup={true} /> :
-                                        statusPosts === 'failed' ? [0, 1].map((item) => (
+                    groupTab === 'mediafiles' ?
+                        <div className='groupPageMainContainer'>
+                            <div className='groupPageFiles'>
+                                <div className='groupPageFilesContainer'>
+                                    <div className='groupPageFilesTitle'>
+                                        File được chia sẻ
+                                    </div>
+                                    <FileTab />
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        <div className='groupPageMainContainer'>
+                            <div className='groupPageFeeds'>
+                                <Share group={groupId} />
+                                {
+                                    statusPosts === 'loading' ?
+                                        [0, 1].map((item) => (
                                             <Variants key={item} />
                                         )) :
-                                            [0, 1].map((item) => (
+                                        statusPosts === 'succeeded' ? <Feed post={posts} isGroup={true} /> :
+                                            statusPosts === 'failed' ? [0, 1].map((item) => (
                                                 <Variants key={item} />
-                                            ))
-                            }
+                                            )) :
+                                                [0, 1].map((item) => (
+                                                    <Variants key={item} />
+                                                ))
+                                }
 
-                        </div>
-                        <div className='groupPageRightContainer'>
-                            <div className='groupPageIntroduceGroupContainer'>
-                                <div style={{ margin: "1rem" }}>
-                                    <span className='groupPageIntroduce'> Giới thiệu</span>
-                                </div>
-                                <div className='groupPageIntroduceGroupNameContainer'>
-                                    <span className='groupPageIntroduceGroupName'>{group.group_name}</span>
-                                </div>
-                                <div className='groupPageIntroduceGroupPrivacyContainer'>
-                                    <div className='groupPageIntroduceGroupPrivacy'>
-                                        {
-                                            group.privacy === 1 ? <MdOutlinePublic size={25} /> : <RiGitRepositoryPrivateLine size={25} />
-                                        }
-                                        <span style={{ marginLeft: "20px" }}>{group.privacy === 1 ? 'Nhóm công khai' : "Nhóm riêng tư"}</span>
+                            </div>
+                            <div className='groupPageRightContainer'>
+                                <div className='groupPageIntroduceGroupContainer'>
+                                    <div style={{ margin: "1rem" }}>
+                                        <span className='groupPageIntroduce'> Giới thiệu</span>
                                     </div>
-                                    <div>
-                                        <span style={{ marginLeft: "45px" }}>{
-                                            group.privacy === 1 ? "Bất kỳ ai cũng có thể nhìn thấy mọi người trong nhóm và những gì họ đăng." : "Chỉ thành viên mới nhìn thấy mọi người trong nhóm và những gì họ đăng."
-                                        }</span>
+                                    <div className='groupPageIntroduceGroupNameContainer'>
+                                        <span className='groupPageIntroduceGroupName'>{group.group_name}</span>
+                                    </div>
+                                    <div className='groupPageIntroduceGroupPrivacyContainer'>
+                                        <div className='groupPageIntroduceGroupPrivacy'>
+                                            {
+                                                group.privacy === 1 ? <MdOutlinePublic size={25} /> : <RiGitRepositoryPrivateLine size={25} />
+                                            }
+                                            <span style={{ marginLeft: "20px" }}>{group.privacy === 1 ? 'Nhóm công khai' : "Nhóm riêng tư"}</span>
+                                        </div>
+                                        <div>
+                                            <span style={{ marginLeft: "45px" }}>{
+                                                group.privacy === 1 ? "Bất kỳ ai cũng có thể nhìn thấy mọi người trong nhóm và những gì họ đăng." : "Chỉ thành viên mới nhìn thấy mọi người trong nhóm và những gì họ đăng."
+                                            }</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='groupPageMediFileGroupContainer'>
-                                <div style={{ margin: "1rem" }}>
-                                    <span className='groupPageIntroduce'> File phương tiện được chia sẻ</span>
-                                </div>
-                                <div className='groupPageMediFileGroupMainContainer'>
+                                <div className='groupPageMediFileGroupContainer'>
+                                    <div style={{ margin: "1rem" }}>
+                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                            <span className='groupPageIntroduce'> File được chia sẻ</span> <Link to={'/groups/group/' + groupId + '/mediafiles'}> <span>Xem thêm</span></Link>
+                                        </div>
+                                    </div>
+
+
+                                    <FileList />
+
 
                                 </div>
-                            </div>
-                            <div>
+                                <div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
             }
             <div>
                 <Dialog

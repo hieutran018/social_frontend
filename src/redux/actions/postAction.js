@@ -143,11 +143,12 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
                 }
             }).then((response) => {
                 console.log('redux postshare', response.data)
+
                 dispatch(addNewPostSucceeded(response.data));
-
-
-
-            }).catch((error) => addNewPostFailed(error.message));
+            }).catch((error) => {
+                addNewPostFailed(error.message);
+                console.log(error);
+            });
         } catch (error) {
             dispatch(fetchPostFailed(error))
         }

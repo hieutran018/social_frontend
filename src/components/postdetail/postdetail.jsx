@@ -8,7 +8,6 @@ import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import Comment from "../comment/comment";
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -88,28 +87,67 @@ function PostDetail({ post }) {
                 </div>
                 <div className="postWrapper">
                     <div className="postTop">
-                        <div className="postTopLeft">
-                            <a href={"/" + post.user_id}>
-                                <img
-                                    className="postProfileImg"
-                                    src={post.avatarUser}
-                                    alt={"Avatar user " + post.displayName}
-                                />
-                            </a>
-
-                            <div>
-                                <span className="postDetailUsername">
-                                    <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                        {post.displayName}
+                        {
+                            post.group_id ?
+                                <div className="postTopLeft">
+                                    <a href={"/" + post.group_id}>
+                                        <img
+                                            className="postProfileImgGroup"
+                                            src={post.groupAvatar}
+                                            alt={"Avatar user " + post.groupName}
+                                        />
                                     </a>
-                                </span>
-                                <div className="postDetailPrivacy">
-                                    <span className="postDetailDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                        {post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
-                                </div>
-                            </div>
 
-                        </div>
+                                    <div>
+                                        <span className="postUsername">
+                                            <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                                {post.groupName}
+                                            </a>
+                                        </span>
+                                        <div className="postPrivacy">
+                                            <span className="postMemberGroup">
+                                                <a className="postLinkProfileMemberGroup" href={"/" + post.user_id}>
+                                                    {post.displayName}
+                                                </a>
+                                            </span>
+                                            <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                {post.privacy.toString() === "0" ?
+                                                    <LockIcon className="postIconPrivacy" /> :
+                                                    post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                        : <GroupIcon className="postIconPrivacy" />
+                                                }</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                :
+                                <div className="postTopLeft">
+                                    <a href={"/" + post.user_id}>
+                                        <img
+                                            className="postProfileImg"
+                                            src={post.avatarUser}
+                                            alt={"Avatar user " + post.displayName}
+                                        />
+                                    </a>
+
+                                    <div>
+                                        <span className="postUsername">
+                                            <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                                {post.displayName} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                            </a>
+                                        </span>
+                                        <div className="postPrivacy">
+                                            <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                {post.privacy.toString() === "0" ?
+                                                    <LockIcon className="postIconPrivacy" /> :
+                                                    post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                        : <GroupIcon className="postIconPrivacy" />
+                                                }</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        }
 
                     </div>
 
@@ -244,27 +282,62 @@ function PostDetail({ post }) {
 
                                         </div>
                                         <div className="postShareTop">
-                                            <div className="postTopLeft">
-                                                <a href={"/" + post.parent_post.user_id}>
-                                                    <img
-                                                        className="postProfileImg"
-                                                        src={post.parent_post.avatarUser}
-                                                        alt={"Avatar user " + post.parent_post.displayName}
-                                                    />
-                                                </a>
+                                            {
+                                                post.parent_post.group_id ?
 
-                                                <div>
-                                                    <span className="postUsername">
-                                                        <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
-                                                            {post.parent_post.displayName}
+                                                    <div className="postTopLeft">
+                                                        <a href={"/" + post.parent_post.group_id}>
+                                                            <img
+                                                                className="postProfileImgGroup"
+                                                                src={post.parent_post.groupAvatar}
+                                                                alt={"Avatar user " + post.parent_post.groupName}
+                                                            />
                                                         </a>
-                                                    </span>
-                                                    <div className="postPrivacy">
-                                                        <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                                            {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : post.privacy === 2 ? <GroupIcon className="postIconPrivacy" /> : <PersonRemoveIcon className="postIconPrivacy" />}</span>
+
+                                                        <div>
+                                                            <span className="postUsername">
+                                                                <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
+                                                                    {post.parent_post.groupName}
+                                                                </a>
+                                                            </span>
+                                                            <div className="postPrivacy">
+                                                                <span className="postMemberGroup">
+                                                                    <a className="postLinkProfileMemberGroup" href={"/" + post.parent_post.user_id}>
+                                                                        {post.parent_post.displayName}
+                                                                    </a>
+                                                                </span>
+                                                                <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                    {post.parent_post.privacy.toString() === "0" ?
+                                                                        <LockIcon className="postIconPrivacy" /> :
+                                                                        post.parent_post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                                            : <GroupIcon className="postIconPrivacy" />
+                                                                    }</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div> :
+                                                    <div className="postTopLeft">
+                                                        <a href={"/" + post.parent_post.user_id}>
+                                                            <img
+                                                                className="postProfileImg"
+                                                                src={post.parent_post.avatarUser}
+                                                                alt={"Avatar user " + post.parent_post.displayName}
+                                                            />
+                                                        </a>
+
+                                                        <div>
+                                                            <span className="postUsername">
+                                                                <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
+                                                                    {post.parent_post.displayName} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                </a>
+                                                            </span>
+                                                            <div className="postPrivacy">
+                                                                <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                    {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                            }
 
                                         </div>
                                         <div>

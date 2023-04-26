@@ -109,10 +109,17 @@
     box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
     margin: 2rem 5rem;
     display: flex;
-    height: 200px;
-    max-height: 210px;
+    height: 400px;
+    max-height: 500px;
     flex-direction: column;
+   
 }
+.groupPageMediFileGroupContainerMain{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .groupPageRightContainer{
     width: 35%;
     
@@ -273,3 +280,24 @@ background-color: rgb(209, 210, 212);
     cursor: pointer;
 }
 /* DIALOG SETTING END */
+
+.groupPageFiles{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    
+}
+.groupPageFilesContainer{
+    width: 80%;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    padding: 1rem;
+}
+.groupPageFilesTitle{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
