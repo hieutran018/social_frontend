@@ -39,6 +39,8 @@ function DialogShare({ group }) {
     const [taggingList, setTaggingList] = useState([]);
     const [taggingId, setTaggingId] = useState([]);
     const [inputContentPost, setInputContentPost] = useState();
+
+
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFIles = [];
@@ -289,7 +291,6 @@ function DialogShare({ group }) {
                 }
 
             </div>
-
         </div >
     );
 }

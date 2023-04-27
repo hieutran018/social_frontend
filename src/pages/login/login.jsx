@@ -8,7 +8,10 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { auth, googleProvider, facebookProvider } from '../../firebase/firebaseconfig';
 import { signInWithPopup } from "firebase/auth";
+import { requestDev } from '../../components/auth/auth';
 import './login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 
@@ -16,49 +19,50 @@ function Login() {
     const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
-    const [validateMsg, setValidateMsg] = useState({});
-    const [unAuthorized, setUnAuthorized] = useState();
-    const [errorSocial, setErrorSocial] = useState('')
 
     const [, setCookie] = useCookies(['_tk']);
 
     function isValidEmail(email) {
         return /\S+@\S+\.\S+/.test(email);
     }
+    const noti = (textError) => {
+        toast.error(textError, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
 
     const validate = () => {
-        const msg = {}
-
-        if (!isValidEmail(email)) {
-            msg.email = 'Định dạng email không hợp lệ!'
-        }
-        if (isEmpty(email)) {
-            msg.email = 'Email không được bỏ trống!'
-        }
-        if (isEmpty(password)) {
-            msg.password = 'Mật khẩu không được bỏ trống!'
-        }
-        setValidateMsg(msg);
-        if (Object.keys(msg).length > 0) {
+        if (isEmpty(email) || isEmpty(password)) {
+            noti('Email và mật khẩu không được bỏ trống')
             return false;
         }
+        if (!isValidEmail(email)) {
+            noti('Email không hợp lệ!');
+            return false;
+        }
+
         return true;
     }
 
     const submitFormLLogin = () => {
         const isValid = validate();
-        console.log(!isValid)
+
         if (!isValid) {
             return;
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/auth/login', {
+                requestDev.post('/auth/login', {
                     email: email,
                     password: password,
                 }).then((res) => {
-
                     if (!res.statusText === 'OK') {
-                        setUnAuthorized('Email hoặc mật khẩu không đúng');
                         return;
                     } else {
                         console.log(res);
@@ -66,14 +70,8 @@ function Login() {
                         localStorage.setItem('user', JSON.stringify(res.data.user));
                         navigate('/')
                     }
-
-
-                }).catch((error) => { setUnAuthorized('Email hoặc mật khẩu không đúng'); setErrorSocial('') });
-
-
-
+                }).catch((error) => { console.log(error); noti('Email hoặc mật khẩu không đúng'); });
             } catch (error) {
-                setUnAuthorized('Email hoặc mật khẩu không đúng');
                 console.log(error);
             }
         }
@@ -97,7 +95,7 @@ function Login() {
                 setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 navigate('/')
-            }).catch((err) => { console.log(err); setErrorSocial('Địa chỉ email này hiện đã được đăng ký sử dụng!'); setUnAuthorized('') });
+            }).catch((err) => { console.log(err); noti('Địa chỉ email này hiện đã được đăng ký sử dụng!'); });
         }).catch((error) => {
             console.log(error);
         });
@@ -116,7 +114,6 @@ function Login() {
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
-        setValidateMsg({})
 
     }
     const handleChangePassword = (e) => {
@@ -131,6 +128,8 @@ function Login() {
     //     }
     // }, [tokenString, userString, isSuccess, resetToken]);
 
+
+
     return (
 
         <div className="login">
@@ -143,14 +142,10 @@ function Login() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                        <div className='loginErrorMsgTopContainer'>
-                            <span className='loginErrorMsgTop'>{unAuthorized && unAuthorized}</span>
-                            <span className='loginErrorMsgTop'>{errorSocial && errorSocial}</span>
-                        </div>
                         <input placeholder="Email" className="loginInput" onChange={handleChangeEmail} />
-                        <span className='loginErrorMsg'>{validateMsg.email}</span>
+
                         <input placeholder="Password" type={"password"} className="loginInput" onChange={handleChangePassword} />
-                        <span className='loginErrorMsg'>{validateMsg.password}</span>
+
                         <button onClick={submitFormLLogin} className="loginButton">Đăng nhập</button>
                         <div className='loginOptionLogin'>
                             <span className='loginTextSpan'>Đăng nhập với</span>
@@ -168,6 +163,19 @@ function Login() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                style={{ borderRadius: "5px", width: "400px" }}
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
 
 

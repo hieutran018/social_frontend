@@ -68,7 +68,7 @@ function Share({ group }) {
                     </div>
                     {
                         !group ?
-                            <div className="shareOption">
+                            <div onClick={handleClickOpen} className="shareOption">
                                 <LocalOfferIcon htmlColor="blue" className="shareIcon" />
                                 <span className="shareOptionText">Gắn thẻ</span>
                             </div> :

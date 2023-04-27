@@ -1,4 +1,4 @@
-import "./home.css"
+import "./home.css";
 import Lottie from 'react-lottie-player';
 import ErrorAnimation from '../../lottiefiles/error.json';
 import Topbar from "../../components/topbar/Topbar";
@@ -7,6 +7,7 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Share from "../../components/share/Share";
 import Variants from '../../components/feed/postskeleton';
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus, selectPage } from "../../redux/selectors/postSelector";
@@ -23,19 +24,20 @@ function Home() {
         if (
             window.innerHeight + document.documentElement.scrollTop !==
             document.documentElement.offsetHeight
-
         )
             return;
 
         setNextPage(nextPage === page ? page : nextPage + 1);
         console.log("PAGE NEXT", nextPage, "TOTAL PAGE", page);
     };
+
     useEffect(() => {
         dispatch(fetchPost(cookies, nextPage));
         window.addEventListener("scroll", handleScroll);
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [cookies, dispatch, nextPage,])
+    }, [cookies, dispatch, nextPage])
+
 
     return (
         <div>
@@ -76,6 +78,7 @@ function Home() {
 
                 <Rightbar />
             </div>
+
         </div>
     );
 }

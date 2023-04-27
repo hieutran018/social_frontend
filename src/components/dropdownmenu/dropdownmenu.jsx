@@ -28,9 +28,8 @@ const DropdownMenu = () => {
     const handleLogOut = () => {
         console.log(1);
         axios({
-            method: 'POST', //you can set what request you want to be
+            method: 'POST',
             url: 'http://127.0.0.1:8000/api/auth/logout',
-
             headers: {
                 Authorization: 'Bearer ' + cookies._tk
             }

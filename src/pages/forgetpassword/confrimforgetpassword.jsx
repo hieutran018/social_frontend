@@ -1,25 +1,69 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import isEmpty from 'validator/lib/isEmpty';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './forgetpassword.css';
 
 function ConfirmForgotPassword() {
 
 
-    const [tokenString, setTokenString] = useState();
-    const [message, setMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
+    const [tokenString, setTokenString] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
+    const noti = (textError) => {
+        toast.error(textError, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+    const notiInfo = (textInfo) => {
+        toast.info(textInfo, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+
+    const handleChangeTokenString = (event) => {
+        setTokenString(event.target.value);
+    }
+    const validate = () => {
+        if (isEmpty(tokenString)) {
+            noti('Mã xác nhận không được phép bỏ trống!')
+            return false;
+        }
+
+        return true;
+    }
     const submitTokenString = () => {
-        setIsLoading(true);
-        setMessage('Mật khẩu được đặt lại đang được xác nhận!')
-        const requestURL = 'http://127.0.0.1:8000/api/auth/completed-forgot-password';
-        axios.post(requestURL, {
-            tokenReset: tokenString,
-        }).then((res) => {
-            setMessage('Mật khẩu mới đã được gửi đến địa chỉ email của bạn!')
+        const isValid = validate();
+        if (!isValid) {
+            return;
+        } else {
             setIsLoading(true);
-        }).catch((err) => { setMessage('Mã xác nhận không đúng'); setIsLoading(false); });
+            const requestURL = 'http://127.0.0.1:8000/api/auth/completed-forgot-password';
+            axios.post(requestURL, {
+                tokenReset: tokenString,
+            }).then((res) => {
+                notiInfo('Mật khẩu mới đã được gửi đến địa chỉ email của bạn!')
+                setIsLoading(false);
+            }).catch((err) => { noti('Mã xác nhận không đúng'); setIsLoading(false); });
+        }
+
     }
 
     return (
@@ -34,12 +78,11 @@ function ConfirmForgotPassword() {
                 </div>
                 <div className="forgetPasswordRight">
                     <div className="forgetPasswordBox">
-                        <span className='forgetPasswordTextDescription'>Mã xác nhận đã được gửi đi, vui lòng chờ trong ít phút!</span>
-                        <span style={{ fontSize: "18px", display: "flex", justifyContent: "center" }}>{message && message}</span>
-                        <input placeholder="Mã xác nhận" className="forgetPasswordInput" value={tokenString} onChange={(event) => { setTokenString(event.target.value); setIsLoading(false); }} />
-                        <button onClick={submitTokenString} style={{ backgroundColor: isLoading ? 'gray' : '' }} disabled={isLoading} className="forgetSendRessetPasswordButton">Xác nhận</button>
-
-
+                        <div className='forgetPasswordTextDescriptionContainer'>
+                            <span className='forgetPasswordTextDescription'>Mã xác nhận đã được gửi đến email của bạn, vui lòng chờ giây lát!</span>
+                        </div>
+                        <input placeholder="Mã xác nhận" className="forgetPasswordInput" value={tokenString} onChange={handleChangeTokenString} />
+                        <button onClick={submitTokenString} style={{ backgroundColor: isLoading ? 'gray' : '' }} disabled={isLoading} className="forgetSendRessetPasswordButton">{isLoading ? 'Đang xác minh' : 'Xác nhận'}</button>
                         <Link to="/login" className="forgetPasswordButton">
                             Quay lại đăng nhập
                         </Link>
@@ -47,9 +90,20 @@ function ConfirmForgotPassword() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                style={{ borderRadius: "5px", maxwidth: "500px" }}
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
-
-
     );
 }
 
