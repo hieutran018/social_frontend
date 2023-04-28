@@ -1,0 +1,14 @@
+.settingTopBar{
+    display: flex;
+}
+.settingContainer{
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 4.3rem;
+}
+.settingMainContainer{
+    flex: 4.0;
+    display: flex;
+    
+}

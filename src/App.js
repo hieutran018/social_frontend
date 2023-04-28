@@ -14,6 +14,7 @@ import Loading from './components/loading/Loading';
 // import ProtectedRoutes from './components/protectedroute/protectedroute';
 import FriendRequest from './pages/friendrequest/friendrequest';
 import Search from './pages/search/search';
+import Settings from './pages/setting/setting';
 
 
 
@@ -45,6 +46,7 @@ function App() {
       <Route path='/groups/:pages/:groupId' element={<Group />} />
       <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} />
       <Route path='/search/:result' element={<Search />} />
+      <Route path='/settings' element={<Settings />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>
   );

@@ -1,0 +1,57 @@
+.settingAccount{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.settingAccountWrapper{
+    width: 50%;
+    height: 100%;
+}
+.settingAccountTitle{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+.settingAccountDownloadContent{
+    height: 50px;
+    border: 0.1px solid grey;
+    border-radius: 5px;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+.settingAccountHr{
+    margin-top: 2rem;
+}
+.settingAccountOption{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    
+}
+.settingAccountTitleOption{
+    font-size: 16;
+    font-weight: 600;
+    width: 35%;
+}
+.settingAccountDescriptionOption{
+    font-size: 16;
+    width: 60%;
+}
+.settingAccountLinkOption{
+    font-size: 16;
+    width: 20%;
+    display: flex;
+    justify-content: end;
+}
+.settingAccountOption{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 50px;
+}
+.settingAccountOption:hover{
+    background-color: aliceblue;
+}

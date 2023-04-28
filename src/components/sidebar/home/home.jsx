@@ -1,4 +1,5 @@
 import '../sidebar.css';
+import './home.css';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { FaUserFriends } from 'react-icons/fa';
@@ -6,7 +7,7 @@ import { RiVideoFill } from 'react-icons/ri';
 import { TiGroup } from 'react-icons/ti';
 const SidebarHomePage = () => {
     return (
-        <>
+        <div className='sidebarHome'>
             <ul className="sidebarList">
                 <li className="sidebarListItem">
                     <AiFillHome size={25} className="sidebarIcon" />
@@ -39,7 +40,7 @@ const SidebarHomePage = () => {
             <button className="sidebarButton">Xem thêm</button>
             <hr className="sidebarHr" />
 
-        </>);
+        </div>);
 };
 
 export default SidebarHomePage;

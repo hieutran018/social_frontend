@@ -45,7 +45,10 @@ function Home() {
                 <Topbar />
             </div>
             <div className="homeContainer">
-                <Sidebar page={1} />
+                <div>
+                    <Sidebar page={1} />
+                </div>
+
                 <div className="homeFeed">
                     <Share />
                     {

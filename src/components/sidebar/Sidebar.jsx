@@ -15,6 +15,7 @@ import SidebarFriendSuggestion from './friendsuggestion/FriendSuggestion';
 import FriendRequest from './friendrequest/friendrequest';
 import SideBarGroup from './group/sidebargroup';
 import SidebarSearch from './search/sidebarsearch'
+import SidebarSetting from './setting/setting';
 
 function Sidebar({ page }) {
 
@@ -63,8 +64,10 @@ function Sidebar({ page }) {
             <div className='sidebarFriend'>
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
-                        <GroupOutlined className="sidebarIcon" />
-                        <span className="sidebarListItemText">Trang Chủ </span>
+                        <Link to="/" className="sidebarListItemText">
+                            <GroupOutlined className="sidebarIcon" />
+                            <span className="sidebarListItemText">Trang Chủ </span>
+                        </Link>
                     </li>
                     <li className="sidebarListItem">
                         <Link to="/friend-request" className="sidebarListItemText">
@@ -103,7 +106,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : page === 7 ? <SidebarSetting /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

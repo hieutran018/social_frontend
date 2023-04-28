@@ -110,7 +110,6 @@ function Post({ post }) {
         } else {
             dispatch(sharePostToWall(post, cookies, null, 1))
         }
-
         setShare(share + 1)
         setAnchor(null);
     }

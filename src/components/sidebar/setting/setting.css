@@ -1,0 +1,25 @@
+.sidebarSettingButtonBack {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.sidebarSettingButtonBack:hover{
+    background-color: #dfe0e1;
+}
+.sidebarSettingIconBack{
+    color: #9e9d9d;
+}
+.sidebarSettingItemText{
+    font-size: 30px;
+    font-weight: 600;
+}

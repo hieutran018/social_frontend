@@ -60,13 +60,16 @@ we always go back to main conyainer and we use secondary as name for more contai
                         </DropdownItem>
                     </Link>
                     {/* if this item is clicked then only CSSTransition component will be triggered if active === settings as given in in prop boolean */}
-                    <DropdownItem
-                        leftIcon={<SettingsIcon />}
-                        goToMenu={"settings"}
-                        setActive={setActive}
-                    >
-                        <span className="textFunction">Cài đặt chung</span>
-                    </DropdownItem>
+
+                    <Link to="/settings" className="dropDownItemProfile">
+                        <DropdownItem
+                            leftIcon={<SettingsIcon />}
+                        // goToMenu={"settings"}
+                        // setActive={setActive}
+                        >
+                            <span className="textFunction">Cài đặt chung</span>
+                        </DropdownItem>
+                    </Link>
                     <DropdownItem leftIcon={<LogoutIcon />}>
                         <div style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }} onClick={handleLogOut}>
                             <span className="textFunction">Đăng xuất</span>
@@ -75,7 +78,7 @@ we always go back to main conyainer and we use secondary as name for more contai
                     </DropdownItem>
                 </div>
             </CSSTransition>
-            <CSSTransition
+            {/* <CSSTransition
                 in={active === "settings"}
                 unmountOnExit
                 timeout={500}
@@ -94,7 +97,7 @@ we always go back to main conyainer and we use secondary as name for more contai
                     <DropdownItem className="textFunction" leftIcon={<SettingsIcon />}><span className="textFunction">Đổi mật khẩu</span></DropdownItem>
 
                 </div>
-            </CSSTransition >
+            </CSSTransition > */}
 
         </div >
     );
