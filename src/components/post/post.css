@@ -230,6 +230,9 @@ color: black;
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
 }
+.postWithTextShare{
+    font-weight: 400;
+}
 .postShareWrapper{
     margin: 0.5rem;    
 }

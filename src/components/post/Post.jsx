@@ -17,7 +17,7 @@ import moment from 'moment';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { sharePostToWall } from "../../redux/actions/postAction";
+import { sharePostToWall, sharePostFormGroupToWall } from "../../redux/actions/postAction";
 import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
 import axios from "axios";
@@ -25,9 +25,12 @@ import 'moment/locale/vi';
 
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
+import { useParams } from "react-router-dom";
 
 function Post({ post }) {
     console.log(post);
+    const pages = useParams().pages;
+    const groupId = useParams().groupId;
     const cookies = useCookies('_tk');
     const [open, setOpen] = useState(false);
     const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
@@ -102,7 +105,12 @@ function Post({ post }) {
     }
 
     const handleClickSharePost = () => {
-        dispatch(sharePostToWall(post, cookies, null, 1))
+        if (pages === 'group' && groupId) {
+            dispatch(sharePostFormGroupToWall(post, cookies, null, 1))
+        } else {
+            dispatch(sharePostToWall(post, cookies, null, 1))
+        }
+
         setShare(share + 1)
         setAnchor(null);
     }
@@ -158,6 +166,7 @@ function Post({ post }) {
                                             <a className="postLinkProfileMemberGroup" href={"/" + post.user_id}>
                                                 {post.displayName}
                                             </a>
+
                                         </span>
                                         <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
                                             {post.privacy.toString() === "0" ?
@@ -182,8 +191,9 @@ function Post({ post }) {
                                 <div>
                                     <span className="postUsername">
                                         <a className="postLinkProfileUser" href={"/" + post.user_id}>
-                                            {post.displayName} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                            {post.displayName}
                                         </a>
+                                        {post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                     </span>
                                     <div className="postPrivacy">
                                         <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}

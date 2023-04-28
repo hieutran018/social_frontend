@@ -129,6 +129,29 @@ export const addNewPost = (token, contentPost, files, privacy, tags, group) => {
         }
     }
 }
+export const sharePostFormGroupToWall = (post, cookies, inputContent, privacy) => {
+    return async dispatch => {
+        try {
+            dispatch(addNewPostStarted());
+            axios({
+                method: 'POST', //you can set what request you want to be
+                url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
+                data: { postId: post.id, postContent: inputContent, privacy: privacy },
+                headers: {
+                    Authorization: 'Bearer ' + cookies[0]._tk
+                }
+            }).then((response) => {
+                console.log('redux postshare', response.data)
+
+            }).catch((error) => {
+                addNewPostFailed(error.message);
+                console.log(error);
+            });
+        } catch (error) {
+            dispatch(fetchPostFailed(error))
+        }
+    };
+}
 
 export const sharePostToWall = (post, cookies, inputContent, privacy) => {
     return async dispatch => {

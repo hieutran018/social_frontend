@@ -1,15 +1,16 @@
 .groupPageAvatarContainer{
     width: 100%;
-    height: 500px;
-    max-height: 550px;
+    height: 450px;
+    max-height: 500px;
     border-radius: 10px;
 }
 
 .groupPageAvatar{
     width: 100%;
-    height: 500px;
-    max-height: 550px;
+    height: 450px;
+    max-height: 500px;
     border-radius: 10px;
+    object-fit: revert;
 }
 .groupPageInforContainer{
     margin-top: 1rem;
