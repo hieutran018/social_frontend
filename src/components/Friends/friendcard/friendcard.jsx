@@ -5,12 +5,14 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 function FriendCard({ friend }) {
-
+    const userCurrent = useParams().userId;
+    const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
     const [isFriend, setIsFriend] = useState(true)
     const [isSend, setIsSend] = useState(true);
+    console.log(user.id === userCurrent, user.id, userCurrent);
     const unFriend = (userId) => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/unfriend';
         axios({
@@ -87,7 +89,7 @@ function FriendCard({ friend }) {
                         <Grid item xs container direction="column" spacing={2}>
                             <div className='friendCardRight'>
                                 <div className='friendCardRightContainer'>
-                                    <Link className='friendCardUserName' to={"/" + friend.friendId}>
+                                    <Link className='friendCardUserName' to={"/userId/" + friend.friendId}>
                                         <div>
                                             <span className='friendCardUserName'>{friend.displayName}</span>
                                         </div>
@@ -96,13 +98,17 @@ function FriendCard({ friend }) {
                                         <div className='informationButtonEdit'><MoreHorizIcon /></div>
                                     </div>
                                 </div>
-                                <div className='friendCardButtonUnfriend' >
-                                    {
-                                        isFriend ? <button onClick={() => unFriend(friend.friendId)} className='friendButtonUnFriend'>Hủy kết bạn</button>
-                                            : (isSend ? <button onClick={() => hanldeClickResendAddFriend(friend.friendId)} className='friendButtonResendAddFriend'>Kết bạn</button> : <button onClick={() => hanldeClickCancelAddFriend(friend.friendId)} className='friendButtonUnFriend'>Hủy lời mời</button>)
-                                    }
+                                {
+                                    user.id.toString() === userCurrent ?
+                                        <div className='friendCardButtonUnfriend' >
+                                            {
+                                                isFriend ? <button onClick={() => unFriend(friend.friendId)} className='friendButtonUnFriend'>Hủy kết bạn</button>
+                                                    : (isSend ? <button onClick={() => hanldeClickResendAddFriend(friend.friendId)} className='friendButtonResendAddFriend'>Kết bạn</button> : <button onClick={() => hanldeClickCancelAddFriend(friend.friendId)} className='friendButtonUnFriend'>Hủy lời mời</button>)
+                                            }
+                                        </div> :
+                                        <></>
+                                }
 
-                                </div>
                             </div>
 
                         </Grid>

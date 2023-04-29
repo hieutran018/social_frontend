@@ -45,7 +45,7 @@
     font-size: 16;
     width: 20%;
     display: flex;
-    justify-content: end;
+    justify-content: right;
 }
 .settingAccountOption{
     margin-top: 0.5rem;

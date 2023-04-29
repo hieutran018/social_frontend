@@ -14,17 +14,17 @@ function Photos() {
                     <span className='photosTitleText'> Ảnh</span>
                 </div>
                 <div className='photosTabCategory'>
-                    <Link className='photosLinkTab' to={"/" + userId + "/photos/photos_of"}>
+                    <Link className='photosLinkTab' to={"/userId/" + userId + "/photos/photos_of"}>
                         <div className={category === 'photos_of' ? 'photosTab active' : 'photosTab'}>
                             <span className='photosTabCategoryName'> Ảnh có mặt bạn</span>
                         </div>
                     </Link>
-                    <Link className='photosLinkTab' to={"/" + userId + "/photos/photos_by"}>
+                    <Link className='photosLinkTab' to={"/userId/" + userId + "/photos/photos_by"}>
                         <div className={category === 'photos_by' ? 'photosTab active' : 'photosTab'}>
                             <span className='photosTabCategoryName'> Ảnh của bạn</span>
                         </div>
                     </Link>
-                    <Link className='photosLinkTab' to={"/" + userId + "/photos/album"}>
+                    <Link className='photosLinkTab' to={"/userId/" + userId + "/photos/album"}>
                         <div className={category === 'album' ? 'photosTab active' : 'photosTab'}>
                             <span className='photosTabCategoryName'> Album</span>
                         </div>

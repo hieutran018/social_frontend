@@ -18,7 +18,7 @@ function SettingAccount() {
                     <div className='settingAccountOption'>
                         <div className='settingAccountTitleOption'>Truy cập thông tin của bạn</div>
                         <div className='settingAccountDescriptionOption'>Xem, cập nhật thông tin của bạn.</div>
-                        <a className='settingAccountLinkOption' href="*">Đi đến</a>
+                        <a className='settingAccountLinkOption' href="/settings/your_information">Đi đến</a>
                     </div>
                     <hr />
                     <div className='settingAccountOption'>

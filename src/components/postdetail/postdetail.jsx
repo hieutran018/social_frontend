@@ -100,13 +100,13 @@ function PostDetail({ post }) {
 
                                     <div>
                                         <span className="postUsername">
-                                            <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                            <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                                 {post.groupName}
                                             </a>
                                         </span>
                                         <div className="postPrivacy">
                                             <span className="postMemberGroup">
-                                                <a className="postLinkProfileMemberGroup" href={"/" + post.user_id}>
+                                                <a className="postLinkProfileMemberGroup" href={"/userId/" + post.user_id}>
                                                     {post.displayName}
                                                 </a>
                                             </span>
@@ -122,7 +122,7 @@ function PostDetail({ post }) {
                                 </div>
                                 :
                                 <div className="postTopLeft">
-                                    <a href={"/" + post.user_id}>
+                                    <a href={"/userId/" + post.user_id}>
                                         <img
                                             className="postProfileImg"
                                             src={post.avatarUser}
@@ -132,7 +132,7 @@ function PostDetail({ post }) {
 
                                     <div>
                                         <span className="postUsername">
-                                            <a className="postLinkProfileUser" href={"/" + post.user_id}>
+                                            <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                                 {post.displayName}
 
                                             </a>
@@ -298,13 +298,13 @@ function PostDetail({ post }) {
 
                                                         <div>
                                                             <span className="postUsername">
-                                                                <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
+                                                                <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
                                                                     {post.parent_post.groupName}
                                                                 </a>
                                                             </span>
                                                             <div className="postPrivacy">
                                                                 <span className="postMemberGroup">
-                                                                    <a className="postLinkProfileMemberGroup" href={"/" + post.parent_post.user_id}>
+                                                                    <a className="postLinkProfileMemberGroup" href={"/userId/" + post.parent_post.user_id}>
                                                                         {post.parent_post.displayName}
                                                                     </a>
                                                                 </span>
@@ -319,7 +319,7 @@ function PostDetail({ post }) {
 
                                                     </div> :
                                                     <div className="postTopLeft">
-                                                        <a href={"/" + post.parent_post.user_id}>
+                                                        <a href={"/userId/" + post.parent_post.user_id}>
                                                             <img
                                                                 className="postProfileImg"
                                                                 src={post.parent_post.avatarUser}
@@ -329,7 +329,7 @@ function PostDetail({ post }) {
 
                                                         <div>
                                                             <span className="postUsername">
-                                                                <a className="postLinkProfileUser" href={"/" + post.parent_post.user_id}>
+                                                                <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
                                                                     {post.parent_post.displayName} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
                                                                 </a>
                                                             </span>

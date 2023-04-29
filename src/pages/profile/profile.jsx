@@ -185,11 +185,11 @@ function Profile() {
                                 <div className='profileTabBar'>
 
                                     <div className='profileTabBarButton'>
-                                        <Link className='profileTextLink' to={"/" + userId}><div className={page ? 'profileTab' : 'profileTab active'}> <span className='profileTextTab'>Bài viết</span></div></Link>
-                                        <Link className='profileTextLink' to={"/" + userId + "/about"}><div className={page === 'about' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Giới thiệu</span></div></Link>
-                                        <Link className='profileTextLink' to={"/" + userId + "/friends"}><div className={page === 'friends' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Bạn bè</span></div></Link>
-                                        <Link className='profileTextLink' to={"/" + userId + "/photos/photos_of"}><div className={page === 'photos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Ảnh</span></div> </Link>
-                                        <Link className='profileTextLink' to={"/" + userId + "/videos"}><div className={page === 'videos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Video</span></div></Link>
+                                        <Link className='profileTextLink' to={"/userId/" + userId}><div className={page ? 'profileTab' : 'profileTab active'}> <span className='profileTextTab'>Bài viết</span></div></Link>
+                                        <Link className='profileTextLink' to={"/userId/" + userId + "/about"}><div className={page === 'about' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Giới thiệu</span></div></Link>
+                                        <Link className='profileTextLink' to={"/userId/" + userId + "/friends"}><div className={page === 'friends' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Bạn bè</span></div></Link>
+                                        <Link className='profileTextLink' to={"/userId/" + userId + "/photos/photos_of"}><div className={page === 'photos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Ảnh</span></div> </Link>
+                                        <Link className='profileTextLink' to={"/userId/" + userId + "/videos"}><div className={page === 'videos' ? 'profileTab active' : 'profileTab'}> <span className='profileTextTab'>Video</span></div></Link>
                                     </div>
                                 </div>
                                 {

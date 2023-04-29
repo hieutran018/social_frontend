@@ -25,11 +25,11 @@ function Comment({ comment }) {
             <div className='comment'>
                 <div className="commentCard">
                     <div className="commentAvatarContainer">
-                        <a href={"/" + comment.userId}><img className="commentAvatarProfile" src={comment.avatarUser} alt="" /></a>
+                        <a href={"/userId/" + comment.userId}><img className="commentAvatarProfile" src={comment.avatarUser} alt="" /></a>
                     </div>
                     <div className='commentMain'>
                         <div onClick={() => viewProfileUser(comment.userId)} className="commentUserNameContainer">
-                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + comment.userId}>{comment.displayName}</a></span>
+                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/userId/" + comment.userId}>{comment.displayName}</a></span>
                         </div>
                         <div className="commentContent">
                             <span>{comment.comment_content}</span>
@@ -49,11 +49,11 @@ function Comment({ comment }) {
                             <div className='comment'>
                                 <div className="commentCard">
                                     <div className="commentAvatarContainer">
-                                        <a href={"/" + reply.userId}><img className="commentAvatarProfile" src={reply.avatarUser} alt="" /></a>
+                                        <a href={"/userId/" + reply.userId}><img className="commentAvatarProfile" src={reply.avatarUser} alt="" /></a>
                                     </div>
                                     <div className='commentMain'>
                                         <div onClick={() => viewProfileUser(reply.userId)} className="commentUserNameContainer">
-                                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/" + reply.userId}>{reply.displayName}</a></span>
+                                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/userId/" + reply.userId}>{reply.displayName}</a></span>
                                         </div>
                                         <div className="commentContent">
                                             <span>{reply.comment_content}</span>

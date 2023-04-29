@@ -9,12 +9,11 @@ import axios from 'axios';
 
 
 function ViewProfile() {
-    let { userId } = useParams();
+    const userId = useParams().userId;
     const [user, setUser] = useState([]);
+    console.log("LOG", userId);
     useEffect(() => {
-        axios.post('http://127.0.0.1:8000/api/profile-user', {
-            userId: userId,
-        }).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
+        axios.get('http://127.0.0.1:8000/api/profile-user/userId=' + userId).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
 
         window.scrollTo(0, 0)
     }, [userId])

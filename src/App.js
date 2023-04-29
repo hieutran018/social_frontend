@@ -38,15 +38,16 @@ function App() {
       <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} />
       <Route path='/friend-request' element={< FriendRequest />} />
       <Route path='/friend-request/:userId' element={< FriendRequest />} />
-      <Route path='/:userId' element={<Profile />} />
-      <Route path='/:userId/:page' element={<Profile />} />
-      <Route path='/:userId/:page/:category' element={<Profile />} />
-      <Route path='/:userId/:page/:category/:albumId' element={<Profile />} />
+      <Route path='/userId/:userId' element={<Profile />} />
+      <Route path='/userId/:userId/:page' element={<Profile />} />
+      <Route path='/userId/:userId/:page/:category' element={<Profile />} />
+      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} />
       <Route path='/groups/:pages' element={<Group />} />
       <Route path='/groups/:pages/:groupId' element={<Group />} />
       <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} />
       <Route path='/search/:result' element={<Search />} />
       <Route path='/settings' element={<Settings />} />
+      <Route path='/settings/:setting' element={<Settings />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>
   );

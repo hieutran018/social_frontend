@@ -80,7 +80,7 @@ function RightbarProfile({ user }) {
             <div className="rightbarContainer">
                 <div className="rightbarFriend">
                     <div className="rightbarFriendContent">
-                        <div className="rightbarTitleContent"><h4 className="rightbarTitle">Bạn bè</h4><Link className="rightbarLinkViewMoreFriend" to={"/" + user.id + "/friends"}><span className="rightbarLinkViewMoreFriend">Xem tất cả bạn bè</span></Link></div>
+                        <div className="rightbarTitleContent"><h4 className="rightbarTitle">Bạn bè</h4><Link className="rightbarLinkViewMoreFriend" to={"/userId/" + user.id + "/friends"}><span className="rightbarLinkViewMoreFriend">Xem tất cả bạn bè</span></Link></div>
                         <div className="rightbarFriendContainer">
                             <Grid sx={{ flexGrow: 1 }} container spacing={0.5}>
                                 <Grid item xs={12}>
@@ -113,7 +113,7 @@ function RightbarProfile({ user }) {
             <div className="rightbarContainer">
                 <div className="rightbarFriend">
                     <div className="rightbarFriendContent">
-                        <div className="rightbarTitleContent"><h4 className="rightbarTitle">Ảnh</h4><Link className="rightbarLinkViewMoreFriend" to={"/" + user.id + "/photos/photos_of"}><span>Xem tất cả ảnh</span></Link></div>
+                        <div className="rightbarTitleContent"><h4 className="rightbarTitle">Ảnh</h4><Link className="rightbarLinkViewMoreFriend" to={"/userId/" + user.id + "/photos/photos_of"}><span>Xem tất cả ảnh</span></Link></div>
                         <div className="rightbarFriendContainer">
 
                             <Grid sx={{ flexGrow: 1 }} container spacing={0.5}>

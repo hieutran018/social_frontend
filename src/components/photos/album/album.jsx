@@ -105,7 +105,7 @@ function Album() {
                                         albums.map((album) => (
                                             <Grid key={album.id} item>
 
-                                                <Link to={"/" + userId + "/photos/album/" + album.id}>
+                                                <Link to={"/userId/" + userId + "/photos/album/" + album.id}>
                                                     {album.thumnail === null ? <div style={{
                                                         backgroundColor: "#D8DADF", width: "11.95rem",
                                                         height: "11.95rem"

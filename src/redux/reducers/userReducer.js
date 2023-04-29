@@ -7,7 +7,8 @@ import {
     UPDATE_USER_SUCCESSED,
     UPDATE_AVATAR_STARTED,
     UPDATE_AVATAR_SUCCESSED,
-    UPDATE_AVATAR_FAILED
+    UPDATE_AVATAR_FAILED,
+    FETCH_CURRENT_USER
 } from '../constants/userContant';
 
 const initialState = []
@@ -32,6 +33,12 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 users: [],
                 status: 'failed'
+            }
+        }
+        case FETCH_CURRENT_USER: {
+            return {
+                ...state,
+                users: action.user
             }
         }
         case UPDATE_USER_STARTED: {

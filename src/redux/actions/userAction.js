@@ -13,7 +13,8 @@ import {
     UPDATE_AVATAR_FAILED,
     UPDATE_COVER_STARTED,
     UPDATE_COVER_SUCCESSED,
-    UPDATE_COVER_FAILED
+    UPDATE_COVER_FAILED,
+    FETCH_CURRENT_USER
 } from '../constants/userContant';
 
 export const fetchUserStart = () => ({
@@ -68,6 +69,10 @@ export const updateCoverUserFail = error => ({
     type: UPDATE_COVER_FAILED,
     error
 })
+export const fetchCurrentUser = user => ({
+    type: FETCH_CURRENT_USER,
+    user
+})
 
 export const fetchUser = (userId) => {
     return async dispatch => {
@@ -81,6 +86,79 @@ export const fetchUser = (userId) => {
             dispatch(fetchUserSuccessed(response.data))
         }).catch((error) => dispatch(fetchUserFail(error.message)));
         console.log(userId);
+    }
+}
+
+export const currentUser = (cookies) => {
+    return async dispatch => {
+        try {
+            const requestURL = 'http://127.0.0.1:8000/api/auth/me';
+            axios({
+                method: "POST",
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log(response.data);
+                dispatch(fetchCurrentUser(response.data))
+            })
+        } catch (error) {
+
+        }
+    }
+}
+
+export const updateDisplaynameUser = (cookies, displayName) => {
+    return async dispatch => {
+        try {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/update-displayname-user';
+            axios({
+                method: "POST",
+                url: requestURL,
+                data: {
+                    displayName: displayName
+                },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log(response.data);
+                dispatch(fetchCurrentUser(response.data));
+                localStorage.setItem('user', JSON.stringify(response.data))
+            })
+        } catch (error) {
+
+        }
+    }
+}
+export const updatePhoneUser = (cookies, phone) => {
+    return async dispatch => {
+        try {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/update-phone-user';
+            axios({
+                method: "POST",
+                url: requestURL,
+                data: {
+                    phone: phone
+                },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log(response.data);
+                dispatch(fetchCurrentUser(response.data));
+                localStorage.setItem('user', JSON.stringify(response.data))
+            })
+        } catch (error) {
+
+        }
     }
 }
 
@@ -98,7 +176,6 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log("RES =========", response.data);
             dispatch(updateUserSuccess(response.data));
             // dispatch(fetchUser())
 

@@ -2,8 +2,12 @@ import './setting.css';
 import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import SettingAccount from '../../components/settings/setting';
+import { useParams } from 'react-router-dom';
+import DetailUser from '../../components/settings/detailuser/detailuser';
 
 function Settings() {
+    const setting = useParams().setting;
+    console.log("LOG PARA", setting);
     return (
         <div className='setting'>
             <div className='settingTopBar'>
@@ -12,7 +16,12 @@ function Settings() {
             <div className='settingContainer'>
                 <Sidebar page={7} />
                 <div className='settingMainContainer'>
-                    <SettingAccount />
+                    {
+                        !setting ? <SettingAccount /> :
+                            setting === 'your_information' ? <DetailUser /> :
+                                <>NOT FOUND</>
+                    }
+
                 </div>
             </div>
         </div>

@@ -54,7 +54,7 @@ we always go back to main conyainer and we use secondary as name for more contai
         in this component props to next element and we add css to animate
         */}
                 <div className="menu">
-                    <Link to={"/" + user.id} className="dropDownItemProfile">
+                    <Link to={"/userId/" + user.id} className="dropDownItemProfile">
                         <DropdownItem leftIcon={<AccountCircleIcon />}>
                             <span className="textFunction">{user.displayName}</span>
                         </DropdownItem>
