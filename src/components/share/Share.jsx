@@ -84,6 +84,7 @@ function Share({ group }) {
                     onClose={handleClose}
                     fullWidth
                     maxWidth="sm"
+                    scroll='body'
                 >
                     <DialogShare group={group} />
                 </Dialog>
