@@ -191,7 +191,7 @@ function Post({ post }) {
                                         <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                             {post.displayName}
                                         </a>
-                                        {post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                        {post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                     </span>
                                     <div className="postPrivacy">
                                         <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
@@ -388,7 +388,7 @@ function Post({ post }) {
                                                     <div>
                                                         <span className="postUsername">
                                                             <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
-                                                                {post.parent_post.displayName} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                {post.parent_post.displayName} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
                                                             </a>
                                                         </span>
                                                         <div className="postPrivacy">

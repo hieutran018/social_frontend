@@ -18,7 +18,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useCookies } from 'react-cookie';
 import { addNewPost } from '../../redux/actions/postAction'
@@ -40,11 +40,48 @@ function DialogShare({ group }) {
     const [checkClick, setCheckClick] = useState(true);
     const [tab, setTab] = useState(0);
     const [listFr, setListFr] = useState([]);
+    const [listIcon, setListIcon] = useState([]);
     const [taggingList, setTaggingList] = useState([]);
     const [taggingId, setTaggingId] = useState([]);
     const [inputContentPost, setInputContentPost] = useState();
+    const [selectIcon, setSelectIcon] = useState();
+    const [inputSearchIcon, setInputSearchIcon] = useState('');
+    const [resultIcon, setResultIcon] = useState([]);
+    const typingTimeOutRef = useRef(null);
+    const handleChangeSearch = (event) => {
+        setInputSearchIcon(event.target.value)
+        if (!event.target.value) {
+            setResultIcon([])
+        } else {
+            setInputSearchIcon(event.target.value);
+            //? ĐẶT LẠI THỜI GIAN ĐỢI CHO VIỆC GÕ
+            if (typingTimeOutRef.current) {
+                clearTimeout(typingTimeOutRef.current);
+            }
+            typingTimeOutRef.current = setTimeout(() => {
+                searchIcon(event.target.value);
 
+            }, 300)
+        }
 
+    }
+
+    function searchIcon(input) {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/search-feel-and-activity-posts/search=' + input;
+
+        axios({
+            method: "GET",
+            url: requestURL,
+            headers: {
+                Authorization: "Bearer " + cookies[0]._tk,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then((response) => {
+            setResultIcon(response.data);
+            console.log(response.data);
+        }).catch((error) => console.log(error));
+    }
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFIles = [];
@@ -78,7 +115,7 @@ function DialogShare({ group }) {
             return;
         }
         setCheckClick(false);
-        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group));
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group, selectIcon.id));
         setInputContentPost('');
         setFiles([]);
         setImages([]);
@@ -122,7 +159,27 @@ function DialogShare({ group }) {
         }).catch((error) => console.log(error));
     }
     const handleClickFellingandActivity = () => {
-        setTab(2);
+        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-fell-and-activity-posts";
+
+        axios({
+            method: 'GET',
+            url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies[0]._tk,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+
+        }).then((response) => {
+            setListIcon(response.data);
+            setTab(2);
+            console.log(selectIcon);
+        }).catch((error) => console.log(error));
+    }
+
+    const handleSelectIcon = (icon) => {
+        setSelectIcon(icon);
+        setTab(0);
     }
 
     return (
@@ -148,7 +205,7 @@ function DialogShare({ group }) {
                                         <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={user.avatar} alt="logo" /></div>
 
                                         <div className="details">
-                                            <p className='shareUserName'>{user.displayName} {taggingList.length === 0 ? "" : <span className='shareWithText'> cùng với <span className='shareUserName'>{taggingList.length + " người khác"}</span></span>}</p>
+                                            <p className='shareUserName'>{user.displayName} {selectIcon ? <span className='shareWithText'>đang cảm thấy <img width={20} height={20} src={selectIcon.patch} alt="" /> <span className='shareUserName'>{selectIcon.icon_name}</span></span> : ""} {taggingList.length === 0 ? "" : <span className='shareWithText'> cùng với <span className='shareUserName'>{taggingList.length + " người khác"}</span></span>}</p>
                                             <div className='privacy' onClick={handleClick}>
                                                 {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                                 <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -304,28 +361,45 @@ function DialogShare({ group }) {
                                                 <span style={{ fontSize: "20px", fontWeight: "500" }}>Bạn đang cảm thấy như thế nào?</span>
                                             </div>
                                             <div className='dialogShareSearchFeelingAndActivityContainer'>
-                                                <BsSearch size={25} /> <input type="text" className='dialogShareSearchFeelingAndActivity' />
+                                                <BsSearch size={25} /> <input onChange={handleChangeSearch} value={inputSearchIcon} type="text" className='dialogShareSearchFeelingAndActivity' />
                                             </div>
                                         </DialogTitle>
                                         <DialogContent style={{ padding: "0px" }}>
                                             <div className='dialogShareFeelingAndActivityMain'>
                                                 <div className='dialogShareFeelingAndActivityList'>
-                                                    <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
-                                                        {
-                                                            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((item) => (
-                                                                <Grid key={item} item xs={6}>
-                                                                    <div className='dialogShareFeelingAndActivytiCard'>
-                                                                        <div className='dialogShareFeelingAndActivytiIcon'>
-                                                                            <img className='dialogShareFeelingAndActivytiImage' src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/C4yAC7LRNGf.png" alt="" />
+                                                    {
+                                                        resultIcon.length === 0 ? <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
+                                                            {
+                                                                listIcon.map((item) => (
+                                                                    <Grid onClick={() => handleSelectIcon(item)} key={item.id} item xs={6}>
+                                                                        <div style={{ backgroundColor: selectIcon ? (selectIcon.id === item.id ? "#c0c1c3" : "") : "" }} className='dialogShareFeelingAndActivytiCard'>
+                                                                            <div className='dialogShareFeelingAndActivytiIcon'>
+                                                                                <img className='dialogShareFeelingAndActivytiImage' src={item.patch} alt="" />
+                                                                            </div>
+                                                                            <div className='dialogShareFeelingAndActivytiName'>{item.icon_name}</div>
                                                                         </div>
-                                                                        <div className='dialogShareFeelingAndActivytiName'>blesed</div>
-                                                                    </div>
-                                                                </Grid>
-                                                            ))
-                                                        }
+                                                                    </Grid>
+                                                                ))
+                                                            }
 
 
-                                                    </Grid>
+                                                        </Grid> : <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
+                                                            {
+                                                                resultIcon.map((item) => (
+                                                                    <Grid onClick={() => handleSelectIcon(item)} key={item.id} item xs={6}>
+                                                                        <div style={{ backgroundColor: selectIcon ? (selectIcon.id === item.id ? "#c0c1c3" : "") : "" }} className='dialogShareFeelingAndActivytiCard'>
+                                                                            <div className='dialogShareFeelingAndActivytiIcon'>
+                                                                                <img className='dialogShareFeelingAndActivytiImage' src={item.patch} alt="" />
+                                                                            </div>
+                                                                            <div className='dialogShareFeelingAndActivytiName'>{item.icon_name}</div>
+                                                                        </div>
+                                                                    </Grid>
+                                                                ))
+                                                            }
+
+
+                                                        </Grid>
+                                                    }
 
                                                 </div>
                                             </div>
