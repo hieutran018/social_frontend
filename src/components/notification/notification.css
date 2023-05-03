@@ -1,0 +1,73 @@
+
+.notification{
+    background-color: white;
+    position: absolute;
+    border-radius: 10px;
+    border: 0.1px solid #D8DADF;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+
+.notification-list{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 800px !important;
+}
+
+.notification-list::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+.notification-list::-webkit-scrollbar-thumb{
+    
+    border-radius: 100px;
+    width: 100px;
+}
+
+.notificationItem{
+    width: 25rem;
+    padding: 10px;
+    margin: 0.5rem;
+    border-radius: 10px;
+}
+.notificationItem:hover{
+    background-color: #D8DADF;
+}
+.notificationHeader{
+    display: flex;
+    align-items: center;
+}
+.notificationBottom{
+    margin-left: 100px;
+}
+
+.notificationAvatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 10px;
+}
+
+.notificationContent {
+    display: flex;
+    flex: 1;
+}
+
+.notificationMessage {
+    margin: 0;
+    color: black;
+    font-size: 18px;
+}
+.notificationUserName{
+    font-weight: 500;
+    margin: 0;
+    color: black;
+    font-size: 18px;
+}
+.notificationCreateAt{
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+}

@@ -9,6 +9,7 @@ import { useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Notification from '../notification/notification';
 
 
 function Topbar() {
@@ -17,8 +18,15 @@ function Topbar() {
     const [dataUsers, setDataUsers] = useState([]);
     const [searchTemp, setSearchTemp] = useState('');
     const typingTimeOutRef = useRef(null);
+    const [openNoti, setOpenNoti] = useState(false);
 
+    const handleOpenNoti = () => {
+        setOpenNoti(true);
+    }
 
+    const handleCloseNoti = () => {
+        setOpenNoti(false);
+    }
 
     const handleChangeSearch = (event) => {
         setSearchTemp(event.target.value);
@@ -128,10 +136,12 @@ function Topbar() {
                         {/* <span className="topbarIconBadge">2</span> */}
                     </div>
                     <div className="topbarIconItem">
-                        <Notifications fontSize='25' />
-                        {/* <span className="topbarIconBadge">1</span> */}
+                        <Notifications onClick={!openNoti ? handleOpenNoti : handleCloseNoti} fontSize='25' />
+                        <Notification close={openNoti} />
                     </div>
+
                 </div>
+
 
                 <NavItem icon={<ArrowDropDownIcon />}>
                     <DropdownMenu />

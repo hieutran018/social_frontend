@@ -40,7 +40,7 @@ function Home() {
 
 
     return (
-        <div>
+        <div className="home">
             <div className="homeTopbar">
                 <Topbar />
             </div>

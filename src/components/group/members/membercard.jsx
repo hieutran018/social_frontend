@@ -63,7 +63,7 @@ function MemberCard({ member, auth }) {
                         }
                     </div>
                     <div className='memberCardJoinedAt'>
-                        Đã tham gia vào thứ ba
+                        {member.isAccept === 1 ? "Lời mời trở thành quản trị viên Đã tham gia vào thứ ba, ngày 2 tháng 5 năm 2023" : "Đã tham gia vào thứ ba, ngày 2 tháng 5 năm 2023"}
                     </div>
                 </div>
             </div>

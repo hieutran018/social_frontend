@@ -91,6 +91,9 @@
     height: 100%;
    
 }
+.homeRightbar::-webkit-scrollbar{
+    display: none;
+}
 
 .rightbarInfo {
     margin-bottom: 30px;
