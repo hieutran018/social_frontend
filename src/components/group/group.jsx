@@ -143,7 +143,7 @@ function GroupPage() {
 
 
 
-        }).catch((error) => console.log(error.message));
+        }).catch((error) => console.log(error));
     }
 
 

@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShowMoreText from "react-show-more-text";
 import PublicIcon from '@mui/icons-material/Public';
+import { AiOutlineCamera } from 'react-icons/ai';
 import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
 import ImageList from '@mui/material/ImageList';
@@ -12,61 +13,67 @@ import Comment from "../comment/comment";
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { commentPost } from '../../redux/actions/postAction';
+import axios from 'axios';
 
 import './postdetail.css'
 
 
 
 function PostDetail({ post }) {
+
     const cookies = useCookies('_tk');
     const user = JSON.parse(localStorage.getItem('user'));
     const [commentList, setCommentList] = useState([]);
     const [inputComment, setInputComment] = useState('');
     const [countComment, setCountComment] = useState(post.totalComment);
+    const [file, setFile] = useState();
 
     const dispatch = useDispatch();
 
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
+    const handleChangeFile = (e) => {
+        setFile(e.target.files[0])
+    }
 
     useEffect(() => {
-        async function fetchCommentByIdPost(postId) {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ postId: postId })
-            };
-            const requestURL = "http://127.0.0.1:8000/api/fetch-comment-by-post";
-            const response = await fetch(requestURL, requestOptions);
-            const responseJson = await response.json();
-            setCommentList(responseJson);
-
+        function fetchCommentByIdPost(postId) {
+            const requestURL = 'http://127.0.0.1:8000/api/fetch-comment-by-post';
+            axios({
+                method: "POST",
+                url: requestURL,
+                data: {
+                    postId: postId
+                }
+            }).then((response) => {
+                setCommentList(response.data);
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
         }
         fetchCommentByIdPost(post.id)
     }, [post.id])
 
 
-
-
-
     const handleClickPostComment = (postId) => {
-        dispatch(commentPost(cookies[0]._tk, postId, inputComment))
-
+        console.log(postId, post);
+        dispatch(commentPost(cookies[0]._tk, postId, inputComment, file ? file : null))
+        const requestURL = 'http://127.0.0.1:8000/api/fetch-comment-by-post';
+        axios({
+            method: "POST",
+            url: requestURL,
+            data: {
+                postId: postId
+            }
+        }).then((response) => {
+            setCommentList(response.data);
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        })
         setInputComment('');
-        async function fetchCommentByIdPost(postId) {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ postId: postId })
-            };
-            const requestURL = "http://127.0.0.1:8000/api/fetch-comment-by-post";
-            const response = await fetch(requestURL, requestOptions);
-            const responseJson = await response.json();
-            setCommentList(responseJson);
-            setCountComment(countComment + 1);
-        }
-        fetchCommentByIdPost(postId)
     }
 
     return (
@@ -389,12 +396,22 @@ function PostDetail({ post }) {
                                     }
                                 } : {}
                             } className="commentBoxInut" type="text" value={inputComment} onChange={(event) => setInputComment(event.target.value)} />
-                        </div>
 
+                            <label className='commentBoxUpload' onChange={handleChangeFile} htmlFor='uploadFiles'><input type="file" id="uploadFiles" hidden /><AiOutlineCamera style={{ fontSize: "35" }} className="shareIcon" /></label>
+                        </div>
+                        {
+                            file ? <div className='commentBoxPreviewUploadContainer'>
+                                {
+                                    file.type === 'image/jpeg' ? <img width={500} height={200} src={URL.createObjectURL(file)} alt="" /> :
+                                        <video src={URL.createObjectURL(file)} controls></video>
+                                }
+                            </div> :
+                                <></>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

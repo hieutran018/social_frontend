@@ -180,3 +180,20 @@ font-size: 20px;
 .commentBoxInut:focus{
     outline: none;
 }
+.commentBoxUpload{
+    width: 50px;
+    
+    border: 0.1px solid #d8d8d8;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.commentBoxPreviewUploadContainer{
+    margin-top: 0.5rem;
+    width: 500px;
+    height: 200px;
+    margin-left: 60px;
+}

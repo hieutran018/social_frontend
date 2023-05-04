@@ -42,6 +42,17 @@ function Comment({ comment }) {
                 <span onClick={!isReply ? handleOpenCommentBox : handleCloseCommentBox} className="commentSubItem">Phản hồi</span>
                 <span className="commentSubItem">{moment(comment.created_at, 'YYYYMMDD H:mm:ss').fromNow()}</span>
             </div>
+            {
+                comment.fileName ?
+                    <div className='commentBoxPreviewUploadContainer'>
+                        {
+                            comment.mediaType === 'jpeg' || comment.mediaType === 'png' || comment.mediaType === 'jpg' ? <img src={comment.fileName} width={500} height={200} alt="" /> :
+                                <video controls width={500} height={200} src={comment.fileName}></video>
+                        }
+
+                    </div> :
+                    <></>
+            }
             <div className='commentReply'>
                 {
                     comment.replies.map((reply) => (
@@ -66,6 +77,10 @@ function Comment({ comment }) {
                                 <span onClick={handleOpenCommentBox} className="commentSubItem">Phản hồi</span>
                                 <span className="commentSubItem">{moment(reply.created_at, 'YYYYMMDD H:mm:ss').fromNow()}</span>
                             </div>
+
+
+
+
                         </div>
                     ))
                 }

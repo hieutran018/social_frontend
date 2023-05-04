@@ -210,15 +210,17 @@ export const fetchPostGroupByIdGroup = (cookies, groupId, page) => {
     }
 }
 
-export const commentPost = (cookies, postId, commentContent) => {
+export const commentPost = (cookies, postId, commentContent, file) => {
     return async dispatch => {
         try {
             axios({
                 method: 'POST', //you can set what request you want to be
                 url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
-                data: { postId: postId, commentContent: commentContent },
+                data: { postId: postId, commentContent: commentContent, file: file },
                 headers: {
-                    Authorization: 'Bearer ' + cookies
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
                 }
             }).then((res) => console.log(res))
         }

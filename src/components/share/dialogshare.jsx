@@ -115,7 +115,7 @@ function DialogShare({ group }) {
             return;
         }
         setCheckClick(false);
-        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group, selectIcon.id));
+        dispatch(addNewPost(cookies[0]._tk, inputContentPost, files, privacy, taggingId, group, selectIcon ? selectIcon.id : null));
         setInputContentPost('');
         setFiles([]);
         setImages([]);
