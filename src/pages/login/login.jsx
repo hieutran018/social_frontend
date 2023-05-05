@@ -12,6 +12,7 @@ import { requestDev } from '../../components/auth/auth';
 import './login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { io } from "socket.io-client";
 
 function Login() {
 
@@ -65,7 +66,11 @@ function Login() {
                     if (!res.statusText === 'OK') {
                         return;
                     } else {
-                        console.log(res);
+                        const socket = io('http://localhost:3001');
+                        socket.on('connection', () => {
+
+                        });
+                        socket.emit('online', res.data.user)
                         setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
                         localStorage.setItem('user', JSON.stringify(res.data.user));
                         navigate('/')

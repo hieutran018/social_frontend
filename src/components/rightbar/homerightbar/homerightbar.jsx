@@ -1,8 +1,20 @@
 import '../rightbar.css';
-import { Users } from "../../../data";
 import Online from "../../online/Online";
+import { io } from "socket.io-client";
+import { useEffect, useState } from 'react';
 
 function HomeRightbar() {
+    const [onlines, setOnlines] = useState([])
+    useEffect(() => {
+        const socket = io('http://localhost:3001');
+        socket.on('online', (response) => {
+            setOnlines(response);
+        });
+
+    }, [])
+
+
+    console.log('ONLINE LIST', onlines);
     return (
         <div className="homeRightbar">
             <div className="birthdayContainer">
@@ -14,8 +26,8 @@ function HomeRightbar() {
             {/* <img className="rightbarAd" src="assets/ad.png" alt="" /> */}
             <h4 className="rightbarTitle">Người liên hệ</h4>
             <ul className="rightbarFriendList">
-                {Users.map((u) => (
-                    <Online key={u.id} user={u} />
+                {onlines.map((online) => (
+                    <Online key={online.id} user={online} />
                 ))}
             </ul>
         </div>

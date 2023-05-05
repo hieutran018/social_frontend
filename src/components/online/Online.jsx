@@ -5,10 +5,10 @@ function Online({ user }) {
     return (
         <li className="onlineRightbarFriend">
             <div className="rightbarProfileImgContainer">
-                <img className="rightbarProfileImg" src={user.profilePicture} alt="" />
+                <img className="rightbarProfileImg" src={user.avatar} alt="" />
                 <span className="rightbarOnline"></span>
             </div>
-            <span className="rightbarUsername">{user.username}</span>
+            <span className="rightbarUsername">{user.displayName}</span>
         </li>
     );
 }
