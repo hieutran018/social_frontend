@@ -16,6 +16,7 @@ import FriendRequest from './friendrequest/friendrequest';
 import SideBarGroup from './group/sidebargroup';
 import SidebarSearch from './search/sidebarsearch'
 import SidebarSetting from './setting/setting';
+import SidebarStories from './stories/sidebarsories';
 
 function Sidebar({ page }) {
 
@@ -106,7 +107,7 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : page === 7 ? <SidebarSetting /> : <SidebarFriendSuggestion />}
+                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : page === 7 ? <SidebarSetting /> : page === 8 ? <SidebarStories /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

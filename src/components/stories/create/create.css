@@ -1,0 +1,57 @@
+.createStory{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.createStoryWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.createStoryOptions{
+    width: 20rem;
+    height: 30rem;
+    
+    margin: 0rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+   
+}
+
+.storyPhoto{
+    background-color: blue;
+   
+}
+.storyPhoto:hover{
+    background-color: rgb(65, 65, 236);
+}
+.storyVideo{
+    background-color: rgb(231, 70, 108);
+    
+}.storyVideo:hover{
+    background-color: rgb(234, 93, 126);
+}
+.createStoryDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.createStoryDescriptionIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    background-color: #dfdfdf;
+    margin-bottom: 1rem;
+}
+.createStoryDescriptionText{
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}

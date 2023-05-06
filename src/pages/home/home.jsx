@@ -6,7 +6,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Share from "../../components/share/Share";
+import Stories from '../../components/stories/stories'
 import Variants from '../../components/feed/postskeleton';
+
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../../redux/actions/postAction";
@@ -53,6 +55,7 @@ function Home() {
                 </div>
 
                 <div className="homeFeed">
+                    <Stories />
                     <Share />
                     {
                         status === 'loading' ?

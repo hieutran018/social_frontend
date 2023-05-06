@@ -15,6 +15,7 @@ import Loading from './components/loading/Loading';
 import FriendRequest from './pages/friendrequest/friendrequest';
 import Search from './pages/search/search';
 import Settings from './pages/setting/setting';
+import StoriesPage from './pages/storiespage/storiespage';
 
 
 
@@ -48,6 +49,7 @@ function App() {
       <Route path='/search/:result' element={<Search />} />
       <Route path='/settings' element={<Settings />} />
       <Route path='/settings/:setting' element={<Settings />} />
+      <Route path='/stories/create' element={<StoriesPage />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>
   );

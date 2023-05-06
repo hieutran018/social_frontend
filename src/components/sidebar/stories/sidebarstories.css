@@ -1,0 +1,32 @@
+.sidebarStories{
+    width: 20rem;
+    margin-top: 2rem;
+}
+.titlesidebarStories{
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.sidebarStoryUser{
+    display: flex;
+    align-items: center;
+    border: 0.1px solid #dfdfdf;
+    padding: 0.2rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+.sidebarStoryAvatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    object-fit: cover;
+    border: 0.1px solid grey;
+}
+.sidebarStoryUserName{
+    font-size: 20px;
+    font-weight: 500px;
+    margin-left: 1rem;
+}
