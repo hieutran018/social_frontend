@@ -2,21 +2,21 @@ import '../rightbar.css';
 import Online from "../../online/Online";
 import { io } from "socket.io-client";
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import axios from 'axios';
 
 function HomeRightbar() {
     // const cookies = useCookies('_tk')[0]._tk;
     // const user = JSON.parse(localStorage.getItem('user'));
     const [onlines, setOnlines] = useState([]);
     const [friends, setFriends] = useState([]);
+    const user = JSON.parse(localStorage.getItem('user'));
+
     useEffect(() => {
         const socket = io('http://localhost:3001');
+        socket.emit('online', { displayName: user.displayName, avatar: user.avatar, userId: user.id })
         socket.on('online', (response) => {
             setOnlines(response);
             console.log(response);
         });
-
     }, [])
     return (
         <div className="homeRightbar">

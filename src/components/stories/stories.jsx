@@ -1,33 +1,63 @@
 import './stories.css';
-import image from '../../ckc_social_logo.png';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStories } from '../../redux/actions/storiesAction';
+import { selectStories, selectStatusStories } from '../../redux/selectors/storiesSelector';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 
 function Stories() {
+    const cookies = useCookies('_tk')[0]._tk;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const dispatch = useDispatch();
+    const stories = useSelector(selectStories);
+    const status = useSelector(selectStatusStories);
+
+    useEffect(() => {
+        dispatch(fetchStories(cookies));
+    }, [dispatch])
     return (
         <div className='stories'>
-            <div className='storiesWrapper'>
-                <Link to="/stories/create">
-                    <div className='storiesItem'>
+            {
+                status === 'loading' ?
+                    <div className="storiesWrapper">
+                        LOADING
+                    </div> :
+                    status === 'successed' ?
+                        <div className='storiesWrapper'>
+                            <Link to="/stories/create">
+                                <div className='storiesItem'>
 
-                        <img className='storiesThumbnail' width={115} height={200} src={image} alt="" />
-                        <div className='storiesAdd'>
-                            <div className='storiesAddText'>
-                                Thêm tin
-                            </div>
-                        </div>
-                    </div></Link>
-                {
-                    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
-                        <div key={item} className='storiesItem'>
-                            <img className='storiesUserAvatar' width={50} height={50} src={image} alt="" />
-                            <img className='storiesThumbnail' width={115} height={200} src={image} alt="" />
-                            <div className='storiesUserName'>
-                                Tran Duong Chi Hieu
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+                                    <img className='storiesThumbnail' width={115} height={200} src={user.avatar} alt="" />
+                                    <div className='storiesAdd'>
+                                        <div className='storiesAddText'>
+                                            Thêm tin
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                            {
+                                stories.map((item) => (
+                                    <div key={item.id} className='storiesItem'>
+                                        <img className='storiesUserAvatar' width={50} height={50} src={item.avatar} alt="" />
+                                        {
+                                            item.type === 'image' ? <img className='storiesThumbnail' width={115} height={200} src={item.file_name_story} alt="" /> :
+                                                <video className='storiesThumbnail' width={115} height={200} src={item.file_name_story}></video>
+                                        }
+                                        <div className='storiesUserName'>
+                                            {item.userName}
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div> :
+                        status === 'failed' ?
+                            <div className="storiesWrapper">
+                                FAILED
+                            </div> :
+                            <></>
+            }
+
         </div>
     );
 }

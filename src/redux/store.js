@@ -6,6 +6,7 @@ import groupReducer from './reducers/groupReducer'
 import albumReducer from './reducers/albumReducer'
 import mediafileReducer from './reducers/mediafileReducer'
 import memberReducer from './reducers/memberReducer'
+import storiesReducer from './reducers/storiesReducer'
 
 
 
@@ -20,6 +21,7 @@ const store = configureStore({
         albums: albumReducer,
         mediafiles: mediafileReducer,
         members: memberReducer,
+        stories: storiesReducer,
 
 
     }
