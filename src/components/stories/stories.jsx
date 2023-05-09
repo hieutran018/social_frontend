@@ -5,6 +5,7 @@ import { fetchStories } from '../../redux/actions/storiesAction';
 import { selectStories, selectStatusStories } from '../../redux/selectors/storiesSelector';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import SkeletionStories from './skeletonstories';
 
 function Stories() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -15,13 +16,17 @@ function Stories() {
 
     useEffect(() => {
         dispatch(fetchStories(cookies));
-    }, [dispatch])
+    }, [dispatch, cookies])
     return (
         <div className='stories'>
             {
                 status === 'loading' ?
                     <div className="storiesWrapper">
-                        LOADING
+                        {
+                            [0, 1, 2, 3, 4, 5].map((item) => (
+                                <SkeletionStories key={item} />
+                            ))
+                        }
                     </div> :
                     status === 'successed' ?
                         <div className='storiesWrapper'>
@@ -53,7 +58,11 @@ function Stories() {
                         </div> :
                         status === 'failed' ?
                             <div className="storiesWrapper">
-                                FAILED
+                                {
+                                    [0, 1, 2, 3, 4, 5].map((item) => (
+                                        <SkeletionStories key={item} />
+                                    ))
+                                }
                             </div> :
                             <></>
             }

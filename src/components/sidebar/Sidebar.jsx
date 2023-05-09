@@ -17,6 +17,7 @@ import SideBarGroup from './group/sidebargroup';
 import SidebarSearch from './search/sidebarsearch'
 import SidebarSetting from './setting/setting';
 import SidebarStories from './stories/sidebarsories';
+import SidebarListStory from './stories/sidebarListstory';
 
 function Sidebar({ page }) {
 
@@ -107,7 +108,16 @@ function Sidebar({ page }) {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
-                {page === 1 ? <SidebarHomePage /> : page === 2 ? <SidebarVideo /> : page === 3 ? <SideBarFriend /> : page === 4 ? <FriendRequest /> : page === 5 ? <SideBarGroup /> : page === 6 ? <SidebarSearch /> : page === 7 ? <SidebarSetting /> : page === 8 ? <SidebarStories /> : <SidebarFriendSuggestion />}
+                {page === 1 ?
+                    <SidebarHomePage /> : page === 2 ?
+                        <SidebarVideo /> : page === 3 ?
+                            <SideBarFriend /> : page === 4 ?
+                                <FriendRequest /> : page === 5 ?
+                                    <SideBarGroup /> : page === 6 ?
+                                        <SidebarSearch /> : page === 7 ?
+                                            <SidebarSetting /> : page === 8 ?
+                                                <SidebarStories /> : page === 9 ?
+                                                    <SidebarListStory /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

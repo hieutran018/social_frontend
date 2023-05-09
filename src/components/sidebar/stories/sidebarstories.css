@@ -30,3 +30,21 @@
     font-weight: 500px;
     margin-left: 1rem;
 }
+.sidebarListStoryNewIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    object-fit: cover;
+    border: 0.1px solid grey;
+}
+.marginTop{
+    margin-top: 1rem;
+}
+.sidebarunLink{
+    text-decoration: none;
+    background-color: black;
+    
+}

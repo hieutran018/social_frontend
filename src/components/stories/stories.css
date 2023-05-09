@@ -25,6 +25,11 @@
     position: relative;
     
 }
+.skeletonStoriesItem{
+    border-radius: 10px;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
 .storiesThumbnail{
     border-radius: 10px;
     border: 0.1px solid gray;
