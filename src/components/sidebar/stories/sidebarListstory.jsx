@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { ArrowBack } from '@mui/icons-material';
 import { IoMdAdd } from 'react-icons/io';
 import StoriesCard from './storiescard/storiescard';
+import { useSelector } from 'react-redux';
+import { selectStories } from '../../../redux/selectors/storiesSelector';
 
 function SidebarListStory() {
+    const stories = useSelector(selectStories);
+    console.log(stories);
     return (
         <div className='sidebarStories'>
             <div className="titlesidebarStories">
@@ -31,8 +35,8 @@ function SidebarListStory() {
             </div>
             <div className='sidebarListStory'>
                 {
-                    [0, 1, 2, 3].map((item) => (
-                        <StoriesCard key={item} />
+                    stories.map((item) => (
+                        <StoriesCard story={item} key={item} />
                     ))
                 }
             </div>

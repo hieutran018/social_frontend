@@ -1,13 +1,16 @@
+import { useParams, Link } from 'react-router-dom';
 import './storiescard.css';
-import image from '../../../../ckc_social_logo.png';
 
 
-function StoriesCard() {
+function StoriesCard({ story }) {
+    const storiesCurrent = useParams().storiesCurrent;
     return (
-        <div className='storiesCard'>
-            <img className='storiesCardAvatar' src={image} alt="" />
-            <div className='storiesCardUserName'>Trần Dương Chí Hiếu</div>
-        </div>
+        <Link className='sidebarunLink' to={"/stories/view/" + story.id}>
+            <div className={story.id.toString() === storiesCurrent ? 'storiesCard storiesCardSelect' : 'storiesCard'}>
+                <img className='storiesCardAvatar' src={story.avatar} alt="" />
+                <div className='storiesCardUserName'>{story.userName}</div>
+            </div>
+        </Link>
     );
 }
 

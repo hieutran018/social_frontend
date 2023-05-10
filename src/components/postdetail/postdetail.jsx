@@ -138,13 +138,13 @@ function PostDetail({ post }) {
                                     </a>
 
                                     <div>
-                                        <span className="postUsername">
+                                        <div className="postUsername">
                                             <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                                 {post.displayName}
 
                                             </a>
                                             {post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
-                                        </span>
+                                        </div>
                                         <div className="postPrivacy">
                                             <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
                                                 {post.privacy.toString() === "0" ?

@@ -51,7 +51,7 @@ function App() {
       <Route path='/settings' element={<Settings />} />
       <Route path='/settings/:setting' element={<Settings />} />
       <Route path='/stories/create' element={<StoriesPage />} />
-      <Route path='/stories/view' element={<StoriesView />} />
+      <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
     </Routes>
   );

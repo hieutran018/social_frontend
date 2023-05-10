@@ -43,16 +43,18 @@ function Stories() {
                             </Link>
                             {
                                 stories.map((item) => (
-                                    <div key={item.id} className='storiesItem'>
-                                        <img className='storiesUserAvatar' width={50} height={50} src={item.avatar} alt="" />
-                                        {
-                                            item.type === 'image' ? <img className='storiesThumbnail' width={115} height={200} src={item.file_name_story} alt="" /> :
-                                                <video className='storiesThumbnail' width={115} height={200} src={item.file_name_story}></video>
-                                        }
-                                        <div className='storiesUserName'>
-                                            {item.userName}
+                                    <Link key={item.id} to={"/stories/view/" + item.id}>
+                                        <div className='storiesItem'>
+                                            <img className='storiesUserAvatar' width={50} height={50} src={item.avatar} alt="" />
+                                            {
+                                                item.type === 'image' ? <img className='storiesThumbnail' width={115} height={200} src={item.file_name_story} alt="" /> :
+                                                    <video className='storiesThumbnail' width={115} height={200} src={item.file_name_story}></video>
+                                            }
+                                            <div className='storiesUserName'>
+                                                {item.userName}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))
                             }
                         </div> :
