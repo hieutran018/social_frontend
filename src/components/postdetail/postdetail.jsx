@@ -14,12 +14,11 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { commentPost } from '../../redux/actions/postAction';
 import axios from 'axios';
-
 import './postdetail.css'
 
 
 
-function PostDetail({ post }) {
+function PostDetail({ post, like, share }) {
 
     const cookies = useCookies('_tk');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -370,7 +369,7 @@ function PostDetail({ post }) {
                         }
                     </div>
                     <div className="postBottomStatistical">
-                        <span className="postTextStatistical">{post.totalLike === 0 ? "" : post.totalLike + " lượt thích"}</span> <div><span className="postTextStatistical statisticalComment">{countComment === 0 ? "" : countComment + " bình luận"}</span><span className="postTextStatistical">{post.totalShare === 0 ? "" : post.totalShare + " lượt chia sẻ"}</span></div>
+                        <span className="postTextStatistical">{like === 0 ? "" : like + " lượt thích"}</span> <div><span className="postTextStatistical statisticalComment">{countComment === 0 ? "" : countComment + " bình luận"}</span><span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span></div>
                     </div>
                     <div className="postDetailBottom">
 

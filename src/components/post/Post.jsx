@@ -26,6 +26,7 @@ import 'moment/locale/vi';
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
 import { useParams } from "react-router-dom";
+import ReactionsPost from "../reationspost/reactionspost";
 
 function Post({ post }) {
     const pages = useParams().pages;
@@ -43,7 +44,7 @@ function Post({ post }) {
     const [isLike, setIsLike] = useState(post.isLike)
     const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
     const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
-
+    const [openReactions, setOpenReactions] = useState(false);
     useEffect(() => {
 
         if (selectAddPostStatus) {
@@ -74,6 +75,14 @@ function Post({ post }) {
             setLike(!isLike ? like + 1 : like - 1)
         }).catch((error) => console.log(error));
 
+    }
+
+    const handleOpenReactions = () => {
+        setOpenReactions(true);
+    }
+    const handleCloseReactions = () => {
+        setOpenReactions(false);
+        console.log(0);
     }
 
     const handleClickOpenopenShareOptionToFeed = () => {
@@ -428,9 +437,9 @@ function Post({ post }) {
                         <span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span>
                     </div>
                 </div>
-                <div className="postBottom">
+                <div onMouseLeave={handleCloseReactions} className="postBottom">
                     <div className="postBottomLeft">
-                        <div className="postBottomButton"><button onClick={handleLike} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
+                        <div className="postBottomButton"> {openReactions ? <ReactionsPost onMouseOver={handleOpenReactions} /> : <></>}<button onMouseOver={handleOpenReactions} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
                         <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn "><AiOutlineComment size={25} /></button></div>
                         <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn "><AiOutlineShareAlt size={25} /></button></div>
                     </div>
@@ -484,7 +493,7 @@ function Post({ post }) {
                     fullWidth
                     maxWidth="md"
                 >
-                    <PostDetail post={post} />
+                    <PostDetail post={post} like={like} share={share} />
                 </Dialog>
                 <Dialog
                     open={openShareOptionToFeed}

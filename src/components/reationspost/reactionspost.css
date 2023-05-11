@@ -1,0 +1,22 @@
+.reactionsPost{
+    border-radius: 25px;
+    padding: 0.2rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+}
+
+.reactionsPostWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.reactionsPostGif{
+    margin: 0.2rem;
+}
+.reactionsPostGif:hover{
+    zoom: 1.5;
+}
