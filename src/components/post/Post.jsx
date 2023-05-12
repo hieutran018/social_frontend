@@ -22,6 +22,13 @@ import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
 import axios from "axios";
 import 'moment/locale/vi';
+import likeImg from '../../rections/like.png';
+import loveImg from '../../rections/love.png';
+import yayImg from '../../rections/yay.png';
+import wowImg from '../../rections/wow.png';
+import sadImg from '../../rections/sad.png';
+import hahaImg from '../../rections/haha.png';
+import angryImg from '../../rections/angry.png';
 
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
@@ -45,6 +52,16 @@ function Post({ post }) {
     const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
     const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
     const [openReactions, setOpenReactions] = useState(false);
+    const reactions = [
+        { id: 1, img: likeImg },
+        { id: 2, img: loveImg },
+        { id: 3, img: sadImg },
+        { id: 4, img: hahaImg },
+        { id: 5, img: yayImg },
+        { id: 6, img: wowImg },
+        { id: 7, img: angryImg },
+
+    ]
     useEffect(() => {
 
         if (selectAddPostStatus) {
@@ -54,25 +71,32 @@ function Post({ post }) {
 
     }, [statusAdd, dispatch])
 
-    const handleLike = () => {
+    const handleLike = (reaction) => {
         setIsLike(!isLike)
         const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post';
-
         axios({
             method: 'POST',
             url: requestURL,
             data: {
                 postId: post.id,
+                reaction: reaction
             },
             headers: {
                 Authorization: "Bearer " + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
-
             }
         }).then((response) => {
-            console.log(response.data);
-            setLike(!isLike ? like + 1 : like - 1)
+            console.log(response.data.id);
+            if (response.status === 200) {
+                post.like.push(response.data);
+                setLike(like + 1);
+            } else if (response.status === 202) {
+                post.like.filter((item) => item.id === parseInt(response.data.id) ? item.type = response.data.type : item.type)
+            } else {
+                setLike(like - 1);
+            }
+
         }).catch((error) => console.log(error));
 
     }
@@ -82,7 +106,6 @@ function Post({ post }) {
     }
     const handleCloseReactions = () => {
         setOpenReactions(false);
-        console.log(0);
     }
 
     const handleClickOpenopenShareOptionToFeed = () => {
@@ -431,7 +454,18 @@ function Post({ post }) {
                     }
                 </div>
                 <div className="postBottomStatistical">
-                    <span className="postTextStatistical">{like === 0 ? "" : like + " lượt thích"}</span>
+                    <span className="postTextStatistical">
+                        <div className="postIconReacactionsContainer">
+                            {post.like.map((reaction) => parseInt(reaction.type) === 1 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                parseInt(reaction.type) === 2 ? <img className="postIconReactions" src={reactions[1].img} alt="" /> : reaction.type === 7 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                    parseInt(reaction.type) === 3 ? <img className="postIconReactions" src={reactions[2].img} alt="" /> :
+                                        parseInt(reaction.type) === 4 ? <img className="postIconReactions" src={reactions[3].img} alt="" /> :
+                                            parseInt(reaction.type) === 5 ? <img className="postIconReactions" src={reactions[4].img} alt="" /> :
+                                                parseInt(reaction.type) === 6 ? <img className="postIconReactions" src={reactions[5].img} alt="" /> :
+                                                    <img className="postIconReactions" src={reactions[6].img} alt="" />)}
+                        </div>
+                        <span className="postTextDescriptionReactions">{like === 0 ? "" : like}</span>
+                    </span>
                     <div>
                         <span className="postTextStatistical statisticalComment">{post.totalComment === 0 || !post.totalComment ? "" : post.totalComment + " bình luận"}</span>
                         <span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span>
@@ -439,7 +473,7 @@ function Post({ post }) {
                 </div>
                 <div onMouseLeave={handleCloseReactions} className="postBottom">
                     <div className="postBottomLeft">
-                        <div className="postBottomButton"> {openReactions ? <ReactionsPost onMouseOver={handleOpenReactions} /> : <></>}<button onMouseOver={handleOpenReactions} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
+                        <div className="postBottomButton"> {openReactions ? <ReactionsPost handleReactions={handleLike} onMouseOver={handleOpenReactions} /> : <></>}<button onMouseOver={handleOpenReactions} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
                         <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn "><AiOutlineComment size={25} /></button></div>
                         <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn "><AiOutlineShareAlt size={25} /></button></div>
                     </div>

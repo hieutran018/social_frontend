@@ -7,22 +7,22 @@ import sad from '../../rections/sad.gif';
 import haha from '../../rections/haha.gif';
 import angry from '../../rections/angry.gif';
 
-function ReactionsPost() {
+function ReactionsPost({ handleReactions }) {
     const reactions = [
-        { id: "like", img: like },
-        { id: "love", img: love },
-        { id: "yay", img: yay },
-        { id: "wow", img: wow },
-        { id: "sad", img: sad },
-        { id: "haha", img: haha },
-        { id: "angry", img: angry },
+        { id: 1, img: like },
+        { id: 2, img: love },
+        { id: 3, img: sad },
+        { id: 4, img: haha },
+        { id: 5, img: yay },
+        { id: 6, img: wow },
+        { id: 7, img: angry },
     ]
     return (
         <div className='reactionsPost'>
             <div className='reactionsPostWrapper'>
                 {
                     reactions.map((reaction) => (
-                        <img className='reactionsPostGif' width={30} height={30} src={reaction.img} alt="" />
+                        <img key={reaction.id} onClick={() => handleReactions(reaction.id)} className='reactionsPostGif' width={30} height={30} src={reaction.img} alt="" />
                     ))
                 }
             </div>

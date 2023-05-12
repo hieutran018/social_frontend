@@ -14,12 +14,16 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { commentPost } from '../../redux/actions/postAction';
 import axios from 'axios';
+import likeImg from '../../rections/like.png';
+import loveImg from '../../rections/love.png';
+import yayImg from '../../rections/yay.png';
+import wowImg from '../../rections/wow.png';
+import sadImg from '../../rections/sad.png';
+import hahaImg from '../../rections/haha.png';
+import angryImg from '../../rections/angry.png';
 import './postdetail.css'
 
-
-
 function PostDetail({ post, like, share }) {
-
     const cookies = useCookies('_tk');
     const user = JSON.parse(localStorage.getItem('user'));
     const [commentList, setCommentList] = useState([]);
@@ -28,6 +32,16 @@ function PostDetail({ post, like, share }) {
     const [file, setFile] = useState();
 
     const dispatch = useDispatch();
+    const reactions = [
+        { id: 1, img: likeImg },
+        { id: 2, img: loveImg },
+        { id: 3, img: sadImg },
+        { id: 4, img: hahaImg },
+        { id: 5, img: yayImg },
+        { id: 6, img: wowImg },
+        { id: 7, img: angryImg },
+
+    ]
 
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
@@ -368,8 +382,24 @@ function PostDetail({ post, like, share }) {
                                 </div>
                         }
                     </div>
-                    <div className="postBottomStatistical">
-                        <span className="postTextStatistical">{like === 0 ? "" : like + " lượt thích"}</span> <div><span className="postTextStatistical statisticalComment">{countComment === 0 ? "" : countComment + " bình luận"}</span><span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span></div>
+                    <div className="postBottomStatistical detailPostStatistical">
+                        <div className="postIconReacactionsContainer">
+                            {post.like.map((reaction) => parseInt(reaction.type) === 1 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                parseInt(reaction.type) === 2 ? <img className="postIconReactions" src={reactions[1].img} alt="" /> : reaction.type === 7 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                    parseInt(reaction.type) === 3 ? <img className="postIconReactions" src={reactions[2].img} alt="" /> :
+                                        parseInt(reaction.type) === 4 ? <img className="postIconReactions" src={reactions[3].img} alt="" /> :
+                                            parseInt(reaction.type) === 5 ? <img className="postIconReactions" src={reactions[4].img} alt="" /> :
+                                                parseInt(reaction.type) === 6 ? <img className="postIconReactions" src={reactions[5].img} alt="" /> :
+                                                    <img className="postIconReactions" src={reactions[6].img} alt="" />)}
+                        </div>
+                        <div>
+                            <span className="postTextStatistical statisticalComment">
+                                {countComment === 0 ? "" : countComment + " bình luận"}
+                            </span>
+                            <span className="postTextStatistical">
+                                {share === 0 ? "" : share + " lượt chia sẻ"}
+                            </span>
+                        </div>
                     </div>
                     <div className="postDetailBottom">
 

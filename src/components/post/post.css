@@ -126,10 +126,16 @@ color: black;
     justify-content: space-between;
 }
 .postTextStatistical{
+    display: flex;
+    align-items: center;  
+}
+
+.postTextDescriptionReactions{
     font-size: 16px;
     font-weight: 400;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 0.2rem;
 }
 .statisticalComment{
     margin-right: 10px;
@@ -304,4 +310,8 @@ color: black;
 
 .postShareUser{
     margin-top: 0.5rem;
+}
+.postIconReactions{
+    width: 25px;
+    height: 25px;
 }
