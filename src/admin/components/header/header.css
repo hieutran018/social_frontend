@@ -1,0 +1,38 @@
+.adminHeader{
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: right;
+    height: 70px;
+    position: fixed;
+}
+.adminHeaderRight{
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.adminHeaderNotification{
+    display: flex;
+    align-items: center;
+}
+.adminHeaderUser{
+    display: flex;
+    align-items: center;
+    background-color: #1877f2;
+    padding: 0.5rem;
+    border-radius: 50px;
+    height: 40px;
+}
+.adminHeaderAvatarUser{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    
+}
+.adminHeaderUserName{
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    margin-left: 0.5rem;
+}

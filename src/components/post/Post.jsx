@@ -466,7 +466,7 @@ function Post({ post }) {
                         </div>
                         <span className="postTextDescriptionReactions">{like === 0 ? "" : like}</span>
                     </span>
-                    <div>
+                    <div className="postTextStatistical">
                         <span className="postTextStatistical statisticalComment">{post.totalComment === 0 || !post.totalComment ? "" : post.totalComment + " bình luận"}</span>
                         <span className="postTextStatistical">{share === 0 ? "" : share + " lượt chia sẻ"}</span>
                     </div>

@@ -1,0 +1,23 @@
+.adminSidebar{
+    width: 20%;
+    height: calc(100vh - 70px);
+    padding: 0rem 0.5rem;
+    margin-top: 4.5rem;
+}
+.adminSidebarTab{
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0.5rem 0rem;
+}
+.adminSidebarTabName{
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 20px;
+}
+.adminSidebarTab:hover{
+    background-color: #b7d9f481;
+    color: #1877f2;
+}

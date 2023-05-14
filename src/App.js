@@ -11,32 +11,27 @@ import Friend from './pages/friend/Friend';
 import FriendSuggestion from './pages/friendsuggestion/FriendSuggestion';
 import Group from './pages/groups/group';
 import Loading from './components/loading/Loading';
-// import ProtectedRoutes from './components/protectedroute/protectedroute';
+import ProtectedRoutes from './components/protectedroute/protectedroute';
 import FriendRequest from './pages/friendrequest/friendrequest';
 import Search from './pages/search/search';
 import Settings from './pages/setting/setting';
 import StoriesPage from './pages/storiespage/storiespage';
 import StoriesView from './pages/storiespage/storieview/storiesview';
-
-
-
-
-
+import AdminLogin from './admin/pages/login/login';
+import DashBoard from './admin/pages/home/dashboard';
 
 function App() {
-
-
   return (
-
     <Routes>
       <Route path="/login" element={< Login />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/confirm-forgot-password" element={<ConfirmForgotPassword />} />
       <Route path="/registration" element={<Register />} />
-      <Route path="/" element={<Home />} />
-      <Route path='/video' element={<Videos />} />
-      <Route path='/friend' element={<Friend />} />
-      <Route path='/friend-suggestion' element={< FriendSuggestion />} />
+      <Route path="/" element={<ProtectedRoutes children={<Home />} />} />
+      <Route path="/home" element={<ProtectedRoutes children={<Home />} />} />
+      <Route path='/video' element={<ProtectedRoutes children={<Videos />} />} />
+      <Route path='/friend' element={<ProtectedRoutes children={<Friend />} />} />
+      <Route path='/friend-suggestion' element={<ProtectedRoutes children={<FriendSuggestion />} />} />
       <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} />
       <Route path='/friend-request' element={< FriendRequest />} />
       <Route path='/friend-request/:userId' element={< FriendRequest />} />
@@ -53,6 +48,8 @@ function App() {
       <Route path='/stories/create' element={<StoriesPage />} />
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
+      <Route path="/admin/login" element={< AdminLogin />} />
+      <Route path='/admin/dashboard' element={< DashBoard />} />
     </Routes>
   );
 }

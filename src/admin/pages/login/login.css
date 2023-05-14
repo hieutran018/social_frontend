@@ -1,0 +1,54 @@
+.adminLogin{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2EDF3;
+}
+
+.adminLoginWrapper{
+    width: 35rem;
+    height: 35rem;
+    background-color: white;
+}
+.adminLoginForm{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+.adminLoginLogo{
+    display: flex;
+    justify-content: center;
+}
+.adminLoginLogoApp{
+    width: 200px;
+    height: 150px;
+    object-fit: fill;
+}
+.adminLoginFormInput{
+    background: transparent;
+    border-radius: 0;
+    font-size: .9375rem;
+    border: 1px solid #ebedf2;
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 0.5rem;
+    outline-width: 0.1px;
+    outline-color: #1877f2;
+    
+}
+.adminLoginButtonSubmit{
+    background-color: #1877f2;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    border: none;
+}
