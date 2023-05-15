@@ -53,6 +53,7 @@ function App() {
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
       <Route path='/admin/users' element={<LayoutAdmin children={<UserManagement />} />} />
+      <Route path='/admin/users/detail-user/:userId' element={<LayoutAdmin children={<UserManagement />} />} />
     </Routes>
   );
 }

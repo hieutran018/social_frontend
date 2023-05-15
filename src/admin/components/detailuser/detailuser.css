@@ -1,0 +1,108 @@
+.adminDetailUserWrapper{
+    padding: 1rem;
+}
+.userManagementBreadCrumbTitleCurrent{
+    font-size: 20px;
+    font-weight: 500;
+    color: #1877f2;
+}
+.adminDetailUserMain{
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: white;
+}
+.adminDetailUserAvatar{
+    width: 130px;
+    height: 130px;
+    border: 5px solid #1877f2;
+}
+.adminDetailUserName{
+    margin-top: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.adminDetailUserInfoAccount{
+    border:0.1px solid rgb(196, 196, 196);
+    height: 80px;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.adminDetailUserInfoAccountItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #58a0f1;
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 16px -8px #1877f2;
+    box-shadow: 0px 0px 16px -8px #1877f2;
+}
+.adminDetailUserInfoAccountDescription{
+    font-size: 25px;
+    font-weight: 400;
+    color: white;
+}
+.adminDetailUserInfoAccountContent{
+    margin-left: 0.2rem;
+    font-size: 25px;
+    font-weight: 400;
+    color: white;
+}
+.adminDetailUserInfoBottom{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    border:0.1px solid rgb(196, 196, 196);
+}
+.adminDetailUserInfoItem{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 500px;
+    height: 40px;
+    border: 0.1px solid #1877f2;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px #1877f2;
+    box-shadow: 0px 0px 16px -8px #1877f2;
+}
+.adminDetailUserInfoItemDescription{
+    font-size: 20px;
+    font-weight: 400;
+}
+.adminDetailUserInfoItemContent{
+    margin-left: 0.2rem;
+    font-size: 22px;
+    font-weight: 500;
+}
+.adminDetailUserInfoAction{
+    margin-top: 1rem;
+    height: 80px;
+    border:0.1px solid rgb(196, 196, 196);
+    padding-left: 5rem;
+    display: flex;
+    align-items: center;
+}
+.adminDetailUserInfoActionCancel{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    border: 0.1px solid #1877f2;
+    color: #1877f2;
+}
+.adminDetailUserInfoActionOptions{
+    margin-left: 2rem;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+}

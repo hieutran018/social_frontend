@@ -1,9 +1,12 @@
 import './usermanagement.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { RiFolderUserFill } from 'react-icons/ri';
+import { Link, useParams } from 'react-router-dom';
+import DetailUser from '../detailuser/detailuser';
+
 
 function UserManagement() {
-
+    const userId = useParams().userId;
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'email', headerName: 'Email', width: 250 },
@@ -22,12 +25,8 @@ function UserManagement() {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <div className="viewButton">Xem chi tiết</div>
-                        <div
-                            className="optionsButton"
-                        >
-                            Tùy chỉnh
-                        </div>
+                        <Link style={{ textDecoration: "none" }} to={"/admin/users/detail-user/" + params.id}><div className="viewButton">Xem chi tiết</div></Link>
+                        <div className="optionsButton">Tùy chỉnh</div>
                     </div>
                 );
             },
@@ -47,34 +46,37 @@ function UserManagement() {
     ];
 
     return (
-        <div className='userManagement'>
-            <div className='userManagementWrapper'>
-                <div className='userManagementBreadCrumb'>
-                    <div className='userManagementIconContainer'><RiFolderUserFill size={30} className='userManagementIcon' /></div>
-                    <div className='userManagementBreadCrumbTitle'>Quản lý người dùng</div>
-                </div>
-                <div className='userManagementSearchbar'>
-                    <span className='userManagementSearchDescription'>Tìm kiếm:</span>
-                    <input className='userManagementInputSearch' type="text" />
-                    <button className='userManagementButtonSearch'>Tìm</button>
-                </div>
-                <div className='userManagementActionContainer'>
-                    <div style={{ height: 400, width: '100%' }}>
-                        <DataGrid
-                            rows={rows}
-                            columns={columns.concat(actionColumn)}
-                            initialState={{
-                                pagination: {
-                                    paginationModel: { page: 0, pageSize: 5 },
-                                },
-                            }}
 
-                            pageSizeOptions={[5, 10]}
-                            checkboxSelection
-                        />
+        <div className='userManagement'>
+            {
+                userId ? <DetailUser /> :
+                    <div className='userManagementWrapper'>
+                        <div className='userManagementBreadCrumb'>
+                            <div className='userManagementIconContainer'><RiFolderUserFill size={30} className='userManagementIcon' /></div>
+                            <div className='userManagementBreadCrumbTitle'>Quản lý người dùng</div>
+                        </div>
+                        <div className='userManagementSearchbar'>
+                            <span className='userManagementSearchDescription'>Tìm kiếm:</span>
+                            <input className='userManagementInputSearch' type="text" />
+                            <button className='userManagementButtonSearch'>Tìm</button>
+                        </div>
+                        <div className='userManagementActionContainer'>
+                            <div style={{ height: 650, width: '100%' }}>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={columns.concat(actionColumn)}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: { page: 0, pageSize: 5 },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5, 10]}
+                                    checkboxSelection
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+            }
         </div>
     );
 }
