@@ -1,20 +1,36 @@
 .adminHeader{
     width: 100%;
-    background-color: antiquewhite;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
     height: 70px;
     position: fixed;
+}
+.adminHeaderLogoUnlink{
+ text-decoration: none;
+}
+.adminHeaderLeft{
+    display: flex;
+    align-items: center;
+}
+.adminHeaderLogo{
+    font-size: 2rem;
+    margin-left: 20px;
+    font-weight: 900;
+    color: #1877f2;
+    cursor: pointer;
 }
 .adminHeaderRight{
     display: flex;
     width: 30%;
-    justify-content: space-evenly;
+    justify-content: right;
+    margin-right: 1rem;
     align-items: center;
 }
 .adminHeaderNotification{
     display: flex;
     align-items: center;
+    margin-right: 2rem;
 }
 .adminHeaderUser{
     display: flex;
@@ -35,4 +51,38 @@
     font-weight: 500;
     color: white;
     margin-left: 0.5rem;
+}
+
+
+/* MENU STARTED */
+.adminHeaderMenuTop{
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.adminHeaderMenuItem{
+    width: 300px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+   
+}
+.adminHeaderMenuItemAvatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+.adminHeaderMenuItemUserName{
+    
+    margin-left: 0.5rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.adminHeaderMenuItemOptionText{
+    margin-left: 2rem;
+    font-size: 20px;
+    font-weight: 500;
 }

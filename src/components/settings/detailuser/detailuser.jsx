@@ -3,6 +3,8 @@ import './detailuser.css';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { currentUser, updateDisplaynameUser, updatePhoneUser } from '../../../redux/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/selectors/postSelector';
@@ -19,6 +21,18 @@ function DetailUser() {
     const [currentPassword, setCurrentPassword] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const noti = (textNoti) => {
+        toast.success(textNoti, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
     const toggleOpenName = () => {
         setOpenName(true);
     }
@@ -83,6 +97,8 @@ function DetailUser() {
             }
         }).then((response) => {
             console.log(response.data);
+            setOpen(false);
+            noti('Cập nhật mật khẩu thành công!')
         }).catch((error) => {
             console.log(error);
         })
@@ -170,6 +186,19 @@ function DetailUser() {
                     </div>
                 </div>
             </Dialog>
+            <ToastContainer
+                style={{ borderRadius: "5px", width: "400px" }}
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }

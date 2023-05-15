@@ -69,10 +69,7 @@ function PostDetail({ post, like, share }) {
         fetchCommentByIdPost(post.id)
     }, [post.id])
 
-
-    const handleClickPostComment = (postId) => {
-        console.log(postId, post);
-        dispatch(commentPost(cookies[0]._tk, postId, inputComment, file ? file : null))
+    async function fetchComment(postId) {
         const requestURL = 'http://127.0.0.1:8000/api/fetch-comment-by-post';
         axios({
             method: "POST",
@@ -86,6 +83,15 @@ function PostDetail({ post, like, share }) {
         }).catch((error) => {
             console.log(error);
         })
+    }
+
+    const handleClickPostComment = (postId) => {
+        console.log(postId, post);
+        dispatch(commentPost(cookies[0]._tk, postId, inputComment, file ? file : null))
+        setTimeout(() => {
+            fetchComment(postId);
+        }, 3000);
+        setFile();
         setInputComment('');
     }
 
@@ -405,13 +411,9 @@ function PostDetail({ post, like, share }) {
                         </div>
                     </div>
                     <div className="postDetailBottom">
-
                         <div className="postDetailBottomButton"><button className="btn ">Thích </button></div>
                         <div className="postDetailBottomButton"><button className="btn ">Bình luận</button></div>
                         <div className="postDetailBottomButton"><button className="btn ">Chia sẻ</button></div>
-
-
-
                     </div>
                     <div>
                         {commentList.map((u) => (

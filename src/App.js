@@ -18,7 +18,9 @@ import Settings from './pages/setting/setting';
 import StoriesPage from './pages/storiespage/storiespage';
 import StoriesView from './pages/storiespage/storieview/storiesview';
 import AdminLogin from './admin/pages/login/login';
-import DashBoard from './admin/pages/home/dashboard';
+import LayoutAdmin from './admin/pages/layout';
+import Dashboard from './admin/components/dashboard/dashboard';
+import UserManagement from './admin/components/usermanagement/usermanagement';
 
 function App() {
   return (
@@ -49,7 +51,8 @@ function App() {
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
       <Route path="/admin/login" element={< AdminLogin />} />
-      <Route path='/admin/dashboard' element={< DashBoard />} />
+      <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
+      <Route path='/admin/users' element={<LayoutAdmin children={<UserManagement />} />} />
     </Routes>
   );
 }

@@ -1,0 +1,16 @@
+.charts{
+    width: 100%;
+    background-color: white;
+}
+.chartsTitleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.chartsTitle{
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    margin-top: 2rem;
+}

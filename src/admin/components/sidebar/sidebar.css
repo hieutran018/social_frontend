@@ -4,6 +4,9 @@
     padding: 0rem 0.5rem;
     margin-top: 4.5rem;
 }
+.adminHeaderUnlink{
+    text-decoration: none;
+}
 .adminSidebarTab{
     padding: 0.5rem;
     display: flex;
@@ -11,11 +14,20 @@
     height: 40px;
     border-radius: 10px;
     margin: 0.5rem 0rem;
+    cursor: pointer;
+}
+.adminTabActive{
+    background-color: #1877f2;
+    color: white;
+}
+.adminSidebarIcon{
+    color: #032f6a;
 }
 .adminSidebarTabName{
     font-size: 20px;
     font-weight: 500;
     margin-left: 20px;
+    
 }
 .adminSidebarTab:hover{
     background-color: #b7d9f481;
