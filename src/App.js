@@ -21,6 +21,15 @@ import AdminLogin from './admin/pages/login/login';
 import LayoutAdmin from './admin/pages/layout';
 import Dashboard from './admin/components/dashboard/dashboard';
 import UserManagement from './admin/components/usermanagement/usermanagement';
+import PostsManagement from './admin/components/postsmanagement/postsmanagement';
+import PostStatus from './admin/components/poststatusmanagement/poststatusmanagement';
+import CreatePostStatus from './admin/components/createpoststatus/createpoststatus';
+import EditPostStatus from './admin/components/editpoststatus/editpoststatus';
+import AdminProfile from './admin/components/profile/profile';
+import GroupManagement from './admin/components/groupmanagement/groupmanagement';
+import StoryManagement from './admin/components/storymanagement/storymanagement';
+import ReportManagement from './admin/components/reportmanagement/reportmanagement';
+
 
 function App() {
   return (
@@ -54,6 +63,16 @@ function App() {
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
       <Route path='/admin/users' element={<LayoutAdmin children={<UserManagement />} />} />
       <Route path='/admin/users/detail-user/:userId' element={<LayoutAdmin children={<UserManagement />} />} />
+      <Route path='/admin/posts' element={<LayoutAdmin children={<PostsManagement />} />} />
+      <Route path='/admin/posts/detail-post/:postId' element={<LayoutAdmin children={<PostsManagement />} />} />
+      <Route path='/admin/post-status' element={<LayoutAdmin children={<PostStatus />} />} />
+      <Route path='/admin/post-status/create-post-status' element={<LayoutAdmin children={<CreatePostStatus />} />} />
+      <Route path='/admin/post-status/edit-post-status/:statusId' element={<LayoutAdmin children={<EditPostStatus />} />} />
+      <Route path='/admin/profile' element={<LayoutAdmin children={<AdminProfile />} />} />
+      <Route path='/admin/groups' element={<LayoutAdmin children={<GroupManagement />} />} />
+      <Route path='/admin/groups/detail-group/:groupId' element={<LayoutAdmin children={<GroupManagement />} />} />
+      <Route path='/admin/stories' element={<LayoutAdmin children={<StoryManagement />} />} />
+      <Route path='/admin/reports' element={<LayoutAdmin children={<ReportManagement />} />} />
     </Routes>
   );
 }

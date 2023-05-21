@@ -9,7 +9,9 @@ function LayoutAdmin({ children }) {
                 <AdminHeader />
             </div>
             <div className='layoutAdminMain'>
+
                 <AdminSidebar />
+
                 <div className='layoutAdminMainContainer'>
                     {children}
                 </div>

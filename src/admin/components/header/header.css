@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    position: fixed;
+    /* position: fixed; */
 }
 .adminHeaderLogoUnlink{
  text-decoration: none;
@@ -40,6 +40,9 @@
     border-radius: 50px;
     height: 40px;
 }
+.adminHeaderUser:hover{
+    background-color: #4a93f1;
+}
 .adminHeaderAvatarUser{
     width: 50px;
     height: 50px;
@@ -61,6 +64,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    color: black;
 }
 .adminHeaderMenuItem{
     width: 300px;

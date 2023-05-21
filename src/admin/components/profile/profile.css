@@ -1,27 +1,48 @@
-.adminDetailUserWrapper{
+.adminProfile{
+    width: 100%;
+}
+.adminProfileIconContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1877f2;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.adminProfileWrapper{
     padding: 1rem;
 }
-.userManagementBreadCrumbTitleCurrent{
+.adminProfileBreadCrumb{
+    display: flex;
+    align-items: center;
+}
+.adminProfileIcon{
+    color: white;
+}
+.adminProfileBreadCrumbTitle{
     font-size: 20px;
     font-weight: 500;
-    color: #1877f2;
+    color: black;
+    margin-left: 1rem;
 }
-.adminDetailUserMain{
+
+.adminProfilelMain{
     margin-top: 2rem;
     padding: 2rem;
     background-color: white;
 }
-.adminDetailUserAvatar{
+.adminProfileAvatar{
     width: 130px;
     height: 130px;
     border: 5px solid #1877f2;
 }
-.adminDetailUserName{
+.adminProfileName{
     margin-top: 1rem;
     font-size: 20px;
     font-weight: 500;
 }
-.adminDetailUserInfoAccount{
+.adminProfileInfoAccount{
     border:0.1px solid rgb(196, 196, 196);
     height: 80px;
     margin-top: 1rem;
@@ -29,7 +50,7 @@
     justify-content: space-around;
     align-items: center;
 }
-.adminDetailUserInfoAccountItem{
+.adminProfileInfoAccountItem{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,54 +61,74 @@
     -webkit-box-shadow: 0px 0px 16px -8px #1877f2;
     box-shadow: 0px 0px 16px -8px #1877f2;
 }
-.adminDetailUserInfoAccountDescription{
+.adminProfileInfoAccountDescription{
     font-size: 25px;
     font-weight: 400;
     color: white;
 }
-.adminDetailUserInfoAccountContent{
+.adminProfileInfoAccountContent{
     margin-left: 0.2rem;
     font-size: 25px;
     font-weight: 400;
     color: white;
 }
-.adminDetailUserInfoBottom{
+.adminProfileInfoBottom{
     margin-top: 1rem;
     display: flex;
     justify-content: space-around;
     border:0.1px solid rgb(196, 196, 196);
 }
-.adminDetailUserInfoItem{
+.adminProfileInfoItem{
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 500px;
-    height: 40px;
-    border: 0.1px solid #1877f2;
     display: flex;
     align-items: center;
-    padding-left: 1rem;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px #1877f2;
-    box-shadow: 0px 0px 16px -8px #1877f2;
 }
-.adminDetailUserInfoItemDescription{
+.adminProfileInfoItemDescription{
     font-size: 20px;
     font-weight: 400;
+    width: 150px;
 }
-.adminDetailUserInfoItemContent{
+.adminProfileInfoItemContent{
+    width: 100%;
     margin-left: 0.2rem;
     font-size: 22px;
     font-weight: 500;
+    height: 30px;
+    line-height: 25px;
+    font-size: 20px;
+    background: transparent;
+    border-radius: 0;
+    font-size: .9375rem;
+    border: 1px solid #ebedf2;
+    box-shadow: none;
+    padding-left: 0.5rem;
+    outline-width: 0.1px;
+    outline-color: #1877f2;
 }
-.adminDetailUserInfoAction{
+.adminProfileInfoAction{
     margin-top: 1rem;
     height: 80px;
     border:0.1px solid rgb(196, 196, 196);
-    padding-left: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+   
 }
-.adminDetailUserInfoActionCancel{
+.adminProfileInfoActionChangPassword{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    border: 0.1px solid #ee144b;
+    color: #ee144b;
+    border-radius: 10px;
+}
+.adminProfileInfoActionCancel{
     width: 150px;
     height: 50px;
     font-size: 20px;
@@ -97,7 +138,7 @@
     color: #1877f2;
     border-radius: 10px;
 }
-.adminDetailUserInfoActionOptions{
+.adminProfileInfoActionOptions{
     margin-left: 2rem;
     width: 150px;
     height: 50px;
@@ -107,4 +148,5 @@
     color: white;
     border: none;
     border-radius: 10px;
+    
 }

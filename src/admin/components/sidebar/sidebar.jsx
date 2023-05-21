@@ -2,8 +2,12 @@ import './sidebar.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
-import { RiFolderUserFill } from 'react-icons/ri';
+import { RiFolderUserFill, RiEmotionLaughFill } from 'react-icons/ri';
 import { BsFilePostFill } from 'react-icons/bs';
+import { HiUserGroup } from 'react-icons/hi';
+import { TbNews } from 'react-icons/tb';
+import { GoReport } from 'react-icons/go';
+
 
 function AdminSidebar() {
     const [tab, setTab] = useState();
@@ -28,9 +32,35 @@ function AdminSidebar() {
                 </div>
             </Link>
             <hr />
-            <div onClick={() => handleSetTab(2)} className={tab === 2 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
-                <BsFilePostFill size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Quản lý bài viết</span>
-            </div>
+            <Link to="/admin/posts" className='adminHeaderUnlink'>
+                <div onClick={() => handleSetTab(2)} className={tab === 2 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
+                    <BsFilePostFill size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Quản lý bài viết</span>
+                </div>
+            </Link>
+            <hr />
+            <Link to="/admin/post-status" className='adminHeaderUnlink'>
+                <div onClick={() => handleSetTab(3)} className={tab === 3 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
+                    <RiEmotionLaughFill size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Quản lý cảm xúc bài viết</span>
+                </div>
+            </Link>
+            <hr />
+            <Link to="/admin/groups" className='adminHeaderUnlink'>
+                <div onClick={() => handleSetTab(4)} className={tab === 4 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
+                    <HiUserGroup size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Quản lý nhóm</span>
+                </div>
+            </Link>
+            <hr />
+            <Link to="/admin/stories" className='adminHeaderUnlink'>
+                <div onClick={() => handleSetTab(5)} className={tab === 5 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
+                    <TbNews size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Quản lý bản tin</span>
+                </div>
+            </Link>
+            <hr />
+            <Link to="/admin/reports" className='adminHeaderUnlink'>
+                <div onClick={() => handleSetTab(6)} className={tab === 6 ? 'adminSidebarTab adminTabActive' : 'adminSidebarTab'}>
+                    <GoReport size={30} className='adminSidebarIcon' /> <span className='adminSidebarTabName'>Phản hồi người dùng</span>
+                </div>
+            </Link>
             <hr />
         </div>
     );

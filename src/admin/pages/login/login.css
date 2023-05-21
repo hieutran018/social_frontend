@@ -52,3 +52,6 @@
     color: white;
     border: none;
 }
+.adminLoginButtonSubmit:hover{
+    background-color: #4a93f1;
+}

@@ -1,5 +1,5 @@
 import './header.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,6 +9,7 @@ import { GrLogout } from 'react-icons/gr';
 import { MdPassword } from 'react-icons/md';
 
 function AdminHeader() {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -18,6 +19,10 @@ function AdminHeader() {
         setAnchorEl(null);
     };
 
+
+    const handleLogout = () => {
+        navigate('/admin/login');
+    }
     return (
         <div className='adminHeader'>
             <div className='adminHeaderLeft'>
@@ -25,11 +30,11 @@ function AdminHeader() {
                     <span className="adminHeaderLogo">CKCS</span>
                 </Link>
             </div>
-            <div onClick={handleClick} className='adminHeaderRight'>
+            <div className='adminHeaderRight'>
                 <div className='adminHeaderNotification'>
                     <FiBell size={30} color='blue' />
                 </div>
-                <div className='adminHeaderUser'>
+                <div onClick={handleClick} className='adminHeaderUser'>
                     <img className='adminHeaderAvatarUser' src={avatar} alt="" />
                     <div className='adminHeaderUserName'>Trần Dương Chí Hiếu</div>
                 </div>
@@ -71,10 +76,10 @@ function AdminHeader() {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem style={{ width: "300px" }} onClick={handleClose}>
-                    <div className='adminHeaderMenuTop'>
+                    <Link to='/admin/profile' className='adminHeaderMenuTop'>
                         <img className='adminHeaderMenuItemAvatar' src={avatar} alt="" />
                         <div className='adminHeaderMenuItemUserName'>Trần Dương Chí Hiếu</div>
-                    </div>
+                    </Link>
                 </MenuItem>
                 <MenuItem style={{ width: "300px" }} onClick={handleClose}>
                     <div className='adminHeaderMenuItem'>
@@ -82,7 +87,7 @@ function AdminHeader() {
                         <div className='adminHeaderMenuItemOptionText'>Đổi mật khẩu</div>
                     </div>
                 </MenuItem>
-                <MenuItem style={{ width: "300px" }} onClick={handleClose}>
+                <MenuItem style={{ width: "300px" }} onClick={handleLogout}>
                     <div className='adminHeaderMenuItem'>
                         <GrLogout size={30} />
                         <div className='adminHeaderMenuItemOptionText'>Đăng xuất</div>

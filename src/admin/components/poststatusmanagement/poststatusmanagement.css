@@ -1,0 +1,79 @@
+.adminPostStatus{
+    width: 100%;
+}
+.adminPostStatusIconContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1877f2;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.adminPostStatusWrapper{
+    padding: 1rem;
+}
+.adminPostStatusBreadCrumb{
+    display: flex;
+    align-items: center;
+}
+.adminPostStatusIcon{
+    color: white;
+}
+.adminPostStatusBreadCrumbTitle{
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    margin-left: 1rem;
+}
+.adminPostStatusOption{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    margin-top: 2rem;
+}
+.adminPostStatusInputSearch{
+    background: white;
+    border-radius: 0;
+    font-size: .9375rem;
+    border: 1px solid #b0b1b5;
+    box-shadow: none;
+    border-radius: 10px;
+    margin-left: 0.2rem;
+    width: 50%;
+    height: 30px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    padding-left: 0.5rem;
+    outline-width: 0.1px;
+    outline-color: #1877f2;
+}
+.adminPostStatusButtonSearch{
+    margin-left: 0.5rem;
+    width: 70px;
+    height: 30px;
+    background-color: #1877f2;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+}
+.adminPostStatusCreate{
+    display: flex;
+    align-items: center;
+    background-color: #1877f2;
+    color: white;
+    height: 30px;  
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+}
+.adminUnlink{
+    text-decoration: none;
+}

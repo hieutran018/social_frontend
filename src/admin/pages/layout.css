@@ -1,6 +1,6 @@
 .layoutAdmin{
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
 }
 .layoutAdminMain{
     display: flex;
@@ -8,9 +8,9 @@
     height: 100%;
 }
 .layoutAdminMainContainer{
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     width: 100%;
     /* height: 100%; */
     background-color: #ebedf2;
-    
+
 }

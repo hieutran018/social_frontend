@@ -1,0 +1,208 @@
+.adminDeatailPostWrapper{
+    padding: 1rem;
+    
+}
+.postsManagementBreadCrumbTitleCurrent{
+    font-size: 20px;
+    font-weight: 500;
+    color: #1877f2;
+}
+.adminDeatailPostMain{
+    margin-top: 0.5rem;
+    background-color: white;
+    
+}
+.adminDetailPostMainContainer{
+    padding: 1rem;
+}
+.admiDetailPostUserLeft{
+    display: flex;
+    align-items: center;
+}
+.admiDetailPostUser{
+    display: flex;
+    
+    justify-content: space-between;
+}
+.adminDetailPostUserAvatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 70px;
+    border: 0.1px solid #1877f2;
+}
+.adminDetailPostUserName{
+    font-size: 20px;
+    font-weight: 500;  
+}
+.adminDetailPostCreatedAt{
+    margin-top: 1rem;
+    font-size: 18px;
+    font-weight: 400;
+    color: gray;
+}
+.adminDetailPostContentMain{
+    margin-top: 1rem;
+}
+.adminDetailPostUserContainer{
+    margin-left: 1rem;
+}
+.adminDetailPostContentMedia{
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.adminDetailPostContentMediaFile{
+   width: 20%;
+   height: 20%;
+   border: 0.1px solid grey;
+   margin: 0.5rem;
+}
+.adminDeatailPostMainTop{
+    margin-top: 2rem;
+    display: flex;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+}
+.adminDetailPostAction{
+    display: flex;
+}
+.adminDetailPostActionCountContainer{
+    margin-left: 0.5rem;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.admindetailPostActionColorShare{
+    background-color: #5595e9;
+}
+.admindetailPostActionColorReaction{
+    background-color: #e955dd;
+}
+.adminDetailPostActionCount{
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+.adminDetailBack{
+    background-color: red;
+    color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.adminDetailPostOptionActionPost{
+    display: flex;
+    align-items: center;
+}
+.adminDetailPostOptionActionPostDescription{
+    margin-left: 1rem;
+}
+.adminDetailDialogUsersShareCard{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 10px;
+}
+.adminDetailDialogUsersShareCard:hover{
+    background-color: gainsboro;
+}
+.adminDetailDialogUsersShareAvatar{
+    width: 60px;
+    height:60px;
+    border-radius: 50px;
+}
+.adminDetailDialogUsersShareName{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+.admindetailPostActionColorComment{
+    background-color: rgb(76, 170, 207);
+}
+
+
+
+/* DIALOG COMMENTS LIST START */
+.adminDialogCommentItem{
+    border-radius: 10px;
+}
+.adminDialogCommentItem:hover{
+    background-color: aliceblue;
+}
+.comment{
+    background-color: #F0F2F5;
+    width: 100%;
+    min-height: 5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+}
+
+.adminCommentCard{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    justify-content: space-between;
+}
+.adminCommentUserNameContainer{
+    margin-bottom: 0.2rem;
+}
+.adminCommentUserName{
+    font-size: 1.2rem;
+    font-weight: 600;
+    
+}
+.adminCommentLinkProfileUser{
+    text-decoration: none;
+color: black;
+}
+.adminCommentAvatarContainer{
+    width: 55px;
+    height: 55px;
+}
+.adminCommentAvatarProfile{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.adminCommentMain{
+    width: 100%;
+    
+}
+
+.adminCommentBottom{
+    margin-left: 2rem;
+    width: 15rem;
+    margin-bottom: 0.3rem;
+    margin-top: -0.2rem;
+}
+
+.adminCommentBottom{
+    display: flex;
+    justify-content: space-between;
+}
+.adminCommentSubItem{
+    font-weight: 600;
+    color: #757576;
+}
+.adminCommentReply{
+    width: 95%;
+    margin-left: 5%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+/* DIALOG COMMENTS LIST END */
