@@ -28,8 +28,7 @@
 }
 .userManagementActionContainer{
     margin-top: 0.5rem;
-    background-color: white;
-   
+    background-color: white; 
 }
 .cellAction{
     display: flex;
@@ -104,4 +103,10 @@
     font-weight: 500;
     border: none;
     border-radius: 10px;
+}
+
+.userManagementActionContainerLoading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
