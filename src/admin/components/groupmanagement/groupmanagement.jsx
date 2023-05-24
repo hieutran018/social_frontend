@@ -3,18 +3,30 @@ import { DataGrid } from '@mui/x-data-grid';
 import { HiUserGroup } from 'react-icons/hi';
 import { Link, useParams } from 'react-router-dom';
 import DetailGroup from '../detailgroup/detailgroup';
+import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGroups } from '../../../redux/admin/actions/adminGroupAction';
+import { adminSelectGroups, adminSelectGroupsStatus } from '../../../redux/admin/selectors/adminGroupSelector';
+import { useEffect } from 'react';
 
 
 function GroupManagement() {
     const groupId = useParams().groupId;
+    const cookies = useCookies('tk')[0].tk;
+    const dispatch = useDispatch();
+    const groups = useSelector(adminSelectGroups);
+    const status = useSelector(adminSelectGroupsStatus);
+    useEffect(() => {
+        dispatch(fetchGroups(cookies));
+    }, [dispatch, cookies])
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'groupName', headerName: 'Tên nhóm', width: 250 },
+        { field: 'group_name', headerName: 'Tên nhóm', width: 250 },
         { field: 'owner', headerName: 'Người sở hữu', width: 250 },
         { field: 'members', headerName: 'Thành viên', type: 'number', width: 90 },
-        { field: 'privacy', headerName: 'Quyền riêng tư', width: 90 },
+        { field: 'privacy', headerName: 'Quyền riêng tư', width: 150 },
         { field: 'status', headerName: 'Trạng thái', width: 150 },
-        { field: 'createdAt', headerName: 'Ngày tạo', width: 250 },
+        { field: 'created_at', headerName: 'Ngày tạo', width: 250 },
 
     ];
     const actionColumn = [
@@ -33,18 +45,6 @@ function GroupManagement() {
         },
     ];
 
-    const rows = [
-        { id: 1, groupName: 'Nhóm 1', owner: 'Snow', members: 35, privacy: 'Công khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 2, groupName: 'Nhóm 2', owner: 'Lannister', members: 42, privacy: 'Công khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 3, groupName: 'Nhóm 3', owner: 'Lannister', members: 45, privacy: 'Riêng tư', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 4, groupName: 'Nhóm 4', owner: 'Stark', members: 16, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 5, groupName: 'Nhóm 5', owner: 'Targaryen', members: 20, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 6, groupName: 'Nhóm 6', owner: 'Melisandre', members: 21, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 7, groupName: 'Nhóm 7', owner: 'Clifford', members: 44, privacy: 'Công Khai', status: 'Dừng hoạt động', createdAt: '10/05/2023' },
-        { id: 8, groupName: 'Nhóm 8', owner: 'Frances', members: 36, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 9, groupName: 'Nhóm 9', owner: 'Roxie', members: 65, privacy: 'Riêng tư', status: 'Dừng hoạt động', createdAt: '10/05/2023' },
-    ];
-
     return (
 
         <div className='groupManagement'>
@@ -61,18 +61,25 @@ function GroupManagement() {
                             <button className='groupManagementButtonSearch'>Tìm</button>
                         </div>
                         <div className='groupManagementActionContainer'>
-                            <div style={{ height: 650, width: '100%' }}>
-                                <DataGrid
-                                    rows={rows}
-                                    columns={columns.concat(actionColumn)}
-                                    initialState={{
-                                        pagination: {
-                                            paginationModel: { page: 0, pageSize: 5 },
-                                        },
-                                    }}
-                                    pageSizeOptions={[5, 10]}
-                                    checkboxSelection
-                                />
+                            <div style={{ height: 650, width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                {
+                                    status === 'loading' ?
+                                        <div>
+                                            Đang tải dữ liệu danh sách nhóm
+                                        </div> :
+                                        status === 'successed' ?
+                                            <DataGrid
+                                                rows={groups}
+                                                columns={columns.concat(actionColumn)}
+                                                initialState={{
+                                                    pagination: {
+                                                        paginationModel: { page: 0, pageSize: 5 },
+                                                    },
+                                                }}
+                                                pageSizeOptions={[5, 10]}
+                                            /> :
+                                            <div> Tải dữ liệu danh sách nhóm thất bại!</div>
+                                }
                             </div>
                         </div>
                     </div>

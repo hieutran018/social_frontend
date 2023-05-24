@@ -89,8 +89,7 @@ export const fetchPost = (token, page) => {
                     Authorization: 'Bearer ' + token
                 }
             })
-
-
+            console.log(res.data);
             if (page >= 0 && page < 2) {
                 dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
             } else {

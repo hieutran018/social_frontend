@@ -39,6 +39,7 @@
     padding: 0.5rem;
     border-radius: 50px;
     height: 40px;
+    width: 250px;
 }
 .adminHeaderUser:hover{
     background-color: #4a93f1;

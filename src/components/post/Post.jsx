@@ -456,13 +456,13 @@ function Post({ post }) {
                 <div className="postBottomStatistical">
                     <span className="postTextStatistical">
                         <div className="postIconReacactionsContainer">
-                            {post.like.map((reaction) => parseInt(reaction.type) === 1 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
-                                parseInt(reaction.type) === 2 ? <img className="postIconReactions" src={reactions[1].img} alt="" /> : reaction.type === 7 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
-                                    parseInt(reaction.type) === 3 ? <img className="postIconReactions" src={reactions[2].img} alt="" /> :
-                                        parseInt(reaction.type) === 4 ? <img className="postIconReactions" src={reactions[3].img} alt="" /> :
-                                            parseInt(reaction.type) === 5 ? <img className="postIconReactions" src={reactions[4].img} alt="" /> :
-                                                parseInt(reaction.type) === 6 ? <img className="postIconReactions" src={reactions[5].img} alt="" /> :
-                                                    <img className="postIconReactions" src={reactions[6].img} alt="" />)}
+                            {post.like.map((reaction) => parseInt(reaction.type) === 1 ? <img key={reaction.id} className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                parseInt(reaction.type) === 2 ? <img key={reaction.id} className="postIconReactions" src={reactions[1].img} alt="" /> : reaction.type === 7 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
+                                    parseInt(reaction.type) === 3 ? <img key={reaction.id} className="postIconReactions" src={reactions[2].img} alt="" /> :
+                                        parseInt(reaction.type) === 4 ? <img key={reaction.id} className="postIconReactions" src={reactions[3].img} alt="" /> :
+                                            parseInt(reaction.type) === 5 ? <img key={reaction.id} className="postIconReactions" src={reactions[4].img} alt="" /> :
+                                                parseInt(reaction.type) === 6 ? <img key={reaction.id} className="postIconReactions" src={reactions[5].img} alt="" /> :
+                                                    <img key={reaction.id} className="postIconReactions" src={reactions[6].img} alt="" />)}
                         </div>
                         <span className="postTextDescriptionReactions">{like === 0 ? "" : like}</span>
                     </span>

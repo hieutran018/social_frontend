@@ -7,8 +7,12 @@ import avatar from '../../../ckc_social_logo.png';
 import { FiBell } from 'react-icons/fi';
 import { GrLogout } from 'react-icons/gr';
 import { MdPassword } from 'react-icons/md';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 function AdminHeader() {
+    const user = JSON.parse(localStorage.getItem('adminInfo'));
+    const [cookies, remove] = useCookies(["tk"]);
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -21,7 +25,15 @@ function AdminHeader() {
 
 
     const handleLogout = () => {
-        navigate('/admin/login');
+        const requestURL = 'http://127.0.0.1:8000/api/auth/admin/logout';
+        axios({
+            method: 'POST',
+            url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies.tk,
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then(() => { remove('tk'); localStorage.removeItem('adminInfo'); navigate('/admin/login') }).catch((err) => { console.log(err.message); });
     }
     return (
         <div className='adminHeader'>
@@ -35,8 +47,8 @@ function AdminHeader() {
                     <FiBell size={30} color='blue' />
                 </div>
                 <div onClick={handleClick} className='adminHeaderUser'>
-                    <img className='adminHeaderAvatarUser' src={avatar} alt="" />
-                    <div className='adminHeaderUserName'>Trần Dương Chí Hiếu</div>
+                    <img className='adminHeaderAvatarUser' src={user.avatar} alt="" />
+                    <div className='adminHeaderUserName'>{user.displayName}</div>
                 </div>
 
             </div>
@@ -77,8 +89,8 @@ function AdminHeader() {
             >
                 <MenuItem style={{ width: "300px" }} onClick={handleClose}>
                     <Link to='/admin/profile' className='adminHeaderMenuTop'>
-                        <img className='adminHeaderMenuItemAvatar' src={avatar} alt="" />
-                        <div className='adminHeaderMenuItemUserName'>Trần Dương Chí Hiếu</div>
+                        <img className='adminHeaderMenuItemAvatar' src={user.avatar} alt="" />
+                        <div className='adminHeaderMenuItemUserName'>{user.displayName}</div>
                     </Link>
                 </MenuItem>
                 <MenuItem style={{ width: "300px" }} onClick={handleClose}>
