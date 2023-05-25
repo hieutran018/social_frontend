@@ -18,10 +18,10 @@ function PostStatus() {
         dispatch(fetchFAAs(cookies));
     }, [dispatch, cookies])
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'icon_name', headerName: 'Tên trạng thái/Hoạt động', width: 400 },
-        { field: 'created_at', headerName: 'Ngày được thêm vào', width: 320 },
-        { field: 'status', headerName: 'Trạng thái', width: 150 },
+        { field: 'id', headerName: 'ID', width: 70, headerAlign: 'center', align: 'center', },
+        { field: 'icon_name', headerName: 'Tên trạng thái/Hoạt động', width: 400, headerAlign: 'center', align: 'center', },
+        { field: 'created_at', headerName: 'Ngày được thêm vào', width: 320, headerAlign: 'center', align: 'center', },
+        { field: 'status', headerName: 'Trạng thái', width: 150, headerAlign: 'center', align: 'center', },
 
     ];
     const actionColumn = [
@@ -29,6 +29,7 @@ function PostStatus() {
             field: "patch",
             headerName: "Icon",
             align: 'center',
+            headerAlign: 'center',
             width: 250,
             renderCell: (params) => {
                 console.log(params);
@@ -43,6 +44,8 @@ function PostStatus() {
             field: "action",
             headerName: "Hành động",
             width: 250,
+            align: 'center',
+            headerAlign: 'center',
             renderCell: (params) => {
                 return (
                     <div className="cellAction">

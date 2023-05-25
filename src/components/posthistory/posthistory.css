@@ -1,0 +1,40 @@
+.postHistoryCard{
+    padding: 1rem;
+    
+}
+.postHistoryUpdatedAt{
+    font-size: 20px;
+    font-weight: 500;
+}
+.postHistoryMain{
+    border-radius: 10px;
+    background-color: #E4E6EB;
+    padding: 1rem;
+    margin-top: 0.5rem;
+}
+.postHistoryMainTop{
+    display: flex;
+    align-items: center;
+}
+.postHistoryUserAvatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+.postHistoryUserName{
+    margin-left: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.postHistoryMainBottom{
+    margin-top: 1rem;
+}
+.postHistoryMediaFiles{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.postHistoryMediaFileItem{
+    width: 171px;
+    height: 171px; 
+}

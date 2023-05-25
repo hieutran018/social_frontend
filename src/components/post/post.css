@@ -13,10 +13,19 @@
 
 .postTop {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
-
+.postIconOptionPost{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.postIconOptionPost:hover{
+    background-color: #F0F2F5;
+}
 .postIconPrivacy{
     margin-top: 0px;
     margin-bottom: -10px;
@@ -314,4 +323,14 @@ color: black;
 .postIconReactions{
     width: 25px;
     height: 25px;
+}
+.postMenuSettingItem{
+    display: flex;
+    align-items: center;
+    width: 20rem;
+    font-size: 18px;
+    font-weight: 500;
+}
+.postMenuSettingTextContainer{
+    margin-left: 1rem;
 }

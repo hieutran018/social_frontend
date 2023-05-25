@@ -10,10 +10,15 @@ import MenuItem from '@mui/material/MenuItem';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
+import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { GrHistory, GrEdit } from 'react-icons/gr';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +39,7 @@ import PostDetail from "../postdetail/postdetail";
 import './post.css';
 import { useParams } from "react-router-dom";
 import ReactionsPost from "../reationspost/reactionspost";
+import PostHistory from "../posthistory/posthistory";
 
 function Post({ post }) {
     const pages = useParams().pages;
@@ -42,10 +48,12 @@ function Post({ post }) {
     const [open, setOpen] = useState(false);
     const [openShareOptionToFeed, setOpenShareOptionToFeed] = useState(false)
     const [openViewImage, setopenViewImage] = useState(false);
-
     const [anchor, setAnchor] = useState(null);
     const openOptionShare = Boolean(anchor);
+    const [openViewHistory, setOpenViewHistory] = useState(false);
     const [item, setItem] = useState(0);
+    const [anchorSetting, setAnchorSetting] = useState(null);
+    const openSetting = Boolean(anchorSetting);
     const dispatch = useDispatch();
     const statusAdd = useSelector(selectAddPostStatus);
     const [isLike, setIsLike] = useState(post.isLike)
@@ -123,12 +131,25 @@ function Post({ post }) {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleOpenViewHistory = () => {
+        setOpenViewHistory(true);
+        setAnchorSetting(null);
+    }
+    const handleCloseViewHistory = () => {
+        setOpenViewHistory(false);
+    }
 
     const handleClickOptionShare = (event) => {
         setAnchor(event.currentTarget);
     };
     const handleCloseOptionShare = () => {
         setAnchor(null);
+    };
+    const handleClickSetting = (event) => {
+        setAnchorSetting(event.currentTarget);
+    };
+    const handleCloseSetting = () => {
+        setAnchorSetting(null);
     };
 
     const executeOnClick = (isExpanded) => {
@@ -237,7 +258,57 @@ function Post({ post }) {
 
                             </div>
                     }
-
+                    <div className="postTopRight">
+                        <div onClick={handleClickSetting} className="postIconOptionPost">
+                            <HiOutlineDotsHorizontal size={25} />
+                        </div>
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorSetting}
+                            open={openSetting}
+                            onClose={handleCloseSetting}
+                            MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                            }}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <div className="postMenuSetting">
+                                <MenuItem onClick={handleOpenViewHistory}>
+                                    <div className="postMenuSettingItem">
+                                        <div className="postMenuSettingIcon">
+                                            <GrHistory size={20} />
+                                        </div>
+                                        <div className="postMenuSettingTextContainer">
+                                            <span className="postMenuSettingText">Xem lịch sử chỉnh sửa</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem >
+                                    <div className="postMenuSettingItem">
+                                        <div className="postMenuSettingIcon">
+                                            <GrEdit size={20} />
+                                        </div>
+                                        <div className="postMenuSettingTextContainer">
+                                            <span className="postMenuSettingText">Chỉnh sửa bài viết</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem >
+                                    <div className="postMenuSettingItem">
+                                        <div className="postMenuSettingIcon">
+                                            <RiDeleteBin6Line size={20} />
+                                        </div>
+                                        <div className="postMenuSettingTextContainer">
+                                            <span className="postMenuSettingText">Xóa bài viết</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                            </div>
+                        </Menu>
+                    </div>
                 </div>
 
                 <div className="postCenter">
@@ -518,7 +589,6 @@ function Post({ post }) {
 
                     </div>
                 </Menu>
-
             </div>
             <div>
                 <Dialog
@@ -554,6 +624,24 @@ function Post({ post }) {
                             }
                         </div>
                     </div>
+                </Dialog>
+            </div>
+            <div className="postViewPostHistory">
+                <Dialog
+                    open={openViewHistory}
+                    onClose={handleCloseViewHistory}
+                    fullWidth
+                    maxWidth="sm"
+
+                >
+                    <DialogTitle style={{ padding: "0px" }}>
+                        <div className='contaierHeader'>
+                            <span className='shareTitle'>Lịch sử chỉnh sửa bài viết</span>
+                        </div>
+                    </DialogTitle>
+                    <DialogContent style={{ padding: "0px" }}>
+                        <PostHistory postId={post.id} />
+                    </DialogContent>
                 </Dialog>
             </div>
         </div>

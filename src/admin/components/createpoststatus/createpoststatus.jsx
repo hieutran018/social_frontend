@@ -1,22 +1,35 @@
 import './createpoststatus.css';
 import { useEffect, useState } from 'react';
 import { RiEmotionLaughFill } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
+import { addNewFeelAndActivity } from '../../../redux/admin/actions/adminFeelAndActivityAction';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 function CreatePostStatus() {
+    const cookies = useCookies('tk')[0].tk;
     const [file, setFile] = useState();
-
+    const [iconName, setIconName] = useState('');
+    const dispath = useDispatch();
+    const navigate = useNavigate();
     const handleChangeFile = (e) => {
         const image = e.target.files[0];
         image.preview = URL.createObjectURL(image);
         setFile(e.target.files[0])
-        console.log(e.target.files);
+    }
+    const handleChangeIconName = (e) => {
+        setIconName(e.target.value);
     }
     useEffect(() => {
         return () => {
             file && URL.revokeObjectURL(file.preview);
         }
     }, [file])
+
+    const handleCreateFeelAndActivity = () => {
+        dispath(addNewFeelAndActivity(cookies, iconName, file))
+    }
     return (
         <div className="createPostStatusWrapper">
             <div className='postsManagementBreadCrumb'>
@@ -29,7 +42,7 @@ function CreatePostStatus() {
                         <div className='createPostStatusInPutContainer'>
                             <div className='createPostStatusInput'>
                                 <div className='createPostStatusDescriptionInput'>Tên hoạt động, trạng thái:</div>
-                                <input className='createPostStatusContentInput' type="text" />
+                                <input onChange={handleChangeIconName} value={iconName} className='createPostStatusContentInput' type="text" />
                             </div>
                             <div className='createPostStatusInput'>
                                 <span className='createPostStatusDescriptionInput'>Tệp</span>
@@ -49,8 +62,8 @@ function CreatePostStatus() {
                         </div>
                     </div>
                     <div className='createPostStatusBottom'>
-                        <button className='createPostStatusButtonCancel'>Quay lại</button>
-                        <button className='createPostStatusButtonCreate'>Thêm</button>
+                        <button onClick={() => navigate(-1)} className='createPostStatusButtonCancel'>Quay lại</button>
+                        <button onClick={handleCreateFeelAndActivity} className='createPostStatusButtonCreate'>Thêm</button>
                     </div>
                 </div>
             </div>

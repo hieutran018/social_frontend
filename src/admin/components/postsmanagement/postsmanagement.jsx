@@ -21,7 +21,8 @@ function PostsManagement() {
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'userName', headerName: 'Tên người dùng', width: 250 },
-        { field: 'post_content', headerName: 'Nội dung', width: 500 },
+        { field: 'post_content', headerName: 'Nội dung', width: 400 },
+        { field: 'type', headerName: 'Loại bài viết', width: 100 },
         { field: 'reaction', headerName: 'Lượt reaction', type: 'number', width: 140 },
         { field: 'share', headerName: 'Lượt share', type: 'number', width: 90 },
         { field: 'privacy', headerName: 'Quyền riêng tư', width: 150 },
