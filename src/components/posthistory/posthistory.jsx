@@ -25,7 +25,7 @@ function PostHistory({ postId }) {
                             <div key={history.id} className='postHistoryCard'>
                                 <div className='postHistoryCardWrapper'>
                                     <div className='postHistoryUpdatedAt'>
-                                        {history.created_at} day
+                                        {history.created_at}
                                     </div>
                                     <div className='postHistoryMain'>
                                         <div className="postHistoryMainTop">
