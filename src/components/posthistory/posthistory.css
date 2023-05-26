@@ -1,6 +1,5 @@
 .postHistoryCard{
     padding: 1rem;
-    
 }
 .postHistoryUpdatedAt{
     font-size: 20px;
@@ -36,5 +35,6 @@
 }
 .postHistoryMediaFileItem{
     width: 171px;
-    height: 171px; 
+    height: 171px;
+    object-fit: cover;
 }

@@ -1,5 +1,4 @@
 import './posthistory.css';
-import avatar from '../../ckc_social_logo.png';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostHistory } from '../../redux/actions/postHistoryAction';
@@ -26,7 +25,7 @@ function PostHistory({ postId }) {
                             <div key={history.id} className='postHistoryCard'>
                                 <div className='postHistoryCardWrapper'>
                                     <div className='postHistoryUpdatedAt'>
-                                        Hôm nay lúc 12:00
+                                        {history.created_at}
                                     </div>
                                     <div className='postHistoryMain'>
                                         <div className="postHistoryMainTop">
@@ -41,11 +40,10 @@ function PostHistory({ postId }) {
                                                 <Grid sx={{ flexGrow: 1 }} container spacing={0.1}>
                                                     <Grid item xs={12}>
                                                         <Grid container justifyContent="left" spacing={0.5}>
-                                                            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                                                                <Grid key={value} item>
-                                                                    <img className='postHistoryMediaFileItem' src={avatar} alt="" />
+                                                            {history.mediafile.map((file) => (
+                                                                <Grid key={file.id} item>
+                                                                    <img className='postHistoryMediaFileItem' src={file.media_file_name} alt="" />
                                                                 </Grid>
-
                                                             ))}
                                                         </Grid>
                                                     </Grid>
