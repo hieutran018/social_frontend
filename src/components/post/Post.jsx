@@ -14,6 +14,7 @@ import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from '
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { GrHistory, GrEdit } from 'react-icons/gr';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { MdOutlinePrivacyTip } from 'react-icons/md';
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
@@ -40,8 +41,10 @@ import './post.css';
 import { useParams } from "react-router-dom";
 import ReactionsPost from "../reationspost/reactionspost";
 import PostHistory from "../posthistory/posthistory";
+import EditPost from "../editpost/editpost";
 
 function Post({ post }) {
+    const user = JSON.parse(localStorage.getItem('user'));
     const pages = useParams().pages;
     const groupId = useParams().groupId;
     const cookies = useCookies('_tk');
@@ -51,6 +54,7 @@ function Post({ post }) {
     const [anchor, setAnchor] = useState(null);
     const openOptionShare = Boolean(anchor);
     const [openViewHistory, setOpenViewHistory] = useState(false);
+    const [openEditPost, setOpenEditPost] = useState(false);
     const [item, setItem] = useState(0);
     const [anchorSetting, setAnchorSetting] = useState(null);
     const openSetting = Boolean(anchorSetting);
@@ -59,6 +63,7 @@ function Post({ post }) {
     const [isLike, setIsLike] = useState(post.isLike)
     const [like, setLike] = useState(!post.totalLike ? 0 : post.totalLike)
     const [share, setShare] = useState(!post.totalShare ? 0 : post.totalShare)
+    const [reacts, setReaction] = useState(post.like);
     const [openReactions, setOpenReactions] = useState(false);
     const reactions = [
         { id: 1, img: likeImg },
@@ -68,15 +73,12 @@ function Post({ post }) {
         { id: 5, img: yayImg },
         { id: 6, img: wowImg },
         { id: 7, img: angryImg },
-
     ]
     useEffect(() => {
-
         if (selectAddPostStatus) {
             setOpenShareOptionToFeed(false);
             setAnchor(null);
         }
-
     }, [statusAdd, dispatch])
 
     const handleLike = (reaction) => {
@@ -95,18 +97,18 @@ function Post({ post }) {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log(response.data.id);
+            console.log(response.data);
             if (response.status === 200) {
-                post.like.push(response.data);
+                setReaction([...reacts, response.data]);
                 setLike(like + 1);
             } else if (response.status === 202) {
-                post.like.filter((item) => item.id === parseInt(response.data.id) ? item.type = response.data.type : item.type)
-            } else {
+                reacts.filter((item) => item.id === parseInt(response.data.id) ? item.type = response.data.type : item.type)
+            } else if (response.status === 201) {
+                setReaction(reacts.filter((item) => item.id !== parseInt(response.data.id)));
                 setLike(like - 1);
             }
-
+            console.log(reaction);
         }).catch((error) => console.log(error));
-
     }
 
     const handleOpenReactions = () => {
@@ -118,7 +120,6 @@ function Post({ post }) {
 
     const handleClickOpenopenShareOptionToFeed = () => {
         setOpenShareOptionToFeed(true);
-
     };
     const handleCloseopenShareOptionToFeed = () => {
         setOpenShareOptionToFeed(false);
@@ -126,7 +127,6 @@ function Post({ post }) {
 
     const handleClickOpen = () => {
         setOpen(true);
-
     };
     const handleClose = () => {
         setOpen(false);
@@ -137,6 +137,13 @@ function Post({ post }) {
     }
     const handleCloseViewHistory = () => {
         setOpenViewHistory(false);
+    }
+    const handleOpenEditPost = () => {
+        setOpenEditPost(true);
+        setAnchorSetting(null);
+    }
+    const handleCloseEditPost = () => {
+        setOpenEditPost(false);
     }
 
     const handleClickOptionShare = (event) => {
@@ -238,13 +245,12 @@ function Post({ post }) {
                                         alt={"Avatar user " + post.displayName}
                                     />
                                 </a>
-
                                 <div>
                                     <div className="postUsername">
                                         <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                             {post.displayName}
                                         </a>
-                                        {post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                        {post.iconName ? <span className='postWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                     </div>
                                     <div className="postPrivacy">
                                         <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
@@ -276,17 +282,35 @@ function Post({ post }) {
                             }}
                         >
                             <div className="postMenuSetting">
-                                <MenuItem onClick={handleOpenViewHistory}>
-                                    <div className="postMenuSettingItem">
-                                        <div className="postMenuSettingIcon">
-                                            <GrHistory size={20} />
-                                        </div>
-                                        <div className="postMenuSettingTextContainer">
-                                            <span className="postMenuSettingText">Xem lịch sử chỉnh sửa</span>
-                                        </div>
-                                    </div>
-                                </MenuItem>
-                                <MenuItem >
+                                {
+                                    post.user_id === user.id ?
+                                        <MenuItem >
+                                            <div className="postMenuSettingItem">
+                                                <div className="postMenuSettingIcon">
+                                                    <MdOutlinePrivacyTip size={20} />
+                                                </div>
+                                                <div className="postMenuSettingTextContainer">
+                                                    <span className="postMenuSettingText">Cập nhật quyền riêng tư</span>
+                                                </div>
+                                            </div>
+                                        </MenuItem> :
+                                        <></>
+                                }
+                                {
+                                    post.histories !== 0 ?
+                                        <MenuItem onClick={handleOpenViewHistory}>
+                                            <div className="postMenuSettingItem">
+                                                <div className="postMenuSettingIcon">
+                                                    <GrHistory size={20} />
+                                                </div>
+                                                <div className="postMenuSettingTextContainer">
+                                                    <span className="postMenuSettingText">Xem lịch sử chỉnh sửa</span>
+                                                </div>
+                                            </div>
+                                        </MenuItem> :
+                                        <></>
+                                }
+                                <MenuItem onClick={handleOpenEditPost}>
                                     <div className="postMenuSettingItem">
                                         <div className="postMenuSettingIcon">
                                             <GrEdit size={20} />
@@ -310,7 +334,6 @@ function Post({ post }) {
                         </Menu>
                     </div>
                 </div>
-
                 <div className="postCenter">
                     {
                         post.parent_post ? <ShowMoreText
@@ -331,7 +354,6 @@ function Post({ post }) {
                         !post.parent_post ?
                             <div>
                                 <ShowMoreText
-                                    /* Default options */
                                     lines={1}
                                     more="xem thêm"
                                     less="ẩn bớt"
@@ -339,7 +361,6 @@ function Post({ post }) {
                                     anchorClass="postViewMore"
                                     onClick={executeOnClick}
                                     expanded={false}
-
                                     truncatedEndingComponent={"... "}
                                 ><p>{post.post_content}</p>
                                 </ShowMoreText>
@@ -351,7 +372,6 @@ function Post({ post }) {
                                                     <img className="postImg" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />
                                             }
                                         </div>
-
                                         : post.totalMediaFile === 2 ?
                                             <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                                 {post.mediafile.map((item) => (
@@ -388,7 +408,6 @@ function Post({ post }) {
                                                         </ImageListItem>
                                                     ))}
                                                 </ImageList>
-
                                     }</div>
                             </div> :
                             <div className="postParent">
@@ -401,7 +420,6 @@ function Post({ post }) {
                                                         post.parent_post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.parent_post.mediafile[0].media_file_name} controls></video> :
                                                             <img className="postShareImg" src={post.parent_post.mediafile[0].media_file_name} alt="" />
                                                     }
-
                                                 </div>
                                                 : post.parent_post.totalMediaFile === 2 ?
                                                     <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
@@ -442,12 +460,10 @@ function Post({ post }) {
                                                         </ImageList>
                                             }
                                         </div>
-
                                     </div>
                                     <div className="postShareTop">
                                         {
                                             post.parent_post.group_id ?
-
                                                 <div className="postTopLeft">
                                                     <a href={"/" + post.parent_post.group_id}>
                                                         <img
@@ -456,7 +472,6 @@ function Post({ post }) {
                                                             alt={"Avatar user " + post.parent_post.groupName}
                                                         />
                                                     </a>
-
                                                     <div>
                                                         <span className="postUsername">
                                                             <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
@@ -477,7 +492,6 @@ function Post({ post }) {
                                                                 }</span>
                                                         </div>
                                                     </div>
-
                                                 </div> :
                                                 <div className="postTopLeft">
                                                     <a href={"/userId/" + post.parent_post.user_id}>
@@ -487,7 +501,6 @@ function Post({ post }) {
                                                             alt={"Avatar user " + post.parent_post.displayName}
                                                         />
                                                     </a>
-
                                                     <div>
                                                         <div className="postUsername">
                                                             <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
@@ -501,8 +514,6 @@ function Post({ post }) {
                                                     </div>
                                                 </div>
                                         }
-
-
                                     </div>
                                     <div>
                                         <ShowMoreText
@@ -514,12 +525,10 @@ function Post({ post }) {
                                             anchorClass="postViewMore"
                                             onClick={executeOnClick}
                                             expanded={false}
-
                                             truncatedEndingComponent={"... "}
                                         ><p>{post.parent_post.post_content}</p>
                                         </ShowMoreText>
                                     </div>
-
                                 </div>
                             </div>
                     }
@@ -527,7 +536,7 @@ function Post({ post }) {
                 <div className="postBottomStatistical">
                     <span className="postTextStatistical">
                         <div className="postIconReacactionsContainer">
-                            {post.like.map((reaction) => parseInt(reaction.type) === 1 ? <img key={reaction.id} className="postIconReactions" src={reactions[0].img} alt="" /> :
+                            {reacts.map((reaction) => parseInt(reaction.type) === 1 ? <img key={reaction.id} className="postIconReactions" src={reactions[0].img} alt="" /> :
                                 parseInt(reaction.type) === 2 ? <img key={reaction.id} className="postIconReactions" src={reactions[1].img} alt="" /> : reaction.type === 7 ? <img className="postIconReactions" src={reactions[0].img} alt="" /> :
                                     parseInt(reaction.type) === 3 ? <img key={reaction.id} className="postIconReactions" src={reactions[2].img} alt="" /> :
                                         parseInt(reaction.type) === 4 ? <img key={reaction.id} className="postIconReactions" src={reactions[3].img} alt="" /> :
@@ -548,7 +557,6 @@ function Post({ post }) {
                         <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn "><AiOutlineComment size={25} /></button></div>
                         <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn "><AiOutlineShareAlt size={25} /></button></div>
                     </div>
-
                 </div>
             </div>
             <div>
@@ -586,7 +594,6 @@ function Post({ post }) {
                                 </div>
                             </div>
                         </MenuItem>
-
                     </div>
                 </Menu>
             </div>
@@ -607,7 +614,6 @@ function Post({ post }) {
                 >
                     <ShareOption post={post.parent_post !== null ? post.parent_post : post} />
                 </Dialog>
-
                 <Dialog
                     open={openViewImage}
                     onClose={handleCloseViewMedia}
@@ -632,7 +638,6 @@ function Post({ post }) {
                     onClose={handleCloseViewHistory}
                     fullWidth
                     maxWidth="sm"
-
                 >
                     <DialogTitle style={{ padding: "0px" }}>
                         <div className='contaierHeader'>
@@ -641,6 +646,23 @@ function Post({ post }) {
                     </DialogTitle>
                     <DialogContent style={{ padding: "0px" }}>
                         <PostHistory postId={post.id} />
+                    </DialogContent>
+                </Dialog>
+            </div>
+            <div className="postEditPost">
+                <Dialog
+                    open={openEditPost}
+                    onClose={handleCloseEditPost}
+                    fullWidth
+                    maxWidth="sm"
+                >
+                    <DialogTitle style={{ padding: "0px" }}>
+                        <div className='contaierHeader'>
+                            <span className='shareTitle'>Chỉnh sửa bài viết</span>
+                        </div>
+                    </DialogTitle>
+                    <DialogContent style={{ padding: "0px" }}>
+                        <EditPost postId={post.id} />
                     </DialogContent>
                 </Dialog>
             </div>

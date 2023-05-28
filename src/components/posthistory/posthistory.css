@@ -38,3 +38,24 @@
     height: 171px;
     object-fit: cover;
 }
+
+/* POST HISTORY SKELETON START */
+.postHistorySkeleton{
+    padding:1rem;
+}
+.postHistorySkeletonMain{
+    border-radius: 10px;
+    background-color: #E4E6EB;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    height: 10rem;
+}
+.postHistorySkeletonMainTop{
+    display: flex;
+    align-items: center;
+}
+.postHistorySkeletonItemText{
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+/* POST HISTORY SKELETON END */

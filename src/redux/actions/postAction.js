@@ -7,6 +7,7 @@ import {
     ADD_POST_STARTED,
     ADD_POST_SUCCEEDED,
     ADD_POST_FAILED, LOAD_MORE_POST,
+    UPDATE_POST
 } from '../constants/postConstant'
 
 export const fetchPostStarted = posts => ({
@@ -41,6 +42,11 @@ export const fetchPostFailed = error => ({
 export const loadMorePost = posts => ({
     type: LOAD_MORE_POST,
     posts
+})
+
+export const updatePost = post => ({
+    type: UPDATE_POST,
+    post
 })
 
 
@@ -103,6 +109,7 @@ export const fetchPost = (token, page) => {
 
 export const addNewPost = (token, contentPost, files, privacy, tags, group, feelActivityId) => {
     return async dispatch => {
+        console.log(tags);
         try {
             dispatch(addNewPostStarted());
             const requestURL = "http://127.0.0.1:8000/api/v1/create-post";
@@ -120,8 +127,6 @@ export const addNewPost = (token, contentPost, files, privacy, tags, group, feel
                 console.log("POST POST GROUP", response.data);
                 dispatch(addNewPostSucceeded(response.data));
                 // dispatch(fetchPost())
-
-
             }).catch((error) => addNewPostFailed(error.message));
         } catch (error) {
             dispatch(fetchPostFailed(error))
@@ -175,6 +180,38 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
             dispatch(fetchPostFailed(error))
         }
     };
+}
+
+export const editPost = (cookies, postId, contentPost, files, privacy, tags, feelActivityId) => {
+    return async dispatch => {
+        try {
+            const requestURL = "http://127.0.0.1:8000/api/v1/update-post";
+            axios({
+                method: "POST",
+                url: requestURL,
+                data: {
+                    postId: postId,
+                    contentPost: contentPost,
+                    privacy: privacy,
+                    tags: tags,
+                    feelActivityId: feelActivityId,
+                    files: files,
+                },
+                headers: {
+                    Authorization: "Bearer " + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                dispatch(updatePost(response.data));
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export const fetchPostGroupByIdGroup = (cookies, groupId, page) => {

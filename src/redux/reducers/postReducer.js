@@ -3,7 +3,8 @@ import {
     FETCH_POST_SUCCEEDED,
     FETCH_POST_FAILED, ADD_POST, ADD_POST_STARTED, ADD_POST_SUCCEEDED, ADD_POST_FAILED,
     LOAD_MORE_POST,
-    COUNT_COMMENT_POST
+    COUNT_COMMENT_POST,
+    UPDATE_POST
 } from '../constants/postConstant'
 
 const initialState = []
@@ -56,6 +57,18 @@ export default function postReducer(state = initialState, action) {
                 error: action.error
             }
         }
+        case UPDATE_POST: {
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.post.id) {
+                        return post = action.post
+                    } else {
+                        return post
+                    }
+                })
+            }
+        }
         case LOAD_MORE_POST: {
             return {
                 ...state,
@@ -65,7 +78,6 @@ export default function postReducer(state = initialState, action) {
         case COUNT_COMMENT_POST: {
             return {
                 ...state,
-
             }
         }
         case ADD_POST: {

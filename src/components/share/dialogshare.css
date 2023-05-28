@@ -10,7 +10,6 @@
 
 .wrapper{
   margin: 1rem;
-  
 }
 
 .contaierHeader{
@@ -36,10 +35,8 @@
   width: 4rem;
   height: 4rem;
   margin-right: 10px;
-
 }
 .shareImgAvatar{
-  
   width: 4rem;
   height: 4rem;
   border-radius: 50px;
@@ -115,12 +112,12 @@ div.details{
 } */
 
 .content{
-    display: flex;
+  display: flex;
     
 }
 .shareUserName{
-    font-size: 20px;
-    font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 }
 .details .privacy span{
   font-size: 13px;

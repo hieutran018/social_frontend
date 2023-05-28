@@ -40,10 +40,8 @@ function Topbar() {
             }
             typingTimeOutRef.current = setTimeout(() => {
                 searchData(event.target.value);
-
             }, 300)
         }
-
     }
     function searchData(input) {
         const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/' + input;
@@ -96,7 +94,7 @@ function Topbar() {
                                                 </div>
                                                 <div className='dataCardRight'>
                                                     <div className='dataName'>{item.displayName}</div>
-                                                    <Link onClick={handleCloseData} to={'/' + item.id}>
+                                                    <Link onClick={handleCloseData} to={'/userId/' + item.id}>
                                                         <div className='dataButtonNextSearch'>
                                                             <GrLinkNext size={25} />
                                                         </div>
@@ -110,27 +108,19 @@ function Topbar() {
                                             <div className='dataIconSearchFor'>
                                                 <BsSearch size={25} className="searchIcon" />
                                             </div>
-
                                             <div className='dataCardRight'>
                                                 <div className='dataNameSearchFor'>Tìm kiếm kết quả cho "{inputSearch}"</div>
-
                                             </div>
-
-
                                         </div>
                                     </Link>
                                 </div>
                             </div>
                     }
                 </div>
-
-
             </div>
 
             <div className="topbarRight">
-
                 <div className="topbarIcons">
-
                     <div className="topbarIconItem">
                         <Chat fontSize='25' />
                         {/* <span className="topbarIconBadge">2</span> */}
@@ -139,10 +129,7 @@ function Topbar() {
                         <Notifications onClick={!openNoti ? handleOpenNoti : handleCloseNoti} fontSize='25' />
                         <Notification close={openNoti} />
                     </div>
-
                 </div>
-
-
                 <NavItem icon={<ArrowDropDownIcon />}>
                     <DropdownMenu />
                 </NavItem>

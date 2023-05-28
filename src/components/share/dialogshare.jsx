@@ -122,18 +122,19 @@ function DialogShare({ group }) {
     }
 
     const handleTaggingUser = (friend) => {
+        console.log(friend);
         setTaggingList([...taggingList, friend])
-        setTaggingId([...taggingId, friend.id])
+        setTaggingId([...taggingId, friend.friendId])
         setListFr((listFr) =>
-            listFr.filter((fr) => fr.id !== friend.id)
+            listFr.filter((fr) => fr.friendId !== friend.friendId)
         );
     }
     const handlUndoTaggingUser = (friend) => {
         setTaggingList((taggingList) =>
-            taggingList.filter((tagging) => tagging.id !== friend.id)
+            taggingList.filter((tagging) => tagging.friendId !== friend.friendId)
         );
         setTaggingId((taddingId) =>
-            taddingId.filter((tagging) => tagging !== friend.id)
+            taddingId.filter((tagging) => tagging !== friend.friendId)
         );
         setListFr([...listFr, friend])
     }
@@ -302,8 +303,8 @@ function DialogShare({ group }) {
                                                 'aria-labelledby': 'basic-button',
                                             }}
                                         >
-                                            <MenuItem onClick={() => hanldeSelectPrivacy(1)} >Công khai</MenuItem>
-                                            <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Bạn bè</MenuItem>
+                                            <MenuItem onClick={() => hanldeSelectPrivacy(1)}>Công khai</MenuItem>
+                                            <MenuItem onClick={() => hanldeSelectPrivacy(2)}>Bạn bè</MenuItem>
                                             <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                                         </Menu>
 

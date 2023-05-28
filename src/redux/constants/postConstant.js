@@ -8,3 +8,5 @@ export const ADD_POST_SUCCEEDED = 'ADD_POST_SUCCEEDED'
 export const ADD_POST_FAILED = 'ADD_POST_FAILED'
 export const ADD_POST = 'ADD_POST'
 export const COUNT_COMMENT_POST = 'COUNT_COMMENT_POST'
+
+export const UPDATE_POST = 'UPDATE_POST'

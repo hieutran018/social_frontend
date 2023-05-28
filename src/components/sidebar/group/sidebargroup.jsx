@@ -61,6 +61,7 @@ function SideBarGroup() {
 
     const handleSubmitCreateGroup = () => {
         dispatch(createNewGroup(cookies, groupName, privacy));
+        handleClose();
     }
 
     return (

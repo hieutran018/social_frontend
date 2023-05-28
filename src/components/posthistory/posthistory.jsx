@@ -5,6 +5,7 @@ import { fetchPostHistory } from '../../redux/actions/postHistoryAction';
 import { selectStatusPostHistories, selectPostHistories } from '../../redux/selectors/postHistorySelector';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
+import PostHistorySkeleton from './postHistorySkeleton';
 
 function PostHistory({ postId }) {
     const cookies = useCookies('_tk')[0]._tk;
@@ -19,7 +20,9 @@ function PostHistory({ postId }) {
         <div className='postHistoryList'>
             {
                 status === 'loading' ?
-                    <>LOADING</> :
+                    [0, 1,].map((item) => (
+                        <PostHistorySkeleton key={item} />
+                    )) :
                     status === 'succeeded' ?
                         histories.map((history) => (
                             <div key={history.id} className='postHistoryCard'>
