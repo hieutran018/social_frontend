@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import {
     FETCH_POST_STARTED,
     FETCH_POST_SUCCEEDED,
@@ -52,11 +52,9 @@ export const updatePost = post => ({
 
 export const fetchPostGroup = (cookies, page) => {
     return async dispatch => {
-
         if (page + 1 === 1) {
             dispatch(fetchPostStarted([]))
         }
-
         try {
             const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group?page=' + page
             axios({
@@ -182,7 +180,7 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
     };
 }
 
-export const editPost = (cookies, postId, contentPost, files, privacy, tags, feelActivityId) => {
+export const editPost = (cookies, postId, contentPost, files, privacy, tags, feelActivityId, removeFile) => {
     return async dispatch => {
         try {
             const requestURL = "http://127.0.0.1:8000/api/v1/update-post";
@@ -194,8 +192,9 @@ export const editPost = (cookies, postId, contentPost, files, privacy, tags, fee
                     contentPost: contentPost,
                     privacy: privacy,
                     tags: tags,
-                    feelActivityId: feelActivityId,
+                    faaId: feelActivityId,
                     files: files,
+                    removeFile: removeFile
                 },
                 headers: {
                     Authorization: "Bearer " + cookies,

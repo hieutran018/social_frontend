@@ -63,12 +63,51 @@ div.editDetails{
   background: #E4E6EB;
   justify-content: space-evenly;
 }
+.editPostContentPost{
+  max-height: 5rem;
+}
 .editPostOptionsContainer{
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     border: 1px solid  #898a8b72;
     border-radius: 15px;
     height: 3.5rem;
+}
+.editPostRemoveMediaFile{
+  height: 35px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #E4E6EB;
+  border: none;
+}
+.editPostRemoveFileContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+.editPostRemoveFileCard{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  
+}
+.editPostRemoveFileItems{
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  margin: 0.1rem;
+}
+.editPostRemoveDescription{
+  font-size: 20px;
+  font-weight: 500;
+}
+.editPostRemoveFilesButton{
+  border: none;
+  border-radius: 5px;
+  background-color: #E4E6EB;
+  font-weight: 500;
+  height: 30px;
 }
 .editPostDescriptionContainer{
   display: flex;

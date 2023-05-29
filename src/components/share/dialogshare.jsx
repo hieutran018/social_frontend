@@ -142,9 +142,7 @@ function DialogShare({ group }) {
         setTab(0)
     }
     const handleClickTag = () => {
-
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + user.id;
-
         axios({
             method: 'GET',
             url: requestURL,
@@ -153,7 +151,6 @@ function DialogShare({ group }) {
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             setListFr(response.data.data);
             setTab(1);

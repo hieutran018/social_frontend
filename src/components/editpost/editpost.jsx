@@ -4,11 +4,16 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import GroupIcon from '@mui/icons-material/Group';
+import LockIcon from '@mui/icons-material/Lock';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
+import ShowMoreText from "react-show-more-text";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import { IoMdClose } from 'react-icons/io';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { PermMedia, Room, EmojiEmotions } from "@mui/icons-material";
@@ -18,6 +23,8 @@ import EditPostSkeleton from './editPostSkeleton';
 import { useDispatch } from 'react-redux';
 import { editPost } from '../../redux/actions/postAction';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import 'moment/locale/vi';
 
 function EditPost({ postId }) {
     const navigate = useNavigate();
@@ -33,6 +40,8 @@ function EditPost({ postId }) {
     const [listFr, setListFr] = useState([]);
     const [tags, setTags] = useState([]);
     const [tagged, setTagged] = useState([]);
+    const [privacy, setPrivacy] = useState();
+    const [removeFile, setRemoveFile] = useState([]);
     const dispatch = useDispatch();
 
     const handleClick = (event) => {
@@ -50,6 +59,19 @@ function EditPost({ postId }) {
     const handleChangeContent = (e) => {
         setContent(e.target.value);
     }
+    const executeOnClick = (isExpanded) => {
+        console.log(isExpanded);
+    }
+    const hanldeSelectPrivacy = (privacy) => {
+        setPrivacy(privacy);
+        setAnchorEl(null);
+    }
+    const handleChangeRemoveFile = (file) => {
+        console.log(file);
+        removeFile.push(file.id);
+        setFiles(files.filter(f => f.id !== file.id))
+        console.log(removeFile);
+    }
 
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -66,7 +88,7 @@ function EditPost({ postId }) {
     };
 
     const handleEditPost = () => {
-        dispatch(editPost(cookies, postId, content, changeFile, 1, tagged, 1))
+        dispatch(editPost(cookies, postId, content, changeFile, privacy, tagged, 1, removeFile))
     }
 
     const handleClickTag = () => {
@@ -146,6 +168,7 @@ function EditPost({ postId }) {
             setContent(response.data.post_content);
             setFiles(response.data.mediafile);
             setTags(response.data.tag);
+            setPrivacy(response.data.privacy);
             response.data.tag.map((tag) => {
                 return tagged.push(tag.user_id);
             })
@@ -166,8 +189,8 @@ function EditPost({ postId }) {
                         <div className="editDetails">
                             <p className='editPostUserName'>{post.displayName} {post.icon ? <span className='editPostWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='editPostUserName'>{post.iconName}</span></span> : ""} {tags.length === 0 ? "" : <span className='editPostWithText'> cùng với <span className='editPostUserName'>{tags.length + " người khác"}</span></span>}</p>
                             <div className='editPostPrivacy' onClick={handleClick}>
-                                {post.privacy === 2 ? <PeopleAltIcon /> : post.privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
-                                <span>{post.privacy === 2 ? 'Bạn bè' : post.privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
+                                {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
+                                <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
                                 <ArrowDropDownIcon />
                             </div>
                         </div>
@@ -180,15 +203,146 @@ function EditPost({ postId }) {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <MenuItem >Công khai</MenuItem>
-                            <MenuItem >Bạn bè</MenuItem>
-                            <MenuItem >Chỉ mình tôi</MenuItem>
+                            <MenuItem onClick={() => hanldeSelectPrivacy(1)}>Công khai</MenuItem>
+                            <MenuItem onClick={() => hanldeSelectPrivacy(2)}>Bạn bè</MenuItem>
+                            <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                         </Menu>
                     </div>
                     <div>
                         <textarea value={content} onChange={handleChangeContent} aria-multiline className='editPostContentPost' placeholder="Bạn đang nghĩ gì thế?"></textarea>
                     </div>
                     <div>
+                        {
+                            post.parent_post ? <div className="postParent">
+                                <div className="postShareWrapper">
+                                    <div className="postShareCenter">
+                                        <div>
+                                            {post.parent_post.totalMediaFile === 1 ?
+                                                <div>
+                                                    {
+                                                        post.parent_post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.parent_post.mediafile[0].media_file_name} controls></video> :
+                                                            <img className="postShareImg" src={post.parent_post.mediafile[0].media_file_name} alt="" />
+                                                    }
+                                                </div>
+                                                : post.parent_post.totalMediaFile === 2 ?
+                                                    <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
+                                                        {post.parent_post.mediafile.map((item) => (
+                                                            <ImageListItem key={item.media_file_name}>
+                                                                {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                    src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                    srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                    alt={item.title}
+                                                                    loading="lazy"
+                                                                />}
+                                                            </ImageListItem>
+                                                        ))}
+                                                    </ImageList> : post.parent_post.totalMediaFile === 3 ?
+                                                        <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                            {post.parent_post.mediafile.map((item) => (
+                                                                <ImageListItem key={item.media_file_name}>
+                                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                        alt={item.title}
+                                                                        loading="lazy"
+                                                                    />}
+                                                                </ImageListItem>
+                                                            ))}
+                                                        </ImageList> :
+                                                        <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                                            {post.parent_post.mediafile.map((item) => (
+                                                                <ImageListItem key={item.media_file_name}>
+                                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                        alt={item.title}
+                                                                        loading="lazy"
+                                                                    />}
+                                                                </ImageListItem>
+                                                            ))}
+                                                        </ImageList>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className="postShareTop">
+                                        {
+                                            post.parent_post.group_id ?
+                                                <div className="postTopLeft">
+                                                    <a href={"/" + post.parent_post.group_id}>
+                                                        <img
+                                                            className="postProfileImgGroup"
+                                                            src={post.parent_post.groupAvatar}
+                                                            alt={"Avatar user " + post.parent_post.groupName}
+                                                        />
+                                                    </a>
+                                                    <div>
+                                                        <span className="postUsername">
+                                                            <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
+                                                                {post.parent_post.groupName}
+                                                            </a>
+                                                        </span>
+                                                        <div className="postPrivacy">
+                                                            <span className="postMemberGroup">
+                                                                <a className="postLinkProfileMemberGroup" href={"/userId/" + post.parent_post.user_id}>
+                                                                    {post.parent_post.displayName}
+                                                                </a>
+                                                            </span>
+                                                            <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                {post.parent_post.privacy.toString() === "0" ?
+                                                                    <LockIcon className="postIconPrivacy" /> :
+                                                                    post.parent_post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                                        : <GroupIcon className="postIconPrivacy" />
+                                                                }</span>
+                                                        </div>
+                                                    </div>
+                                                </div> :
+                                                <div className="postTopLeft">
+                                                    <a href={"/userId/" + post.parent_post.user_id}>
+                                                        <img
+                                                            className="postProfileImg"
+                                                            src={post.parent_post.avatarUser}
+                                                            alt={"Avatar user " + post.parent_post.displayName}
+                                                        />
+                                                    </a>
+                                                    <div>
+                                                        <div className="postUsername">
+                                                            <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
+                                                                {post.parent_post.displayName} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                            </a>
+                                                        </div>
+                                                        <div className="postPrivacy">
+                                                            <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        <ShowMoreText
+                                            /* Default options */
+                                            lines={1}
+                                            more="xem thêm"
+                                            less="ẩn bớt"
+                                            className="postText"
+                                            anchorClass="postViewMore"
+                                            onClick={executeOnClick}
+                                            expanded={false}
+                                            truncatedEndingComponent={"... "}
+                                        ><p>{post.parent_post.post_content}</p>
+                                        </ShowMoreText>
+                                    </div>
+                                </div>
+                            </div>
+                                : <></>
+                        }
+                    </div>
+                    <div className='editPostMediaFile'>
+                        {
+                            files.length !== 0 ?
+                                <div><button onClick={() => handleChangeTab(3)} className='editPostRemoveMediaFile'>Xóa ảnh/video</button></div>
+                                : <></>
+                        }
                         {
                             files ?
                                 files.map((file) => (
@@ -253,7 +407,27 @@ function EditPost({ postId }) {
                             </List>
                         </div>
                     </div> :
-                        <>TAB TAG</> :
+                        tab === 2 ? <>TAB TAG</> :
+                            <div>
+                                <div className='dialogShareTaggingTitle'>
+                                    <div className='editPostRemoveDescription'>
+                                        Xóa ảnh/video
+                                    </div>
+                                    <div className='dialogShareDoneTagging'>
+                                        <button onClick={handleCloseTag} className='dialogShareDoneTaggingButton'>Xong</button>
+                                    </div>
+                                </div>
+                                <div className='editPostRemoveFileContainer'>
+                                    {
+                                        files.map((file) => (
+                                            <div className='editPostRemoveFileCard'>
+                                                <img className='editPostRemoveFileItems' src={file.media_file_name} alt="" />
+                                                <button onClick={() => handleChangeRemoveFile(file)} className='editPostRemoveFilesButton'>Xóa ảnh</button>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div> :
                     <EditPostSkeleton />
             }
         </div>
