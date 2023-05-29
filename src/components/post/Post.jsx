@@ -410,127 +410,136 @@ function Post({ post }) {
                                                 </ImageList>
                                     }</div>
                             </div> :
-                            <div className="postParent">
-                                <div className="postShareWrapper">
-                                    <div className="postShareCenter">
-                                        <div onClick={handleOpenViewMedia}>
-                                            {post.parent_post.totalMediaFile === 1 ?
-                                                <div>
-                                                    {
-                                                        post.parent_post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.parent_post.mediafile[0].media_file_name} controls></video> :
-                                                            <img className="postShareImg" src={post.parent_post.mediafile[0].media_file_name} alt="" />
-                                                    }
-                                                </div>
-                                                : post.parent_post.totalMediaFile === 2 ?
-                                                    <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
-                                                        {post.parent_post.mediafile.map((item) => (
-                                                            <ImageListItem key={item.media_file_name}>
-                                                                {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
-                                                                    src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
-                                                                    srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                                                    alt={item.title}
-                                                                    loading="lazy"
-                                                                />}
-                                                            </ImageListItem>
-                                                        ))}
-                                                    </ImageList> : post.parent_post.totalMediaFile === 3 ?
-                                                        <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
-                                                            {post.parent_post.mediafile.map((item) => (
-                                                                <ImageListItem key={item.media_file_name}>
-                                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
-                                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
-                                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                                                        alt={item.title}
-                                                                        loading="lazy"
-                                                                    />}
-                                                                </ImageListItem>
-                                                            ))}
-                                                        </ImageList> :
-                                                        <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
-                                                            {post.parent_post.mediafile.map((item) => (
-                                                                <ImageListItem key={item.media_file_name}>
-                                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
-                                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
-                                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                                                        alt={item.title}
-                                                                        loading="lazy"
-                                                                    />}
-                                                                </ImageListItem>
-                                                            ))}
-                                                        </ImageList>
-                                            }
+                            post.parent_post === 1 ?
+                                <div className="postParent">
+                                    <div className="postShareWrapper">
+                                        <div className="postShareIsDeleteContenTitle">Nội dung này hiện không có sẵn.</div>
+                                        <div className="postShareIsDeleteContentDescription">
+                                            Khi điều này xảy ra, thường là do chủ sở hữu chỉ chia sẻ nội dung đó với một nhóm nhỏ người hoặc thay đổi người có thể xem hoặc nội dung đó đã bị xóa.
                                         </div>
                                     </div>
-                                    <div className="postShareTop">
-                                        {
-                                            post.parent_post.group_id ?
-                                                <div className="postTopLeft">
-                                                    <a href={"/" + post.parent_post.group_id}>
-                                                        <img
-                                                            className="postProfileImgGroup"
-                                                            src={post.parent_post.groupAvatar}
-                                                            alt={"Avatar user " + post.parent_post.groupName}
-                                                        />
-                                                    </a>
+                                </div> :
+                                <div className="postParent">
+                                    <div className="postShareWrapper">
+                                        <div className="postShareCenter">
+                                            <div onClick={handleOpenViewMedia}>
+                                                {post.parent_post.totalMediaFile === 1 ?
                                                     <div>
-                                                        <span className="postUsername">
-                                                            <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
-                                                                {post.parent_post.groupName}
-                                                            </a>
-                                                        </span>
-                                                        <div className="postPrivacy">
-                                                            <span className="postMemberGroup">
-                                                                <a className="postLinkProfileMemberGroup" href={"/userId/" + post.parent_post.user_id}>
-                                                                    {post.parent_post.displayName}
+                                                        {
+                                                            post.parent_post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.parent_post.mediafile[0].media_file_name} controls></video> :
+                                                                <img className="postShareImg" src={post.parent_post.mediafile[0].media_file_name} alt="" />
+                                                        }
+                                                    </div>
+                                                    : post.parent_post.totalMediaFile === 2 ?
+                                                        <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
+                                                            {post.parent_post.mediafile.map((item) => (
+                                                                <ImageListItem key={item.media_file_name}>
+                                                                    {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                        src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                        srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                        alt={item.title}
+                                                                        loading="lazy"
+                                                                    />}
+                                                                </ImageListItem>
+                                                            ))}
+                                                        </ImageList> : post.parent_post.totalMediaFile === 3 ?
+                                                            <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                                {post.parent_post.mediafile.map((item) => (
+                                                                    <ImageListItem key={item.media_file_name}>
+                                                                        {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                            src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                            srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                            alt={item.title}
+                                                                            loading="lazy"
+                                                                        />}
+                                                                    </ImageListItem>
+                                                                ))}
+                                                            </ImageList> :
+                                                            <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                                                {post.parent_post.mediafile.map((item) => (
+                                                                    <ImageListItem key={item.media_file_name}>
+                                                                        {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
+                                                                            src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
+                                                                            srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                                                            alt={item.title}
+                                                                            loading="lazy"
+                                                                        />}
+                                                                    </ImageListItem>
+                                                                ))}
+                                                            </ImageList>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className="postShareTop">
+                                            {
+                                                post.parent_post.group_id ?
+                                                    <div className="postTopLeft">
+                                                        <a href={"/" + post.parent_post.group_id}>
+                                                            <img
+                                                                className="postProfileImgGroup"
+                                                                src={post.parent_post.groupAvatar}
+                                                                alt={"Avatar user " + post.parent_post.groupName}
+                                                            />
+                                                        </a>
+                                                        <div>
+                                                            <span className="postUsername">
+                                                                <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
+                                                                    {post.parent_post.groupName}
                                                                 </a>
                                                             </span>
-                                                            <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                                                {post.parent_post.privacy.toString() === "0" ?
-                                                                    <LockIcon className="postIconPrivacy" /> :
-                                                                    post.parent_post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
-                                                                        : <GroupIcon className="postIconPrivacy" />
-                                                                }</span>
+                                                            <div className="postPrivacy">
+                                                                <span className="postMemberGroup">
+                                                                    <a className="postLinkProfileMemberGroup" href={"/userId/" + post.parent_post.user_id}>
+                                                                        {post.parent_post.displayName}
+                                                                    </a>
+                                                                </span>
+                                                                <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                    {post.parent_post.privacy.toString() === "0" ?
+                                                                        <LockIcon className="postIconPrivacy" /> :
+                                                                        post.parent_post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
+                                                                            : <GroupIcon className="postIconPrivacy" />
+                                                                    }</span>
+                                                            </div>
+                                                        </div>
+                                                    </div> :
+                                                    <div className="postTopLeft">
+                                                        <a href={"/userId/" + post.parent_post.user_id}>
+                                                            <img
+                                                                className="postProfileImg"
+                                                                src={post.parent_post.avatarUser}
+                                                                alt={"Avatar user " + post.parent_post.displayName}
+                                                            />
+                                                        </a>
+                                                        <div>
+                                                            <div className="postUsername">
+                                                                <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
+                                                                    {post.parent_post.displayName} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                </a>
+                                                            </div>
+                                                            <div className="postPrivacy">
+                                                                <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                                                    {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> :
-                                                <div className="postTopLeft">
-                                                    <a href={"/userId/" + post.parent_post.user_id}>
-                                                        <img
-                                                            className="postProfileImg"
-                                                            src={post.parent_post.avatarUser}
-                                                            alt={"Avatar user " + post.parent_post.displayName}
-                                                        />
-                                                    </a>
-                                                    <div>
-                                                        <div className="postUsername">
-                                                            <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
-                                                                {post.parent_post.displayName} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
-                                                            </a>
-                                                        </div>
-                                                        <div className="postPrivacy">
-                                                            <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                                                {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        }
-                                    </div>
-                                    <div>
-                                        <ShowMoreText
-                                            /* Default options */
-                                            lines={1}
-                                            more="xem thêm"
-                                            less="ẩn bớt"
-                                            className="postText"
-                                            anchorClass="postViewMore"
-                                            onClick={executeOnClick}
-                                            expanded={false}
-                                            truncatedEndingComponent={"... "}
-                                        ><p>{post.parent_post.post_content}</p>
-                                        </ShowMoreText>
+                                            }
+                                        </div>
+                                        <div>
+                                            <ShowMoreText
+                                                /* Default options */
+                                                lines={1}
+                                                more="xem thêm"
+                                                less="ẩn bớt"
+                                                className="postText"
+                                                anchorClass="postViewMore"
+                                                onClick={executeOnClick}
+                                                expanded={false}
+                                                truncatedEndingComponent={"... "}
+                                            ><p>{post.parent_post.post_content}</p>
+                                            </ShowMoreText>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                     }
                 </div>
                 <div className="postBottomStatistical">

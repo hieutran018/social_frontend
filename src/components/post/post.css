@@ -334,3 +334,10 @@ color: black;
 .postMenuSettingTextContainer{
     margin-left: 1rem;
 }
+.postShareIsDeleteContenTitle{
+    font-size: 20px;
+    font-weight: 500;
+}
+.postShareIsDeleteContentDescription{
+    margin-top: 0.5rem;
+}

@@ -67,23 +67,27 @@ function EditPost({ postId }) {
         setAnchorEl(null);
     }
     const handleChangeRemoveFile = (file) => {
-        console.log(file);
+        console.log("FILE SERVER", file);
         removeFile.push(file.id);
-        setFiles(files.filter(f => f.id !== file.id))
-        console.log(removeFile);
-    }
+        setFiles(files.filter(f => f.id !== file.id));
 
+        setChangeFile(Array.from(changeFile).filter(f => { //? Tử kiểu File List -> Array -> gán cho changeFile list đã lọc ra
+            return f.name !== file.id;
+        }));
+
+    }
+    console.log("CHANGE FILE = ", changeFile);
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFiles = [];
             const targetFiles = e.target.files;
             const targetFilesObject = [...targetFiles]
             targetFilesObject.map((file) => {
-                return selectedFiles.push(URL.createObjectURL(file))
+                return selectedFiles.push({ id: file.name, media_file_name: URL.createObjectURL(file) })
             })
             setChangeFile(e.target.files);
             setFiles([...files, ...selectedFiles]);
-            console.log(files);
+            console.log(changeFile);
         }
     };
 
