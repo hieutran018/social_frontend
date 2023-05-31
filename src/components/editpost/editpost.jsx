@@ -1,11 +1,15 @@
 import './editpost.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { BsSearch } from 'react-icons/bs';
 import GroupIcon from '@mui/icons-material/Group';
 import LockIcon from '@mui/icons-material/Lock';
+import Grid from '@mui/material/Grid';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItem from '@mui/material/ListItem';
@@ -41,6 +45,11 @@ function EditPost({ postId }) {
     const [tags, setTags] = useState([]);
     const [tagged, setTagged] = useState([]);
     const [privacy, setPrivacy] = useState();
+    const [listIcon, setListIcon] = useState([]);
+    const [inputSearchIcon, setInputSearchIcon] = useState('');
+    const typingTimeOutRef = useRef(null);
+    const [resultIcon, setResultIcon] = useState([]);
+    const [faa, setFaa] = useState();
     const [removeFile, setRemoveFile] = useState([]);
     const dispatch = useDispatch();
 
@@ -76,7 +85,7 @@ function EditPost({ postId }) {
         }));
 
     }
-    console.log("CHANGE FILE = ", changeFile);
+
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFiles = [];
@@ -92,7 +101,7 @@ function EditPost({ postId }) {
     };
 
     const handleEditPost = () => {
-        dispatch(editPost(cookies, postId, content, changeFile, privacy, tagged, 1, removeFile))
+        dispatch(editPost(cookies, postId, content, changeFile, privacy, tagged, faa.id, removeFile))
     }
 
     const handleClickTag = () => {
@@ -157,7 +166,59 @@ function EditPost({ postId }) {
 
         setListFr([...listFr, friend])
     }
-    console.log("TAGGED", tagged);
+
+    const handleClickFellingandActivity = () => {
+        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-fell-and-activity-posts";
+        axios({
+            method: 'GET',
+            url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+
+        }).then((response) => {
+            setListIcon(response.data);
+            setTab(2);
+        }).catch((error) => console.log(error));
+    }
+    const handleSelectIcon = (icon) => {
+        setFaa(icon);
+        setTab(0);
+    }
+
+    const handleChangeSearch = (event) => {
+        setInputSearchIcon(event.target.value)
+        if (!event.target.value) {
+            setResultIcon([])
+        } else {
+            setInputSearchIcon(event.target.value);
+            //? ĐẶT LẠI THỜI GIAN ĐỢI CHO VIỆC GÕ
+            if (typingTimeOutRef.current) {
+                clearTimeout(typingTimeOutRef.current);
+            }
+            typingTimeOutRef.current = setTimeout(() => {
+                searchIcon(event.target.value);
+            }, 300)
+        }
+    }
+    function searchIcon(input) {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/search-feel-and-activity-posts/search=' + input;
+        axios({
+            method: "GET",
+            url: requestURL,
+            headers: {
+                Authorization: "Bearer " + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then((response) => {
+            setResultIcon(response.data);
+            console.log(response.data);
+        }).catch((error) => console.log(error));
+    }
+
     const fetchPost = useCallback(() => {
         const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-id/postId=" + postId;
         axios({
@@ -173,6 +234,7 @@ function EditPost({ postId }) {
             setFiles(response.data.mediafile);
             setTags(response.data.tag);
             setPrivacy(response.data.privacy);
+            setFaa(response.data.icon);
             response.data.tag.map((tag) => {
                 return tagged.push(tag.user_id);
             })
@@ -180,7 +242,7 @@ function EditPost({ postId }) {
             navigate('/login');
         })
     }, [cookies, postId, navigate]);
-
+    console.log(faa);
     useEffect(() => {
         fetchPost()
     }, [fetchPost])
@@ -191,7 +253,7 @@ function EditPost({ postId }) {
                     <div className="editContent">
                         <div className='editPostImgAvatarContainer'><img className='editPostImgAvatar' src={post.avatarUser} alt="logo" /></div>
                         <div className="editDetails">
-                            <p className='editPostUserName'>{post.displayName} {post.icon ? <span className='editPostWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='editPostUserName'>{post.iconName}</span></span> : ""} {tags.length === 0 ? "" : <span className='editPostWithText'> cùng với <span className='editPostUserName'>{tags.length + " người khác"}</span></span>}</p>
+                            <p className='editPostUserName'>{post.displayName} {post.icon ? <span className='editPostWithText'> đang cảm thấy <img width={20} height={20} src={faa.patch} alt="" /> <span className='editPostUserName'>{faa.icon_name}</span></span> : ""} {tags.length === 0 ? "" : <span className='editPostWithText'> cùng với <span className='editPostUserName'>{tags.length + " người khác"}</span></span>}</p>
                             <div className='editPostPrivacy' onClick={handleClick}>
                                 {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                 <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>
@@ -361,7 +423,7 @@ function EditPost({ postId }) {
                         <div className="editPostOptions">
                             <label onChange={handleFileChange} htmlFor='uploadFiles' ><input type="file" multiple id="uploadFiles" hidden /><PermMedia style={{ fontSize: "35" }} htmlColor="tomato" className="shareIcon" /></label>
                             <div><Room style={{ fontSize: "35" }} htmlColor="green" className="editPostIcon" /></div>
-                            <div onClick={() => handleChangeTab(2)} ><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="editPostIcon" /></div>
+                            <div onClick={handleClickFellingandActivity} ><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="editPostIcon" /></div>
                             <div onClick={handleClickTag}><LocalOfferIcon style={{ fontSize: "35" }} htmlColor="blue" className="editPostIcon" /></div>
                         </div>
                     </div>
@@ -411,7 +473,57 @@ function EditPost({ postId }) {
                             </List>
                         </div>
                     </div> :
-                        tab === 2 ? <>TAB TAG</> :
+                        tab === 2 ?
+                            <div className='dialogShareFeelingandActivity'>
+                                <DialogTitle style={{ padding: "0px" }}>
+                                    <div className='dialogShareFeelingandActivityTitle'>
+                                        <span style={{ fontSize: "20px", fontWeight: "500" }}>Bạn đang cảm thấy như thế nào?</span>
+                                    </div>
+                                    <div className='dialogShareSearchFeelingAndActivityContainer'>
+                                        <BsSearch size={25} /> <input onChange={handleChangeSearch} value={inputSearchIcon} type="text" className='dialogShareSearchFeelingAndActivity' />
+                                    </div>
+                                </DialogTitle>
+                                <DialogContent style={{ padding: "0px" }}>
+                                    <div className='dialogShareFeelingAndActivityMain'>
+                                        <div className='dialogShareFeelingAndActivityList'>
+                                            {
+                                                resultIcon.length === 0 ? <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
+                                                    {
+                                                        listIcon.map((item) => (
+                                                            <Grid onClick={() => handleSelectIcon(item)} key={item.id} item xs={6}>
+                                                                <div style={{ backgroundColor: faa ? (faa.id === item.id ? "#c0c1c3" : "") : "" }} className='dialogShareFeelingAndActivytiCard'>
+                                                                    <div className='dialogShareFeelingAndActivytiIcon'>
+                                                                        <img className='dialogShareFeelingAndActivytiImage' src={item.patch} alt="" />
+                                                                    </div>
+                                                                    <div className='dialogShareFeelingAndActivytiName'>{item.icon_name}</div>
+                                                                </div>
+                                                            </Grid>
+                                                        ))
+                                                    }
+
+
+                                                </Grid> : <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
+                                                    {
+                                                        resultIcon.map((item) => (
+                                                            <Grid onClick={() => handleSelectIcon(item)} key={item.id} item xs={6}>
+                                                                <div style={{ backgroundColor: faa ? (faa.id === item.id ? "#c0c1c3" : "") : "" }} className='dialogShareFeelingAndActivytiCard'>
+                                                                    <div className='dialogShareFeelingAndActivytiIcon'>
+                                                                        <img className='dialogShareFeelingAndActivytiImage' src={item.patch} alt="" />
+                                                                    </div>
+                                                                    <div className='dialogShareFeelingAndActivytiName'>{item.icon_name}</div>
+                                                                </div>
+                                                            </Grid>
+                                                        ))
+                                                    }
+
+
+                                                </Grid>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </DialogContent>
+                            </div> :
                             <div>
                                 <div className='dialogShareTaggingTitle'>
                                     <div className='editPostRemoveDescription'>

@@ -20,7 +20,7 @@ function Notification({ close }) {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log("LOG VIDEOS", response.data);
+            console.log(response.data);
             setNotifications(response.data);
         }).catch((error) => console.log(error))
     }, [cookies])

@@ -42,8 +42,10 @@ import { useParams } from "react-router-dom";
 import ReactionsPost from "../reationspost/reactionspost";
 import PostHistory from "../posthistory/posthistory";
 import EditPost from "../editpost/editpost";
+import ReactionButton from "../reaction/reaction";
 
 function Post({ post }) {
+    console.log("FETCH  POST + " + post.id, post);
     const user = JSON.parse(localStorage.getItem('user'));
     const pages = useParams().pages;
     const groupId = useParams().groupId;
@@ -82,7 +84,6 @@ function Post({ post }) {
     }, [statusAdd, dispatch])
 
     const handleLike = (reaction) => {
-        setIsLike(!isLike)
         const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post';
         axios({
             method: 'POST',
@@ -97,14 +98,16 @@ function Post({ post }) {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log(response.data);
             if (response.status === 200) {
                 setReaction([...reacts, response.data]);
+                setIsLike(response.data);
                 setLike(like + 1);
             } else if (response.status === 202) {
                 reacts.filter((item) => item.id === parseInt(response.data.id) ? item.type = response.data.type : item.type)
+                setIsLike(response.data)
             } else if (response.status === 201) {
                 setReaction(reacts.filter((item) => item.id !== parseInt(response.data.id)));
+                setIsLike(null);
                 setLike(like - 1);
             }
             console.log(reaction);
@@ -297,6 +300,7 @@ function Post({ post }) {
                                         <></>
                                 }
                                 {
+
                                     post.histories !== 0 ?
                                         <MenuItem onClick={handleOpenViewHistory}>
                                             <div className="postMenuSettingItem">
@@ -562,7 +566,7 @@ function Post({ post }) {
                 </div>
                 <div onMouseLeave={handleCloseReactions} className="postBottom">
                     <div className="postBottomLeft">
-                        <div className="postBottomButton"> {openReactions ? <ReactionsPost handleReactions={handleLike} onMouseOver={handleOpenReactions} /> : <></>}<button onMouseOver={handleOpenReactions} className="btn ">{isLike ? <AiFillLike size={25} /> : <AiOutlineLike size={25} />} </button></div>
+                        <div className="postBottomButton"> {openReactions ? <ReactionsPost handleReactions={handleLike} onMouseOver={handleOpenReactions} /> : <></>}<button onMouseOver={handleOpenReactions} className="btn ">{isLike ? <ReactionButton reaction={isLike} /> : <AiOutlineLike size={25} />} </button></div>
                         <div className="postBottomButton"><button onClick={() => handleClickOpen()} className="btn "><AiOutlineComment size={25} /></button></div>
                         <div className="postBottomButton"><button onClick={handleClickOptionShare} className="btn "><AiOutlineShareAlt size={25} /></button></div>
                     </div>
@@ -613,7 +617,7 @@ function Post({ post }) {
                     fullWidth
                     maxWidth="md"
                 >
-                    <PostDetail post={post} like={like} share={share} />
+                    <PostDetail post={post} isLiked={isLike} like={like} likes={reacts} share={share} close={handleClose} reaction={handleLike} />
                 </Dialog>
                 <Dialog
                     open={openShareOptionToFeed}

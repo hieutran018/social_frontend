@@ -42,7 +42,7 @@ function FriendRequest() {
             url: requestURL,
             data: { userIdRequest: userId },
             headers: {
-                Authorization: 'Bearer ' + cookies[0],
+                Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }

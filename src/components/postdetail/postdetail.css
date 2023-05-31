@@ -139,11 +139,13 @@ font-size: 20px;
     border-bottom: 1px dashed gray;
     font-size: 15px;
 }
-.postTitle{
-    display: flex;
-    justify-content: space-around;
+.postDetailTitle{
+    display: flex;  
+    justify-content: space-between;
 }
 .dialoPostButtonClose{
+    background-color: #ecebeb;
+    border-radius: 50px;
     display: flex;
     /* justify-content: end; */
 }

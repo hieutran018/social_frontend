@@ -125,7 +125,7 @@ export const addNewPost = (token, contentPost, files, privacy, tags, group, feel
                 console.log("POST POST GROUP", response.data);
                 dispatch(addNewPostSucceeded(response.data));
                 // dispatch(fetchPost())
-            }).catch((error) => addNewPostFailed(error.message));
+            }).catch((error) => addNewPostFailed(error));
         } catch (error) {
             dispatch(fetchPostFailed(error))
         }
