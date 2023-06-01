@@ -17,6 +17,7 @@ function Stories() {
     useEffect(() => {
         dispatch(fetchStories(cookies));
     }, [dispatch, cookies])
+    console.log(stories);
     return (
         <div className='stories'>
             {
@@ -47,11 +48,11 @@ function Stories() {
                                         <div className='storiesItem'>
                                             <img className='storiesUserAvatar' width={50} height={50} src={item.avatar} alt="" />
                                             {
-                                                item.type === 'image' ? <img className='storiesThumbnail' width={115} height={200} src={item.file_name_story} alt="" /> :
-                                                    <video className='storiesThumbnail' width={115} height={200} src={item.file_name_story}></video>
+                                                item.stories[0].type === 'image' ? <img className='storiesThumbnail' width={115} height={200} src={item.stories[0].file_name_story} alt="" /> :
+                                                    <video className='storiesThumbnail' width={115} height={200} src={item.stories[0].file_name_story}></video>
                                             }
                                             <div className='storiesUserName'>
-                                                {item.userName}
+                                                {item.displayName}
                                             </div>
                                         </div>
                                     </Link>

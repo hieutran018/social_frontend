@@ -341,3 +341,60 @@ color: black;
 .postShareIsDeleteContentDescription{
     margin-top: 0.5rem;
 }
+.postMediaFileContainerItemList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.postMediFileItemsList{
+    margin: 0.05rem;
+    width: 348px;
+    height: 350px;
+    object-fit: cover;
+}
+.postMediFileCountItem{
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    color: white;
+    font-size: 50px;
+    font-weight: 500;
+}
+.postMediaFileCountItemsList{
+    position: absolute;
+    background-color: #262525bd;
+    width: 348px;
+    height: 350px;
+    
+}
+.postMediaFileItemsListCount{
+    position: relative;
+}
+
+.postParentMediaFileContainerItemList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.postParentMediFileItemsList{
+    margin: 0.05rem;
+    width: 339px;
+    height: 339px;
+    object-fit: cover;
+}
+.postParentMediFileCountItem{
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    color: white;
+    font-size: 40px;
+    font-weight: 500;
+}
+.postParentMediaFileCountItemsList{
+    position: absolute;
+    background-color: #262525bd;
+    width: 339px;
+    height: 339px;
+    
+}
+.postParentMediaFileItemsListCount{
+    position: relative;
+}

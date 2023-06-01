@@ -36,7 +36,7 @@ function SidebarListStory() {
             <div className='sidebarListStory'>
                 {
                     stories.map((item) => (
-                        <StoriesCard story={item} key={item} />
+                        <StoriesCard story={item} key={item.id} />
                     ))
                 }
             </div>

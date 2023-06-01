@@ -43,3 +43,20 @@
     height: 100%;
     object-fit: fill;
 }
+.storyViewButtonSlide{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+}
+.storyViewButtonSlideContainer{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.storyViewButtonIconSlide{
+    color: white;
+}

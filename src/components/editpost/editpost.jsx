@@ -101,7 +101,7 @@ function EditPost({ postId }) {
     };
 
     const handleEditPost = () => {
-        dispatch(editPost(cookies, postId, content, changeFile, privacy, tagged, faa.id, removeFile))
+        dispatch(editPost(cookies, postId, content, changeFile, privacy, tagged, faa && faa.id, removeFile))
     }
 
     const handleClickTag = () => {
@@ -184,6 +184,7 @@ function EditPost({ postId }) {
         }).catch((error) => console.log(error));
     }
     const handleSelectIcon = (icon) => {
+        console.log(icon);
         setFaa(icon);
         setTab(0);
     }
@@ -253,7 +254,7 @@ function EditPost({ postId }) {
                     <div className="editContent">
                         <div className='editPostImgAvatarContainer'><img className='editPostImgAvatar' src={post.avatarUser} alt="logo" /></div>
                         <div className="editDetails">
-                            <p className='editPostUserName'>{post.displayName} {post.icon ? <span className='editPostWithText'> đang cảm thấy <img width={20} height={20} src={faa.patch} alt="" /> <span className='editPostUserName'>{faa.icon_name}</span></span> : ""} {tags.length === 0 ? "" : <span className='editPostWithText'> cùng với <span className='editPostUserName'>{tags.length + " người khác"}</span></span>}</p>
+                            <p className='editPostUserName'>{post.displayName} {faa ? <span className='editPostWithText'> đang cảm thấy <img width={20} height={20} src={faa.patch} alt="" /> <span className='editPostUserName'>{faa.icon_name}</span></span> : ""} {tags.length === 0 ? "" : <span className='editPostWithText'> cùng với <span className='editPostUserName'>{tags.length + " người khác"}</span></span>}</p>
                             <div className='editPostPrivacy' onClick={handleClick}>
                                 {privacy === 2 ? <PeopleAltIcon /> : privacy === 0 ? <LockPersonIcon /> : <PublicIcon />}
                                 <span>{privacy === 2 ? 'Bạn bè' : privacy === 0 ? 'Chỉ mình tôi' : 'Công khai'}</span>

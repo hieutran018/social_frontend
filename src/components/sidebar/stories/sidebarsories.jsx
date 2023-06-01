@@ -4,6 +4,7 @@ import { ArrowBack } from '@mui/icons-material';
 import image from '../../../ckc_social_logo.png';
 
 function SidebarStories() {
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
         <div className='sidebarStories'>
             <div className="titlesidebarStories">
@@ -15,8 +16,8 @@ function SidebarStories() {
 
             </div>
             <div className='sidebarStoryUser'>
-                <img className='sidebarStoryAvatar' src={image} alt="" />
-                <div className='sidebarStoryUserName'>Trần Dương Chí Hiếu</div>
+                <img className='sidebarStoryAvatar' src={user.avatar} alt="" />
+                <div className='sidebarStoryUserName'>{user.displayName}</div>
 
             </div>
         </div>

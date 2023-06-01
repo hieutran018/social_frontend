@@ -45,7 +45,7 @@ import EditPost from "../editpost/editpost";
 import ReactionButton from "../reaction/reaction";
 
 function Post({ post }) {
-    console.log("FETCH  POST + " + post.id, post);
+    console.log("FETCH  POST + " + post.id, post.mediafile[0]);
     const user = JSON.parse(localStorage.getItem('user'));
     const pages = useParams().pages;
     const groupId = useParams().groupId;
@@ -400,7 +400,7 @@ function Post({ post }) {
                                                             />}
                                                         </ImageListItem>
                                                     ))}
-                                                </ImageList> : post.totalMediaFile === 0 ? <></> : <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                </ImageList> : post.totalMediaFile === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                     {post.mediafile.map((item) => (
                                                         <ImageListItem key={item.media_file_name}>
                                                             {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -411,7 +411,18 @@ function Post({ post }) {
                                                             />}
                                                         </ImageListItem>
                                                     ))}
-                                                </ImageList>
+                                                </ImageList> :
+                                                    post.totalMediaFile > 4 ?
+                                                        <div className="postMediaFileContainerItemList">
+                                                            <img className="postMediFileItemsList" src={post.mediafile[0].media_file_name} alt="" />
+                                                            <img className="postMediFileItemsList" src={post.mediafile[1].media_file_name} alt="" />
+                                                            <img className="postMediFileItemsList" src={post.mediafile[2].media_file_name} alt="" />
+                                                            <div className="postMediaFileItemsListCount">
+                                                                <div className="postMediaFileCountItemsList"><span className="postMediFileCountItem">+{post.totalMediaFile - 3}</span></div>
+                                                                <img className="postMediFileItemsList" src={post.mediafile[3].media_file_name} alt="" />
+                                                            </div>
+                                                        </div>
+                                                        : <></>
                                     }</div>
                             </div> :
                             post.parent_post === 1 ?
@@ -459,7 +470,7 @@ function Post({ post }) {
                                                                     </ImageListItem>
                                                                 ))}
                                                             </ImageList> :
-                                                            <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={350}>
+                                                            post.parent_post.totalMediaFile === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                                 {post.parent_post.mediafile.map((item) => (
                                                                     <ImageListItem key={item.media_file_name}>
                                                                         {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -470,7 +481,18 @@ function Post({ post }) {
                                                                         />}
                                                                     </ImageListItem>
                                                                 ))}
-                                                            </ImageList>
+                                                            </ImageList> :
+                                                                post.parent_post.totalMediaFile > 4 ?
+                                                                    <div className="postParentMediaFileContainerItemList">
+                                                                        <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[0].media_file_name} alt="" />
+                                                                        <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[1].media_file_name} alt="" />
+                                                                        <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[2].media_file_name} alt="" />
+                                                                        <div className="postParentMediaFileItemsListCount">
+                                                                            <div className="postParentMediaFileCountItemsList"><span className="postParentMediFileCountItem">+{post.parent_post.totalMediaFile - 3}</span></div>
+                                                                            <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[3].media_file_name} alt="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    : <></>
                                                 }
                                             </div>
                                         </div>

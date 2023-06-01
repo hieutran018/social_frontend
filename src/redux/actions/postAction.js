@@ -74,8 +74,12 @@ export const fetchPostGroup = (cookies, page) => {
                 }
 
 
-            }).catch((error) => dispatch(fetchPostFailed(error)));
+            }).catch((error) => {
+                dispatch(fetchPostFailed(error))
+                console.log(error);
+            });
         } catch (err) {
+            console.log(err);
             dispatch(fetchPostFailed(err))
         }
     }
@@ -93,7 +97,7 @@ export const fetchPost = (token, page) => {
                     Authorization: 'Bearer ' + token
                 }
             })
-            console.log(res.data);
+            console.log("DATA", res.data);
             if (page >= 0 && page < 2) {
                 dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
             } else {

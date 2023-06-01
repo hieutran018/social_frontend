@@ -292,9 +292,9 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
 
                                                         </div>
                                                         : post.parent_post.totalMediaFile === 2 ?
-                                                            <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
+                                                            <ImageList sm={{ width: "90%", height: "300px" }} cols={2} rowHeight={400}>
                                                                 {post.parent_post.mediafile.map((item) => (
-                                                                    <ImageListItem key={item.media_file_name}>
+                                                                    <ImageListItem style={{ height: "300px" }} key={item.media_file_name}>
                                                                         {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
                                                                             src={`${item.media_file_name}?w=164&h=164&fit=crop&auto=format`}
                                                                             srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
