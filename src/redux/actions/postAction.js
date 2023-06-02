@@ -7,7 +7,8 @@ import {
     ADD_POST_STARTED,
     ADD_POST_SUCCEEDED,
     ADD_POST_FAILED, LOAD_MORE_POST,
-    UPDATE_POST
+    UPDATE_POST,
+    DELETE_POST
 } from '../constants/postConstant'
 
 export const fetchPostStarted = posts => ({
@@ -46,6 +47,10 @@ export const loadMorePost = posts => ({
 
 export const updatePost = post => ({
     type: UPDATE_POST,
+    post
+})
+export const deletedPost = post => ({
+    type: DELETE_POST,
     post
 })
 
@@ -262,6 +267,28 @@ export const commentPost = (cookies, postId, commentContent, file) => {
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((res) => console.log(res))
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const deletePost = (cookies, postId) => {
+    return async dispatch => {
+        try {
+            axios({
+                method: 'POST', //you can set what request you want to be
+                url: 'http://127.0.0.1:8000/api/v1/delete-post',
+                data: { postId: postId },
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((res) => {
+                console.log(res.data);
+                dispatch(deletedPost(res.data))
+            })
         }
         catch (error) {
             console.log(error);

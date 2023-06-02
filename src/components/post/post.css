@@ -398,3 +398,7 @@ color: black;
 .postParentMediaFileItemsListCount{
     position: relative;
 }
+.postMenuSettingIcon{
+    display: flex;
+    align-items: center;
+}

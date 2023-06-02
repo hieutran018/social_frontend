@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loading from "../loading/Loading";
 function ProtectedRoutes({ children }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [isLoggedIn, setIsLoggedIn] = useState();
@@ -19,6 +20,9 @@ function ProtectedRoutes({ children }) {
     if (isLoggedIn) {
         return children;
     }
+    return (
+        <Loading />
+    );
 
 
 

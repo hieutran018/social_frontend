@@ -10,7 +10,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { AiFillLike, AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
+import { AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
+import { GoReport } from 'react-icons/go';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { GrHistory, GrEdit } from 'react-icons/gr';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -23,7 +24,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { sharePostToWall, sharePostFormGroupToWall } from "../../redux/actions/postAction";
+import { sharePostToWall, sharePostFormGroupToWall, deletePost } from "../../redux/actions/postAction";
 import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
 import axios from "axios";
@@ -43,6 +44,9 @@ import ReactionsPost from "../reationspost/reactionspost";
 import PostHistory from "../posthistory/posthistory";
 import EditPost from "../editpost/editpost";
 import ReactionButton from "../reaction/reaction";
+import Reports from "../reports/reports";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Post({ post }) {
     console.log("FETCH  POST + " + post.id, post.mediafile[0]);
@@ -57,6 +61,7 @@ function Post({ post }) {
     const openOptionShare = Boolean(anchor);
     const [openViewHistory, setOpenViewHistory] = useState(false);
     const [openEditPost, setOpenEditPost] = useState(false);
+    const [openReport, setOpenReport] = useState(false);
     const [item, setItem] = useState(0);
     const [anchorSetting, setAnchorSetting] = useState(null);
     const openSetting = Boolean(anchorSetting);
@@ -166,6 +171,14 @@ function Post({ post }) {
         console.log(isExpanded);
     }
 
+    const handleOpenReport = () => {
+        setOpenReport(true);
+        setAnchorSetting(null);
+    }
+    const handleCloseReport = () => {
+        setOpenReport(false);
+    }
+
     const handleClickSharePost = () => {
         if (pages === 'group' && groupId) {
             dispatch(sharePostFormGroupToWall(post, cookies, null, 1))
@@ -200,6 +213,9 @@ function Post({ post }) {
         else {
             setItem(item - 1)
         }
+    }
+    const handleDeletePost = () => {
+        dispatch(deletePost(cookies[0]._tk, post.id))
     }
     return (
         <div className="post">
@@ -314,26 +330,48 @@ function Post({ post }) {
                                         </MenuItem> :
                                         <></>
                                 }
-                                <MenuItem onClick={handleOpenEditPost}>
-                                    <div className="postMenuSettingItem">
-                                        <div className="postMenuSettingIcon">
-                                            <GrEdit size={20} />
-                                        </div>
-                                        <div className="postMenuSettingTextContainer">
-                                            <span className="postMenuSettingText">Chỉnh sửa bài viết</span>
-                                        </div>
-                                    </div>
-                                </MenuItem>
-                                <MenuItem >
-                                    <div className="postMenuSettingItem">
-                                        <div className="postMenuSettingIcon">
-                                            <RiDeleteBin6Line size={20} />
-                                        </div>
-                                        <div className="postMenuSettingTextContainer">
-                                            <span className="postMenuSettingText">Xóa bài viết</span>
-                                        </div>
-                                    </div>
-                                </MenuItem>
+                                {
+                                    post.user_id === user.id ?
+                                        <MenuItem onClick={handleOpenEditPost}>
+                                            <div className="postMenuSettingItem">
+                                                <div className="postMenuSettingIcon">
+                                                    <GrEdit size={20} />
+                                                </div>
+                                                <div className="postMenuSettingTextContainer">
+                                                    <span className="postMenuSettingText">Chỉnh sửa bài viết</span>
+                                                </div>
+                                            </div>
+                                        </MenuItem> :
+                                        <></>
+                                }
+                                {
+                                    post.user_id === user.id ?
+                                        <MenuItem onClick={handleDeletePost}>
+                                            <div className="postMenuSettingItem">
+                                                <div className="postMenuSettingIcon">
+                                                    <RiDeleteBin6Line size={20} />
+                                                </div>
+                                                <div className="postMenuSettingTextContainer">
+                                                    <span className="postMenuSettingText">Xóa bài viết</span>
+                                                </div>
+                                            </div>
+                                        </MenuItem> :
+                                        <></>
+                                }
+                                {
+                                    post.user_id !== user.id ?
+                                        <MenuItem onClick={handleOpenReport}>
+                                            <div className="postMenuSettingItem">
+                                                <div className="postMenuSettingIcon">
+                                                    <GoReport size={20} />
+                                                </div>
+                                                <div className="postMenuSettingTextContainer">
+                                                    <span className="postMenuSettingText">Báo cáo bài viết</span>
+                                                </div>
+                                            </div>
+                                        </MenuItem> :
+                                        <></>
+                                }
                             </div>
                         </Menu>
                     </div>
@@ -701,6 +739,36 @@ function Post({ post }) {
                     </DialogContent>
                 </Dialog>
             </div>
+            <div className="postReport">
+                <Dialog
+                    open={openReport}
+                    onClose={handleCloseReport}
+                    fullWidth
+                    maxWidth="sm"
+                >
+                    <DialogTitle style={{ padding: "0px" }}>
+                        <div className='contaierHeader'>
+                            <span className='shareTitle'>Báo cáo bài viết</span>
+                        </div>
+                    </DialogTitle>
+                    <DialogContent style={{ padding: "0px" }}>
+                        <Reports postId={post.id} close={handleCloseReport} />
+                    </DialogContent>
+                </Dialog>
+            </div>
+            <ToastContainer
+                style={{ borderRadius: "5px", width: "400px" }}
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }

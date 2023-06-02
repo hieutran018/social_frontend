@@ -1,0 +1,56 @@
+
+.reporsWrapper{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.reportsTitle{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.reportsItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+.reportsItem:hover{
+    background-color: #dfdfdf;
+}
+.reportsItemDescription{
+    font-size: 20px;
+    font-weight: 500;
+}
+.reportsBack{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #dfdfdf;
+    margin-bottom: 1rem;
+}
+.reportsButtonSubmit{
+    width: 100%;
+    align-self: center;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1877F2;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}

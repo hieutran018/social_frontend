@@ -1,7 +1,8 @@
 .logo-loading{
-    width: 85vh;
+    width: 80vh;
     display: flex;
     margin: auto;
+    margin-top: 5%;
 }
 
 .loading{
