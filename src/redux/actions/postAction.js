@@ -92,7 +92,6 @@ export const fetchPostGroup = (cookies, page) => {
 
 export const fetchPost = (token, page) => {
     return async dispatch => {
-
         if (page + 1 === 1) {
             dispatch(fetchPostStarted([]))
         }
@@ -114,6 +113,27 @@ export const fetchPost = (token, page) => {
     }
 }
 
+export const fetchPostByUserId = (userId, page) => {
+    return async dispatch => {
+        if (page + 1 === 1) {
+            dispatch(fetchPostStarted([]))
+        }
+        try {
+            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post-by-userId/userId=' + userId + '?page=' + page, {
+            })
+            console.log("DATA", res.data);
+            if (page >= 0 && page < 2) {
+                dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
+            } else {
+                dispatch(loadMorePost(res.data.data))
+            }
+        } catch (err) {
+            dispatch(fetchPostFailed(err))
+        }
+    }
+}
+
+
 export const addNewPost = (token, contentPost, files, privacy, tags, group, feelActivityId) => {
     return async dispatch => {
         console.log(tags);
@@ -131,7 +151,7 @@ export const addNewPost = (token, contentPost, files, privacy, tags, group, feel
                     'Access-Control-Allow-Origin': '*',
                 }
             }).then((response) => {
-                console.log("POST POST GROUP", response.data);
+                console.log("CREATE POST", response.data);
                 dispatch(addNewPostSucceeded(response.data));
                 // dispatch(fetchPost())
             }).catch((error) => addNewPostFailed(error));

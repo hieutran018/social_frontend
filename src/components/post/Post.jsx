@@ -10,6 +10,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
 import { AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
 import { GoReport } from 'react-icons/go';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
@@ -108,14 +110,19 @@ function Post({ post }) {
                 setIsLike(response.data);
                 setLike(like + 1);
             } else if (response.status === 202) {
-                reacts.filter((item) => item.id === parseInt(response.data.id) ? item.type = response.data.type : item.type)
+                setReaction(post.like.map((item) => {
+                    if (parseInt(item.id) === parseInt(response.data.id)) {
+                        return item = response.data;
+                    }
+                }))
                 setIsLike(response.data)
+                console.log(reacts, "CURRENT UPDATE")
             } else if (response.status === 201) {
                 setReaction(reacts.filter((item) => item.id !== parseInt(response.data.id)));
                 setIsLike(null);
                 setLike(like - 1);
             }
-            console.log(reaction);
+            console.log(reaction, isLike);
         }).catch((error) => console.log(error));
     }
 
@@ -245,7 +252,7 @@ function Post({ post }) {
                                             </a>
 
                                         </span>
-                                        <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                        <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD H:mm:ss').fromNow()}
                                             {post.privacy.toString() === "0" ?
                                                 <LockIcon className="postIconPrivacy" /> :
                                                 post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
@@ -272,7 +279,7 @@ function Post({ post }) {
                                         {post.iconName ? <span className='postWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                     </div>
                                     <div className="postPrivacy">
-                                        <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
+                                        <span className="postDate">{moment(post.created_at, 'YYYYMMDD H:mm:ss').fromNow()}
                                             {post.privacy.toString() === "0" ?
                                                 <LockIcon className="postIconPrivacy" /> :
                                                 post.privacy.toString() === "1" ? <PublicIcon className="postIconPrivacy" />
@@ -301,7 +308,7 @@ function Post({ post }) {
                             }}
                         >
                             <div className="postMenuSetting">
-                                {
+                                {/* {
                                     post.user_id === user.id ?
                                         <MenuItem >
                                             <div className="postMenuSettingItem">
@@ -314,7 +321,7 @@ function Post({ post }) {
                                             </div>
                                         </MenuItem> :
                                         <></>
-                                }
+                                } */}
                                 {
 
                                     post.histories !== 0 ?
@@ -693,13 +700,52 @@ function Post({ post }) {
                     fullWidth
                     maxWidth="md"
                 >
+                    <DialogTitle style={{ padding: "0px", display: "flex", justifyContent: "space-between" }}>
+                        <div style={{ width: "10%" }}></div>
+                        <div className='contaierHeader'>
+                            <span className='shareTitle'>Ảnh từ bài viết của {post.displayName}</span>
+                        </div>
+                        <div style={{ width: "10%", display: "flex", justifyContent: "end", alignItems: "center" }}>
+                            <div onClick={handleCloseViewMedia} className="dialoPostButtonClose">
+                                <IconButton className="buttonClose" aria-label="delete" size="medium">
+                                    <ClearIcon fontSize="inherit" />
+                                </IconButton>
+                            </div>
+                        </div>
+                    </DialogTitle>
                     <div className="dialogViewMediaFile">
                         <div style={{ margin: 'auto' }}>
                             {
-                                post.totalMediaFile === 1 ? <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><div className="dialogButton"><ArrowBackIosNewIcon /></div> {post.mediafile[0].media_type === 'mp4' ? <video loop className="dialogViewImage" src={post.mediafile[0].media_file_name} controls></video> :
-                                    <img className="dialogViewImage" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />}<div className="dialogButton"><ArrowForwardIosIcon /></div> </div>
-                                    : post.totalMediaFile === 0 ? <div></div> : <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><div onClick={handlePreMediaItem} className="dialogButton"><ArrowBackIosNewIcon /></div> {post.mediafile[item].media_type === 'mp4' ? <video loop className="dialogViewImage" src={post.mediafile[item].media_file_name} controls></video> :
-                                        <img className="dialogViewImage" src={post.mediafile[item].media_file_name} alt="" srcSet={post.mediafile[item].media_file_name} />}<div onClick={handleNextMediaItem} className="dialogButton"><ArrowForwardIosIcon /></div> </div>
+                                post.totalMediaFile === 1 ?
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <div className="dialogButton">
+                                            <ArrowBackIosNewIcon />
+                                        </div>
+                                        {post.mediafile[0].media_type === 'mp4' ?
+                                            <video loop className="dialogViewImage" src={post.mediafile[0].media_file_name} controls></video> :
+                                            <img className="dialogViewImage" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />}
+                                        <div className="dialogButton">
+                                            <ArrowForwardIosIcon />
+                                        </div>
+                                    </div>
+                                    : post.totalMediaFile === 0 ? <div></div> :
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <div onClick={handlePreMediaItem} className="dialogButton">
+                                                <ArrowBackIosNewIcon />
+                                            </div>
+                                            {
+                                                post.mediafile[item].media_type === 'mp4' ?
+                                                    <div style={{ width: "45rem", display: "flex", justifyContent: "center", padding: "1rem" }}>
+                                                        <video loop className="dialogViewImage" src={post.mediafile[item].media_file_name} controls></video>
+                                                    </div> :
+                                                    <div style={{ width: "45rem", display: "flex", justifyContent: "center", padding: "1rem" }}>
+                                                        <img className="dialogViewImage" src={post.mediafile[item].media_file_name} alt="" srcSet={post.mediafile[item].media_file_name} />
+                                                    </div>
+                                            }
+                                            <div onClick={handleNextMediaItem} className="dialogButton">
+                                                <ArrowForwardIosIcon />
+                                            </div>
+                                        </div>
                             }
                         </div>
                     </div>

@@ -58,7 +58,7 @@ function FriendCard({ friend }) {
         axios({
             method: 'POST',
             url: requestURL,
-            data: { userIdAccept: userId },
+            data: { userId: userId },
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",

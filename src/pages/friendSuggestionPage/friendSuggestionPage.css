@@ -1,0 +1,17 @@
+.friendSuggestionPageViewProfile{
+    flex: 2;
+}
+.friendSuggestionPageMain{
+    
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.friendSuggestionPageTextDescription{
+    font-size: 2rem;
+    font-weight: 600;
+}
+.friendSuggestionPage{
+    display: flex;
+    width: 100%;  
+}

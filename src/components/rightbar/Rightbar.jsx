@@ -11,7 +11,7 @@ import HomeRightbar from "./homerightbar/homerightbar"
 import RightbarProfile from './rightbarprofile/rightbarprofile'
 
 
-export default function Rightbar({ profile, userProfile }) {
+export default function Rightbar({ profile }) {
     const status = useSelector(selectStatusupdate);
     useEffect(() => {
 
@@ -20,7 +20,7 @@ export default function Rightbar({ profile, userProfile }) {
     return (
         <div className="rightbar">
             <div className={profile ? "profileRightbarWrapper" : "homeRightbarWrapper"}>
-                {profile ? <RightbarProfile user={userProfile} /> : <HomeRightbar />}
+                {profile ? <RightbarProfile user={profile} /> : <HomeRightbar />}
             </div>
         </div>
     );

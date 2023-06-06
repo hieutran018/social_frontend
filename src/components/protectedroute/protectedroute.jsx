@@ -15,7 +15,7 @@ function ProtectedRoutes({ children }) {
                 Authorization: 'Bearer ' + cookies
             }
         }).then((res) => setIsLoggedIn(true)).catch((err) => { console.log(err.message); setIsLoggedIn(false); navigate('/login') });
-    })
+    }, [cookies])
 
     if (isLoggedIn) {
         return children;

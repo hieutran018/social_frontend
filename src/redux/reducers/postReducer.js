@@ -32,7 +32,6 @@ export default function postReducer(state = initialState, action) {
             return {
                 ...state,
                 status: 'failed',
-                posts: [],
                 error: action.error
             }
         }

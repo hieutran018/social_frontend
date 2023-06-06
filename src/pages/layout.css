@@ -1,0 +1,12 @@
+.layoutContainer {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 3.5rem;
+}
+.layoutTopbar{
+    display: flex;
+}
+.layoutProfileContainer{
+    display: flex;
+}

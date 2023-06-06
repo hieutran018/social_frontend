@@ -3,10 +3,7 @@
     height: 95vh;
     overflow-y: scroll;
     padding: 15px;
-    margin-top: 3rem;
-    
 }
-
 
 .titleAndViewMore{
     display: flex;

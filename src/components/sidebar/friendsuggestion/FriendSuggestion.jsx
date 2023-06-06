@@ -8,6 +8,7 @@ import {
     ArrowBack
 } from '@mui/icons-material';
 import './friendsuggestion.css';
+import FriendSuggestionCard from "./friendSuggestionCard/friendSuggestionCard";
 
 function SidebarFriendSuggestion() {
     const [frs, setFrs] = useState([]);
@@ -33,24 +34,6 @@ function SidebarFriendSuggestion() {
 
     }, [cookies])
 
-    const hanldeClickSendAddFriend = (userId) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userIdAccept: userId },
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-
-        }).then((response) => {
-            console.log(response.data);
-        }).catch((error) => console.log(error));
-    }
-
     return (
         <div className="sidebarFriendSuggestion">
             <div className="titleFriendSuggestion">
@@ -59,22 +42,7 @@ function SidebarFriendSuggestion() {
             </div>
             <ul className="sidebarList">
                 {frs.map((u) => (
-
-                    <li key={u.id} className="sidebarListItemFriendSuggestion">
-                        <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >
-                            <div className="frsContainnerImage"><img className='imageProfile' src={u.avatar} alt="" /></div>
-                        </Link>
-                        <div className='profileInfo'>
-                            <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >
-                                <div className="nameProfile">{u.displayName}</div>
-                            </Link>
-                            <div className="buttonAction">
-                                <button onClick={() => hanldeClickSendAddFriend(u.id)} className='buttonSuggesstionAccept'>Thêm bạn bè</button>
-                                <button className='buttonSuggesstionCancel'>Xóa, gỡ bỏ</button>
-                            </div>
-                        </div>
-                    </li>
-
+                    <FriendSuggestionCard u={u} key={u.id} />
                 ))}
             </ul>
         </div >

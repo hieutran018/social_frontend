@@ -8,6 +8,7 @@ import hahaImg from '../../rections/haha.png';
 import angryImg from '../../rections/angry.png';
 
 function ReactionButton({ reaction }) {
+    console.log("BUTTON REACTION", reaction);
     const reactions = [
         { id: 1, img: likeImg },
         { id: 2, img: loveImg },

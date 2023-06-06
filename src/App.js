@@ -29,6 +29,13 @@ import AdminProfile from './admin/components/profile/profile';
 import GroupManagement from './admin/components/groupmanagement/groupmanagement';
 import StoryManagement from './admin/components/storymanagement/storymanagement';
 import ReportManagement from './admin/components/reportmanagement/reportmanagement';
+import HomePage from './pages/homePage/homePage';
+import LayoutUser from './pages/layout';
+import FriendPage from './pages/friendPage/friendPage';
+import FriendRequestPage from './pages/friendRequestPage/friendRequestPage';
+import FriendSuggestionPage from './pages/friendSuggestionPage/friendSuggestionPage';
+import GroupPage from './pages/groupPage/groupPage';
+import VideoPage from './pages/videoPage/videoPage';
 
 
 function App() {
@@ -38,27 +45,44 @@ function App() {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/confirm-forgot-password" element={<ConfirmForgotPassword />} />
       <Route path="/registration" element={<Register />} />
-      <Route path="/" element={<ProtectedRoutes children={<Home />} />} />
-      <Route path="/home" element={<ProtectedRoutes children={<Home />} />} />
-      <Route path='/video' element={<ProtectedRoutes children={<Videos />} />} />
-      <Route path='/friend' element={<ProtectedRoutes children={<Friend />} />} />
-      <Route path='/friend-suggestion' element={<ProtectedRoutes children={<FriendSuggestion />} />} />
-      <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} />
-      <Route path='/friend-request' element={< FriendRequest />} />
-      <Route path='/friend-request/:userId' element={< FriendRequest />} />
-      <Route path='/userId/:userId' element={<Profile />} />
-      <Route path='/userId/:userId/:page' element={<Profile />} />
+      {/* <Route path="/" element={<ProtectedRoutes children={<Home />} />} /> */}
+      {/* <Route path="/home" element={<ProtectedRoutes children={<Home />} />} /> */}
+      {/* <Route path='/video' element={<ProtectedRoutes children={<Videos />} />} /> */}
+      {/* <Route path='/friend' element={<ProtectedRoutes children={<Friend />} />} /> */}
+      {/* <Route path='/friend-suggestion' element={<ProtectedRoutes children={<FriendSuggestion />} />} /> */}
+      {/* <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} /> */}
+      {/* <Route path='/friend-request' element={< FriendRequest />} /> */}
+      {/* <Route path='/friend-request/:userId' element={< FriendRequest />} /> */}
+      {/* <Route path='/userId/:userId' element={<Profile />} /> */}
+      {/* <Route path='/userId/:userId/:page' element={<Profile />} />
       <Route path='/userId/:userId/:page/:category' element={<Profile />} />
-      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} />
-      <Route path='/groups/:pages' element={<Group />} />
-      <Route path='/groups/:pages/:groupId' element={<Group />} />
-      <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} />
+      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} /> */}
+      {/* <Route path='/groups/:pages' element={<Group />} /> */}
+      {/* <Route path='/groups/:pages/:groupId' element={<Group />} /> */}
+      {/* <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} /> */}
       <Route path='/search/:result' element={<Search />} />
       <Route path='/settings' element={<Settings />} />
       <Route path='/settings/:setting' element={<Settings />} />
       <Route path='/stories/create' element={<StoriesPage />} />
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
+      //? ==================================================================
+      <Route path="/" element={<ProtectedRoutes children={<LayoutUser children={<HomePage />} sidebar={1} rightbar />} />} />
+      <Route path="/home" element={<ProtectedRoutes children={<LayoutUser children={<HomePage />} sidebar={1} rightbar />} />} />
+      <Route path="/videos" element={<ProtectedRoutes children={<LayoutUser children={<VideoPage />} sidebar={2} />} />} />
+      <Route path="/friend" element={<ProtectedRoutes children={<LayoutUser children={<FriendPage />} sidebar={3} />} />} />
+      <Route path='/friend-request' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
+      <Route path='/friend-suggestion' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
+      <Route path='/friend-request/:userId' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
+      <Route path='/friend-suggestion/:userId' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
+      <Route path='/userId/:userId' element={<Profile />} />
+      <Route path='/userId/:userId/:page' element={<Profile />} />
+      <Route path='/userId/:userId/:page/:category' element={<Profile />} />
+      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} />
+      <Route path='/groups/:pages' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
+      <Route path='/groups/:pages/:groupId' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
+      <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
+      //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
       <Route path='/admin/users' element={<LayoutAdmin children={<UserManagement />} />} />
@@ -73,6 +97,7 @@ function App() {
       <Route path='/admin/groups/detail-group/:groupId' element={<LayoutAdmin children={<GroupManagement />} />} />
       <Route path='/admin/stories' element={<LayoutAdmin children={<StoryManagement />} />} />
       <Route path='/admin/reports' element={<LayoutAdmin children={<ReportManagement />} />} />
+      <Route path='/admin/reports/detail-report/:reportId' element={<LayoutAdmin children={<ReportManagement />} />} />
     </Routes>
   );
 }

@@ -26,7 +26,7 @@ import FileTab from './files/filetab';
 
 
 
-function GroupPage() {
+function GroupPageDetail() {
     const groupTab = useParams().groupTab;
     const groupId = useParams().groupId;
     const navigate = useNavigate();
@@ -159,7 +159,7 @@ function GroupPage() {
     }
 
     return (
-        <div className='groupPage'>
+        <div className='groupPages'>
             <div className='groupPageAvatarContainer'>
                 <img className='groupPageAvatar' src={group.avatar} alt="" />
             </div>
@@ -369,4 +369,4 @@ function GroupPage() {
     );
 }
 
-export default GroupPage;
+export default GroupPageDetail;

@@ -1,0 +1,6 @@
+.videoPage{
+    margin-top: 1rem;
+    flex: 4;
+    display: flex;
+    justify-content: center;
+}

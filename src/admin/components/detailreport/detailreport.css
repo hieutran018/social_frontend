@@ -1,0 +1,54 @@
+.reportDetailMain{
+    margin-top: 2rem;
+    background-color: white;
+    padding: 1rem;
+}
+.reportDetailContentDescription{
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.reportDetailContentReport{
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+.reportAction{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+.reportButtonCancel{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    border: 0.1px solid #1877f2;
+    color: #1877f2;
+    border-radius: 10px;
+}
+.reportButtonDeletePost{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.reportButtonChecked{
+    margin-left: 2rem;
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}

@@ -304,17 +304,15 @@ color: black;
 }
 
 .dialogViewImage{
-    width: 40rem;
-    height: 40rem;
+    max-width: 85%;
+    max-height: 35rem;
 }
 
 .dialogViewMediaFile{
     width: 100%;
     height: 40rem;
     display: flex;
-   
     align-items: center;
-    
 }
 
 .postShareUser{

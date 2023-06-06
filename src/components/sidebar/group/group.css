@@ -1,3 +1,6 @@
+.sidebar{
+    flex:1;
+}
 .groupCreateGroup{
     font-size: 20px;
     font-weight: 500;

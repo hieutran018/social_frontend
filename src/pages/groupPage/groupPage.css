@@ -1,0 +1,12 @@
+.groupPage{
+    flex: 4;
+}
+.groupDetail{
+    margin-top: 1rem;
+    flex: 4;
+}
+
+.myGroup{
+    margin-top: 1rem;
+    flex: 4;
+}

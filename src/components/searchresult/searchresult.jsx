@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import SearchCardUser from './searchCardUser/searchCardUser';
 
 function SearchResult() {
     const result = useParams().result;
@@ -14,8 +15,7 @@ function SearchResult() {
     const [dataPosts, setDataPosts] = useState([]);
     useEffect(() => {
         function searchData() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/' + result;
-
+            const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/input=' + result;
             axios({
                 method: "GET",
                 url: requestURL,
@@ -34,7 +34,7 @@ function SearchResult() {
         }
         searchData();
     }, [result, cookies])
-    console.log(result);
+    console.log(dataUsers, "RESULT SEARCH");
     return (
         <div className='searchResult'>
             <div className='searchResultWrapper'>
@@ -45,16 +45,7 @@ function SearchResult() {
                         </div>
                         {
                             dataUsers.map((data) => (
-                                <Link className='searchResultLink' key={data.id} to={"/" + data.id}>
-                                    <div className='searchResultUserCard'>
-                                        <div className='searchResultCardLeft'>
-                                            <img className='searchResultAvatar' src={data.avatar} alt="" />
-                                        </div>
-                                        <div className='searchResultCardRight'>
-                                            <div className='searchResultName'>{data.displayName}</div>
-                                            <div className='searchResultButtonAction'>Kết bạn</div>
-                                        </div>
-                                    </div></Link>
+                                <SearchCardUser data={data} key={data.id} />
                             ))
                         }
                         <div className='searchReusltLoadMore'>

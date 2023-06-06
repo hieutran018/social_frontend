@@ -52,11 +52,11 @@ function FriendList() {
                     <Box sx={{ width: '100%' }}>
                         <Grid container rowSpacing={3} columnSpacing={3}>
                             {fr.map((u) => (
-                                u.status === 1 ?
-                                    <Grid key={u.id} item xs={6}>
-                                        <FriendCard friend={u} />
-                                    </Grid>
-                                    : <div key={u.id}></div>
+
+                                <Grid key={u.id} item xs={6}>
+                                    <FriendCard friend={u} />
+                                </Grid>
+
                             ))}
                         </Grid>
                     </Box>

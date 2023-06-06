@@ -20,7 +20,6 @@ import SidebarStories from './stories/sidebarsories';
 import SidebarListStory from './stories/sidebarListstory';
 
 function Sidebar({ page }) {
-
     const SidebarVideo = () => {
         return (
             <>

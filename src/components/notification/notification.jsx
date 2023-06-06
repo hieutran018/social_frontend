@@ -4,11 +4,24 @@ import { useCookies } from 'react-cookie';
 import './notification.css';
 import Lottie from 'react-lottie-player';
 import Nodata from '../../lottiefiles/nodata.json';
+import Pusher from 'pusher-js';
 
 
 function Notification({ close }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [notifications, setNotifications] = useState([]);
+    const user = JSON.parse(localStorage.getItem('user'));
+    // const pusher = new Pusher('4eea52e19a1b86509eb3', {
+    //     cluster: 'ap1',
+    //     encrypted: true
+    // });
+    // const channel = pusher.subscribe('notif-' + user.id);
+    // useEffect(() => {
+    //     channel.bind('my-event', function (data) {
+    //         setNotifications(notifications.push(data.tif));
+    //         console.log(data);
+    //     });
+    // }, [user.id, channel, notifications])
     useEffect(() => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-notifications';
         axios({

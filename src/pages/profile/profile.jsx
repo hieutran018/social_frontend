@@ -19,7 +19,7 @@ import Dialog from '@mui/material/Dialog';
 import { RxAvatar } from 'react-icons/rx/';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useCookies } from 'react-cookie';
-import { fetchPost } from "../../redux/actions/postAction";
+import { fetchPostByUserId } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
 
 
@@ -36,7 +36,7 @@ function Profile() {
     const posts = useSelector(selectPost);
 
     useEffect(() => {
-        dispatch(fetchPost(cookies, 1));
+        dispatch(fetchPostByUserId(userId, 1));
     }, [cookies, dispatch])
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);
@@ -98,7 +98,6 @@ function Profile() {
                 status === 'loading' ?
                     <div></div> : status === 'success' ?
                         <div className="profile">
-
                             <div className="profileRight">
                                 <div className="profileRightTop">
                                     <div className="profileCover">
@@ -211,7 +210,7 @@ function Profile() {
                                                             }
 
                                                         </div>
-                                                        <Rightbar profile userProfile={user} />
+                                                        <Rightbar profile={true} />
                                                     </div>
                                 }
                             </div>
@@ -235,8 +234,6 @@ function Profile() {
                             </Dialog>
                         </div > : <div></div>
             }
-
-
         </>
     );
 }

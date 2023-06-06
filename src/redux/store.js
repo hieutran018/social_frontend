@@ -13,6 +13,7 @@ import adminPostReducer from './admin/reducers/adminPostReducer'
 import adminGroupReducer from './admin/reducers/adminGroupReducer'
 import adminFeelAndActivityReducer from './admin/reducers/adminFeelAndActivityReducer'
 import postHistoryReducer from './reducers/postHistoryReducer'
+import adminReportReducer from './admin/reducers/adminReportReducer'
 // Automatically adds the thunk middleware and the Redux DevTools extension
 const store = configureStore({
     // Automatically calls `combineReducers`
@@ -30,6 +31,7 @@ const store = configureStore({
         adminPosts: adminPostReducer,
         adminGroup: adminGroupReducer,
         adminFAA: adminFeelAndActivityReducer,
+        adminReports: adminReportReducer
     }
 })
 

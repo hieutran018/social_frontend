@@ -1,4 +1,3 @@
-import '../sidebar.css';
 import './group.css'
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';

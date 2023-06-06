@@ -21,7 +21,7 @@ const SidebarHomePage = () => {
 
                 </li>
                 <li className="sidebarListItem">
-                    <Link to="/video" className="sidebarListItemText">
+                    <Link to="/videos" className="sidebarListItemText">
                         <RiVideoFill size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Thước phim</span>
                     </Link>

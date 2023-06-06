@@ -239,11 +239,12 @@ function EditPost({ postId }) {
             response.data.tag.map((tag) => {
                 return tagged.push(tag.user_id);
             })
+            console.log(response.data);
         }).catch((error) => {
             navigate('/login');
         })
     }, [cookies, postId, navigate]);
-    console.log(faa);
+
     useEffect(() => {
         fetchPost()
     }, [fetchPost])

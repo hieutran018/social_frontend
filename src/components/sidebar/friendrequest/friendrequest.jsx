@@ -56,7 +56,7 @@ function FriendRequest() {
         <div className="sidebarFriendSuggestion">
             <div className="titleFriendSuggestion">
                 <Link to="/friend"><ArrowBack className='iconBack' />
-                </Link> Gợi ý
+                </Link> Lời mời kết bạn
             </div>
             <ul className="sidebarList">
                 {frs.map((u) => (
