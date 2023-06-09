@@ -36,6 +36,7 @@ import FriendRequestPage from './pages/friendRequestPage/friendRequestPage';
 import FriendSuggestionPage from './pages/friendSuggestionPage/friendSuggestionPage';
 import GroupPage from './pages/groupPage/groupPage';
 import VideoPage from './pages/videoPage/videoPage';
+import ViewPostDetail from './components/viewpostdetail/viewpostdetail';
 
 
 function App() {
@@ -63,7 +64,6 @@ function App() {
       <Route path='/search/:result' element={<Search />} />
       <Route path='/settings' element={<Settings />} />
       <Route path='/settings/:setting' element={<Settings />} />
-      <Route path='/stories/create' element={<StoriesPage />} />
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
       //? ==================================================================
@@ -82,6 +82,8 @@ function App() {
       <Route path='/groups/:pages' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
       <Route path='/groups/:pages/:groupId' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
       <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
+      <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser children={<StoriesPage />} sidebar={8} />} />} />
+      <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser children={<ViewPostDetail />} profile />} />} />
       //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />

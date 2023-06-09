@@ -11,9 +11,8 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Comment from "../comment/comment";
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import { commentPost } from '../../redux/actions/postAction';
-import axios from 'axios';
+import 'moment/locale/vi';
+import { useDispatch, useSelector } from 'react-redux';
 import likeImg from '../../rections/like.png';
 import loveImg from '../../rections/love.png';
 import yayImg from '../../rections/yay.png';
@@ -24,9 +23,13 @@ import angryImg from '../../rections/angry.png';
 import './postdetail.css'
 import ReactionsPost from '../reationspost/reactionspost';
 import ReactionButton from '../reaction/reaction';
+import { fetchComment, commentPost } from '../../redux/actions/commentAction';
+import { selectStatusComments, selectComments } from '../../redux/selectors/commentSelector';
+import SkeletonCommentPost from '../comment/skeletonComment';
 
 function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
     const cookies = useCookies('_tk');
+    const [postId,] = useState(post.id);
     const user = JSON.parse(localStorage.getItem('user'));
     const [isLike, setIsLike] = useState(post.isLike);
     const [commentList, setCommentList] = useState([]);
@@ -34,8 +37,9 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
     const [countComment, setCountComment] = useState(post.totalComment);
     const [file, setFile] = useState();
     const [openReactions, setOpenReactions] = useState(false);
-
     const dispatch = useDispatch();
+    const comments = useSelector(selectComments);
+    const status = useSelector(selectStatusComments);
     const reactions = [
         { id: 1, img: likeImg },
         { id: 2, img: loveImg },
@@ -61,48 +65,12 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
     }
 
     useEffect(() => {
-        function fetchCommentByIdPost(postId) {
-            const requestURL = 'http://127.0.0.1:8000/api/fetch-comment-by-post';
-            axios({
-                method: "POST",
-                url: requestURL,
-                data: {
-                    postId: postId
-                }
-            }).then((response) => {
-                setCommentList(response.data);
-                console.log(response.data);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-        fetchCommentByIdPost(post.id)
-    }, [post.id])
-
-    async function fetchComment(postId) {
-        const requestURL = 'http://127.0.0.1:8000/api/fetch-comment-by-post';
-        axios({
-            method: "POST",
-            url: requestURL,
-            data: {
-                postId: postId
-            }
-        }).then((response) => {
-            setCommentList(response.data);
-            console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
+        dispatch(fetchComment(cookies, postId))
+    }, [])
     const handleClickPostComment = (postId) => {
-        console.log(postId, post);
-        dispatch(commentPost(cookies[0]._tk, postId, inputComment, file ? file : null))
-        setTimeout(() => {
-            fetchComment(postId);
-        }, 3000);
-        setFile();
+        dispatch(commentPost(cookies, postId, inputComment, file))
         setInputComment('');
+        setFile();
     }
 
     return (
@@ -437,11 +405,19 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                         <div className="postDetailBottomButton"><button className="btn ">Bình luận</button></div>
                         <div className="postDetailBottomButton"><button className="btn ">Chia sẻ</button></div>
                     </div>
-                    <div>
-                        {commentList.map((u) => (
-                            <Comment key={u.id} comment={u} />
-                        ))}
-                    </div>
+                    {
+                        status === 'loading' ?
+                            <SkeletonCommentPost /> :
+                            status === 'succeeded' ?
+                                <div>
+                                    {comments.map((u) => (
+                                        <Comment key={u.id} comment={u} />
+                                    ))}
+                                </div> :
+                                status === 'failed' ?
+                                    <>FAILED</> :
+                                    <></>
+                    }
                     <div>
                         <div className="commentBox">
                             <img className="commentBoxAvatarProfile" src={user.avatar} alt="" />
@@ -452,7 +428,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                     }
                                 } : {}
                             } className="commentBoxInut" type="text" value={inputComment} onChange={(event) => setInputComment(event.target.value)} />
-
                             <label className='commentBoxUpload' onChange={handleChangeFile} htmlFor='uploadFiles'><input type="file" id="uploadFiles" hidden /><AiOutlineCamera style={{ fontSize: "35" }} className="shareIcon" /></label>
                         </div>
                         {

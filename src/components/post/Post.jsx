@@ -51,7 +51,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Post({ post }) {
-    console.log("FETCH  POST + " + post.id, post.mediafile[0]);
     const user = JSON.parse(localStorage.getItem('user'));
     const pages = useParams().pages;
     const groupId = useParams().groupId;

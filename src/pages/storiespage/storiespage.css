@@ -1,16 +1,5 @@
-.storiespage{
-    width: 100%;
-}
 
-.storiespageContainer{
-    margin-top: 3.5rem;
-    display: flex;
-    
-}
-.storiespageMain{
+.storiespage{
     width: 100%;
     flex: 4;
-}
-.storiespage{
-    position: fixed;
 }

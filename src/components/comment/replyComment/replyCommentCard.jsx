@@ -1,16 +1,17 @@
-import './comment.css';
+import { useState } from "react";
+
+import CommentBox from "../../commentbox/commentbox";
+import ReplyComment from "./replyComment";
 import moment from 'moment';
 import 'moment/locale/vi';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import CommentBox from '../commentbox/commentbox'
-import ReplyComment from './replyComment/replyComment';
+import { useNavigate } from "react-router-dom";
 
-
-function Comment({ comment }) {
+function ReplyCommentCard({ comment, commentList }) {
+    console.log("COMMENT:" + comment.id);
     const navigate = useNavigate();
     const [isReply, setIsReply] = useState(false);
     const [viewMore, setViewMore] = useState();
+    const [replies, setReplies] = useState(commentList);
     const viewProfileUser = (userId) => {
         const url = "/" + userId;
         navigate(url);
@@ -23,7 +24,7 @@ function Comment({ comment }) {
         setIsReply(false);
     }
     return (
-        <div>
+        <div key={comment.id}>
             <div className='comment'>
                 <div className="commentCard">
                     <div className="commentAvatarContainer">
@@ -61,12 +62,11 @@ function Comment({ comment }) {
                     <div></div>
             }
             <div className='commentReply'>
-                {isReply ? <CommentBox postId={comment.post_id} commentId={comment.id} /> : <></>}
+                {isReply ? <CommentBox postId={comment.post_id} commentId={comment.id} setComment={replies} /> : <></>}
             </div>
 
         </div>
-
     );
 }
 
-export default Comment;
+export default ReplyCommentCard;

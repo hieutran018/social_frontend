@@ -4,24 +4,17 @@ import { useCookies } from 'react-cookie';
 import './notification.css';
 import Lottie from 'react-lottie-player';
 import Nodata from '../../lottiefiles/nodata.json';
-import Pusher from 'pusher-js';
+import { Link } from 'react-router-dom';
 
 
-function Notification({ close }) {
+
+function Notification({ close, channel }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [notifications, setNotifications] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'));
-    // const pusher = new Pusher('4eea52e19a1b86509eb3', {
-    //     cluster: 'ap1',
-    //     encrypted: true
-    // });
-    // const channel = pusher.subscribe('notif-' + user.id);
-    // useEffect(() => {
-    //     channel.bind('my-event', function (data) {
-    //         setNotifications(notifications.push(data.tif));
-    //         console.log(data);
-    //     });
-    // }, [user.id, channel, notifications])
+    channel.bind('my-event', function (data) {
+        setNotifications([data.notif, ...notifications]);
+        console.log('ADD REALTIME NOTI', data, notifications);
+    })
     useEffect(() => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-notifications';
         axios({
@@ -58,15 +51,17 @@ function Notification({ close }) {
                         <div className='notification-list' >
                             {
                                 notifications.map((notification) => (
-                                    <div key={notification.id} className='notificationItem' >
-                                        <div className='notificationHeader'>
-                                            <div className="notificationAvatar"></div>
-                                            <div className="notificationContent">
-                                                <span className="notificationMessage"><span className='notificationUserName'>{notification.userNameFrom}</span> {notification.title}</span>
+                                    <Link style={{ textDecoration: "none" }} to={notification.object_type === "crPost" ? "/posts/view-post-detail/" + notification.object_id : "/"}>
+                                        <div key={notification.id} className='notificationItem' >
+                                            <div className='notificationHeader'>
+                                                <img className="notificationAvatar" src={notification.userAvatarFrom} alt="" />
+                                                <div className="notificationContent">
+                                                    <span className="notificationMessage"><span className='notificationUserName'>{notification.userNameFrom}</span> {notification.title}</span>
+                                                </div>
                                             </div>
+                                            <div className='notificationBottom'><div className='notificationCreateAt'>1 ngày trước</div></div>
                                         </div>
-                                        <div className='notificationBottom'><div className='notificationCreateAt'>1 ngày trước</div></div>
-                                    </div>
+                                    </Link>
                                 ))
                             }
 

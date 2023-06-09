@@ -19,7 +19,6 @@ function RightbarProfile({ user }) {
             axios({
                 method: 'GET',
                 url: requestURL,
-                data: { userId: userId },
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",

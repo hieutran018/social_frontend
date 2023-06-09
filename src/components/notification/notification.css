@@ -6,8 +6,8 @@
     border: 0.1px solid #D8DADF;
     display: flex;
     justify-content: center;
-    
-    
+    margin-top: 35px;
+    margin-right: 35px;  
 }
 
 .notification-list{

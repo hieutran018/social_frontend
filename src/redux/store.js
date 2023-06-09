@@ -14,11 +14,13 @@ import adminGroupReducer from './admin/reducers/adminGroupReducer'
 import adminFeelAndActivityReducer from './admin/reducers/adminFeelAndActivityReducer'
 import postHistoryReducer from './reducers/postHistoryReducer'
 import adminReportReducer from './admin/reducers/adminReportReducer'
+import commentReducer from './reducers/commentReducer'
 // Automatically adds the thunk middleware and the Redux DevTools extension
 const store = configureStore({
     // Automatically calls `combineReducers`
     reducer: {
         posts: postReducer,
+        comments: commentReducer,
         users: userReducer,
         groups: groupReducer,
         albums: albumReducer,

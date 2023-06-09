@@ -66,3 +66,12 @@ color: black;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+.skeletonCommentPost{
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.commetLoadMoreComment{
+    margin-left: 5%;
+}

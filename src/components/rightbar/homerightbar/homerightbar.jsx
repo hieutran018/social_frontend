@@ -1,23 +1,28 @@
 import '../rightbar.css';
 import Online from "../../online/Online";
-import { io } from "socket.io-client";
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 function HomeRightbar() {
-    // const cookies = useCookies('_tk')[0]._tk;
-    // const user = JSON.parse(localStorage.getItem('user'));
-    const [onlines, setOnlines] = useState([]);
+    const cookies = useCookies('_tk')[0]._tk;
+    const userId = JSON.parse(localStorage.getItem('user')).id;
     const [friends, setFriends] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        const socket = io('http://localhost:3001');
-        socket.emit('online', { displayName: user.displayName, avatar: user.avatar, userId: user.id })
-        socket.on('online', (response) => {
-            setOnlines(response);
-            console.log(response);
-        });
-    }, [])
+        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/' + userId + '/25';
+        axios({
+            method: 'GET',
+            url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then((response) => {
+            setFriends(response.data);
+        }).catch((error) => console.log(error.message));
+    }, [cookies, userId])
     return (
         <div className="homeRightbar">
             <div className="birthdayContainer">
@@ -29,7 +34,7 @@ function HomeRightbar() {
             {/* <img className="rightbarAd" src="assets/ad.png" alt="" /> */}
             <h4 className="rightbarTitle">Người liên hệ</h4>
             <ul className="rightbarFriendList">
-                {onlines.map((online) => (
+                {friends.map((online) => (
                     <Online key={online.id} user={online} />
                 ))}
             </ul>

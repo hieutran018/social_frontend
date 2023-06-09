@@ -3,12 +3,12 @@ import axios from 'axios';
 import './commentbox.css';
 import { useCookies } from 'react-cookie';
 
-function CommentBox({ postId, commentId }) {
+function CommentBox({ postId, commentId, setComment }) {
     const [inputComment, setInputComment] = useState('');
     const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
-
     const handleClickReplyComment = () => {
+        console.log("CURENT COMMENT:" + commentId);
         console.log('Press to enter')
         const requestURL = 'http://127.0.0.1:8000/api/v1/reply-comment';
 
@@ -19,7 +19,9 @@ function CommentBox({ postId, commentId }) {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }
-        }).then(response => console.log(response.data)).catch(error => console.log(error));
+        }).then(response => {
+            setComment.push(response.data);
+        }).catch(error => console.log(error));
         setInputComment('');
     }
     console.log(commentId, postId)

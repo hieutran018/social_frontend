@@ -10,18 +10,28 @@ import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Notification from '../notification/notification';
+import { RxDotFilled } from 'react-icons/rx';
 
 
-function Topbar() {
+function Topbar({ pusher }) {
     const cookies = useCookies('_tk')[0]._tk;
+    const user = JSON.parse(localStorage.getItem('user'));
     const [inputSearch, setInputSearch] = useState('');
     const [dataUsers, setDataUsers] = useState([]);
     const [searchTemp, setSearchTemp] = useState('');
     const typingTimeOutRef = useRef(null);
     const [openNoti, setOpenNoti] = useState(false);
+    const [newNoti, setNewNoti] = useState(false);
+
+    const channel = pusher.subscribe('notif-' + user.id);
+    channel.bind('my-event', function (data) {
+        setNewNoti(true);
+        console.log(data);
+    });
 
     const handleOpenNoti = () => {
         setOpenNoti(true);
+        setNewNoti(false);
     }
 
     const handleCloseNoti = () => {
@@ -126,8 +136,20 @@ function Topbar() {
                         {/* <span className="topbarIconBadge">2</span> */}
                     </div>
                     <div className="topbarIconItem">
-                        <Notifications onClick={!openNoti ? handleOpenNoti : handleCloseNoti} fontSize='25' />
-                        <Notification close={openNoti} />
+                        <div onClick={!openNoti ? handleOpenNoti : handleCloseNoti}>
+                            <Notifications fontSize='25' style={{ position: "absolute" }} />
+                            {
+                                newNoti ?
+                                    <RxDotFilled color='red' style={{
+                                        position: "relative",
+                                        left: "7",
+                                        bottom: "8"
+                                    }} /> :
+                                    <></>
+                            }
+                            <Notification close={openNoti} channel={channel} />
+                        </div>
+
                     </div>
                 </div>
                 <NavItem icon={<ArrowDropDownIcon />}>
