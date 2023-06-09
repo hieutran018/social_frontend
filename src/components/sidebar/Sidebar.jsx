@@ -18,6 +18,7 @@ import SidebarSearch from './search/sidebarsearch'
 import SidebarSetting from './setting/setting';
 import SidebarStories from './stories/sidebarsories';
 import SidebarListStory from './stories/sidebarListstory';
+import SidebarChat from './chat/sidebarchat';
 
 function Sidebar({ page }) {
     const SidebarVideo = () => {
@@ -116,7 +117,8 @@ function Sidebar({ page }) {
                                         <SidebarSearch /> : page === 7 ?
                                             <SidebarSetting /> : page === 8 ?
                                                 <SidebarStories /> : page === 9 ?
-                                                    <SidebarListStory /> : <SidebarFriendSuggestion />}
+                                                    <SidebarListStory /> : page === 10 ?
+                                                        <SidebarChat /> : <SidebarFriendSuggestion />}
             </div>
         </div>
     );

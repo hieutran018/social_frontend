@@ -37,6 +37,7 @@ import FriendSuggestionPage from './pages/friendSuggestionPage/friendSuggestionP
 import GroupPage from './pages/groupPage/groupPage';
 import VideoPage from './pages/videoPage/videoPage';
 import ViewPostDetail from './components/viewpostdetail/viewpostdetail';
+import ChatPage from './pages/chatPage/chatPage';
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
       <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
       <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser children={<StoriesPage />} sidebar={8} />} />} />
       <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser children={<ViewPostDetail />} profile />} />} />
+      <Route path="/chats/:chatId" element={<ProtectedRoutes children={<LayoutUser children={<ChatPage />} sidebar={10} />} />} />
       //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />

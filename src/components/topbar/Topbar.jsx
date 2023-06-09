@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Notification from '../notification/notification';
 import { RxDotFilled } from 'react-icons/rx';
+import Message from '../../components/messages/messages';
 
 
 function Topbar({ pusher }) {
@@ -21,6 +22,7 @@ function Topbar({ pusher }) {
     const [searchTemp, setSearchTemp] = useState('');
     const typingTimeOutRef = useRef(null);
     const [openNoti, setOpenNoti] = useState(false);
+    const [openChat, setOpenChat] = useState(false);
     const [newNoti, setNewNoti] = useState(false);
 
     const channel = pusher.subscribe('notif-' + user.id);
@@ -36,6 +38,15 @@ function Topbar({ pusher }) {
 
     const handleCloseNoti = () => {
         setOpenNoti(false);
+    }
+
+    const handleOpenChat = () => {
+        setOpenChat(true);
+        setNewNoti(false);
+    }
+
+    const handleCloseChat = () => {
+        setOpenChat(false);
     }
 
     const handleChangeSearch = (event) => {
@@ -132,8 +143,10 @@ function Topbar({ pusher }) {
             <div className="topbarRight">
                 <div className="topbarIcons">
                     <div className="topbarIconItem">
-                        <Chat fontSize='25' />
-                        {/* <span className="topbarIconBadge">2</span> */}
+                        <div onClick={!openChat ? handleOpenChat : handleCloseChat}>
+                            <Chat fontSize='25' />
+                            <Message close={openChat} />
+                        </div>
                     </div>
                     <div className="topbarIconItem">
                         <div onClick={!openNoti ? handleOpenNoti : handleCloseNoti}>

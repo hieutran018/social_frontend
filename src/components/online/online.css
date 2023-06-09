@@ -3,6 +3,10 @@
     align-items: center;
     margin-bottom: 15px;
     padding-left: 10px;
+    border-radius: 5px;
+}
+.onlineRightbarFriend:hover{
+    background-color: aliceblue;
 }
 
 .rightbarProfileImgContainer {
