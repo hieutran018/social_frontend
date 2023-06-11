@@ -42,6 +42,26 @@
     justify-content: center;
     margin-top: 1.5rem;
 }
+.profileButtonActionContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profileButtonAction{
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+.profileActionAddFriend{
+    background-color: #1877F2;
+    color: white;
+}
 
 .profileInfoName {
     font-size: 24px;

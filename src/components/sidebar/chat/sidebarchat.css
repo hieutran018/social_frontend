@@ -1,7 +1,21 @@
 
+
+.sidebarChatTitle{
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+.sidebarChatItemsList{
+    position: relative;
+    overflow-y: scroll;
+}
+
 .chatItem{
     display: flex;
     align-items: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 10px;
 }
 .chatItemAvatar{
     width: 60px;
@@ -20,4 +34,7 @@
     color: grey;
     font-size: 16px;
     font-weight: 300;
+}
+.chatItemActive{
+    background-color: rgb(209, 209, 209);
 }

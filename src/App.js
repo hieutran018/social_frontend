@@ -38,9 +38,15 @@ import GroupPage from './pages/groupPage/groupPage';
 import VideoPage from './pages/videoPage/videoPage';
 import ViewPostDetail from './components/viewpostdetail/viewpostdetail';
 import ChatPage from './pages/chatPage/chatPage';
+import Pusher from 'pusher-js';
 
 
 function App() {
+
+  const pusher = new Pusher('4eea52e19a1b86509eb3', {
+    cluster: 'ap1',
+    encrypted: true
+  });
   return (
     <Routes>
       <Route path="/login" element={< Login />} />
@@ -68,24 +74,24 @@ function App() {
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
       //? ==================================================================
-      <Route path="/" element={<ProtectedRoutes children={<LayoutUser children={<HomePage />} sidebar={1} rightbar />} />} />
-      <Route path="/home" element={<ProtectedRoutes children={<LayoutUser children={<HomePage />} sidebar={1} rightbar />} />} />
-      <Route path="/videos" element={<ProtectedRoutes children={<LayoutUser children={<VideoPage />} sidebar={2} />} />} />
-      <Route path="/friend" element={<ProtectedRoutes children={<LayoutUser children={<FriendPage />} sidebar={3} />} />} />
+      <Route path="/" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<HomePage />} sidebar={1} rightbar />} />} />
+      <Route path="/home" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<HomePage />} sidebar={1} rightbar />} />} />
+      <Route path="/videos" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<VideoPage />} sidebar={2} />} />} />
+      <Route path="/friend" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<FriendPage />} sidebar={3} />} />} />
       <Route path='/friend-request' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
       <Route path='/friend-suggestion' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
       <Route path='/friend-request/:userId' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
       <Route path='/friend-suggestion/:userId' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
-      <Route path='/userId/:userId' element={<Profile />} />
-      <Route path='/userId/:userId/:page' element={<Profile />} />
-      <Route path='/userId/:userId/:page/:category' element={<Profile />} />
-      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} />
-      <Route path='/groups/:pages' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
-      <Route path='/groups/:pages/:groupId' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
-      <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser children={<GroupPage />} sidebar={5} />} />
-      <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser children={<StoriesPage />} sidebar={8} />} />} />
-      <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser children={<ViewPostDetail />} profile />} />} />
-      <Route path="/chats/:chatId" element={<ProtectedRoutes children={<LayoutUser children={<ChatPage />} sidebar={10} />} />} />
+      <Route path='/userId/:userId' element={<Profile pusher={pusher} />} />
+      <Route path='/userId/:userId/:page' element={<Profile pusher={pusher} />} />
+      <Route path='/userId/:userId/:page/:category' element={<Profile pusher={pusher} />} />
+      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile pusher={pusher} />} />
+      <Route path='/groups/:pages' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
+      <Route path='/groups/:pages/:groupId' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
+      <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
+      <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<StoriesPage />} sidebar={8} />} />} />
+      <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ViewPostDetail />} profile />} />} />
+      <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage />} sidebar={10} />} />} />
       //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />

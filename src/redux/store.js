@@ -15,6 +15,7 @@ import adminFeelAndActivityReducer from './admin/reducers/adminFeelAndActivityRe
 import postHistoryReducer from './reducers/postHistoryReducer'
 import adminReportReducer from './admin/reducers/adminReportReducer'
 import commentReducer from './reducers/commentReducer'
+import chatReducer from './reducers/chatReducer'
 // Automatically adds the thunk middleware and the Redux DevTools extension
 const store = configureStore({
     // Automatically calls `combineReducers`
@@ -27,6 +28,7 @@ const store = configureStore({
         mediafiles: mediafileReducer,
         members: memberReducer,
         stories: storiesReducer,
+        chats: chatReducer,
         postHistories: postHistoryReducer,
         adminUsers: adminUserReducer,
         dashboard: adminDashboardReducer,

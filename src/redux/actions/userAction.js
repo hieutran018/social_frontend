@@ -74,16 +74,20 @@ export const fetchCurrentUser = user => ({
     user
 })
 
-export const fetchUser = (userId) => {
+export const fetchUser = (cookies, userId) => {
     return async dispatch => {
 
-        const requestURL = "http://127.0.0.1:8000/api/profile-user/userId=" + userId;
+        const requestURL = "http://127.0.0.1:8000/api/v1/profile-user/userId=" + userId;
         dispatch(fetchUserStart());
         axios({
             method: 'GET',
             url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies
+            }
         }).then((response) => {
             dispatch(fetchUserSuccessed(response.data))
+            console.log(response.data);
         }).catch((error) => dispatch(fetchUserFail(error.message)));
         console.log(userId);
     }

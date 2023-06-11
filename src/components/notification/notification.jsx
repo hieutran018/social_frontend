@@ -51,8 +51,8 @@ function Notification({ close, channel }) {
                         <div className='notification-list' >
                             {
                                 notifications.map((notification) => (
-                                    <Link style={{ textDecoration: "none" }} to={notification.object_type === "crPost" ? "/posts/view-post-detail/" + notification.object_id : "/"}>
-                                        <div key={notification.id} className='notificationItem' >
+                                    <Link key={notification.id} style={{ textDecoration: "none" }} to={notification.object_type === "crPost" ? "/posts/view-post-detail/" + notification.object_id : "/"}>
+                                        <div className='notificationItem' >
                                             <div className='notificationHeader'>
                                                 <img className="notificationAvatar" src={notification.userAvatarFrom} alt="" />
                                                 <div className="notificationContent">

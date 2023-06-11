@@ -1,13 +1,20 @@
 .chatPage{
     flex: 5;
+    
 }
 .chatPageWrapper{
-    padding: 1rem;
+    position: absolute;
+    width: -webkit-fill-available;
 }
 .chatPageTop{
     display: flex;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    padding-top: 1rem;
 }
+
 .chatPageAvatar{
     width: 60px;
     height: 60px;
@@ -21,45 +28,47 @@
     font-size: 20px;
     font-weight: 500;
 }
-.itemSentMessage{
+.chatPageMain{
     display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    flex-direction: column-reverse;
+    position: relative;
+    z-index: -1;
+    margin-bottom: 45px;
+    bottom: 0;
+    margin-top: 5rem;
+
 }
-.itemSentMessageAvatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    object-fit: cover;
-}
-.itemSentMassageContent{
+.chatPageBottom{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     background-color: white;
-    font-size: 18px;
-    border-radius: 30px;
-    border: 0.1px solid blue;
-    max-width: 40%;
-    padding: 0.5rem;
+    margin-bottom: 1rem;
 }
-.itemGetMessage{
+.chatPageInputContainer{
     display: flex;
     align-items: center;
-    justify-content: end;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
 }
-.itemGetMessageAvatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    object-fit: cover;
-}
-.itemGetMassageContent{
-    background-color: blue;
-    color: white;
+.chatPageInput{
+    width: 79%;
+    height: 35px;
+    border-radius:10px;
+    border: none;
+    background-color: #F0F2F5;
+    outline: none;
     font-size: 18px;
-    border-radius: 30px;
-    max-width: 40%;
-    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.chatPageButtonSentMessage{
+    height: 35px;
+    border-radius:10px;
+    border: none;
+    background-color: #0065fc;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

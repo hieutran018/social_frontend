@@ -1,17 +1,17 @@
+import { Link, useParams } from 'react-router-dom';
 import './sidebarchat.css';
-
-import avatar from '../../../ckc_social_logo.png';
 function ChatCard({ chat }) {
+    const userId = useParams().userId;
     return (
-        <div className='chatItem'>
-            <img className='chatItemAvatar' src={avatar} alt="" />
+        <Link to={"/chats/" + chat.userId} className={parseInt(userId) === parseInt(chat.userId) ? 'chatItem chatItemActive' : 'chatItem'}>
+            <img className='chatItemAvatar' src={chat.conversation_avatar} alt="" />
             <div className='chatItemName'>
-                <div>Tran Duong Chi Hieu</div>
+                <div>{chat.conversation_name}</div>
                 <div className='chatItemChatLasted'>
                     Ban: Hom nay an gi vay?
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

@@ -1,5 +1,5 @@
 import './profile.css';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
@@ -23,8 +23,9 @@ import { fetchPostByUserId } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
 
 
-function Profile() {
-    const { userId } = useParams();
+function Profile({ pusher }) {
+    const navigate = useNavigate();
+    const userId = useParams().userId;
     const cookies = useCookies('_tk')[0]._tk;
     const userCurrent = JSON.parse(localStorage.getItem('user'));
     const { page } = useParams();
@@ -37,7 +38,7 @@ function Profile() {
 
     useEffect(() => {
         dispatch(fetchPostByUserId(userId, 1));
-    }, [cookies, dispatch])
+    }, [cookies, dispatch, userId])
 
     const [openViewAvatar, setOpenViewAvatar] = useState(false);
     const [openUpdateAvatar, setOpenUpdateAvatar] = useState(false);
@@ -85,15 +86,15 @@ function Profile() {
     }
 
     useEffect(() => {
-        dispatch(fetchUser(userId));
+        dispatch(fetchUser(cookies, userId));
 
-    }, [userId, dispatch]);
+    }, [userId, dispatch, cookies]);
 
 
 
     return (
         <>
-            <Topbar />
+            <Topbar pusher={pusher} />
             {
                 status === 'loading' ?
                     <div></div> : status === 'success' ?
@@ -160,8 +161,6 @@ function Profile() {
                                             }}
                                             anchorEl={anchorEl}
                                             open={open}
-
-
                                             onClose={handleClose}
                                             TransitionComponent={Fade}
                                         >
@@ -177,6 +176,15 @@ function Profile() {
                                     <div className="profileInfo">
                                         <h4 className="profileInfoName">{user.displayName}</h4>
                                         <span className="profileInfoDesc">Hi</span>
+                                    </div>
+                                    <div className='profileButtonActionContainer'>
+                                        {
+                                            userCurrent.id === user.id ?
+                                                <></> :
+                                                user.isFriend === true ? <button className='profileButtonAction profileActionAddFriend'>Hủy kết bạn</button> :
+                                                    <button className='profileButtonAction profileActionAddFriend'>Kết bạn</button>
+                                        }
+                                        <button onClick={() => navigate('/chats/' + user.id)} className='profileButtonAction profileActionSentMessage'>Nhắn tin</button>
                                     </div>
 
                                 </div>

@@ -1,21 +1,40 @@
 import './sidebarchat.css';
 import { Link } from 'react-router-dom';
-import avatar from '../../../ckc_social_logo.png';
 import ChatCard from './chatcard';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchChat } from '../../../redux/actions/chatAction';
+import { selectChats, selectStatusChats } from '../../../redux/selectors/chatSelector';
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
 
 function SidebarChat() {
+    const cookies = useCookies('_tk')[0]._tk;
+    const dispatch = useDispatch();
+    const status = useSelector(selectStatusChats);
+    const chats = useSelector(selectChats);
+    useEffect(() => {
+        dispatch(fetchChat(cookies));
+    }, [dispatch, cookies]);
     return (
         <div className="sidebarChat">
-            <div className="titleFriendSuggestion">
-                <Link to="/friend">
-                </Link> Tro Chuyen
-            </div>
-            <div>
-                {
-                    [0, 1, 2, 3, 4, 5, 6].map((item) => (
-                        <ChatCard key={item} chat={item} />
-                    ))
-                }
+            <div className='sidebarChatWrapper'>
+                <div className="sidebarChatTitle">
+                    <Link to="/friend">
+                    </Link> Trò chuyện
+                </div>
+                <div className='sidebarChatItemsList'>
+                    {
+                        status === 'loading' ?
+                            <>LOADING</> :
+                            status === 'succeeded' ?
+                                chats.map((chat) => (
+                                    <ChatCard key={chat.id} chat={chat} />
+                                )) :
+                                status === 'failed' ?
+                                    <>FAILED</> :
+                                    <></>
+                    }
+                </div>
             </div>
         </div>
     )

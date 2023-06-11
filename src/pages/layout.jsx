@@ -2,14 +2,10 @@ import './layout.css';
 import Rightbar from "../components/rightbar/Rightbar";
 import Sidebar from "../components/sidebar/Sidebar";
 import Topbar from "../components/topbar/Topbar";
-import Pusher from 'pusher-js';
-import ChatFriendBox from '../components/chatfriendbox/chatfriendbox';
 
-function LayoutUser({ children, sidebar, profile, rightbar }) {
-    const pusher = new Pusher('4eea52e19a1b86509eb3', {
-        cluster: 'ap1',
-        encrypted: true
-    });
+
+function LayoutUser({ children, sidebar, profile, rightbar, pusher }) {
+
     return (
         <div className="layout">
             <div className="layoutTopbar">
