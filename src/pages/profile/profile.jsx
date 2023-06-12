@@ -21,6 +21,7 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useCookies } from 'react-cookie';
 import { fetchPostByUserId } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
+import axios from 'axios';
 
 
 function Profile({ pusher }) {
@@ -90,7 +91,25 @@ function Profile({ pusher }) {
 
     }, [userId, dispatch, cookies]);
 
+    const handleClickChat = () => {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/chats/create-chat';
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: {
+                userId: userId
+            },
+            headers: {
+                Authorization: "Bearer " + cookies
+            }
+        }).then((response) => {
+            console.log(response.data);
+            navigate('/chats/' + userId);
+        }).catch((error) => {
+            console.log(error);
+        })
 
+    }
 
     return (
         <>
@@ -184,7 +203,7 @@ function Profile({ pusher }) {
                                                 user.isFriend === true ? <button className='profileButtonAction profileActionAddFriend'>Hủy kết bạn</button> :
                                                     <button className='profileButtonAction profileActionAddFriend'>Kết bạn</button>
                                         }
-                                        <button onClick={() => navigate('/chats/' + user.id)} className='profileButtonAction profileActionSentMessage'>Nhắn tin</button>
+                                        <button onClick={handleClickChat} className='profileButtonAction profileActionSentMessage'>Nhắn tin</button>
                                     </div>
 
                                 </div>

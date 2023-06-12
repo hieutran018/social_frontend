@@ -1,25 +1,35 @@
 import { useParams } from 'react-router-dom';
 import './chatPage.css';
-import avatar from '../../ckc_social_logo.png';
 import MessageSent from '../../components/messages/messagesent/messagesent';
 import MessageGet from '../../components/messages/messageget/messageget';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
-function ChatPage() {
+function ChatPage({ pusher }) {
     const userId = useParams().userId;
     const user = JSON.parse(localStorage.getItem('user')).id;
     const cookies = useCookies('_tk')[0]._tk;
-    const [conversation, setConversation] = useState();
+    const [conversation, setConversation] = useState([]);
     const [messages, setMessages] = useState([]);
+    const [contentMessage, setContentMessage] = useState('');
+
+    const channel = pusher.subscribe('conversation-' + conversation.id);
+    channel.bind('message', function (data) {
+        setMessages([data.message, ...messages]);
+        console.log(data, "PUSHER");
+    });
+
+
     useEffect(() => {
         const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-message/userId=' + userId;
         axios({
             method: "GET",
             url: requestURL,
             headers: {
-                Authorization: "Bearer " + cookies
+                Authorization: "Bearer " + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
             setConversation(response.data.conversation)
@@ -28,6 +38,33 @@ function ChatPage() {
             console.log(error);
         })
     }, [cookies, userId])
+
+    const handleChangeContentMessage = (e) => {
+        setContentMessage(e.target.value);
+    }
+
+
+    const sendMessage = () => {
+        const requestURL = 'http://127.0.0.1:8000/api/v1/chats/send-message';
+        axios({
+            method: 'POST',
+            url: requestURL,
+            data: {
+                conversationId: conversation.id,
+                contentMessage: contentMessage
+            },
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+                'Access-Control-Allow-Origin': '*',
+                "Content-Type": "multipart/form-data",
+            }
+        }).then((response) => {
+            setContentMessage('');
+
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 
     return (
         <div className="chatPage">
@@ -50,8 +87,8 @@ function ChatPage() {
                 </div>
                 <div className='chatPageBottom'>
                     <div className='chatPageInputContainer'>
-                        <input className='chatPageInput' type="text" />
-                        <button className='chatPageButtonSentMessage'>Gửi</button>
+                        <input value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
+                        <button onClick={sendMessage} className='chatPageButtonSentMessage'>Gửi</button>
                     </div>
                 </div>
             </div>

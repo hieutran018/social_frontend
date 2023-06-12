@@ -91,7 +91,7 @@ function App() {
       <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
       <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<StoriesPage />} sidebar={8} />} />} />
       <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ViewPostDetail />} profile />} />} />
-      <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage />} sidebar={10} />} />} />
+      <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage pusher={pusher} />} sidebar={10} />} />} />
       //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
