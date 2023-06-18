@@ -1,7 +1,7 @@
 .itemGetMessage{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: left;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }

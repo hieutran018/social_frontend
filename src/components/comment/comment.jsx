@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommentBox from '../commentbox/commentbox'
 import ReplyComment from './replyComment/replyComment';
+import authorUser from '../../lottiefiles/tick_blue.png';
 
 
 function Comment({ comment }) {
@@ -31,7 +32,10 @@ function Comment({ comment }) {
                     </div>
                     <div className='commentMain'>
                         <div onClick={() => viewProfileUser(comment.userId)} className="commentUserNameContainer">
-                            <span className="commentUserName"><a className='commentLinkProfileUser' href={"/userId/" + comment.userId}>{comment.displayName}</a></span>
+                            <span className="commentUserName">
+                                <a className='commentLinkProfileUser' href={"/userId/" + comment.userId}>{comment.displayName}</a>
+                                {comment.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>}
+                            </span>
                         </div>
                         <div className="commentContent">
                             <span>{comment.comment_content}</span>

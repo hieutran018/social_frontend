@@ -20,6 +20,7 @@ import wowImg from '../../rections/wow.png';
 import sadImg from '../../rections/sad.png';
 import hahaImg from '../../rections/haha.png';
 import angryImg from '../../rections/angry.png';
+import authorUser from '../../lottiefiles/tick_blue.png';
 import './postdetail.css'
 import ReactionsPost from '../reationspost/reactionspost';
 import ReactionButton from '../reaction/reaction';
@@ -143,7 +144,8 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                 {post.displayName}
 
                                             </a>
-                                            {post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                            {post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>}
+                                            {post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText"><span style={{ marginLeft: "0.3rem" }}>cùng với</span> <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                         </div>
                                         <div className="postPrivacy">
                                             <span className="postDate">{moment(post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}

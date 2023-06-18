@@ -7,9 +7,7 @@ function ChatCard({ chat }) {
             <img className='chatItemAvatar' src={chat.conversation_avatar} alt="" />
             <div className='chatItemName'>
                 <div>{chat.conversation_name}</div>
-                <div className='chatItemChatLasted'>
-                    Ban: Hom nay an gi vay?
-                </div>
+
             </div>
         </Link>
     );

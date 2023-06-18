@@ -19,11 +19,11 @@
     margin-left: 3rem;
 }
 
-.profileRight {
+.viewprofileRight {
     flex: 9;
 }
 
-.profileCover {
+.viewprofileCover {
     height: 320px;
     position: relative;
 }
@@ -34,7 +34,7 @@
     object-fit: cover;
 }
 
-.profileUserImg {
+.viewprofileUserImg {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -47,7 +47,7 @@
     border: 3px solid white;
 }
 
-.profileInfo {
+.viewprofileInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,11 +55,11 @@
     margin-top: 1.5rem;
 }
 
-.profileInfoName {
+.viewprofileInfoName {
     font-size: 24px;
 }
 
-.profileInfoDesc {
+.viewprofileInfoDesc {
     font-weight: 300;
     padding-bottom: 20px;
 }

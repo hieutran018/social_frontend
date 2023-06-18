@@ -89,7 +89,6 @@ export const fetchUser = (cookies, userId) => {
             dispatch(fetchUserSuccessed(response.data))
             console.log(response.data);
         }).catch((error) => dispatch(fetchUserFail(error.message)));
-        console.log(userId);
     }
 }
 
@@ -219,6 +218,6 @@ export const updateCoverImage = (cookies, file) => {
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-        }).then(res => { console.log(res.data); dispatch(fetchUser(res.data.id)); dispatch(updateCoverUserSuccess(res.data)); localStorage.setItem('user', JSON.stringify(res.data)) }).catch(err => dispatch(updateCoverUserFail(err.message)));
+        }).then(res => { console.log(res.data); dispatch(fetchUser(cookies, res.data.id)); dispatch(updateCoverUserSuccess(res.data)); localStorage.setItem('user', JSON.stringify(res.data)) }).catch(err => dispatch(updateCoverUserFail(err.message)));
     }
 }

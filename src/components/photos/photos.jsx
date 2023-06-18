@@ -3,10 +3,22 @@ import Grid from '@mui/material/Grid';
 import { Link, useParams } from 'react-router-dom';
 import Album from './album/album';
 import PhotoBy from './photosby/photoby';
+import { useDispatch, useSelector } from "react-redux";
+import { selectStatusMediaFile, selectMediaFile } from "../../redux/selectors/mediafileSelector";
+import { fetchMediaFilePostTag } from "../../redux/actions/mediafileAction";
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
+import SkeletonPhotoBy from './photosby/skeletonPhotoBy';
 
 function Photos() {
-
     const { userId, category } = useParams();
+    const cookies = useCookies('_tk')[0]._tk;
+    const dispatch = useDispatch();
+    const photos = useSelector(selectMediaFile);
+    const status = useSelector(selectStatusMediaFile);
+    useEffect(() => {
+        dispatch(fetchMediaFilePostTag(cookies, userId));
+    }, [cookies, userId, dispatch])
     return (
         <div className='photosList'>
             <div className='photosWrapper'>
@@ -35,12 +47,13 @@ function Photos() {
                         <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                             <Grid item xs={12}>
                                 <Grid container justifyContent="left" spacing={1}>
-                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                                        <Grid key={value} item>
-                                            <img className='photosImageItem' src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/87857085_844273819374433_4021419020736528384_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_ohc=t5JmVLMCzkEAX8rgSs8&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAe8QAb5ZDvCPdDV7WYJyjOfQK00MgZiFU-8OZhBOyNQg&oe=6451D36C" alt="" />
-                                        </Grid>
+                                    {status === 'loading' ? <SkeletonPhotoBy /> : status === 'succeeded' ?
+                                        photos.map((item) => (
+                                            <Grid key={item.id} item>
+                                                <img className='photosImageItem' src={item.media_file_name} alt="" />
+                                            </Grid>
 
-                                    ))}
+                                        )) : <SkeletonPhotoBy />}
                                 </Grid>
 
 

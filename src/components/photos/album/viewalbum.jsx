@@ -29,7 +29,7 @@ function ViewImageInAlbum() {
     const [view, setView] = useState(false);
     const [lstImage, setLstImage] = useState([]);
     const [album, setAlbum] = useState('');
-
+    const [canEdit, setCanEdit] = useState(1);
     const handleClickOpen = () => {
         setOpen(true);
 
@@ -126,6 +126,7 @@ function ViewImageInAlbum() {
                 setAlbum(response.data.album_name);
                 setImages(response.data.media_files);
                 setStatus(true);
+                setCanEdit(response.data.isDefault);
 
             }).catch((error) => console.log(error.message));
         }
@@ -136,9 +137,12 @@ function ViewImageInAlbum() {
         <div className="imageAlbum">
             <div className='imageAlbumNameContainer'>
                 <span className='imageAlbumName'>{albumName}</span>
-                <div onClick={handleClickOpen} className='imageAlbumEdit'>
-                    Chỉnh sửa
-                </div>
+                {
+                    canEdit === 0 ? <div onClick={handleClickOpen} className='imageAlbumEdit'>
+                        Chỉnh sửa
+                    </div> :
+                        <></>
+                }
             </div>
             <div className='imageAlbumGrid'>
                 <Grid sx={{ flexGrow: 1 }} container spacing={1}>

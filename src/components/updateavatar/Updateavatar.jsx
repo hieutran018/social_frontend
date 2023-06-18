@@ -13,22 +13,39 @@ function UpdateAvatar() {
     const [imgUploaded, setImgUploaded] = useState([]);
     const cookies = useCookies('_tk')[0]._tk;
     const [file, setFile] = useState([]);
+    const [imageAvatar, setImageAvatar] = useState([]);
     const [isUpload, setIsUpload] = useState(true);
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + userId;
-        axios({
-            method: 'GET', //you can set what request you want to be
-            url: requestURL,
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => {
-            console.log("RES =========", response.data);
-            setImgUploaded(response.data);
-        }).catch((error) => console.log(error.message));
-
+        function fetchImageAvatars() {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-avatar/userId=' + userId;
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                setImageAvatar(response.data);
+            }).catch((error) => console.log(error));
+        }
+        function fetchImageUploaded() {
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + userId;
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                setImgUploaded(response.data);
+            }).catch((error) => console.log(error.message));
+        }
+        fetchImageUploaded();
+        fetchImageAvatars();
     }, [cookies, userId])
 
     const hanldeChangeFileUpload = (e) => {
@@ -92,9 +109,9 @@ function UpdateAvatar() {
                                 <Grid sx={{ flexGrow: 1 }} container spacing={1}>
                                     <Grid item xs={12}>
                                         <Grid container justifyContent="left" spacing={1}>
-                                            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                                                <Grid key={value} item>
-                                                    <img className='updateAvatarImageItem' src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/87857085_844273819374433_4021419020736528384_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_ohc=t5JmVLMCzkEAX8rgSs8&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAe8QAb5ZDvCPdDV7WYJyjOfQK00MgZiFU-8OZhBOyNQg&oe=6451D36C" alt="" />
+                                            {imageAvatar.map((item) => (
+                                                <Grid key={item.id} item>
+                                                    <img className='updateAvatarImageItem' src={item.media_file_name} alt="" />
                                                 </Grid>
 
                                             ))}

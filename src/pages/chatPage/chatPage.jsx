@@ -37,6 +37,7 @@ function ChatPage({ pusher }) {
         }).catch((error) => {
             console.log(error);
         })
+        window.scrollTo(0, 9999999999);
     }, [cookies, userId])
 
     const handleChangeContentMessage = (e) => {
@@ -87,7 +88,13 @@ function ChatPage({ pusher }) {
                 </div>
                 <div className='chatPageBottom'>
                     <div className='chatPageInputContainer'>
-                        <input value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
+                        <input onKeyDownCapture={
+                            event => {
+                                if (event.key === 'Enter' && contentMessage !== null) {
+                                    sendMessage()
+                                }
+                            }
+                        } value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
                         <button onClick={sendMessage} className='chatPageButtonSentMessage'>Gửi</button>
                     </div>
                 </div>

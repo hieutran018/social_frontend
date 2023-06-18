@@ -43,3 +43,26 @@ export const fetchMediaFile = (cookies, userId) => {
     }
 }
 
+export const fetchMediaFilePostTag = (cookies, userId) => {
+    return async dispatch => {
+        try {
+            dispatch(fetchMediaFileStarted());
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-from-post-tag/userId=' + userId;
+            axios({
+                method: 'GET',
+                url: requestURL,
+                headers: {
+                    Authorization: 'Bearer ' + cookies,
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }).then((response) => {
+                console.log("MEDIAFILE POST TAG", response.data);
+                dispatch(fetchMediaFileSucceeded(response.data));
+            }).catch((error) => dispatch(fetchMediaFileFailed(error.message)));
+        } catch (error) {
+            dispatch(fetchMediaFileFailed(error));
+        }
+    }
+}
+

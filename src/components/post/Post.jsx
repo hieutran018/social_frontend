@@ -17,7 +17,6 @@ import { GoReport } from 'react-icons/go';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { GrHistory, GrEdit } from 'react-icons/gr';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { MdOutlinePrivacyTip } from 'react-icons/md';
 import FeedIcon from '@mui/icons-material/Feed';
 import ShowMoreText from "react-show-more-text";
 import moment from 'moment';
@@ -38,7 +37,7 @@ import wowImg from '../../rections/wow.png';
 import sadImg from '../../rections/sad.png';
 import hahaImg from '../../rections/haha.png';
 import angryImg from '../../rections/angry.png';
-
+import authorUser from '../../lottiefiles/tick_blue.png';
 import PostDetail from "../postdetail/postdetail";
 import './post.css';
 import { useParams } from "react-router-dom";
@@ -275,7 +274,8 @@ function Post({ post }) {
                                         <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
                                             {post.displayName}
                                         </a>
-                                        {post.iconName ? <span className='postWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName}</span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
+                                        {post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>}
+                                        {post.iconName ? <span className='postWithText'> đang cảm thấy <img width={20} height={20} src={post.iconPatch} alt="" /> <span className='postTagUser'>{post.iconName} </span></span> : ""}{post.parent_post ? <span className="postWithTextShare"> đã chia sẻ một bài viết</span> : ""} {post.tag.length === 0 ? "" : <span className="postWithText"> <span style={{ marginLeft: '0.3rem' }}> cùng với </span> <span className="postTagUser">{post.tag.length + " người khác"}</span></span>}
                                     </div>
                                     <div className="postPrivacy">
                                         <span className="postDate">{moment(post.created_at, 'YYYYMMDD H:mm:ss').fromNow()}
@@ -583,8 +583,9 @@ function Post({ post }) {
                                                         <div>
                                                             <div className="postUsername">
                                                                 <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
-                                                                    {post.parent_post.displayName} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                    {post.parent_post.displayName}
                                                                 </a>
+                                                                {post.parent_post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
                                                             </div>
                                                             <div className="postPrivacy">
                                                                 <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}

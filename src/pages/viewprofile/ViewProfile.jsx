@@ -21,23 +21,23 @@ function ViewProfile() {
         <div className="viewProfile">
 
             <div className="viewprofileWrapper">
-                <div className="profileRight">
-                    <div className="profileRightTop">
-                        <div className="profileCover">
+                <div className="viewprofileRight">
+                    <div className="viewprofileRightTop">
+                        <div className="viewprofileCover">
                             <img
-                                className="profileCoverImg"
+                                className="viewprofileCoverImg"
                                 src={user.coverImage}
                                 alt=""
                             />
                             <img
-                                className="profileUserImg"
+                                className="viewprofileUserImg"
                                 src={user.avatar}
                                 alt=""
                             />
                         </div>
-                        <div className="profileInfo">
-                            <h4 className="profileInfoName">{user.displayName}</h4>
-                            <span className="profileInfoDesc">Doing!</span>
+                        <div className="viewprofileInfo">
+                            <h4 className="viewprofileInfoName">{user.displayName}</h4>
+                            <span className="viewprofileInfoDesc">Doing!</span>
                         </div>
                     </div>
                     <div className="viewprofileRightBottom">

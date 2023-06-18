@@ -1,4 +1,5 @@
 import './profile.css';
+import authorUser from '../../lottiefiles/tick_blue.png';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import Feed from '../../components/feed/Feed';
@@ -73,7 +74,6 @@ function Profile({ pusher }) {
 
     const handleChangeCoverImage = (e) => {
         setUploadCover(e.target.files)
-        console.log(e.target.files)
     }
 
     const handleClickCancelUploadCoverImage = () => {
@@ -83,7 +83,6 @@ function Profile({ pusher }) {
     const handleSubmitUpload = () => {
         dispatch(updateCoverImage(cookies, uploadCover))
         setUploadCover(null);
-
     }
 
     useEffect(() => {
@@ -103,7 +102,6 @@ function Profile({ pusher }) {
                 Authorization: "Bearer " + cookies
             }
         }).then((response) => {
-            console.log(response.data);
             navigate('/chats/' + userId);
         }).catch((error) => {
             console.log(error);
@@ -193,18 +191,24 @@ function Profile({ pusher }) {
                                         </Menu>
                                     </div>
                                     <div className="profileInfo">
-                                        <h4 className="profileInfoName">{user.displayName}</h4>
-                                        <span className="profileInfoDesc">Hi</span>
+                                        <h4 className="profileInfoName">{user.displayName} {user.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>}</h4>
+
+                                        <div className='profileButtonActionContainer'>
+                                            {
+                                                userCurrent.id === user.id ?
+                                                    <></> :
+                                                    user.isFriend === true ? <button className='profileButtonAction profileActionAddFriend'>Hủy kết bạn</button> :
+                                                        <button className='profileButtonAction profileActionAddFriend'>Kết bạn</button>
+                                            }
+                                            {
+                                                userCurrent.id === user.id ? <></> :
+                                                    <button onClick={handleClickChat} className='profileButtonAction profileActionSentMessage'>Nhắn tin</button>
+                                            }
+
+                                        </div>
                                     </div>
-                                    <div className='profileButtonActionContainer'>
-                                        {
-                                            userCurrent.id === user.id ?
-                                                <></> :
-                                                user.isFriend === true ? <button className='profileButtonAction profileActionAddFriend'>Hủy kết bạn</button> :
-                                                    <button className='profileButtonAction profileActionAddFriend'>Kết bạn</button>
-                                        }
-                                        <button onClick={handleClickChat} className='profileButtonAction profileActionSentMessage'>Nhắn tin</button>
-                                    </div>
+
+
 
                                 </div>
                                 <div className='profileHr'></div>
@@ -237,7 +241,7 @@ function Profile({ pusher }) {
                                                             }
 
                                                         </div>
-                                                        <Rightbar profile={true} />
+                                                        <Rightbar profile={true} user={user} />
                                                     </div>
                                 }
                             </div>
