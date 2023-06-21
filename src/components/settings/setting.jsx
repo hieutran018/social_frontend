@@ -9,7 +9,7 @@ function SettingAccount() {
                     Thông tin của bạn trên CKCSocial
                 </div>
                 <div className='settingAccountDownloadContent'>
-                    Bạn có thể xem hoặc tải xuống thông tin của mình và xóa tài khoản bất cứ lúc nào.
+                    Bạn có thể xem hoặc xác minh thông tin của mình và xóa tài khoản bất cứ lúc nào.
                 </div>
                 <div>
                     <hr className='settingAccountHr' />
@@ -22,9 +22,9 @@ function SettingAccount() {
                     </div>
                     <hr />
                     <div className='settingAccountOption'>
-                        <div className='settingAccountTitleOption'>Tải xuống thông tin của bạn</div>
-                        <div className='settingAccountDescriptionOption'>Sao chép ảnh, video, bài viết hoặc thông tin khác sang dịch vụ khác.</div>
-                        <a className='settingAccountLinkOption' href="*">Đi đến</a>
+                        <div className='settingAccountTitleOption'>Xác minh tài khoản của bạn</div>
+                        <div className='settingAccountDescriptionOption'>Dành cho các tài khoản cá nhân chính chủ, có sức ảnh hưởng đến cộng đồng.</div>
+                        <a className='settingAccountLinkOption' href="/settings/verified_profile">Đi đến</a>
                     </div>
                     <hr />
                     <div className='settingAccountOption'>

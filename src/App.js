@@ -39,6 +39,7 @@ import VideoPage from './pages/videoPage/videoPage';
 import ViewPostDetail from './components/viewpostdetail/viewpostdetail';
 import ChatPage from './pages/chatPage/chatPage';
 import Pusher from 'pusher-js';
+import SettingPage from './pages/settingPage/settingPage';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
     cluster: 'ap1',
     encrypted: true
   });
+
   return (
     <Routes>
       <Route path="/login" element={< Login />} />
@@ -69,8 +71,8 @@ function App() {
       {/* <Route path='/groups/:pages/:groupId' element={<Group />} /> */}
       {/* <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} /> */}
       <Route path='/search/:result' element={<Search />} />
-      <Route path='/settings' element={<Settings />} />
-      <Route path='/settings/:setting' element={<Settings />} />
+      {/* <Route path='/settings' element={<Settings />} /> */}
+      {/* <Route path='/settings/:setting' element={<Settings />} /> */}
       <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
       //? ==================================================================
@@ -92,6 +94,8 @@ function App() {
       <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<StoriesPage />} sidebar={8} />} />} />
       <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ViewPostDetail />} profile />} />} />
       <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage pusher={pusher} />} sidebar={10} />} />} />
+      <Route path='/settings' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />
+      <Route path='/settings/:setting' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />
       //? ==================================================================
       <Route path="/admin/login" element={< AdminLogin />} />
       <Route path='/admin/dashboard' element={< LayoutAdmin children={<Dashboard />} />} />
@@ -108,6 +112,7 @@ function App() {
       <Route path='/admin/stories' element={<LayoutAdmin children={<StoryManagement />} />} />
       <Route path='/admin/reports' element={<LayoutAdmin children={<ReportManagement />} />} />
       <Route path='/admin/reports/detail-report/:reportId' element={<LayoutAdmin children={<ReportManagement />} />} />
+
     </Routes>
   );
 }

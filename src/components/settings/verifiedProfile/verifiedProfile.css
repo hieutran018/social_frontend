@@ -1,0 +1,88 @@
+.verifiedProfile{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.verifiedProfileWrapper{
+    width: 50%;
+    height: 100%;
+    margin-bottom: 1rem;
+}
+.verifiedProfileTitle{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+.verifiedProfileDescriptionPage{
+    height: 70px;
+    border: 0.1px solid grey;
+    border-radius: 5px;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+.verifiedProfileHr{
+    margin-top: 2rem;
+}
+.verifiedProfileMain{
+    margin-top: 2rem;
+}
+.verifiedProfileStep{
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.verifiedProfileLabel{
+    width: 150px;
+    font-size: 16;
+    font-weight: 400;
+}
+.verifiedProfileInput{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.verifiedProfileInputContent{
+    width: 20rem;
+    height: 25px;
+    padding-left: 0.5rem;
+    font-size: 18px;
+    font-weight: 500;
+}
+.verifiedProfileInputContentselect{
+    width: 20.9rem;
+    height: 25px;
+    padding-left: 0.5rem;
+    font-size: 18px;
+    font-weight: 500;
+}
+.verifiedProfileLabelAddFile{
+    font-size: 19px;
+    font-weight: 500;
+}
+.verifiedProfileInputAddFile{
+    margin-bottom: 2rem;
+}
+.verifiedProfileLabelAddFileDescription{
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+.verifiedProfileButton{
+    display: flex;
+    justify-content: right;
+}
+.verifiedProfileButtonSubmit{
+    height: 35px;
+    border-radius:5px;
+    border: none;
+    background-color: #0065fc;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
