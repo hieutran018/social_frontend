@@ -1,6 +1,5 @@
 import axios from "axios";
-
-
+import { requestDev } from "../../components/auth/auth";
 import {
     FETCH_USER_STARTED,
     FETCH_USER_SUCCESSED,
@@ -76,12 +75,9 @@ export const fetchCurrentUser = user => ({
 
 export const fetchUser = (cookies, userId) => {
     return async dispatch => {
-
-        const requestURL = "http://127.0.0.1:8000/api/v1/profile-user/userId=" + userId;
         dispatch(fetchUserStart());
-        axios({
-            method: 'GET',
-            url: requestURL,
+        const requestURL = "https://ckcsocial.site/api/v1/profile-user/userId=" + userId;
+        requestDev.get('/v1/profile-user/userId=' + userId, {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }
@@ -95,7 +91,7 @@ export const fetchUser = (cookies, userId) => {
 export const currentUser = (cookies) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/auth/me';
+            const requestURL = 'https://ckcsocial.site/api/auth/me';
             axios({
                 method: "POST",
                 url: requestURL,
@@ -117,7 +113,7 @@ export const currentUser = (cookies) => {
 export const updateDisplaynameUser = (cookies, displayName) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/update-displayname-user';
+            const requestURL = 'https://ckcsocial.site/api/v1/update-displayname-user';
             axios({
                 method: "POST",
                 url: requestURL,
@@ -142,7 +138,7 @@ export const updateDisplaynameUser = (cookies, displayName) => {
 export const updatePhoneUser = (cookies, phone) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/update-phone-user';
+            const requestURL = 'https://ckcsocial.site/api/v1/update-phone-user';
             axios({
                 method: "POST",
                 url: requestURL,
@@ -167,7 +163,7 @@ export const updatePhoneUser = (cookies, phone) => {
 
 export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
     return async dispatch => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/edit-information-user";
+        const requestURL = "https://ckcsocial.site/api/v1/edit-information-user";
         dispatch(updateAvatarUserStart());
         axios({
             method: 'POST', //you can set what request you want to be
@@ -189,7 +185,7 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
 export const updateAvatar = (cokkie, file) => {
     return async dispatch => {
         dispatch(updateAvatarUserStart());
-        const requestURL = 'http://127.0.0.1:8000/api/v1/upload-avatar';
+        const requestURL = 'https://ckcsocial.site/api/v1/upload-avatar';
 
         axios({
             method: 'POST',
@@ -207,7 +203,7 @@ export const updateAvatar = (cokkie, file) => {
 export const updateCoverImage = (cookies, file) => {
     return async dispatch => {
         dispatch(updateCoverUserStart());
-        const requestURL = 'http://127.0.0.1:8000/api/v1/upload-cover-image';
+        const requestURL = 'https://ckcsocial.site/api/v1/upload-cover-image';
 
         axios({
             method: 'POST',

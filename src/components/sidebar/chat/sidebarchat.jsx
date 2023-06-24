@@ -17,24 +17,22 @@ function SidebarChat() {
     }, [dispatch, cookies]);
     return (
         <div className="sidebarChat">
-            <div className='sidebarChatWrapper'>
-                <div className="sidebarChatTitle">
-                    <Link to="/friend">
-                    </Link> Trò chuyện
-                </div>
-                <div className='sidebarChatItemsList'>
-                    {
-                        status === 'loading' ?
-                            <>LOADING</> :
-                            status === 'succeeded' ?
-                                chats.map((chat) => (
-                                    <ChatCard key={chat.id} chat={chat} />
-                                )) :
-                                status === 'failed' ?
-                                    <>FAILED</> :
-                                    <></>
-                    }
-                </div>
+            <div className="sidebarChatTitle">
+                <Link to="/friend"></Link> Trò chuyện
+            </div>
+            <div className='sidebarChatItemsList'>
+                {
+                    status === 'loading' ?
+                        <>LOADING</> :
+                        status === 'succeeded' ?
+                            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((chat) => (
+                                <ChatCard key={chat} chat={chat} />
+                            )) :
+                            status === 'failed' ?
+                                <>FAILED</> :
+                                <></>
+                }
+
             </div>
         </div>
     )

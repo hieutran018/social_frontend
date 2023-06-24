@@ -60,15 +60,12 @@ function DialogShare({ group }) {
             }
             typingTimeOutRef.current = setTimeout(() => {
                 searchIcon(event.target.value);
-
             }, 300)
         }
-
     }
 
     function searchIcon(input) {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/search-feel-and-activity-posts/search=' + input;
-
+        const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
         axios({
             method: "GET",
             url: requestURL,
@@ -142,7 +139,7 @@ function DialogShare({ group }) {
         setTab(0)
     }
     const handleClickTag = () => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + user.id;
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
         axios({
             method: 'GET',
             url: requestURL,
@@ -157,8 +154,7 @@ function DialogShare({ group }) {
         }).catch((error) => console.log(error));
     }
     const handleClickFellingandActivity = () => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-fell-and-activity-posts";
-
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
         axios({
             method: 'GET',
             url: requestURL,

@@ -102,7 +102,7 @@ function Reports({ postId, close }) {
     }
 
     const handleSubmitReport = () => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/create-report";
+        const requestURL = "https://ckcsocial.site/api/v1/create-report";
         axios({
             method: 'POST',
             url: requestURL,

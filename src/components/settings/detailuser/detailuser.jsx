@@ -83,7 +83,7 @@ function DetailUser() {
     }
 
     const submitUpdatePassword = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/update-password-user';
+        const requestURL = 'https://ckcsocial.site/api/v1/update-password-user';
         axios({
             method: "POST",
             url: requestURL,

@@ -45,7 +45,7 @@ function ForgetPassword() {
         if (!isValid) {
             return;
         } else {
-            const requestURL = 'http://127.0.0.1:8000/api/auth/forgot-password';
+            const requestURL = 'https://ckcsocial.site/api/auth/forgot-password';
             axios.post(requestURL, {
                 email: email,
             }).then((res) => {

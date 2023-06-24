@@ -16,7 +16,7 @@ function Notification({ close, channel }) {
         console.log('ADD REALTIME NOTI', data, notifications);
     })
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-notifications';
+        const requestURL = 'https://ckcsocial.site/api/v1/fetch-notifications';
         axios({
             method: "GET",
             url: requestURL,

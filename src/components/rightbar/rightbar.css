@@ -6,6 +6,7 @@
 .homebarWrapper {
     padding: 20px 20px 0 0;
     position: fixed;
+    
 }
 
 .profileRightbarWrapper{
@@ -20,7 +21,8 @@
 
 .homeRightbar{
     height: calc(90vh + 40px);
-    overflow-y: scroll; 
+    overflow-y: scroll;
+    margin-top: 5rem;
 }
 
 .birthdayContainer {

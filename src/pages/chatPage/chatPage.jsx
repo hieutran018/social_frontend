@@ -3,8 +3,9 @@ import './chatPage.css';
 import MessageSent from '../../components/messages/messagesent/messagesent';
 import MessageGet from '../../components/messages/messageget/messageget';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { requestDev } from '../../components/auth/auth';
+import { AiOutlineFileAdd } from 'react-icons/ai';
 
 function ChatPage({ pusher }) {
     const userId = useParams().userId;
@@ -13,6 +14,7 @@ function ChatPage({ pusher }) {
     const [conversation, setConversation] = useState([]);
     const [messages, setMessages] = useState([]);
     const [contentMessage, setContentMessage] = useState('');
+    const [files, setFiles] = useState([]);
 
     const channel = pusher.subscribe('conversation-' + conversation.id);
     channel.bind('message', function (data) {
@@ -22,10 +24,8 @@ function ChatPage({ pusher }) {
 
 
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-message/userId=' + userId;
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/fetch-message/userId=' + userId;
+        requestDev.get('/v1/fetch-message/userId=' + userId, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -46,14 +46,11 @@ function ChatPage({ pusher }) {
 
 
     const sendMessage = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/chats/send-message';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                conversationId: conversation.id,
-                contentMessage: contentMessage
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/chats/send-message';
+        requestDev.post('/v1/chats/send-message', {
+            conversationId: conversation.id,
+            contentMessage: contentMessage
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 'Access-Control-Allow-Origin': '*',
@@ -87,16 +84,17 @@ function ChatPage({ pusher }) {
 
                 </div>
                 <div className='chatPageBottom'>
-                    <div className='chatPageInputContainer'>
-                        <input onKeyDownCapture={
-                            event => {
-                                if (event.key === 'Enter' && contentMessage !== null) {
-                                    sendMessage()
-                                }
+
+                    <label className='chatPageInputContainerSentFile' htmlFor="sentFiles"> <AiOutlineFileAdd size={25} /><input id='sentFiles' type="file" hidden /></label>
+                    <input onKeyDownCapture={
+                        event => {
+                            if (event.key === 'Enter' && contentMessage !== null) {
+                                sendMessage()
                             }
-                        } value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
-                        <button onClick={sendMessage} className='chatPageButtonSentMessage'>Gửi</button>
-                    </div>
+                        }
+                    } value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
+                    <button onClick={sendMessage} className='chatPageButtonSentMessage'>Gửi</button>
+
                 </div>
             </div>
         </div>

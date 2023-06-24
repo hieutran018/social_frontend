@@ -17,7 +17,7 @@ function UpdateAvatar() {
     const [isUpload, setIsUpload] = useState(true);
     useEffect(() => {
         function fetchImageAvatars() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-avatar/userId=' + userId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-avatar/userId=' + userId;
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -31,7 +31,7 @@ function UpdateAvatar() {
             }).catch((error) => console.log(error));
         }
         function fetchImageUploaded() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + userId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;
             axios({
                 method: 'GET',
                 url: requestURL,

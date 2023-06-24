@@ -67,7 +67,7 @@ function ViewImageInAlbum() {
     }
 
     const handleSumbitEditAlbum = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/edit-album';
+        const requestURL = 'https://ckcsocial.site/api/v1/edit-album';
         axios({
             method: 'POST',
             url: requestURL,
@@ -89,7 +89,7 @@ function ViewImageInAlbum() {
     }
 
     const handleDeleteAlbum = () => {
-        const requestURl = "http://127.0.0.1:8000/api/v1/delete-album";
+        const requestURl = "https://ckcsocial.site/api/v1/delete-album";
 
         axios({
             method: "POST",
@@ -109,7 +109,7 @@ function ViewImageInAlbum() {
     useEffect(() => {
         const fetchImageAlbum = () => {
 
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-album/' + userId + '/' + albumId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-album/' + userId + '/' + albumId;
             axios({
                 method: 'GET',
                 url: requestURL,

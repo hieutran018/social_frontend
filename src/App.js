@@ -40,10 +40,11 @@ import ViewPostDetail from './components/viewpostdetail/viewpostdetail';
 import ChatPage from './pages/chatPage/chatPage';
 import Pusher from 'pusher-js';
 import SettingPage from './pages/settingPage/settingPage';
+import { app, analytics } from './firebase/firebaseconfig';
 
-
+const newapp = app;
+const newanalytics = analytics;
 function App() {
-
   const pusher = new Pusher('4eea52e19a1b86509eb3', {
     cluster: 'ap1',
     encrypted: true
@@ -55,21 +56,6 @@ function App() {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/confirm-forgot-password" element={<ConfirmForgotPassword />} />
       <Route path="/registration" element={<Register />} />
-      {/* <Route path="/" element={<ProtectedRoutes children={<Home />} />} /> */}
-      {/* <Route path="/home" element={<ProtectedRoutes children={<Home />} />} /> */}
-      {/* <Route path='/video' element={<ProtectedRoutes children={<Videos />} />} /> */}
-      {/* <Route path='/friend' element={<ProtectedRoutes children={<Friend />} />} /> */}
-      {/* <Route path='/friend-suggestion' element={<ProtectedRoutes children={<FriendSuggestion />} />} /> */}
-      {/* <Route path='/friend-suggestion/:userId' element={< FriendSuggestion />} /> */}
-      {/* <Route path='/friend-request' element={< FriendRequest />} /> */}
-      {/* <Route path='/friend-request/:userId' element={< FriendRequest />} /> */}
-      {/* <Route path='/userId/:userId' element={<Profile />} /> */}
-      {/* <Route path='/userId/:userId/:page' element={<Profile />} />
-      <Route path='/userId/:userId/:page/:category' element={<Profile />} />
-      <Route path='/userId/:userId/:page/:category/:albumId' element={<Profile />} /> */}
-      {/* <Route path='/groups/:pages' element={<Group />} /> */}
-      {/* <Route path='/groups/:pages/:groupId' element={<Group />} /> */}
-      {/* <Route path='/groups/:pages/:groupId/:groupTab' element={<Group />} /> */}
       <Route path='/search/:result' element={<Search />} />
       {/* <Route path='/settings' element={<Settings />} /> */}
       {/* <Route path='/settings/:setting' element={<Settings />} /> */}
@@ -80,10 +66,10 @@ function App() {
       <Route path="/home" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<HomePage />} sidebar={1} rightbar />} />} />
       <Route path="/videos" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<VideoPage />} sidebar={2} />} />} />
       <Route path="/friend" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<FriendPage />} sidebar={3} />} />} />
-      <Route path='/friend-request' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
-      <Route path='/friend-suggestion' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
+      <Route path='/friend-request' element={<LayoutUser pusher={pusher} children={<FriendRequestPage />} sidebar={4} />} />
+      <Route path='/friend-suggestion' element={<LayoutUser pusher={pusher} children={<FriendSuggestionPage />} sidebar />} />
       <Route path='/friend-request/:userId' element={<LayoutUser children={<FriendRequestPage />} sidebar={4} />} />
-      <Route path='/friend-suggestion/:userId' element={<LayoutUser children={<FriendSuggestionPage />} sidebar />} />
+      <Route path='/friend-suggestion/:userId' element={<LayoutUser pusher={pusher} children={<FriendSuggestionPage />} sidebar />} />
       <Route path='/userId/:userId' element={<Profile pusher={pusher} />} />
       <Route path='/userId/:userId/:page' element={<Profile pusher={pusher} />} />
       <Route path='/userId/:userId/:page/:category' element={<Profile pusher={pusher} />} />

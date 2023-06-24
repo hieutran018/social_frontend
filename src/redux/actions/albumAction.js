@@ -29,7 +29,7 @@ export const fetchAlbum = (cookies, userId) => {
 
         try {
 
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-album-by-userid/userId=" + userId;
+            const requestURL = "https://ckcsocial.site/api/v1/fetch-album-by-userid/userId=" + userId;
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -56,7 +56,7 @@ export const createNewAlbum = (cookies, albumName, privacy, files) => {
     return async dispatch => {
         try {
 
-            const requestURL = 'http://127.0.0.1:8000/api/v1/create-album';
+            const requestURL = 'https://ckcsocial.site/api/v1/create-album';
             axios({
                 method: 'POST',
                 url: requestURL,

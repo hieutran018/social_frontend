@@ -24,7 +24,7 @@ export const fetchPostHistory = (cookies, postId) => {
     return async dispatch => {
         dispatch(fetchPostHistoryStarted())
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-history-edit-post/postId=" + postId;
+            const requestURL = "https://ckcsocial.site/api/v1/fetch-history-edit-post/postId=" + postId;
             axios({
                 method: 'GET',
                 url: requestURL,

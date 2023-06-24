@@ -7,5 +7,5 @@ export const requestDev = axios.create({
 
 export const requestStage = axios.create({
     //* Base Url
-    baseURL: 'http://45.117.165.216:8089/api/'
+    baseURL: 'https://ckcsocial.site/api/'
 })

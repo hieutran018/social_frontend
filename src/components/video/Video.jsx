@@ -57,9 +57,7 @@ function Video({ video }) {
                         </div> */}
                     </div>
                     <div className="videoCenter">
-
                         {/* <div className="videoText">{post?.desc}</div> */}
-
                         <div className='videoSrcVideo'>
                             <video ref={videoRef} className="srcVideo" src={video.media_file_name} controls></video>
                         </div>

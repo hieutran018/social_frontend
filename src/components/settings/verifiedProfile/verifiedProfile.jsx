@@ -52,7 +52,7 @@ function VerifiedProfile() {
     }
 
     const handleSubmitVerifiedProfile = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/verified-profile';
+        const requestURL = 'https://ckcsocial.site/api/v1/verified-profile';
         axios({
             method: 'POST',
             url: requestURL,

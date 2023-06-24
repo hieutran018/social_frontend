@@ -15,7 +15,7 @@ function SearchResult() {
     const [dataPosts, setDataPosts] = useState([]);
     useEffect(() => {
         function searchData() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/input=' + result;
+            const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + result;
             axios({
                 method: "GET",
                 url: requestURL,

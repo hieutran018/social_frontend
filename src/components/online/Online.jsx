@@ -1,7 +1,6 @@
 import "./online.css";
 
 function Online({ user }) {
-
     return (
         <li className="onlineRightbarFriend">
             <div className="rightbarProfileImgContainer">

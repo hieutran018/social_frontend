@@ -10,7 +10,7 @@ function Watch() {
     const [videos, setVideos] = useState([]);
 
     function fetchVideos() {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-reels-video';
+        const requestURL = 'https://ckcsocial.site/api/v1/fetch-reels-video';
         axios({
             method: "GET",
             url: requestURL,

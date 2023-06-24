@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-
-// import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics";
+import { getRemoteConfig, fetchAndActivate, getValue } from "firebase/remote-config";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,7 +20,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
+export const remoteConfig = getRemoteConfig(app);
+let val = '';
+fetchAndActivate(remoteConfig)
+  .then(() => {
+    val = getValue(remoteConfig, "base_url_app");
+    console.log(val._value);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+export { app, analytics, val };

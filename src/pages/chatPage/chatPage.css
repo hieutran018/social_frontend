@@ -1,10 +1,11 @@
 .chatPage{
-    flex: 5;
+    flex: 4;
     
 }
 .chatPageWrapper{
-    position: absolute;
     width: -webkit-fill-available;
+    margin-bottom: 50px;
+    padding: 0 50px;
 }
 .chatPageTop{
     display: flex;
@@ -13,6 +14,7 @@
     width: 100%;
     background-color: white;
     padding-top: 1rem;
+    top: 3.5rem;
 }
 
 .chatPageAvatar{
@@ -35,23 +37,23 @@
     z-index: -1;
     margin-bottom: 45px;
     bottom: 0;
-    margin-top: 5rem;
-
+    margin-top: 10rem;
 }
 .chatPageBottom{
     position: fixed;
+    display: flex;
+    align-items: center;
     bottom: 0;
-    width: 100%;
+    width: -webkit-fill-available;
     background-color: white;
-    margin-bottom: 1rem;
-
 }
 .chatPageInputContainer{
     display: flex;
     align-items: center;
+    width: 100%;
 }
 .chatPageInput{
-    width: 90rem;
+    width: 78rem;
     height: 35px;
     border-radius:10px;
     border: none;
@@ -73,4 +75,18 @@
     justify-content: center;
     align-items: center;
     margin-left: 1rem;
+}
+.layout {
+    overflow: hidden!important;
+}
+
+.chatPageInputContainerSentFile{
+    margin-right: 1rem;
+    border: 0.001rem solid gray;
+    border-radius: 5px;
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

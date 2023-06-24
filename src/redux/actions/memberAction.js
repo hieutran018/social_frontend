@@ -31,7 +31,7 @@ export const fetchMemberGroup = (cookies, groupId) => {
     return async dispatch => {
         try {
             dispatch(fetchMemberStarted())
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-member-group/' + groupId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-member-group/' + groupId;
 
             axios({
                 method: 'GET',
@@ -51,7 +51,7 @@ export const fetchMemberGroup = (cookies, groupId) => {
 export const addMemberToAdminGroup = (cookies, userId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/add-admin-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/add-admin-group';
             axios({
                 method: 'POST',
                 url: requestURL,
@@ -76,7 +76,7 @@ export const addMemberToAdminGroup = (cookies, userId, groupId) => {
 export const removeAdminToGroup = (cookies, userId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/remove-admin-to-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/remove-admin-to-group';
             axios({
                 method: 'POST',
                 url: requestURL,
@@ -101,7 +101,7 @@ export const removeAdminToGroup = (cookies, userId, groupId) => {
 export const removeMemberFromGroup = (cookies, memberId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/remove-member-from-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/remove-member-from-group';
             axios({
                 method: "POST",
                 url: requestURL,

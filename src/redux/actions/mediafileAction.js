@@ -24,7 +24,7 @@ export const fetchMediaFile = (cookies, userId) => {
     return async dispatch => {
         try {
             dispatch(fetchMediaFileStarted());
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-uploaded/userId=' + userId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;
             axios({
                 method: 'GET', //you can set what request you want to be
                 url: requestURL,
@@ -47,7 +47,7 @@ export const fetchMediaFilePostTag = (cookies, userId) => {
     return async dispatch => {
         try {
             dispatch(fetchMediaFileStarted());
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-image-from-post-tag/userId=' + userId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-from-post-tag/userId=' + userId;
             axios({
                 method: 'GET',
                 url: requestURL,

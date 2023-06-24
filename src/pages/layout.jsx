@@ -14,9 +14,8 @@ function LayoutUser({ children, sidebar, profile, rightbar, pusher }) {
             <div className="layoutContainer" >
                 {
                     !profile ?
-                        <div style={{ flex: "1" }}>
-                            <Sidebar page={sidebar} />
-                        </div> :
+                        <Sidebar page={sidebar} />
+                        :
                         <></>
                 }
                 {children}

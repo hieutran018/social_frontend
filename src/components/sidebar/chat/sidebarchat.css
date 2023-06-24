@@ -1,5 +1,9 @@
 
 
+.sidebarChat{
+    position: fixed;
+    top: 4.5rem;
+}
 .sidebarChatTitle{
     font-size: 25px;
     font-weight: 500;
@@ -8,6 +12,7 @@
 .sidebarChatItemsList{
     position: relative;
     overflow-y: scroll;
+    height: 80vh;
 }
 
 .chatItem{

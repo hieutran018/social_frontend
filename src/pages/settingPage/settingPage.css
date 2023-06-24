@@ -1,4 +1,5 @@
 .settingPage{
     flex: 4.0;
     display: flex;
+    margin-top: 5rem;
 }

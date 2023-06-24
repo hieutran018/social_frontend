@@ -60,7 +60,7 @@ function Register() {
             return
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/auth/register', {
+                axios.post('https://ckcsocial.site/api/auth/register', {
                     displayName: displayName,
                     email: email,
                     password: password,

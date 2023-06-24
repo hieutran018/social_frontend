@@ -55,7 +55,7 @@ function ConfirmForgotPassword() {
             return;
         } else {
             setIsLoading(true);
-            const requestURL = 'http://127.0.0.1:8000/api/auth/completed-forgot-password';
+            const requestURL = 'https://ckcsocial.site/api/auth/completed-forgot-password';
             axios.post(requestURL, {
                 tokenReset: tokenString,
             }).then((res) => {

@@ -5,18 +5,25 @@ import Rightbar from '../../components/rightbar/Rightbar';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 
 
 function ViewProfile() {
+    const cookies = useCookies('_tk')[0]._tk;
     const userId = useParams().userId;
     const [user, setUser] = useState([]);
-    console.log("LOG", userId);
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/profile-user/userId=' + userId).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
-
+        const requestURL = 'https://ckcsocial.site/api/v1/profile-user/userId=' + userId;
+        axios({
+            method: 'GET',
+            url: requestURL,
+            headers: {
+                Authorization: 'Bearer ' + cookies,
+            }
+        }).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
         window.scrollTo(0, 0)
-    }, [userId])
+    }, [userId, cookies])
     return (
         <div className="viewProfile">
 

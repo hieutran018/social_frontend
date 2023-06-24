@@ -10,7 +10,7 @@ function HomeRightbar() {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/' + userId + '/25';
+        const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-by-user-id/' + userId + '/25';
         axios({
             method: 'GET',
             url: requestURL,

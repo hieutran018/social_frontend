@@ -8,7 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { auth, googleProvider, facebookProvider } from '../../firebase/firebaseconfig';
 import { signInWithPopup } from "firebase/auth";
-import { requestDev } from '../../components/auth/auth';
+import { requestDev, requestStage } from '../../components/auth/auth';
 import './login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -58,7 +58,7 @@ function Login() {
             return;
         } else {
             try {
-                requestDev.post('/auth/login', {
+                requestStage.post('/auth/login', {
                     email: email,
                     password: password,
                 }).then((res) => {
@@ -80,7 +80,6 @@ function Login() {
 
     const signInWithGoogle = () => {
         signInWithPopup(auth, googleProvider).then((result) => {
-            console.log({ "RESULT": result });
             console.log("USER", result.providerId, "==", result.user.email, "==",
                 result);
             const requestURL = "http://127.0.0.1:8000/api/auth/login-with-google";

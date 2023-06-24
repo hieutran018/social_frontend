@@ -28,7 +28,7 @@ export const fetchComment = (cookies, postId) => {
     return async dispatch => {
         try {
             dispatch(fetchCommentStarted());
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-comment-by-post/postId=' + postId;
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-comment-by-post/postId=' + postId;
             axios({
                 method: "GET",
                 url: requestURL,
@@ -51,7 +51,7 @@ export const commentPost = (cookies, postId, commentContent, file) => {
         try {
             axios({
                 method: 'POST', //you can set what request you want to be
-                url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
+                url: 'https://ckcsocial.site/api/v1/create-comment-post',
                 data: { postId: postId, commentContent: commentContent, file: file },
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk,

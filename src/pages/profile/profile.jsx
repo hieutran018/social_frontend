@@ -23,6 +23,7 @@ import { useCookies } from 'react-cookie';
 import { fetchPostByUserId } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
 import axios from 'axios';
+import { requestDev } from '../../components/auth/auth';
 
 
 function Profile({ pusher }) {
@@ -91,13 +92,10 @@ function Profile({ pusher }) {
     }, [userId, dispatch, cookies]);
 
     const handleClickChat = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/chats/create-chat';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                userId: userId
-            },
+        // const requestURL = 'http://127.0.0.1:8000/api/v1/chats/create-chat';
+        requestDev.post('/v1/chats/create-chat', {
+            userId: userId
+        }, {
             headers: {
                 Authorization: "Bearer " + cookies
             }
@@ -106,7 +104,6 @@ function Profile({ pusher }) {
         }).catch((error) => {
             console.log(error);
         })
-
     }
 
     return (

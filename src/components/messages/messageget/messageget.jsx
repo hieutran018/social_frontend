@@ -7,7 +7,6 @@ function MessageGet({ message }) {
             <div className='itemGetMassageContent'>
                 {message.content}
             </div>
-
         </div>
     );
 }

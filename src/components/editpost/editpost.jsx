@@ -105,7 +105,7 @@ function EditPost({ postId }) {
     }
 
     const handleClickTag = () => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + user.id;
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
         axios({
             method: 'GET',
             url: requestURL,
@@ -168,7 +168,7 @@ function EditPost({ postId }) {
     }
 
     const handleClickFellingandActivity = () => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-fell-and-activity-posts";
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
         axios({
             method: 'GET',
             url: requestURL,
@@ -205,7 +205,7 @@ function EditPost({ postId }) {
         }
     }
     function searchIcon(input) {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/search-feel-and-activity-posts/search=' + input;
+        const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
         axios({
             method: "GET",
             url: requestURL,
@@ -221,7 +221,7 @@ function EditPost({ postId }) {
     }
 
     const fetchPost = useCallback(() => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-id/postId=" + postId;
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-post-by-id/postId=" + postId;
         axios({
             method: "GET",
             url: requestURL,

@@ -9,7 +9,8 @@ import {
     ADD_POST_FAILED, LOAD_MORE_POST,
     UPDATE_POST,
     DELETE_POST
-} from '../constants/postConstant'
+} from '../constants/postConstant';
+import { requestDev } from '../../components/auth/auth';
 
 export const fetchPostStarted = posts => ({
     type: FETCH_POST_STARTED,
@@ -61,7 +62,7 @@ export const fetchPostGroup = (cookies, page) => {
             dispatch(fetchPostStarted([]))
         }
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-group?page=' + page
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-post-group?page=' + page
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -96,17 +97,22 @@ export const fetchPost = (token, page) => {
             dispatch(fetchPostStarted([]))
         }
         try {
-            const res = await axios.get('http://127.0.0.1:8000/api/v1/fetch-post?page=' + page, {
+            requestDev.get('/v1/fetch-post?page=' + page, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
-            })
-            console.log("DATA", res.data);
-            if (page >= 0 && page < 2) {
-                dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
-            } else {
-                dispatch(loadMorePost(res.data.data))
-            }
+            }).then((res) => {
+                console.log("DATA", res.data);
+                if (page >= 0 && page < 2) {
+                    dispatch(fetchPostSucceeded(res.data.data, res.data.last_page))
+                } else {
+                    dispatch(loadMorePost(res.data.data))
+                }
+            }).catch((error) => {
+                dispatch(fetchPostFailed(error))
+                console.log(error);
+            });
+
         } catch (err) {
             dispatch(fetchPostFailed(err))
         }
@@ -119,7 +125,7 @@ export const fetchPostByUserId = (userId, page) => {
             dispatch(fetchPostStarted([]))
         }
         try {
-            const res = await axios.get('http://127.0.0.1:8000/api/fetch-post-by-userId/userId=' + userId + '?page=' + page, {
+            const res = await axios.get('https://ckcsocial.site/api/fetch-post-by-userId/userId=' + userId + '?page=' + page, {
             })
             console.log("DATA", res.data);
             if (page >= 0 && page < 2) {
@@ -139,7 +145,7 @@ export const addNewPost = (token, contentPost, files, privacy, tags, group, feel
         console.log(tags);
         try {
             dispatch(addNewPostStarted());
-            const requestURL = "http://127.0.0.1:8000/api/v1/create-post";
+            const requestURL = "https://ckcsocial.site/api/v1/create-post";
 
             axios({
                 method: 'POST', //you can set what request you want to be
@@ -166,7 +172,7 @@ export const sharePostFormGroupToWall = (post, cookies, inputContent, privacy) =
             dispatch(addNewPostStarted());
             axios({
                 method: 'POST', //you can set what request you want to be
-                url: 'http://127.0.0.1:8000/api/v1/share-post-to-profile',
+                url: 'https://ckcsocial.site/api/v1/share-post-to-profile',
                 data: { postId: post.id, postContent: inputContent, privacy: privacy },
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk
@@ -212,7 +218,7 @@ export const sharePostToWall = (post, cookies, inputContent, privacy) => {
 export const editPost = (cookies, postId, contentPost, files, privacy, tags, feelActivityId, removeFile) => {
     return async dispatch => {
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/update-post";
+            const requestURL = "https://ckcsocial.site/api/v1/update-post";
             axios({
                 method: "POST",
                 url: requestURL,
@@ -250,7 +256,7 @@ export const fetchPostGroupByIdGroup = (cookies, groupId, page) => {
             if (page + 1 === 1) {
                 dispatch(fetchPostStarted([]));
             }
-            const requestURL = "http://127.0.0.1:8000/api/v1/fetch-post-by-group-id/" + groupId + "?page=" + page;
+            const requestURL = "https://ckcsocial.site/api/v1/fetch-post-by-group-id/" + groupId + "?page=" + page;
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -274,31 +280,13 @@ export const fetchPostGroupByIdGroup = (cookies, groupId, page) => {
     }
 }
 
-export const commentPost = (cookies, postId, commentContent, file) => {
-    return async dispatch => {
-        try {
-            axios({
-                method: 'POST', //you can set what request you want to be
-                url: 'http://127.0.0.1:8000/api/v1/create-comment-post',
-                data: { postId: postId, commentContent: commentContent, file: file },
-                headers: {
-                    Authorization: 'Bearer ' + cookies,
-                    "Content-Type": "multipart/form-data",
-                    'Access-Control-Allow-Origin': '*',
-                }
-            }).then((res) => console.log(res))
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-}
+
 export const deletePost = (cookies, postId) => {
     return async dispatch => {
         try {
             axios({
                 method: 'POST', //you can set what request you want to be
-                url: 'http://127.0.0.1:8000/api/v1/delete-post',
+                url: 'https://ckcsocial.site/api/v1/delete-post',
                 data: { postId: postId },
                 headers: {
                     Authorization: 'Bearer ' + cookies,

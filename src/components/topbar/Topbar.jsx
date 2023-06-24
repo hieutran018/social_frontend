@@ -65,7 +65,7 @@ function Topbar({ pusher }) {
         }
     }
     function searchData(input) {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/search-users-and-groups/input=' + input;
+        const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + input;
 
         axios({
             method: "GET",

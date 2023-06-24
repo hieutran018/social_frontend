@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 function GroupCard({ group }) {
     const cookies = useCookies('_tk')[0]._tk;
     function acceptJoinGroup() {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/accept-invite-to-group';
+        const requestURL = 'https://ckcsocial.site/api/v1/accept-invite-to-group';
         axios({
             method: 'POST',
             url: requestURL,

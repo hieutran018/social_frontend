@@ -10,7 +10,7 @@ function ViewPostDetail() {
     const cookies = useCookies('_tk')[0]._tk;
     const [post, setPost] = useState();
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-post-by-id/postId=' + postId;
+        const requestURL = 'https://ckcsocial.site/api/v1/fetch-post-by-id/postId=' + postId;
         axios({
             method: 'GET',
             url: requestURL,

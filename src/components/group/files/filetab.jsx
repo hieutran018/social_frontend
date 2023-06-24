@@ -9,7 +9,7 @@ function FileTab() {
     const cookies = useCookies('_tk')[0]._tk;
     const [photos, setPhotos] = useState([]);
     const fetchGroupPhotoList = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-photo-list/groupId=' + groupId + '&limit';
+        const requestURL = 'https://ckcsocial.site/api/v1/fetch-group-photo-list/groupId=' + groupId + '&limit';
         axios({
             method: "GET",
             url: requestURL,

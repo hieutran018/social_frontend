@@ -14,7 +14,7 @@ function FriendCard({ friend }) {
     const [isSend, setIsSend] = useState(true);
     console.log(user.id === userCurrent, user.id, userCurrent);
     const unFriend = (userId) => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/unfriend';
+        const requestURL = 'https://ckcsocial.site/api/v1/unfriend';
         axios({
             method: 'POST',
             url: requestURL,
@@ -34,7 +34,7 @@ function FriendCard({ friend }) {
     }
 
     const hanldeClickResendAddFriend = (userId) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
+        const requestURL = "https://ckcsocial.site/api/v1/request-add-friend";
 
         axios({
             method: 'POST',
@@ -53,7 +53,7 @@ function FriendCard({ friend }) {
     }
 
     const hanldeClickCancelAddFriend = (userId) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/cancle-add-friend";
+        const requestURL = "https://ckcsocial.site/api/v1/cancle-add-friend";
 
         axios({
             method: 'POST',

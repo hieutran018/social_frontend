@@ -45,7 +45,7 @@ function CreateStory() {
     })
 
     const handleSubmit = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/stories/create-story';
+        const requestURL = 'https://ckcsocial.site/api/v1/stories/create-story';
         axios({
             method: 'POST',
             url: requestURL,

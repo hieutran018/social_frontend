@@ -32,7 +32,7 @@ export const fetchGroup = (cookies) => {
 
         try {
             // Axios is common, but also `fetch`, or your own "API service" layer
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-joined';
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-group-joined';
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -56,7 +56,7 @@ export const fetchGroup = (cookies) => {
 export const createNewGroup = (cookies, groupName, privacy) => {
     return async dispatch => {
         try {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/create-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/create-group';
             axios({
                 method: 'POST',
                 url: requestURL,
@@ -84,7 +84,7 @@ export const editGroup = (cookies, groupId, groupName, privacy, file) => {
     return async dispatch => {
         try {
 
-            const requestURL = 'http://127.0.0.1:8000/api/v1/edit-information-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/edit-information-group';
             axios({
                 method: 'POST',
                 url: requestURL,

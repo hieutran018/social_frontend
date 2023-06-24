@@ -89,7 +89,7 @@ function Post({ post }) {
     }, [statusAdd, dispatch])
 
     const handleLike = (reaction) => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/post/like-post';
+        const requestURL = 'https://ckcsocial.site/api/v1/post/like-post';
         axios({
             method: 'POST',
             url: requestURL,
@@ -585,7 +585,7 @@ function Post({ post }) {
                                                                 <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
                                                                     {post.parent_post.displayName}
                                                                 </a>
-                                                                {post.parent_post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {post.parent_post.tag.length === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                {post.parent_post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {parseInt(post.parent_post.tag.length) === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
                                                             </div>
                                                             <div className="postPrivacy">
                                                                 <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}

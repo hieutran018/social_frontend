@@ -10,7 +10,7 @@ function CommentBox({ postId, commentId, setComment }) {
     const handleClickReplyComment = () => {
         console.log("CURENT COMMENT:" + commentId);
         console.log('Press to enter')
-        const requestURL = 'http://127.0.0.1:8000/api/v1/reply-comment';
+        const requestURL = 'https://ckcsocial.site/api/v1/reply-comment';
 
         axios({
             method: 'POST', //you can set what request you want to be

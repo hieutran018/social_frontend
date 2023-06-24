@@ -12,7 +12,7 @@ function MyGroup() {
 
     useEffect(() => {
         function fetchRequestJoindGroup() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-invite-to-group';
+            const requestURL = 'https://ckcsocial.site/api/v1/fetch-invite-to-group';
 
             axios({
                 method: 'GET',

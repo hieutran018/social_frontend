@@ -18,7 +18,7 @@ function FriendList() {
     const [fr, setFr] = useState([]);
     const cookies = useCookies('_tk')[0]._tk;
     useEffect(() => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-by-user-id/" + userId;
+        const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + userId;
 
         axios({
             method: 'GET',
