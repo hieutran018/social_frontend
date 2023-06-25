@@ -15,7 +15,7 @@ function SidebarFriendSuggestion() {
     const cookies = useCookies('_tk')[0]._tk;
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-friends-suggestion';
+            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friends-suggestion';
             axios({
                 method: 'GET', //you can set what request you want to be
                 url: requestURL,

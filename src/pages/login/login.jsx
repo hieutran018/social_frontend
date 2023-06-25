@@ -58,7 +58,7 @@ function Login() {
             return;
         } else {
             try {
-                requestStage.post('/auth/login', {
+                requestDev.post('/auth/login', {
                     email: email,
                     password: password,
                 }).then((res) => {
@@ -139,6 +139,9 @@ function Login() {
                     </span>
                 </div>
                 <div className="loginRight">
+                    <div className="loginTop">
+                        <h3 className="loginLogo">CKCS</h3>
+                    </div>
                     <div className="loginBox">
                         <input placeholder="Email" className="loginInput" onChange={handleChangeEmail} />
 

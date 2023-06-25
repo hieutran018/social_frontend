@@ -1,29 +1,129 @@
+@media only screen and (max-width: 600px) {
+    .registerLeft{
+        display: none;
+    }
+    .registerTop{
+        display: flex;
+        justify-content: center;
+    }
+    .register{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+    }
+    .registerWrapper {
+        max-width: 200px;
+        min-width: 300px;
+        height: 50%;
+        display: flex;
+    }
+    .registerInput {
+        height: 35px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        font-size: 18px;
+        padding-left: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        min-width: -webkit-fill-available;
+    }
+
+    .registerButton {
+        width: 75%;
+        align-self: center;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background-color: #42b72a;
+        color: white;
+        font-size: 17px;
+        font-weight: 500;
+        margin: 0 auto;
+        padding: 0;
+        display: inline-block;
+        line-height: 50px;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        margin-top: 5px;
+    }   
+}
+
+@media only screen and (min-width: 601px) {
+    .registerTop{
+        display: none;
+    }
+    .registerLeft{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .registerRight {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .register {
+        background-color: #f0f2f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .registerWrapper {
+        display: flex;
+        margin-right: 20px;
+    }
+    .registerInput {
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        font-size: 18px;
+        padding-left: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        min-width: -webkit-fill-available;
+    }
+    .registerButton {
+        width: 75%;
+        align-self: center;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background-color: #42b72a;
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0 auto;
+        padding: 0;
+        display: inline-block;
+        line-height: 50px;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        margin-top: 5px;
+    }
+    .registerBox {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        
+        
+    }
+}
+
 .body{
     overflow-y: scroll;
 }
-.register {
-    width: 100vw;
-    height: 100vh;
-    background-color: #f0f2f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.registerWrapper {
-    width: 50%;
-    height: 50%;
-    display: flex;
-}
-
-.registerLeft,
-.registerRight {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 10px;
-}
 
 .title {
     font-size: 30px;
@@ -46,31 +146,15 @@
     font-size: 24px;
 }
 
-.registerBox {
-    height: 700vh;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    
-}
 
-.registerInput {
-    height: 50px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    font-size: 18px;
-    padding-left: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+
+
 
 .registerInput:focus {
     outline: none;
 }
 
-.registerButton {
+/* .registerButton {
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -79,7 +163,7 @@
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
-}
+} */
 
 .submitRegisterButton {
     width: 100%;
@@ -102,26 +186,7 @@
     margin-bottom: 5px;
 }
 
-.registerButton {
-    width: 75%;
-    align-self: center;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: #42b72a;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0 auto;
-    padding: 0;
-    display: inline-block;
-    line-height: 50px;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    margin-top: 5px;
 
-}
 
 .textError{
     color: red;

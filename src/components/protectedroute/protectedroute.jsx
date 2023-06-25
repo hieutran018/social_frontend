@@ -9,7 +9,7 @@ function ProtectedRoutes({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState();
     const navigate = useNavigate()
     useEffect(() => {
-        requestStage.post('/auth/me', {}, {
+        requestDev.post('/auth/me', {}, {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }

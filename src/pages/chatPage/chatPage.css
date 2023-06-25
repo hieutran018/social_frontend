@@ -41,8 +41,6 @@
 }
 .chatPageBottom{
     position: fixed;
-    display: flex;
-    align-items: center;
     bottom: 0;
     width: -webkit-fill-available;
     background-color: white;
@@ -80,6 +78,11 @@
     overflow: hidden!important;
 }
 
+.chatPageBottomChangeInput{
+    display: flex;
+    margin-top: 0.2rem;
+}
+
 .chatPageInputContainerSentFile{
     margin-right: 1rem;
     border: 0.001rem solid gray;
@@ -89,4 +92,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.chatPagePreviewFilesUpload{
+    display: flex;
+    justify-content: left;
+    overflow-x: auto;
+}
+
+.chatPageImg{
+    min-width: 10%;
+    max-width: 12%;
+    max-height: 12%;
+    min-height: 10%;
+    margin: 0px 5px;
+    border-radius: 5px;
+    object-fit: cover;
 }

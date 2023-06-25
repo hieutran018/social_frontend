@@ -8,7 +8,7 @@ function FriendSuggestionCard({ u }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [isAdd, setIsAdd] = useState(false);
     const hanldeClickSendAddFriend = (userId) => {
-        const requestURL = "https://ckcsocial.site/api/v1/request-add-friend";
+        const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
 
         axios({
             method: 'POST',

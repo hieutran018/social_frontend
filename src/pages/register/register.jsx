@@ -5,6 +5,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './register.css';
+import { requestDev } from '../../components/auth/auth';
 
 function Register() {
     const [displayName, setdisplayName] = useState('');
@@ -60,19 +61,19 @@ function Register() {
             return
         } else {
             try {
-                axios.post('https://ckcsocial.site/api/auth/register', {
+                requestDev.post('/auth/register', {
                     displayName: displayName,
                     email: email,
                     password: password,
                     confirmPassword: confirmPassword,
+                }, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
+                }).then((response) => {
+                    console.log(response.data);
+                    noti('Đăng ký thành công, vui lòng kiểm tra hộp thư email của bạn để xác nhận đăng ký tài khoản');
                 })
-                    .then((response) => {
-                        console.log(response.data);
-
-                    })
                     .catch((error) => {
                         if (JSON.parse(error.response.data).email) {
                             console.log("ERROR", JSON.parse(error.response.data).email[0]);
@@ -81,8 +82,6 @@ function Register() {
                         if (JSON.parse(error.response.data).password) {
                             noti(JSON.parse(error.response.data).password[0]);
                         }
-
-
                     }
 
                     );
@@ -102,6 +101,9 @@ function Register() {
                     </span>
                 </div>
                 <div className="registerRight">
+                    <div className="registerTop">
+                        <h3 className="registerLogo">CKCS</h3>
+                    </div>
                     <div className="registerBox">
 
                         <input placeholder="Tên hiển thị" className="registerInput" value={displayName} onChange={(event) => setdisplayName(event.target.value)} />
@@ -115,9 +117,11 @@ function Register() {
 
                         <button onClick={handleFormSubmit} className="submitRegisterButton">Đăng ký</button>
 
-                        <Link to="/login" className="registerButton">
-                            Đã có tải khoản, đăng nhập ngay
-                        </Link>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Link to="/login" className="registerButton">
+                                Đăng nhập ngay
+                            </Link>
+                        </div>
 
                     </div>
                 </div>

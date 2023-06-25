@@ -25,8 +25,8 @@ function SidebarChat() {
                     status === 'loading' ?
                         <>LOADING</> :
                         status === 'succeeded' ?
-                            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((chat) => (
-                                <ChatCard key={chat} chat={chat} />
+                            chats.map((chat) => (
+                                <ChatCard key={chat.id} chat={chat} />
                             )) :
                             status === 'failed' ?
                                 <>FAILED</> :

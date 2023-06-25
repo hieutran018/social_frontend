@@ -30,7 +30,10 @@ export const fetchChat = (cookies) => {
             }).then((response) => {
                 console.log("CHAT LIST", response.data)
                 dispatch(fetchChatSucceeded(response.data));
-            }).catch((error) => dispatch(fetchChatFailed(error.message)));
+            }).catch((error) => {
+                dispatch(fetchChatFailed(error.message));
+                console.log(error);
+            });
         } catch (err) {
             dispatch(fetchChatFailed(err))
         }
