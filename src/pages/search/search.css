@@ -1,14 +1,4 @@
-.searchTopbar{
-    display: flex;
-}
-.searchContainer{
-    display: flex;
-    width: 100%;
-    position: relative;
-    margin-top: 4.3rem;
-
-}
-.searchResultContainer{
-    margin-top: 1rem;
-    flex: 4;
+.searchPage{
+    flex:4;
+    margin-top: 5rem;
 }

@@ -56,10 +56,6 @@ function App() {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/confirm-forgot-password" element={<ConfirmForgotPassword />} />
       <Route path="/registration" element={<Register />} />
-      <Route path='/search/:result' element={<Search />} />
-      {/* <Route path='/settings' element={<Settings />} /> */}
-      {/* <Route path='/settings/:setting' element={<Settings />} /> */}
-      <Route path='/stories/view/:storiesCurrent' element={<StoriesView />} />
       <Route path="/loading" element={<Loading />} />
       //? ==================================================================
       <Route path="/" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<HomePage />} sidebar={1} rightbar />} />} />
@@ -78,7 +74,9 @@ function App() {
       <Route path='/groups/:pages/:groupId' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
       <Route path='/groups/:pages/:groupId/:groupTab' element={<LayoutUser pusher={pusher} children={<GroupPage />} sidebar={5} />} />
       <Route path="/stories/create" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<StoriesPage />} sidebar={8} />} />} />
+      <Route path='/stories/view/:storiesCurrent' element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<StoriesView />} sidebar={9} />} />} />
       <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ViewPostDetail />} profile />} />} />
+      <Route path='/search/:result' element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<Search />} sidebar={6} />} />} />
       <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage pusher={pusher} />} sidebar={10} />} />} />
       <Route path='/settings' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />
       <Route path='/settings/:setting' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />

@@ -13,18 +13,8 @@ function StoriesView() {
     const stories = useSelector(selectStories);
 
     return (
-        <div className='storiesView'>
-            <div className="storiesViewTopbar">
-                <Topbar />
-            </div>
-            <div className='storiesViewContainer'>
-                <div>
-                    <Sidebar page={9} />
-                </div>
-                <div className='storiesViewMain'>
-                    <StoryView story={stories.filter((story) => story.id.toString() === storiesCurrent)} />
-                </div>
-            </div>
+        <div className='storiesViewPage'>
+            <StoryView story={stories.filter((story) => story.id.toString() === storiesCurrent)} />
         </div>
     );
 }

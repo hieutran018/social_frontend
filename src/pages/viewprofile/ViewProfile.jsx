@@ -15,7 +15,8 @@ function ViewProfile() {
             headers: {
                 Authorization: 'Bearer ' + cookies,
             }
-        }).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
+        }).then((response) => { setUser(response.data); })
+        // .catch((error) => console.log(error))
         window.scrollTo(0, 0)
     }, [userId, cookies])
 

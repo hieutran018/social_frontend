@@ -1,8 +1,9 @@
 .storyView{
     background-color: black;
-    height: 100%;
+    height: calc(100vh - 3.5rem);
     display: flex;
     justify-content: center;
+
 }
 .storyViewMediaContainer{
     width: 30rem;

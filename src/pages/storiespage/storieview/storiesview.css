@@ -1,12 +1,5 @@
-.storiesView{
-     width: 100%;
-     position: fixed;
-}
-.storiesViewContainer{
-    margin-top: 3.5rem;
-    display: flex;
-}
-.storiesViewMain{
-    width: 100%;
+.storiesViewPage{
     flex: 4;
+    margin-top: 3.5rem;
+    height: calc(100vh - 3.5rem);
 }

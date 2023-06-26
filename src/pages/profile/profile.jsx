@@ -92,7 +92,7 @@ function Profile({ pusher }) {
 
     const handleClickChat = () => {
         // const requestURL = 'http://127.0.0.1:8000/api/v1/chats/create-chat';
-        baseURL.post('/v1/chats/create-chat', {
+        baseURL.post('/api/v1/chats/create-chat', {
             userId: userId
         }, {
             headers: {

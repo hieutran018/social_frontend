@@ -42,7 +42,7 @@ function ChatPage({ pusher }) {
 
     useEffect(() => {
         // const requestURL = 'https://ckcsocial.site/api/v1/fetch-message/userId=' + userId;
-        baseURL.get('/v1/fetch-message/userId=' + userId, {
+        baseURL.get('/api/v1/fetch-message/userId=' + userId, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -62,7 +62,7 @@ function ChatPage({ pusher }) {
     }
 
     const sendMessage = () => {
-        baseURL.post('/v1/chats/send-message', {
+        baseURL.post('/api/v1/chats/send-message', {
             conversationId: conversation.id,
             contentMessage: contentMessage,
         }, {
@@ -77,14 +77,11 @@ function ChatPage({ pusher }) {
         }).catch((error) => {
             console.log(error);
         })
-        if (files.length > 0) {
-            sendMessageHaveFile();
-        }
     }
 
     const sendMessageHaveFile = () => {
 
-        baseURL.post('/v1/chats/sent-message-file', {
+        baseURL.post('/api/v1/chats/sent-message-file', {
             conversationId: conversation.id,
             files: files
         }, {
@@ -146,14 +143,12 @@ function ChatPage({ pusher }) {
                         <input onKeyDownCapture={
                             event => {
                                 if (event.key === 'Enter') {
-                                    if (contentMessage !== null) {
-                                        sendMessage()
+                                    if (contentMessage !== '') {
+                                        sendMessage();
                                     }
-                                    if (files.length > 0) {
-                                        sendMessageHaveFile()
-                                        console.log("CO FILE");
+                                    if (view) {
+                                        sendMessageHaveFile();
                                     }
-
                                 }
                             }
                         } value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />

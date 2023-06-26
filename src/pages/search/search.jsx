@@ -8,16 +8,8 @@ function Search() {
     const result = useParams().result;
     console.log(result);
     return (
-        <div>
-            <div className="searchTopbar">
-                <Topbar />
-            </div>
-            <div className='searchContainer'>
-                <Sidebar page={6} />
-                <div className='searchResultContainer'>
-                    <SearchResult />
-                </div>
-            </div>
+        <div className='searchPage'>
+            <SearchResult />
         </div>
     );
 }
