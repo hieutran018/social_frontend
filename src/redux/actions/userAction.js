@@ -1,5 +1,4 @@
-import axios from "axios";
-import { requestDev } from "../../components/auth/auth";
+import { baseURL } from "../../components/auth/auth";
 import {
     FETCH_USER_STARTED,
     FETCH_USER_SUCCESSED,
@@ -76,8 +75,8 @@ export const fetchCurrentUser = user => ({
 export const fetchUser = (cookies, userId) => {
     return async dispatch => {
         dispatch(fetchUserStart());
-        const requestURL = "https://ckcsocial.site/api/v1/profile-user/userId=" + userId;
-        requestDev.get('/v1/profile-user/userId=' + userId, {
+        // const requestURL = "https://ckcsocial.site/api/v1/profile-user/userId=" + userId;
+        baseURL.get('/api/v1/profile-user/userId=' + userId, {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }
@@ -91,10 +90,8 @@ export const fetchUser = (cookies, userId) => {
 export const currentUser = (cookies) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/auth/me';
-            axios({
-                method: "POST",
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/auth/me';
+            baseURL.post('/api/auth/me', {}, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -105,7 +102,6 @@ export const currentUser = (cookies) => {
                 dispatch(fetchCurrentUser(response.data))
             })
         } catch (error) {
-
         }
     }
 }
@@ -113,13 +109,10 @@ export const currentUser = (cookies) => {
 export const updateDisplaynameUser = (cookies, displayName) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/v1/update-displayname-user';
-            axios({
-                method: "POST",
-                url: requestURL,
-                data: {
-                    displayName: displayName
-                },
+            // const requestURL = 'https://ckcsocial.site/api/v1/update-displayname-user';
+            baseURL.post('/api/v1/update-displayname-user', {
+                displayName: displayName
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -138,13 +131,10 @@ export const updateDisplaynameUser = (cookies, displayName) => {
 export const updatePhoneUser = (cookies, phone) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/v1/update-phone-user';
-            axios({
-                method: "POST",
-                url: requestURL,
-                data: {
-                    phone: phone
-                },
+            // const requestURL = 'https://ckcsocial.site/api/v1/update-phone-user';
+            baseURL.post('/api/v1/update-phone-user', {
+                phone: phone
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -163,12 +153,11 @@ export const updatePhoneUser = (cookies, phone) => {
 
 export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
     return async dispatch => {
-        const requestURL = "https://ckcsocial.site/api/v1/edit-information-user";
+        // const requestURL = "https://ckcsocial.site/api/v1/edit-information-user";
         dispatch(updateAvatarUserStart());
-        axios({
-            method: 'POST', //you can set what request you want to be
-            url: requestURL,
-            data: { wentTo: wentTo, liveIn: liveIn, relationship: relationship, phone: phone },
+        baseURL.post('/api/v1/edit-information-user', {
+            wentTo: wentTo, liveIn: liveIn, relationship: relationship, phone: phone
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -176,8 +165,6 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
             }
         }).then((response) => {
             dispatch(updateUserSuccess(response.data));
-            // dispatch(fetchUser())
-
         }).catch((error) => dispatch(updateUserFail(error.message)));
     }
 }
@@ -185,12 +172,10 @@ export const updateUser = (cookies, wentTo, liveIn, relationship, phone) => {
 export const updateAvatar = (cokkie, file) => {
     return async dispatch => {
         dispatch(updateAvatarUserStart());
-        const requestURL = 'https://ckcsocial.site/api/v1/upload-avatar';
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { file: file },
+        // const requestURL = 'https://ckcsocial.site/api/v1/upload-avatar';
+        baseURL.post('/api/v1/upload-avatar', {
+            file: file
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cokkie,
                 "Content-Type": "multipart/form-data",
@@ -203,12 +188,10 @@ export const updateAvatar = (cokkie, file) => {
 export const updateCoverImage = (cookies, file) => {
     return async dispatch => {
         dispatch(updateCoverUserStart());
-        const requestURL = 'https://ckcsocial.site/api/v1/upload-cover-image';
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { file: file },
+        // const requestURL = 'https://ckcsocial.site/api/v1/upload-cover-image';
+        baseURL.post('/api/v1/upload-cover-image', {
+            file: file
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",

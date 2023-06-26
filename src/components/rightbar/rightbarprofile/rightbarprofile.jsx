@@ -2,9 +2,8 @@ import '../rightbar.css';
 import Grid from '@mui/material/Grid';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
-
+import { baseURL } from '../../auth/auth';
 
 function RightbarProfile({ user }) {
     const userId = useParams().userId;
@@ -13,10 +12,8 @@ function RightbarProfile({ user }) {
     const [friends, setFriends] = useState([]);
     useEffect(() => {
         const fetchListFriendById = () => {
-            const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + userId + "/6";
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + userId + "/6";
+            baseURL.get('/api/v1/fetch-friend-by-user-id/ ' + userId + '/6', {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -28,10 +25,8 @@ function RightbarProfile({ user }) {
         }
 
         const fetchImageById = () => {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId + '/6';
-            axios({
-                method: 'GET', //you can set what request you want to be
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId + '/6';
+            baseURL.get('/api/v1/fetch-image-uploaded/userId=' + userId + '/6', {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -46,6 +41,7 @@ function RightbarProfile({ user }) {
         fetchImageById();
 
     }, [userId, cookies])
+
     return (
         <div>
             <div className="rightbarContainer">
@@ -89,11 +85,8 @@ function RightbarProfile({ user }) {
                                                     <span className="rightbarFollowingName">{item.displayName}</span>
                                                 </div>
                                             </Grid>
-
                                         ))}
                                     </Grid>
-
-
                                 </Grid>
                             </Grid>
                         </div>
@@ -106,7 +99,6 @@ function RightbarProfile({ user }) {
                     <div className="rightbarFriendContent">
                         <div className="rightbarTitleContent"><h4 className="rightbarTitle">Ảnh</h4><Link className="rightbarLinkViewMoreFriend" to={"/userId/" + userId + "/photos/photos_of"}><span>Xem tất cả ảnh</span></Link></div>
                         <div className="rightbarFriendContainer">
-
                             <Grid sx={{ flexGrow: 1 }} container spacing={0.5}>
                                 <Grid item xs={12}>
                                     <Grid container justifyContent="left" spacing={0.5}>
@@ -117,11 +109,8 @@ function RightbarProfile({ user }) {
 
                                         ))}
                                     </Grid>
-
-
                                 </Grid>
                             </Grid>
-
                         </div>
                     </div>
                 </div>

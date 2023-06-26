@@ -28,7 +28,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { sharePostToWall, sharePostFormGroupToWall, deletePost } from "../../redux/actions/postAction";
 import { selectAddPostStatus } from "../../redux/selectors/postSelector";
 import ShareOption from "../share/shareoptions/shareoption";
-import axios from "axios";
 import 'moment/locale/vi';
 import likeImg from '../../rections/like.png';
 import loveImg from '../../rections/love.png';
@@ -48,6 +47,7 @@ import ReactionButton from "../reaction/reaction";
 import Reports from "../reports/reports";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseURL } from "../auth/auth";
 
 function Post({ post }) {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -89,14 +89,11 @@ function Post({ post }) {
     }, [statusAdd, dispatch])
 
     const handleLike = (reaction) => {
-        const requestURL = 'https://ckcsocial.site/api/v1/post/like-post';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                postId: post.id,
-                reaction: reaction
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/post/like-post';
+        baseURL.post('/api/v1/post/like-post', {
+            postId: post.id,
+            reaction: reaction
+        }, {
             headers: {
                 Authorization: "Bearer " + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -236,7 +233,6 @@ function Post({ post }) {
                                         alt={"Avatar user " + post.groupName}
                                     />
                                 </a>
-
                                 <div>
                                     <span className="postUsername">
                                         <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
@@ -248,7 +244,6 @@ function Post({ post }) {
                                             <a className="postLinkProfileMemberGroup" href={"/userId/" + post.user_id}>
                                                 {post.displayName}
                                             </a>
-
                                         </span>
                                         <span className="postDateGroup">{moment(post.created_at, 'YYYYMMDD H:mm:ss').fromNow()}
                                             {post.privacy.toString() === "0" ?
@@ -258,7 +253,6 @@ function Post({ post }) {
                                             }</span>
                                     </div>
                                 </div>
-
                             </div>
                             :
                             <div className="postTopLeft">
@@ -286,7 +280,6 @@ function Post({ post }) {
                                             }</span>
                                     </div>
                                 </div>
-
                             </div>
                     }
                     <div className="postTopRight">
@@ -307,22 +300,7 @@ function Post({ post }) {
                             }}
                         >
                             <div className="postMenuSetting">
-                                {/* {
-                                    post.user_id === user.id ?
-                                        <MenuItem >
-                                            <div className="postMenuSettingItem">
-                                                <div className="postMenuSettingIcon">
-                                                    <MdOutlinePrivacyTip size={20} />
-                                                </div>
-                                                <div className="postMenuSettingTextContainer">
-                                                    <span className="postMenuSettingText">Cập nhật quyền riêng tư</span>
-                                                </div>
-                                            </div>
-                                        </MenuItem> :
-                                        <></>
-                                } */}
                                 {
-
                                     post.histories !== 0 ?
                                         <MenuItem onClick={handleOpenViewHistory}>
                                             <div className="postMenuSettingItem">
@@ -393,7 +371,6 @@ function Post({ post }) {
                             anchorClass="postViewMore"
                             onClick={executeOnClick}
                             expanded={false}
-
                             truncatedEndingComponent={"... "}
                         ><p>{post.post_content}</p>
                         </ShowMoreText> : <div></div>

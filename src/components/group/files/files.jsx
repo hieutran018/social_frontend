@@ -1,19 +1,17 @@
-import axios from "axios";
 import Grid from '@mui/material/Grid';
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import './files.css';
+import { baseURL } from "../../auth/auth";
 
 function FileList() {
     const groupId = useParams().groupId;
     const cookies = useCookies('_tk')[0]._tk;
     const [photos, setPhotos] = useState([]);
     const fetchGroupPhotoList = () => {
-        const requestURL = 'https://ckcsocial.site/api/v1/fetch-group-photo-list/groupId=' + groupId + '&limit=6';
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/fetch-group-photo-list/groupId=' + groupId + '&limit=6';
+        baseURL.get('/api/v1 / fetch - group - photo - list / groupId=' + groupId + ' & limit=6', {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",

@@ -9,10 +9,8 @@ import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import Share from '../share/Share';
-
 import FriendCard from './friendcard/friendcard';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editGroup } from '../../redux/actions/groupAction';
@@ -23,8 +21,7 @@ import { fetchPostGroupByIdGroup } from '../../redux/actions/postAction';
 import Member from './members/member';
 import FileList from './files/files';
 import FileTab from './files/filetab';
-
-
+import { baseURL } from '../auth/auth';
 
 function GroupPageDetail() {
     const groupTab = useParams().groupTab;
@@ -95,10 +92,8 @@ function GroupPageDetail() {
     };
     useEffect(() => {
         function fetchGroupByIdGroup() {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
-            axios({
-                method: "GET",
-                url: requestURL,
+            // const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-group-by-id/' + groupId;
+            baseURL.get('/api/v1/fetch-group-by-id/' + groupId, {
                 headers: {
                     Authorization: "Bearer " + cookies,
                     "Content-Type": "multipart/form-data",
@@ -120,32 +115,23 @@ function GroupPageDetail() {
 
         return () => {
             file && URL.revokeObjectURL(file.preview);
-
         }
 
     }, [groupId, cookies, update, file, dispatch, nextPage])
 
     function fetchListFriend() {
-        const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
-        axios({
-            method: 'GET',
-            url: requestURL,
-
+        // const requestURL = "http://127.0.0.1:8000/api/v1/fetch-friend-to-invite-group/" + group.id;
+        baseURL.get('/api/v1/fetch-friend-to-invite-group/' + group.id, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log(response.data)
             setFriends(response.data);
-
-
-
         }).catch((error) => console.log(error));
     }
-
 
     function editInformationGroup() {
         dispatch(editGroup(cookies, groupId, groupName, privacy, file));

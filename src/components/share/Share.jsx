@@ -5,10 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAddPostStatus, selectPostStatus } from '../../redux/selectors/postSelector';
-
 import DialogShare from './dialogshare';
-
-
 
 function Share({ group }) {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -17,7 +14,6 @@ function Share({ group }) {
     const statusFetch = useSelector(selectPostStatus);
 
     useEffect(() => {
-
         const handleClose = () => {
             setOpen(false);
         };
@@ -25,16 +21,14 @@ function Share({ group }) {
             handleClose()
         }, 1000)
     }, [statusAdd, statusFetch])
+
     const handleClickOpen = () => {
         setOpen(true);
-
     };
+
     const handleClose = () => {
         setOpen(false);
     };
-
-
-
 
     return (
         <div className="share">
@@ -49,15 +43,10 @@ function Share({ group }) {
                 </div>
                 <hr className="shareHr" />
                 <div className="shareBottom">
-
-
                     <div onClick={handleClickOpen} className="shareOption">
-
                         <PermMedia htmlColor="tomato" className="shareIcon" />
                         <span className="shareOptionText">Hình ảnh/video</span>
-
                     </div>
-
                     <div className="shareOption">
                         <Room htmlColor="green" className="shareIcon" />
                         <span className="shareOptionText">Địa điểm</span>
@@ -74,8 +63,6 @@ function Share({ group }) {
                             </div> :
                             <></>
                     }
-
-
                 </div>
             </div>
             <div>

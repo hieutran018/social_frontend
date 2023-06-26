@@ -9,9 +9,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import PublicIcon from '@mui/icons-material/Public';
-
-import axios from "axios";
 import SkeletonPhotoBy from '../photosby/skeletonPhotoBy';
+import { baseURL } from '../../auth/auth';
 
 function ViewImageInAlbum() {
     const navigate = useNavigate();
@@ -32,8 +31,6 @@ function ViewImageInAlbum() {
     const [canEdit, setCanEdit] = useState(1);
     const handleClickOpen = () => {
         setOpen(true);
-
-
     };
     const handleClose = () => {
         setOpen(false);
@@ -63,38 +60,32 @@ function ViewImageInAlbum() {
 
     const handleChangeAlbumName = (e) => {
         setAlbum(e.target.value)
-
     }
 
     const handleSumbitEditAlbum = () => {
-        const requestURL = 'https://ckcsocial.site/api/v1/edit-album';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { albumId: albumId, albumName: album, privacy: privacy, files: files },
+        // const requestURL = 'https://ckcsocial.site/api/v1/edit-album';
+        baseURL.post('/api/v1/edit-album', {
+            albumId: albumId, albumName: album, privacy: privacy, files: files
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log("RES IMAGES IN ALBUM", response.data)
             setAlbumName(response.data.album_name);
             setImages(response.data.media_files);
             setLstImage([]);
             setOpen(false);
-
         }).catch((error) => console.log(error.message));
     }
 
     const handleDeleteAlbum = () => {
-        const requestURl = "https://ckcsocial.site/api/v1/delete-album";
-
-        axios({
-            method: "POST",
-            url: requestURl,
-            data: { albumId: albumId },
+        // const requestURl = "https://ckcsocial.site/api/v1/delete-album";
+        baseURL.post('/api/v1/delete-album', {
+            albumId: albumId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
@@ -102,24 +93,17 @@ function ViewImageInAlbum() {
             }
         }).then((response) => {
             navigate('/' + userId + '/photos/album');
-
-            console.log(response.data);
         }).catch((error) => console.log(error));
     }
     useEffect(() => {
         const fetchImageAlbum = () => {
-
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-album/' + userId + '/' + albumId;
-            axios({
-                method: 'GET',
-                url: requestURL,
-
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-album/' + userId + '/' + albumId;
+            baseURL.get('/api/v1/fetch-image-album/' + userId + '/' + albumId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
-
             }).then((response) => {
                 console.log("RES IMAGES IN ALBUM", response.data)
                 setAlbumName(response.data.album_name);
@@ -127,7 +111,6 @@ function ViewImageInAlbum() {
                 setImages(response.data.media_files);
                 setStatus(true);
                 setCanEdit(response.data.isDefault);
-
             }).catch((error) => console.log(error.message));
         }
         fetchImageAlbum()
@@ -156,8 +139,6 @@ function ViewImageInAlbum() {
                                 )) :
                                 <SkeletonPhotoBy />}
                         </Grid>
-
-
                     </Grid>
                 </Grid>
             </div>
@@ -170,7 +151,6 @@ function ViewImageInAlbum() {
                 >
                     <div className='albumDialog'>
                         <div className='albumHeaderDialogTitle'>Chỉnh sửa album</div>
-
                         <hr className='albumDialogHr' />
                         <div className='albumDialogWraaper'>
                             <div className='albumDialogContainer'>
@@ -204,7 +184,6 @@ function ViewImageInAlbum() {
                                         </div>
                                     </div>
                                 </div>
-
                                 {
                                     view ?
                                         <div className='albumDialogPreview'>
@@ -219,8 +198,6 @@ function ViewImageInAlbum() {
 
                                                             ))}
                                                         </Grid>
-
-
                                                     </Grid>
                                                 </Grid>
                                             </div>
@@ -232,8 +209,6 @@ function ViewImageInAlbum() {
                                             </div>
                                         </div>
                                 }
-
-
                             </div>
                         </div>
                         <div>
@@ -251,7 +226,6 @@ function ViewImageInAlbum() {
                                     <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Bạn bè</MenuItem>
                                     <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                                 </Menu>
-
                             </div>
                         </div>
                     </div>

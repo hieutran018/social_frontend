@@ -2,10 +2,10 @@ import '../friends.css'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
+import { baseURL } from '../../auth/auth';
 function FriendCard({ friend }) {
     const userCurrent = useParams().userId;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -14,38 +14,32 @@ function FriendCard({ friend }) {
     const [isSend, setIsSend] = useState(true);
     console.log(user.id === userCurrent, user.id, userCurrent);
     const unFriend = (userId) => {
-        const requestURL = 'https://ckcsocial.site/api/v1/unfriend';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userId: userId },
+        // const requestURL = 'https://ckcsocial.site/api/v1/unfriend';
+        baseURL.post('/api/v1/unfriend', {
+            userId: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             setIsFriend(false);
-
         }).catch((error) => console.log(error.message));
 
 
     }
 
     const hanldeClickResendAddFriend = (userId) => {
-        const requestURL = "https://ckcsocial.site/api/v1/request-add-friend";
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userIdAccept: userId },
+        // const requestURL = "https://ckcsocial.site/api/v1/request-add-friend";
+        baseURL.post('/api/v1/request-add-friend', {
+            userIdAccept: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log(response.data);
             setIsSend(false);
@@ -53,18 +47,15 @@ function FriendCard({ friend }) {
     }
 
     const hanldeClickCancelAddFriend = (userId) => {
-        const requestURL = "https://ckcsocial.site/api/v1/cancle-add-friend";
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userId: userId },
+        // const requestURL = "https://ckcsocial.site/api/v1/cancle-add-friend";
+        baseURL.post('/api/v1/cancle-add-friend', {
+            userId: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log(response.data);
             setIsSend(true);

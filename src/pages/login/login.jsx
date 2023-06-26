@@ -1,5 +1,4 @@
 
-import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
@@ -8,7 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { auth, googleProvider, facebookProvider } from '../../firebase/firebaseconfig';
 import { signInWithPopup } from "firebase/auth";
-import { requestDev, requestStage } from '../../components/auth/auth';
+import { baseURL } from '../../components/auth/auth';
 import './login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -58,7 +57,7 @@ function Login() {
             return;
         } else {
             try {
-                requestDev.post('/auth/login', {
+                baseURL.post('/api/auth/login', {
                     email: email,
                     password: password,
                 }).then((res) => {
@@ -82,14 +81,13 @@ function Login() {
         signInWithPopup(auth, googleProvider).then((result) => {
             console.log("USER", result.providerId, "==", result.user.email, "==",
                 result);
-            const requestURL = "http://127.0.0.1:8000/api/auth/login-with-google";
-
-            axios.post(requestURL, {
+            // const requestURL = "http://127.0.0.1:8000/api/auth/login-with-google";
+            baseURL.post('/api/auth/login-with-google', {
                 email: result.user.email,
                 displayName: result.user.displayName,
                 provider: result.providerId,
                 uid: result.user.uid
-            }).then((res) => {
+            }, {}).then((res) => {
                 setCookie('_tk', res.data.access_token, { path: '/', maxAge: res.data.expires_in })
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 navigate('/')
@@ -114,19 +112,10 @@ function Login() {
         setEmail(e.target.value);
 
     }
+
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
     }
-    // useEffect(() => {
-    //     if (sessionStorage.getItem('token') && sessionStorage.getItem('user')) {
-    //         setIsSuccess(false);
-    //         setTokenString(sessionStorage.getItem('token'));
-    //         setUserString(sessionStorage.getItem('user'));
-    //         resetToken(sessionStorage.getItem('user'), sessionStorage.getItem('token'));
-    //     }
-    // }, [tokenString, userString, isSuccess, resetToken]);
-
-
 
     return (
 

@@ -18,8 +18,6 @@ import { selectAlbum, selectStatusAlbum } from '../../../redux/selectors/albumSe
 import ViewImageInAlbum from './viewalbum';
 import SkeletonAlbum from './skeletonAlbum';
 
-
-
 function Album() {
     const userId = useParams().userId;
     const albumId = useParams().albumId;
@@ -38,8 +36,6 @@ function Album() {
     const albums = useSelector(selectAlbum);
     const handleClickOpen = () => {
         setOpen(true);
-
-
     };
     const handleClose = () => {
         setOpen(false);
@@ -70,17 +66,12 @@ function Album() {
 
     const handleChangeAlbumName = (e) => {
         setAlbumName(e.target.value)
-
     }
 
     const handleSubmitCreateAlbum = () => {
         dispatch(createNewAlbum(cookies, albumName, privacy, files));
         setOpen(false);
     }
-
-
-
-
 
     useEffect(() => {
         dispatch(fetchAlbum(cookies, userId))
@@ -99,19 +90,16 @@ function Album() {
                                         <div className='albumNameContainer'><span className='albumName'>Tạo Album</span></div>
                                     </Grid> : <></>
                                 }
-
                                 {
                                     status === 'loading' ? <SkeletonAlbum /> : status === 'succeeded' ?
                                         albums.map((album) => (
                                             <Grid key={album.id} item>
-
                                                 <Link to={"/userId/" + userId + "/photos/album/" + album.id}>
                                                     {album.thumnail === null ? <div style={{
                                                         backgroundColor: "#D8DADF", width: "11.95rem",
                                                         height: "11.95rem"
                                                     }}></div> : <img className='photosImageItem' src={album.thumnail} alt="" />}
                                                 </Link>
-
                                                 <div className='albumNameContainer'>
                                                     <div className='albumInforAlbum'>
                                                         <span className='albumName'>{album.album_name}</span>
@@ -135,7 +123,6 @@ function Album() {
                 >
                     <div className='albumDialog'>
                         <div className='albumHeaderDialogTitle'>Tạo Album</div>
-
                         <hr className='albumDialogHr' />
                         <div className='albumDialogWraaper'>
                             <div className='albumDialogContainer'>
@@ -164,7 +151,6 @@ function Album() {
                                         </div>
                                     </div>
                                 </div>
-
                                 {
                                     view ?
                                         <div className='albumDialogPreview'>
@@ -179,8 +165,6 @@ function Album() {
 
                                                             ))}
                                                         </Grid>
-
-
                                                     </Grid>
                                                 </Grid>
                                             </div>
@@ -192,8 +176,6 @@ function Album() {
                                             </div>
                                         </div>
                                 }
-
-
                             </div>
                         </div>
                         <div>
@@ -211,7 +193,6 @@ function Album() {
                                     <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Bạn bè</MenuItem>
                                     <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                                 </Menu>
-
                             </div>
                         </div>
                     </div>

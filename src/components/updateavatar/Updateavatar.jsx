@@ -3,9 +3,9 @@ import './updateavatar.css'
 import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { updateAvatar } from '../../redux/actions/userAction'
+import { baseURL } from '../auth/auth';
 
 function UpdateAvatar() {
     const { userId } = useParams();
@@ -17,10 +17,8 @@ function UpdateAvatar() {
     const [isUpload, setIsUpload] = useState(true);
     useEffect(() => {
         function fetchImageAvatars() {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-avatar/userId=' + userId;
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-avatar/userId=' + userId;
+            baseURL.get('/api/v1/fetch-image-avatar/userId=' + userId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -31,10 +29,8 @@ function UpdateAvatar() {
             }).catch((error) => console.log(error));
         }
         function fetchImageUploaded() {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;   
+            baseURL.get('/api/v1/fetch-image-uploaded/userId=' + userId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",

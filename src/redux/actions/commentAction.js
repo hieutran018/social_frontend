@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { baseURL } from '../../components/auth/auth';
 import {
     FETCH_COMMENT_POST_STARTED,
     FETCH_COMMENT_POST_SUCCEEDED,
@@ -28,10 +28,8 @@ export const fetchComment = (cookies, postId) => {
     return async dispatch => {
         try {
             dispatch(fetchCommentStarted());
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-comment-by-post/postId=' + postId;
-            axios({
-                method: "GET",
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-comment-by-post/postId=' + postId;
+            baseURL.get('/api/v1/fetch-comment-by-post/postId=' + postId, {
                 headers: {
                     Authorization: "Bearer " + cookies[0]._tk
                 }
@@ -49,10 +47,9 @@ export const fetchComment = (cookies, postId) => {
 export const commentPost = (cookies, postId, commentContent, file) => {
     return async dispatch => {
         try {
-            axios({
-                method: 'POST', //you can set what request you want to be
-                url: 'https://ckcsocial.site/api/v1/create-comment-post',
-                data: { postId: postId, commentContent: commentContent, file: file },
+            baseURL.post('/api/v1/create-comment-post', {
+                postId: postId, commentContent: commentContent, file: file
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk,
                     "Content-Type": "multipart/form-data",

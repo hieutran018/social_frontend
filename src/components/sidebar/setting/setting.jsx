@@ -4,6 +4,7 @@ import { VscAccount } from 'react-icons/vsc';
 import { Link, useParams } from 'react-router-dom';
 function SidebarSetting() {
     const setting = useParams().setting;
+
     return (
         <div className='sidebarSetting'>
             <ul className="sidebarList">

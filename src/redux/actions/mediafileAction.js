@@ -1,9 +1,9 @@
+import { baseURL } from '../../components/auth/auth';
 import {
     FETCH_MEDIAFILE_STARTED,
     FETCH_MEDIAFILE_SUCCEEDED,
     FETCH_MEDIAFILE_FAILED
 } from '../constants/mediafileConstant';
-import axios from 'axios';
 
 
 export const fetchMediaFileStarted = () => ({
@@ -24,10 +24,8 @@ export const fetchMediaFile = (cookies, userId) => {
     return async dispatch => {
         try {
             dispatch(fetchMediaFileStarted());
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;
-            axios({
-                method: 'GET', //you can set what request you want to be
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-uploaded/userId=' + userId;
+            baseURL.get('/api/v1/fetch-image-uploaded/userId=' + userId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -47,10 +45,8 @@ export const fetchMediaFilePostTag = (cookies, userId) => {
     return async dispatch => {
         try {
             dispatch(fetchMediaFileStarted());
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-from-post-tag/userId=' + userId;
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-image-from-post-tag/userId=' + userId;
+            baseURL.get('/api/v1/fetch-image-from-post-tag/userId=' + userId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",

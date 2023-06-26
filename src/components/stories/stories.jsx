@@ -33,7 +33,6 @@ function Stories() {
                         <div className='storiesWrapper'>
                             <Link to="/stories/create">
                                 <div className='storiesItem'>
-
                                     <img className='storiesThumbnail' width={115} height={200} src={user.avatar} alt="" />
                                     <div className='storiesAdd'>
                                         <div className='storiesAddText'>
@@ -69,7 +68,6 @@ function Stories() {
                             </div> :
                             <></>
             }
-
         </div>
     );
 }

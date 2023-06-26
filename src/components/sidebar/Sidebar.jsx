@@ -23,7 +23,7 @@ import SidebarChat from './chat/sidebarchat';
 function Sidebar({ page }) {
     const SidebarVideo = () => {
         return (
-            <>
+            <div className='sidebarVideos'>
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
                         <Link to="/" className="sidebarListItemText">
@@ -56,7 +56,7 @@ function Sidebar({ page }) {
                     <CloseFriend key={u.id} user={u} />
                 ))}
             </ul> */}
-            </>
+            </div>
         );
     };
 
@@ -103,7 +103,6 @@ function Sidebar({ page }) {
 
         );
     }
-
 
     return (
         <div className="sidebar">

@@ -1,14 +1,8 @@
 import './video.css';
-// import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../data";
 import { AiOutlineLike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai'
-
 import { useRef, useEffect } from "react";
 
-
 function Video({ video }) {
-
-    // const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
 
     useEffect(() => {
@@ -16,7 +10,6 @@ function Video({ video }) {
             rootMargin: "0px",
             threshold: [0.25, 0.75]
         };
-
         let handlePlay = (entries, observer) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -27,12 +20,9 @@ function Video({ video }) {
                 }
             });
         };
-
         let observer = new IntersectionObserver(handlePlay, options);
-
         observer.observe(videoRef.current);
     });
-
 
     return (
         <>

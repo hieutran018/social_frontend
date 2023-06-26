@@ -1,10 +1,9 @@
+import { baseURL } from '../../components/auth/auth';
 import {
     FETCH_POSTHISTORY_STARTED,
     FETCH_POSTHISTORY_SUCCEEDED,
     FETCH_POSTHISTORY_FAILED
 } from '../constants/postHistoryConstant';
-import axios from 'axios';
-
 
 export const fetchPostHistoryStarted = () => ({
     type: FETCH_POSTHISTORY_STARTED
@@ -24,11 +23,8 @@ export const fetchPostHistory = (cookies, postId) => {
     return async dispatch => {
         dispatch(fetchPostHistoryStarted())
         try {
-            const requestURL = "https://ckcsocial.site/api/v1/fetch-history-edit-post/postId=" + postId;
-            axios({
-                method: 'GET',
-                url: requestURL,
-
+            // const requestURL = "https://ckcsocial.site/api/v1/fetch-history-edit-post/postId=" + postId;
+            baseURL.get('/api/v1/fetch-history-edit-post/postId=' + postId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",

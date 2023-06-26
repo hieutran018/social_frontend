@@ -1,36 +1,33 @@
 import { Link } from 'react-router-dom';
 import './friendSuggestionCard.css';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { useState } from 'react';
+import { baseURL } from '../../../auth/auth';
 
 function FriendSuggestionCard({ u }) {
     const cookies = useCookies('_tk')[0]._tk;
     const [isAdd, setIsAdd] = useState(false);
     const hanldeClickSendAddFriend = (userId) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
-
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userIdAccept: userId },
+        // const requestURL = "http://127.0.0.1:8000/api/v1/request-add-friend";
+        baseURL.post('/api/v1/request-add-friend', {
+            userIdAccept: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             setIsAdd(true)
             console.log(response.data);
         }).catch((error) => console.log(error));
     }
+
     const hanldeClickCancelAddFriend = (userId) => {
-        const requestURL = "https://ckcsocial.site/api/v1/cancle-add-friend";
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userId: userId },
+        // const requestURL = "https://ckcsocial.site/api/v1/cancle-add-friend";
+        baseURL.post('/api/v1/cancle-add-friend', {
+            userId: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
@@ -41,6 +38,7 @@ function FriendSuggestionCard({ u }) {
             setIsAdd(false);
         }).catch((error) => console.log(error.message));
     }
+
     return (
         <li key={u.id} className="sidebarListItemFriendSuggestion">
             <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >

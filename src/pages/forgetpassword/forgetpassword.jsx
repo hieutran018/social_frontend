@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
 import isEmpty from 'validator/lib/isEmpty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './forgetpassword.css';
+import { baseURL } from '../../components/auth/auth';
 
 function ForgetPassword() {
 
@@ -45,10 +45,10 @@ function ForgetPassword() {
         if (!isValid) {
             return;
         } else {
-            const requestURL = 'https://ckcsocial.site/api/auth/forgot-password';
-            axios.post(requestURL, {
-                email: email,
-            }).then((res) => {
+            // const requestURL = 'https://ckcsocial.site/api/auth/forgot-password';
+            baseURL.post('/api/auth/forgot-password', {
+                email: email
+            }, {}).then((res) => {
                 navigate('/confirm-forgot-password')
             }).catch((err) => {
                 if (err.response.status === 404) {
@@ -56,7 +56,6 @@ function ForgetPassword() {
                 }
             });
         }
-
     }
 
     return (

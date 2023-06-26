@@ -5,6 +5,9 @@
     padding-left: 1rem;
     padding-right: 1rem;
 }
+.sidebarVideos{
+    margin-top: 5rem;
+}
 
 .sidebar::-webkit-scrollbar {
     display: none;

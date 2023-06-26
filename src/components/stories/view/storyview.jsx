@@ -7,9 +7,11 @@ function StoryView({ story }) {
     console.log(story[0]);
     const [size, setSize] = useState('');
     const [item, setItem] = useState(0);
+
     const handlePreviousItem = () => {
         setItem(item - 1);
     }
+
     const handleNextItem = () => {
         if (item + 1 === story[0].stories.length) {
             setItem(item);
@@ -17,6 +19,7 @@ function StoryView({ story }) {
             setItem(item + 1);
         }
     }
+
     useEffect(() => {
         const img = new Image();
         img.src = story[0].stories[item] ? story[0].stories[item].file_name_story : "";
@@ -56,7 +59,6 @@ function StoryView({ story }) {
                     <div style={{ width: "50px" }} onClick={handlePreviousItem} className='storyViewButtonSlideContainer'><GrPrevious color='white' className='storyViewButtonIconSlide' size={25} /></div>
             }
             </div>
-
             <div className='storyViewMediaContainer'>
                 <div className='storyViewUserInfo'>
                     <div>
@@ -66,7 +68,6 @@ function StoryView({ story }) {
                         {story[0].displayName}
                     </div>
                 </div>
-
                 <div className='storyViewMediaMain'>
                     <Slider {...settings}>
                         {
@@ -79,11 +80,8 @@ function StoryView({ story }) {
                         }
                     </Slider>
                 </div>
-
             </div>
-
             <div className='storyViewButtonSlide'><div style={{ width: "50px" }} onClick={handleNextItem} className="storyViewButtonSlideContainer"><GrFormNext className='storyViewButtonIconSlide' size={25} /></div></div>
-
         </div>
     );
 }

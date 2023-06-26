@@ -5,7 +5,7 @@ import { IoMdSettings } from 'react-icons/io';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { baseURL } from '../../auth/auth';
 
 function CreateStory() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -45,13 +45,10 @@ function CreateStory() {
     })
 
     const handleSubmit = () => {
-        const requestURL = 'https://ckcsocial.site/api/v1/stories/create-story';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                file: file, type: type
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/stories/create-story';
+        baseURL.post('/api/v1/stories/create-story', {
+            file: file, type: type
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 'Content-Type': 'multipart/form-data',
@@ -64,10 +61,11 @@ function CreateStory() {
             console.log(error);
         });
     }
+
     const handleCancel = () => {
         setFile()
     }
-    console.log(type);
+
     return (
         <div className='createStory'>
             {
@@ -90,7 +88,6 @@ function CreateStory() {
                                 </div>
                                 <span className='createStoryDescriptionText'>Thêm một Video/Đoạn văn</span>
                             </label>
-
                         </div>
                     </div> :
                     <div className="createStoryWrapper">
@@ -116,14 +113,10 @@ function CreateStory() {
                                     <div onClick={handleSubmit} className='createStoryButtonSubmit'>Đăng</div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
             }
         </div>
-
-
-    )
+    );
 }
 export default CreateStory;

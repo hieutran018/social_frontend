@@ -2,7 +2,7 @@ import '../rightbar.css';
 import Online from "../../online/Online";
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { baseURL } from '../../auth/auth';
 
 function HomeRightbar() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -10,10 +10,8 @@ function HomeRightbar() {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-by-user-id/' + userId + '/25';
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-by-user-id/' + userId + '/25';
+        baseURL.get('/api/v1/fetch-friend-by-user-id/' + userId + '/25', {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",

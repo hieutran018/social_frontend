@@ -12,9 +12,11 @@ function SidebarChat() {
     const dispatch = useDispatch();
     const status = useSelector(selectStatusChats);
     const chats = useSelector(selectChats);
+
     useEffect(() => {
         dispatch(fetchChat(cookies));
     }, [dispatch, cookies]);
+
     return (
         <div className="sidebarChat">
             <div className="sidebarChatTitle">
@@ -32,7 +34,6 @@ function SidebarChat() {
                                 <>FAILED</> :
                                 <></>
                 }
-
             </div>
         </div>
     )

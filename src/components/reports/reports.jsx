@@ -2,9 +2,9 @@ import './reports.css';
 import { GrNext, GrLinkPrevious } from 'react-icons/gr';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseURL } from '../auth/auth';
 
 function Reports({ postId, close }) {
     const cookies = useCookies('_tk')[0]._tk;
@@ -102,15 +102,12 @@ function Reports({ postId, close }) {
     }
 
     const handleSubmitReport = () => {
-        const requestURL = "https://ckcsocial.site/api/v1/create-report";
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                objectType: 1,
-                objectId: postId,
-                contentReport: reported.content
-            },
+        // const requestURL = "https://ckcsocial.site/api/v1/create-report";
+        baseURL.post('/api/v1/create-report', {
+            objectType: 1,
+            objectId: postId,
+            contentReport: reported.content
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
@@ -122,6 +119,7 @@ function Reports({ postId, close }) {
             noti('Chúng tôi sẽ tiến hành kiểm tra báo cáo của bạn.')
         }).catch((error) => console.log(error))
     }
+
     return (
         reported ?
             <div className='reports'>

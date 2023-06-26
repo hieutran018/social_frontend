@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import './detailuser.css';
 import Dialog from '@mui/material/Dialog';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { currentUser, updateDisplaynameUser, updatePhoneUser } from '../../../redux/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/selectors/postSelector';
+import { baseURL } from '../../auth/auth';
 
 function DetailUser() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -83,13 +83,10 @@ function DetailUser() {
     }
 
     const submitUpdatePassword = () => {
-        const requestURL = 'https://ckcsocial.site/api/v1/update-password-user';
-        axios({
-            method: "POST",
-            url: requestURL,
-            data: {
-                currentPassword: currentPassword, password: password, confirmPassword: confirmPassword
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/update-password-user';
+        baseURL.post('/api/v1/update-password-user', {
+            currentPassword: currentPassword, password: password, confirmPassword: confirmPassword
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
@@ -103,6 +100,7 @@ function DetailUser() {
             console.log(error);
         })
     }
+
     return (
         <div className='detailuser'>
             {

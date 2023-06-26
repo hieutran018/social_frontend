@@ -18,7 +18,6 @@ const SidebarHomePage = () => {
                         <FaUserFriends size={25} className="sidebarIcon" />
                         <span className="sidebarListItemText">Bạn bè</span>
                     </Link>
-
                 </li>
                 <li className="sidebarListItem">
                     <Link to="/videos" className="sidebarListItemText">
@@ -39,7 +38,6 @@ const SidebarHomePage = () => {
             </ul>
             <button className="sidebarButton">Xem thêm</button>
             <hr className="sidebarHr" />
-
         </div>);
 };
 

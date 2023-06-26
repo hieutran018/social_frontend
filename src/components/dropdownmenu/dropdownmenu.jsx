@@ -7,8 +7,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CSSTransition } from "react-transition-group";
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
-import axios from "axios";
 import "./dropdownmenu.css";
+import { baseURL } from "../auth/auth";
 
 const DropdownMenu = () => {
     // state for csstransition
@@ -27,13 +27,12 @@ const DropdownMenu = () => {
 
     const handleLogOut = () => {
         console.log(1);
-        axios({
-            method: 'POST',
-            url: 'https://ckcsocial.site/api/auth/logout',
+        baseURL.post('/api/auth/logout', {}, {
             headers: {
                 Authorization: 'Bearer ' + cookies._tk
             }
-        }).then(() => { remove('_tk'); localStorage.removeItem('user'); navigate('/login') }).catch((err) => { console.log(err.message); });
+        }).then(() => { remove('_tk'); localStorage.removeItem('user'); navigate('/login') })
+            .catch((err) => { console.log(err.message); });
     }
 
     return (

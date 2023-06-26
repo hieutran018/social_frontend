@@ -52,14 +52,10 @@ function Photos() {
                                             <Grid key={item.id} item>
                                                 <img className='photosImageItem' src={item.media_file_name} alt="" />
                                             </Grid>
-
                                         )) : <SkeletonPhotoBy />}
                                 </Grid>
-
-
                             </Grid>
                         </Grid> : category === 'album' ? <Album /> : <PhotoBy />}
-
                 </div>
             </div>
         </div>

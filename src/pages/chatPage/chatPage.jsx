@@ -4,10 +4,9 @@ import MessageSent from '../../components/messages/messagesent/messagesent';
 import MessageGet from '../../components/messages/messageget/messageget';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { requestDev } from '../../components/auth/auth';
+import { baseURL } from '../../components/auth/auth';
 import { AiOutlineFileAdd } from 'react-icons/ai';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+
 
 function ChatPage({ pusher }) {
     const userId = useParams().userId;
@@ -41,11 +40,9 @@ function ChatPage({ pusher }) {
         }
     };
 
-
-
     useEffect(() => {
         // const requestURL = 'https://ckcsocial.site/api/v1/fetch-message/userId=' + userId;
-        requestDev.get('/v1/fetch-message/userId=' + userId, {
+        baseURL.get('/v1/fetch-message/userId=' + userId, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -64,9 +61,8 @@ function ChatPage({ pusher }) {
         setContentMessage(e.target.value);
     }
 
-
     const sendMessage = () => {
-        requestDev.post('/v1/chats/send-message', {
+        baseURL.post('/v1/chats/send-message', {
             conversationId: conversation.id,
             contentMessage: contentMessage,
         }, {
@@ -88,7 +84,7 @@ function ChatPage({ pusher }) {
 
     const sendMessageHaveFile = () => {
 
-        requestDev.post('/v1/chats/sent-message-file', {
+        baseURL.post('/v1/chats/sent-message-file', {
             conversationId: conversation.id,
             files: files
         }, {

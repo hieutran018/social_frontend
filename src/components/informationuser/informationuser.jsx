@@ -12,7 +12,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../redux/actions/userAction';
 import { selectStatusupdate } from '../../redux/selectors/postSelector';
 
-
 function InforMationUser({ user }) {
     const { userId } = useParams();
     const cookies = useCookies('_tk')
@@ -24,11 +23,8 @@ function InforMationUser({ user }) {
     const dispatch = useDispatch();
     const status = useSelector(selectStatusupdate);
 
-
     const handleClickOpen = () => {
         setOpen(true);
-
-
     };
     const handleClose = () => {
         setOpen(false);
@@ -52,12 +48,6 @@ function InforMationUser({ user }) {
         dispatch(updateUser(cookies, wentTo, liveIn, relationship, phone));
         setOpen(false);
     };
-
-
-
-
-
-
 
     return (
         <div className='informationUser'>

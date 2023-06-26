@@ -22,8 +22,7 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useCookies } from 'react-cookie';
 import { fetchPostByUserId } from "../../redux/actions/postAction";
 import { selectPost, selectPostStatus } from "../../redux/selectors/postSelector";
-import axios from 'axios';
-import { requestDev } from '../../components/auth/auth';
+import { baseURL } from '../../components/auth/auth';
 
 
 function Profile({ pusher }) {
@@ -93,7 +92,7 @@ function Profile({ pusher }) {
 
     const handleClickChat = () => {
         // const requestURL = 'http://127.0.0.1:8000/api/v1/chats/create-chat';
-        requestDev.post('/v1/chats/create-chat', {
+        baseURL.post('/v1/chats/create-chat', {
             userId: userId
         }, {
             headers: {

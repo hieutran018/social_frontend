@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import axios from "axios";
 import isEmpty from 'validator/lib/isEmpty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './register.css';
-import { requestDev } from '../../components/auth/auth';
+import { baseURL } from '../../components/auth/auth';
 
 function Register() {
     const [displayName, setdisplayName] = useState('');
@@ -61,7 +60,7 @@ function Register() {
             return
         } else {
             try {
-                requestDev.post('/auth/register', {
+                baseURL.post('/api/auth/register', {
                     displayName: displayName,
                     email: email,
                     password: password,

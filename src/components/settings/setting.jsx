@@ -1,5 +1,4 @@
 import './setting.css';
-import { Link } from 'react-router-dom';
 
 function SettingAccount() {
     return (

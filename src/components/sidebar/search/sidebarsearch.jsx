@@ -7,7 +7,6 @@ import { MdSelectAll } from 'react-icons/md';
 
 
 function SidebarSearch() {
-
     return (
         <div>
             <ul className="sidebarList">

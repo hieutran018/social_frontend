@@ -1,32 +1,26 @@
 import './viewprofile.css';
-import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
-
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
-
-
+import { baseURL } from '../../components/auth/auth';
 
 function ViewProfile() {
     const cookies = useCookies('_tk')[0]._tk;
     const userId = useParams().userId;
     const [user, setUser] = useState([]);
     useEffect(() => {
-        const requestURL = 'https://ckcsocial.site/api/v1/profile-user/userId=' + userId;
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/profile-user/userId=' + userId;
+        baseURL.get('/api/v1/profile-user/userId=' + userId, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
             }
         }).then((response) => { setUser(response.data); console.log(response.data) }).catch((error) => console.log(error))
         window.scrollTo(0, 0)
     }, [userId, cookies])
+
     return (
         <div className="viewProfile">
-
             <div className="viewprofileWrapper">
                 <div className="viewprofileRight">
                     <div className="viewprofileRightTop">
@@ -57,10 +51,7 @@ function ViewProfile() {
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     );
 }
 

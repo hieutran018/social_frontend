@@ -1,7 +1,7 @@
 import { useCookies } from 'react-cookie';
 import './verifiedProfile.css';
 import { useState } from 'react';
-import axios from 'axios';
+import { baseURL } from '../../auth/auth';
 
 function VerifiedProfile() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -52,23 +52,20 @@ function VerifiedProfile() {
     }
 
     const handleSubmitVerifiedProfile = () => {
-        const requestURL = 'https://ckcsocial.site/api/v1/verified-profile';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                name: name,
-                documentType: documentType,
-                file1: file1,
-                file2: file2,
-                country: country,
-                outstandingType: outstandingType,
-                quoteOne: quoteOne,
-                quoteTwo: quoteTwo,
-                quoteThree: quoteThree,
-                quoteFour: quoteFour,
-                quoteFive: quoteFive
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/verified-profile';
+        baseURL.post('/api/v1/verified-profile', {
+            name: name,
+            documentType: documentType,
+            file1: file1,
+            file2: file2,
+            country: country,
+            outstandingType: outstandingType,
+            quoteOne: quoteOne,
+            quoteTwo: quoteTwo,
+            quoteThree: quoteThree,
+            quoteFour: quoteFour,
+            quoteFive: quoteFive
+        }, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",

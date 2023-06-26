@@ -3,9 +3,7 @@ import Rightbar from "../components/rightbar/Rightbar";
 import Sidebar from "../components/sidebar/Sidebar";
 import Topbar from "../components/topbar/Topbar";
 
-
 function LayoutUser({ children, sidebar, profile, rightbar, pusher }) {
-
     return (
         <div className="layout">
             <div className="layoutTopbar">
@@ -24,7 +22,6 @@ function LayoutUser({ children, sidebar, profile, rightbar, pusher }) {
                         <Rightbar /> :
                         <></>
                 }
-
             </div>
         </div>
     );

@@ -4,8 +4,8 @@ import Grid from '@mui/material/Grid';
 import CardUser from '../carduser/CardUser';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { baseURL } from '../auth/auth';
 
 
 function Friends() {
@@ -14,10 +14,8 @@ function Friends() {
     const cookies = useCookies('_tk');
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
-            axios({
-                method: 'POST', //you can set what request you want to be
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
+            baseURL.post('/api/v1/fetch-friend-request-list', {}, {
                 headers: {
                     Authorization: 'Bearer ' + cookies[0]._tk,
                     "Content-Type": "multipart/form-data",
@@ -27,7 +25,6 @@ function Friends() {
                 console.log("RES =========", response.data);
                 setFrs(response.data);
             }).catch((error) => console.log(error.message));
-
         }
         fetchFriendSuggestion()
     }, [])

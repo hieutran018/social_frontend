@@ -1,26 +1,22 @@
 import './watch.css'
 import Video from '../video/Video';
-import { Posts } from "../../data";
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { baseURL } from '../auth/auth';
 
 function Watch() {
     const cookies = useCookies('_tk')[0]._tk;
     const [videos, setVideos] = useState([]);
 
     function fetchVideos() {
-        const requestURL = 'https://ckcsocial.site/api/v1/fetch-reels-video';
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/fetch-reels-video';
+        baseURL.get('/api/v1/fetch-reels-video', {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
-            console.log("LOG VIDEOS", response.data);
             setVideos(response.data);
         }).catch((error) => console.log(error))
     }

@@ -3,8 +3,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import GroupCard from './groupcard/groupcard'
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { baseURL } from '../auth/auth';
 
 function MyGroup() {
     const cookies = useCookies('_tk')[0]._tk;
@@ -12,26 +12,17 @@ function MyGroup() {
 
     useEffect(() => {
         function fetchRequestJoindGroup() {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-invite-to-group';
-
-            axios({
-                method: 'GET',
-                url: requestURL,
-
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-invite-to-group';
+            baseURL.get('/api/v1/fetch-invite-to-group', {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
-
             }).then((response) => {
                 console.log(response.data)
                 setGroupInvites(response.data);
-
-
-
             }).catch((error) => console.log(error.message));
-
         }
         fetchRequestJoindGroup()
     }, [cookies])

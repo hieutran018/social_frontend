@@ -26,19 +26,20 @@ function SideBarGroup() {
     const groups = useSelector(selectGroup);
     const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
-    // const [groups, SetGroups] = useState([]);
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const [privacy, setPrivacy] = useState(1);
-
     const [groupName, setGroupName] = useState('');
+
     const hanldeChangeGroupName = (e) => {
         setGroupName(e.target.value);
     }
+
     const handleClickOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -46,10 +47,12 @@ function SideBarGroup() {
     const handleClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
     }
+
     const hanldeSelectPrivacy = (privacy) => {
         setPrivacy(privacy);
         setAnchorEl(null);
     }
+
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
@@ -93,11 +96,8 @@ function SideBarGroup() {
                 <li className="sidebarListItem">
                     <button onClick={handleClickOpen} className='sidebarGroupCreateButton'> <IoMdAdd size={25} />Tạo nhóm mới</button>
                 </li>
-
             </ul>
             <hr className="sidebarHr" />
-
-
             <div className='sidebarGroupJoined'>Nhóm đã tham gia</div>
             <div className="sidebarFriendList">
                 {status === 'loading' ? <SkeletonGroup /> : status === 'succeeded' ? groups.map((group) => (
@@ -111,15 +111,12 @@ function SideBarGroup() {
                     fullWidth
                     maxWidth="sx"
                 >
-
                     <div className='dialogCreateGroup'>
                         <div className='groupCreateGroup'>Tạo nhóm mới</div>
                         <hr className='groupCreateGroupHr' />
                         <div className='groupCreateContainer'>
                             <div className='groupCreateLeft'>
-
                                 <div className='groupCreateLeftContainer' style={{ margin: "1rem" }}>
-
                                     <div className='groupCreateAdminGroup '>
                                         <div className='groupCreateAvatarAdminContainer '>
                                             <img className='groupCreateAvatarAdimin' src={user.avatar} alt="" />
@@ -130,12 +127,10 @@ function SideBarGroup() {
                                             </div>
                                             <div className='groupCreatePositionAdmin'>Quản trị viên</div>
                                         </div>
-
                                     </div>
                                     <div className='groupCreateGroupNameContainer groupLeftItem'>
                                         <input placeholder='Tên nhóm...' onChange={hanldeChangeGroupName} className='groupCreateGroupName' type="text" />
                                     </div>
-
                                     <div onClick={handleClickOpenMenu} className='groupCreateGroupContainerPrivacy groupLeftItem'>
                                         <div className='groupCreateGroupPrivacy'>
                                             <div className='groupCreateGroupPrivacyOption'>
@@ -163,8 +158,6 @@ function SideBarGroup() {
                                         </button>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div className='groupCreateRight'>
                                 <div className='groupCreatePreviewContainer'>
@@ -195,7 +188,6 @@ function SideBarGroup() {
                                                 <div className='groupCreateItemTab'>Tệp</div>
                                             </div>
                                             <div className='groupPreviewContainerFeed'>
-
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +210,6 @@ function SideBarGroup() {
 
                         </div>
                     </div>
-
                 </Dialog>
             </div>
         </div>

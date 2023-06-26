@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import SearchResult from '../../components/searchresult/searchresult';
 import { useParams } from 'react-router-dom';
 
-
 function Search() {
     const result = useParams().result;
     console.log(result);

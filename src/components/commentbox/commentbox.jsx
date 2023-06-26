@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import './commentbox.css';
 import { useCookies } from 'react-cookie';
+import { baseURL } from '../auth/auth';
 
 function CommentBox({ postId, commentId, setComment }) {
     const [inputComment, setInputComment] = useState('');
@@ -10,12 +10,10 @@ function CommentBox({ postId, commentId, setComment }) {
     const handleClickReplyComment = () => {
         console.log("CURENT COMMENT:" + commentId);
         console.log('Press to enter')
-        const requestURL = 'https://ckcsocial.site/api/v1/reply-comment';
-
-        axios({
-            method: 'POST', //you can set what request you want to be
-            url: requestURL,
-            data: { postId: postId, commentContent: inputComment, commentId: commentId },
+        // const requestURL = 'https://ckcsocial.site/api/v1/reply-comment';
+        baseURL.post('/api/v1/reply-comment', {
+            postId: postId, commentContent: inputComment, commentId: commentId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }

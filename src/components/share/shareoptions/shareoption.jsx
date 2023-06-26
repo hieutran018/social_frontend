@@ -21,18 +21,14 @@ import { sharePostToWall } from '../../../redux/actions/postAction'
 import { selectAddPostStatus } from '../../../redux/selectors/postSelector';
 
 function ShareOption({ post }) {
-
     const cookies = useCookies('_tk');
     const userCurrent = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = useState(null);
     const [privacy, setPrivacy] = useState(1);
-
     const open = Boolean(anchorEl);
-
     const dispatch = useDispatch();
     const statusAdd = useSelector(selectAddPostStatus);
     const [checkClick, setCheckClick] = useState(true);
-
     const [inputContentPost, setInputContentPost] = useState('');
 
     const hanldeSelectPrivacy = (privacy) => {
@@ -49,22 +45,17 @@ function ShareOption({ post }) {
 
     const handleChangeContent = (e) => {
         setInputContentPost(e.target.value)
-
     }
+
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     }
-    console.log(post)
-
 
     const submitPost = () => {
-
         setCheckClick(false);
         dispatch(sharePostToWall(post, cookies, inputContentPost, privacy))
         console.log(inputContentPost);
         setInputContentPost('');
-
-
     }
 
     return (
@@ -74,9 +65,6 @@ function ShareOption({ post }) {
             </div>
             <div className='dialogShareHr'></div>
             <div className="wrapper">
-
-
-
                 {
                     statusAdd === 'adding' ?
                         <div className='dialogshareLoading'>
@@ -108,7 +96,6 @@ function ShareOption({ post }) {
                                                         post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.mediafile[0].media_file_name} controls></video> :
                                                             <img className="postShareImg" src={post.mediafile[0].media_file_name} alt="" />
                                                     }
-
                                                 </div>
                                                 : post.totalMediaFile === 2 ?
                                                     <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
@@ -148,7 +135,6 @@ function ShareOption({ post }) {
                                                             ))}
                                                         </ImageList>}
                                         </div>
-
                                     </div>
                                     <div className="postShareTop">
                                         <div className="postTopLeft">
@@ -159,7 +145,6 @@ function ShareOption({ post }) {
                                                     alt={"Avatar user " + post.displayName}
                                                 />
                                             </a>
-
                                             <div>
                                                 <span className="postUsername">
                                                     <a className="postLinkProfileUser" href={"/" + post.user_id}>
@@ -172,7 +157,6 @@ function ShareOption({ post }) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div>
                                         <ShowMoreText
@@ -184,21 +168,16 @@ function ShareOption({ post }) {
                                             anchorClass="postViewMore"
                                             onClick={executeOnClick}
                                             expanded={false}
-
                                             truncatedEndingComponent={"... "}
                                         ><p>{post.post_content}</p>
                                         </ShowMoreText>
                                     </div>
-
                                 </div>
                             </div>
 
                             <div className='shareButtonContainer'>
                                 <button onClick={submitPost} className="shareButton">Đăng</button>
                             </div>
-
-
-
                             <div>
                                 <Menu
                                     id="basic-menu"
@@ -213,7 +192,6 @@ function ShareOption({ post }) {
                                     <MenuItem onClick={() => hanldeSelectPrivacy(2)} >Bạn bè</MenuItem>
                                     <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                                 </Menu>
-
                             </div>
                         </div> : <div className='dialogshareLoading'>
                             <Box sx={{ display: 'flex' }}>
@@ -221,9 +199,7 @@ function ShareOption({ post }) {
                             </Box>
                         </div>
                 }
-
             </div>
-
         </div >
     )
 }

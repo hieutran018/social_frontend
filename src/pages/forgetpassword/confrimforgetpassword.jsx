@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import isEmpty from 'validator/lib/isEmpty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './forgetpassword.css';
+import { baseURL } from '../../components/auth/auth';
 
 function ConfirmForgotPassword() {
 
@@ -55,19 +55,17 @@ function ConfirmForgotPassword() {
             return;
         } else {
             setIsLoading(true);
-            const requestURL = 'https://ckcsocial.site/api/auth/completed-forgot-password';
-            axios.post(requestURL, {
-                tokenReset: tokenString,
-            }).then((res) => {
+            // const requestURL = 'https://ckcsocial.site/api/auth/completed-forgot-password';
+            baseURL.post('/api/auth/completed-forgot-password', {
+                tokenReset: tokenString
+            }, {}).then((res) => {
                 notiInfo('Mật khẩu mới đã được gửi đến địa chỉ email của bạn!')
                 setIsLoading(false);
             }).catch((err) => { noti('Mã xác nhận không đúng'); setIsLoading(false); });
         }
-
     }
 
     return (
-
         <div className="forgetPassword">
             <div className="forgetPasswordWrapper">
                 <div className="forgetPasswordLeft">

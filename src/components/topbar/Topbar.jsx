@@ -8,10 +8,10 @@ import './topbar.css';
 import { useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Notification from '../notification/notification';
 import { RxDotFilled } from 'react-icons/rx';
 import Message from '../../components/messages/messages';
+import { baseURL } from '../auth/auth';
 
 
 function Topbar({ pusher }) {
@@ -64,12 +64,10 @@ function Topbar({ pusher }) {
             }, 300)
         }
     }
-    function searchData(input) {
-        const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + input;
 
-        axios({
-            method: "GET",
-            url: requestURL,
+    function searchData(input) {
+        // const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + input;
+        baseURL.get('/api/v1/search-users-and-groups/input=' + input, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -80,10 +78,10 @@ function Topbar({ pusher }) {
             console.log(response.data.users);
         }).catch((error) => console.log(error));
     }
+
     const handleCloseData = () => {
         setDataUsers([]);
     }
-
 
     return (
         <div className="topbarContainer">
@@ -94,7 +92,6 @@ function Topbar({ pusher }) {
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-
                     <BsSearch size={25} className="searchIcon" />
                     <input
                         value={searchTemp}
@@ -139,7 +136,6 @@ function Topbar({ pusher }) {
                     }
                 </div>
             </div>
-
             <div className="topbarRight">
                 <div className="topbarIcons">
                     <div className="topbarIconItem">

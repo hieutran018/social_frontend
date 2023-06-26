@@ -4,8 +4,8 @@ import { BsDot } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import SearchCardUser from './searchCardUser/searchCardUser';
+import { baseURL } from '../auth/auth';
 
 function SearchResult() {
     const result = useParams().result;
@@ -15,10 +15,8 @@ function SearchResult() {
     const [dataPosts, setDataPosts] = useState([]);
     useEffect(() => {
         function searchData() {
-            const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + result;
-            axios({
-                method: "GET",
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/search-users-and-groups/input=' + result;
+            baseURL.get('/api/v1/search-users-and-groups/input=' + result, {
                 headers: {
                     Authorization: "Bearer " + cookies,
                     "Content-Type": "multipart/form-data",
@@ -34,7 +32,7 @@ function SearchResult() {
         }
         searchData();
     }, [result, cookies])
-    console.log(dataUsers, "RESULT SEARCH");
+
     return (
         <div className='searchResult'>
             <div className='searchResultWrapper'>
@@ -94,7 +92,6 @@ function SearchResult() {
                             <Post key={post.id} post={post} />
                         ))
                 }
-
             </div>
         </div>
     );

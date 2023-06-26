@@ -49,7 +49,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
         { id: 5, img: yayImg },
         { id: 6, img: wowImg },
         { id: 7, img: angryImg },
-
     ]
 
     const executeOnClick = (isExpanded) => {
@@ -105,7 +104,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                             alt={"Avatar user " + post.groupName}
                                         />
                                     </a>
-
                                     <div>
                                         <span className="postUsername">
                                             <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
@@ -126,7 +124,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                 }</span>
                                         </div>
                                     </div>
-
                                 </div>
                                 :
                                 <div className="postTopLeft">
@@ -137,7 +134,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                             alt={"Avatar user " + post.displayName}
                                         />
                                     </a>
-
                                     <div>
                                         <div className="postUsername">
                                             <a className="postLinkProfileUser" href={"/userId/" + post.user_id}>
@@ -156,10 +152,8 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                 }</span>
                                         </div>
                                     </div>
-
                                 </div>
                         }
-
                     </div>
 
                     <div className="postShareCenter">
@@ -299,7 +293,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                                     ))}
                                                                 </ImageList>}
                                                 </div>
-
                                             </div>
                                             <div className="postShareTop">
                                                 {
@@ -313,7 +306,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                                     alt={"Avatar user " + post.parent_post.groupName}
                                                                 />
                                                             </a>
-
                                                             <div>
                                                                 <span className="postUsername">
                                                                     <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
@@ -334,7 +326,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                                         }</span>
                                                                 </div>
                                                             </div>
-
                                                         </div> :
                                                         <div className="postTopLeft">
                                                             <a href={"/userId/" + post.parent_post.user_id}>
@@ -344,7 +335,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                                     alt={"Avatar user " + post.parent_post.displayName}
                                                                 />
                                                             </a>
-
                                                             <div>
                                                                 <span className="postUsername">
                                                                     <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
@@ -358,7 +348,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                             </div>
                                                         </div>
                                                 }
-
                                             </div>
                                             <div>
                                                 <ShowMoreText
@@ -370,7 +359,6 @@ function PostDetail({ post, isLiked, like, likes, share, close, reaction }) {
                                                     anchorClass="postViewMore"
                                                     onClick={executeOnClick}
                                                     expanded={false}
-
                                                     truncatedEndingComponent={"... "}
                                                 ><p>{post.parent_post.post_content}</p>
                                                 </ShowMoreText>

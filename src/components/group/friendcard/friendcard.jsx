@@ -1,10 +1,10 @@
 import '../group.css';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import axios from 'axios';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { baseURL } from '../../auth/auth';
 
 function FriendCard({ friend }) {
     const [isInvite, setInsInvite] = useState(false);
@@ -12,13 +12,10 @@ function FriendCard({ friend }) {
     const groupId = useParams().groupId;
 
     function sendInviteJoinGroup(userId) {
-        const requestUrl = 'http://127.0.0.1:8000/api/v1/send-invite-to-group';
-        axios({
-            method: 'POST',
-            url: requestUrl,
-            data: {
-                userId: userId, groupId: groupId
-            },
+        // const requestUrl = 'http://127.0.0.1:8000/api/v1/send-invite-to-group';
+        baseURL.post('/api/v1/send-invite-to-group', {
+            userId: userId, groupId: groupId
+        }, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -31,13 +28,10 @@ function FriendCard({ friend }) {
         }).catch((error) => console.log(error.message));
     }
     function cancelInviteJoinGroup(userId) {
-        const requestUrl = 'http://127.0.0.1:8000/api/v1/cancel-invite-to-group';
-        axios({
-            method: 'POST',
-            url: requestUrl,
-            data: {
-                userId: userId, groupId: groupId
-            },
+        // const requestUrl = 'http://127.0.0.1:8000/api/v1/cancel-invite-to-group';
+        baseURL.post('/api/v1/cancel-invite-to-group', {
+            userId: userId, groupId: groupId
+        }, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -46,7 +40,6 @@ function FriendCard({ friend }) {
         }).then((response) => {
             console.log(response.data);
             setInsInvite(false)
-
         }).catch((error) => console.log(error.message));
     }
 

@@ -21,7 +21,6 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { IoMdClose } from 'react-icons/io';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { PermMedia, Room, EmojiEmotions } from "@mui/icons-material";
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import EditPostSkeleton from './editPostSkeleton';
 import { useDispatch } from 'react-redux';
@@ -29,6 +28,7 @@ import { editPost } from '../../redux/actions/postAction';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/vi';
+import { baseURL } from '../auth/auth';
 
 function EditPost({ postId }) {
     const navigate = useNavigate();
@@ -105,10 +105,8 @@ function EditPost({ postId }) {
     }
 
     const handleClickTag = () => {
-        const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
+        baseURL.get('/api/v1/fetch-friend-by-user-id/' + user.id, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
@@ -168,16 +166,13 @@ function EditPost({ postId }) {
     }
 
     const handleClickFellingandActivity = () => {
-        const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
+        baseURL.get('/api/v1/fetch-fell-and-activity-posts', {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             setListIcon(response.data);
             setTab(2);
@@ -205,10 +200,8 @@ function EditPost({ postId }) {
         }
     }
     function searchIcon(input) {
-        const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
+        baseURL.get('/api/v1/search-feel-and-activity-posts/search=' + input, {
             headers: {
                 Authorization: "Bearer " + cookies,
                 "Content-Type": "multipart/form-data",
@@ -221,12 +214,12 @@ function EditPost({ postId }) {
     }
 
     const fetchPost = useCallback(() => {
-        const requestURL = "https://ckcsocial.site/api/v1/fetch-post-by-id/postId=" + postId;
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = "https://ckcsocial.site/api/v1/fetch-post-by-id/postId=" + postId;
+        baseURL.get('/api/v1/fetch-post-by-id/postId=' + postId, {
             headers: {
-                Authorization: "Bearer " + cookies
+                Authorization: "Bearer " + cookies,
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
             }
         }).then((response) => {
             setPost(response.data);

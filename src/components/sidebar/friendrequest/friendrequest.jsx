@@ -1,14 +1,10 @@
-import {
-    useEffect, useState
-} from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useCookies } from "react-cookie";
-import {
-    ArrowBack
-} from '@mui/icons-material';
+import { ArrowBack } from '@mui/icons-material';
 import '../friendsuggestion/friendsuggestion.css';
 import '../sidebar.css';
+import { baseURL } from "../../auth/auth";
 
 function FriendRequest() {
     const [frs, setFrs] = useState([]);
@@ -16,10 +12,8 @@ function FriendRequest() {
 
     useEffect(() => {
         const fetchFriendRequest = () => {
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
-            axios({
-                method: 'POST', //you can set what request you want to be
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
+            baseURL.post('/api/v1/fetch-friend-request-list', {}, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -35,18 +29,15 @@ function FriendRequest() {
     }, [cookies])
 
     const hanldeClickAcceptAddFriend = (userId) => {
-        const requestURL = "https://ckcsocial.site/api/v1/accept-friend-request";
-        console.log(userId);
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: { userIdRequest: userId },
+        // const requestURL = "https://ckcsocial.site/api/v1/accept-friend-request";
+        baseURL.post('/api/v1/accept-friend-request', {
+            userIdRequest: userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log(response.data);
         }).catch((error) => console.log(error));
@@ -60,7 +51,6 @@ function FriendRequest() {
             </div>
             <ul className="sidebarList">
                 {frs.map((u) => (
-
                     <li key={u.id} className="sidebarListItemFriendSuggestion">
                         <Link className="frslinkProfile" to={"/friend-request/" + u.id} >
                             <div className="frsContainnerImage"><img className='imageProfile' src={u.avatar} alt="" /></div>
@@ -75,7 +65,6 @@ function FriendRequest() {
                             </div>
                         </div>
                     </li>
-
                 ))}
             </ul>
         </div >

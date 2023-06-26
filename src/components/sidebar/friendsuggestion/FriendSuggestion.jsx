@@ -2,23 +2,21 @@ import {
     useEffect, useState
 } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useCookies } from "react-cookie";
 import {
     ArrowBack
 } from '@mui/icons-material';
 import './friendsuggestion.css';
 import FriendSuggestionCard from "./friendSuggestionCard/friendSuggestionCard";
+import { baseURL } from "../../auth/auth";
 
 function SidebarFriendSuggestion() {
     const [frs, setFrs] = useState([]);
     const cookies = useCookies('_tk')[0]._tk;
     useEffect(() => {
         const fetchFriendSuggestion = () => {
-            const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friends-suggestion';
-            axios({
-                method: 'GET', //you can set what request you want to be
-                url: requestURL,
+            // const requestURL = 'http://127.0.0.1:8000/api/v1/fetch-friends-suggestion';
+            baseURL.get('/api/v1/fetch-friends-suggestion', {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -28,10 +26,8 @@ function SidebarFriendSuggestion() {
                 console.log("RES =========", response.data);
                 setFrs(response.data);
             }).catch((error) => console.log(error));
-
         }
         fetchFriendSuggestion()
-
     }, [cookies])
 
     return (

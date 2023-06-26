@@ -3,17 +3,15 @@ import Post from '../post/Post';
 import './viewpostdetail.css';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { baseURL } from '../auth/auth';
 
 function ViewPostDetail() {
     const postId = useParams().postId;
     const cookies = useCookies('_tk')[0]._tk;
     const [post, setPost] = useState();
     useEffect(() => {
-        const requestURL = 'https://ckcsocial.site/api/v1/fetch-post-by-id/postId=' + postId;
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/fetch-post-by-id/postId=' + postId;
+        baseURL.get('/api/v1/fetch-post-by-id/postId=' + postId, {
             headers: {
                 Authorization: 'Bearer ' + cookies
             }
@@ -24,6 +22,7 @@ function ViewPostDetail() {
             console.log(error);
         });
     }, [cookies, postId])
+
     return (
         <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
             <div className='viewPotDetail'>

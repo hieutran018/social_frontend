@@ -2,25 +2,21 @@ import './groupcard.css';
 import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { baseURL } from '../../auth/auth';
 
 function GroupCard({ group }) {
     const cookies = useCookies('_tk')[0]._tk;
     function acceptJoinGroup() {
-        const requestURL = 'https://ckcsocial.site/api/v1/accept-invite-to-group';
-        axios({
-            method: 'POST',
-            url: requestURL,
-            data: {
-                groupId: group.groupId
-            },
+        // const requestURL = 'https://ckcsocial.site/api/v1/accept-invite-to-group';
+        baseURL.post('/api/v1/accept-invite-to-group', {
+            groupId: group.groupId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + cookies,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             console.log(response.data);
         }).catch((error) => { console.log(error.message); });
@@ -49,18 +45,13 @@ function GroupCard({ group }) {
                                             <span className='groupCardUserName'>{group.groupName}</span>
                                         </div>
                                     </Link>
-
                                 </div>
-
                             </div>
-
                         </Grid>
                         <div className='groupCardButtonViewContainer' >
                             <button onClick={acceptJoinGroup} className='groupCardButtonAccept'>Tham gia</button>
                             <button className='groupCardButtonCancel'>Từ chối</button>
-
                         </div>
-
                     </Grid>
                 </Grid>
             </Paper>

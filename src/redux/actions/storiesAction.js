@@ -1,9 +1,9 @@
-import axios from 'axios';
 import {
     FETCH_STORIES_STARTED,
     FETCH_STORIES_SUCCESSED,
     FETCH_STORIES_FAILED
 } from '../constants/storiesConstant';
+import { baseURL } from '../../components/auth/auth';
 
 export const fetchStoriesStarted = () => ({
     type: FETCH_STORIES_STARTED
@@ -22,10 +22,8 @@ export const fetchStories = (cookies) => {
     return async dispatch => {
         try {
             dispatch(fetchStoriesStarted());
-            const requestURL = 'https://ckcsocial.site/api/v1/stories';
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/stories';
+            baseURL.get('/api/v1/stories', {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",

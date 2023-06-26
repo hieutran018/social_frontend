@@ -1,5 +1,4 @@
 import './dialogshare.css'
-import axios from 'axios';
 import List from '@mui/material/List';
 import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
@@ -25,6 +24,7 @@ import { addNewPost } from '../../redux/actions/postAction'
 import { selectAddPostStatus } from '../../redux/selectors/postSelector';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
+import { baseURL } from '../auth/auth';
 
 function DialogShare({ group }) {
     const cookies = useCookies('_tk');
@@ -65,10 +65,8 @@ function DialogShare({ group }) {
     }
 
     function searchIcon(input) {
-        const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
-        axios({
-            method: "GET",
-            url: requestURL,
+        // const requestURL = 'https://ckcsocial.site/api/v1/search-feel-and-activity-posts/search=' + input;
+        baseURL.get('/api/v1/search-feel-and-activity-posts/search=' + input, {
             headers: {
                 Authorization: "Bearer " + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -79,6 +77,7 @@ function DialogShare({ group }) {
             console.log(response.data);
         }).catch((error) => console.log(error));
     }
+
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFIles = [];
@@ -92,6 +91,7 @@ function DialogShare({ group }) {
             setView(true)
         }
     };
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -139,10 +139,8 @@ function DialogShare({ group }) {
         setTab(0)
     }
     const handleClickTag = () => {
-        const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = "https://ckcsocial.site/api/v1/fetch-friend-by-user-id/" + user.id;
+        baseURL.get('/api/v1/fetch-friend-by-user-id/' + user.id, {
             headers: {
                 Authorization: 'Bearer ' + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
@@ -153,17 +151,15 @@ function DialogShare({ group }) {
             setTab(1);
         }).catch((error) => console.log(error));
     }
+
     const handleClickFellingandActivity = () => {
-        const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
-        axios({
-            method: 'GET',
-            url: requestURL,
+        // const requestURL = "https://ckcsocial.site/api/v1/fetch-fell-and-activity-posts";
+        baseURL.get('/api/v1/fetch-fell-and-activity-posts', {
             headers: {
                 Authorization: 'Bearer ' + cookies[0]._tk,
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
             }
-
         }).then((response) => {
             setListIcon(response.data);
             setTab(2);
@@ -183,7 +179,6 @@ function DialogShare({ group }) {
                     <span className='shareTitle'>Tạo bài viết</span>
                 </div>
             </DialogTitle>
-
             <div className='dialogShareHr'></div>
             <DialogContent style={{ padding: "0px" }}>
                 <div className="wrapper">
@@ -197,7 +192,6 @@ function DialogShare({ group }) {
                                 </div> : (statusAdd === 'succeeded' || !statusAdd) && checkClick ? <div>
                                     <div className="content">
                                         <div className='shareImgAvatarContainer'><img className='shareImgAvatar' src={user.avatar} alt="logo" /></div>
-
                                         <div className="details">
                                             <p className='shareUserName'>{user.displayName} {selectIcon ? <span className='shareWithText'>đang cảm thấy <img width={20} height={20} src={selectIcon.patch} alt="" /> <span className='shareUserName'>{selectIcon.icon_name}</span></span> : ""} {taggingList.length === 0 ? "" : <span className='shareWithText'> cùng với <span className='shareUserName'>{taggingList.length + " người khác"}</span></span>}</p>
                                             <div className='privacy' onClick={handleClick}>
@@ -255,7 +249,6 @@ function DialogShare({ group }) {
                                                                     </ImageListItem>
                                                                 ))}
                                                             </ImageList>}
-
                                                 <button >
                                                     Remove This Image
                                                 </button>
@@ -265,27 +258,17 @@ function DialogShare({ group }) {
                                     <div className="optionsContainer">
                                         <div className='shareDescriptionContainer'><p className='shareDescrion'>Thêm vào bài viết của bạn</p></div>
                                         <div className="options">
-
                                             <label htmlFor='uploadFiles' onChange={handleFileChange}><input type="file" multiple id="uploadFiles" hidden /><PermMedia style={{ fontSize: "35" }} htmlColor="tomato" className="shareIcon" /></label>
-
-
                                             <div><Room style={{ fontSize: "35" }} htmlColor="green" className="shareIcon" /></div>
-
-
                                             <div onClick={handleClickFellingandActivity}><EmojiEmotions style={{ fontSize: "35" }} htmlColor="goldenrod" className="shareIcon" /></div>
                                             {
                                                 group ? <></> : <div onClick={handleClickTag}><LocalOfferIcon style={{ fontSize: "35" }} htmlColor="blue" className="shareIcon" /></div>
                                             }
-
-
                                         </div>
                                     </div>
                                     <div className='shareButtonContainer'>
                                         <button onClick={submitPost} disabled={!inputContentPost && files.length === 0} className={!inputContentPost && files.length === 0 ? "shareButton disablebutton" : "shareButton"} >Đăng</button>
                                     </div>
-
-
-
                                     <div>
                                         <Menu
                                             id="basic-menu"
@@ -300,7 +283,6 @@ function DialogShare({ group }) {
                                             <MenuItem onClick={() => hanldeSelectPrivacy(2)}>Bạn bè</MenuItem>
                                             <MenuItem onClick={() => hanldeSelectPrivacy(0)}>Chỉ mình tôi</MenuItem>
                                         </Menu>
-
                                     </div>
                                 </div> : <div className='dialogshareLoading'>
                                     <Box sx={{ display: 'flex' }}>
@@ -345,7 +327,6 @@ function DialogShare({ group }) {
                                                     </ListItem>
                                                 ))
                                             }
-
                                         </List>
                                     </div>
                                 </div> : tab === 2 ?
@@ -375,8 +356,6 @@ function DialogShare({ group }) {
                                                                     </Grid>
                                                                 ))
                                                             }
-
-
                                                         </Grid> : <Grid container rowSpacing={0.5} columnSpacing={{ xs: 0.5, sm: 0.5, md: 0.5 }}>
                                                             {
                                                                 resultIcon.map((item) => (
@@ -390,18 +369,14 @@ function DialogShare({ group }) {
                                                                     </Grid>
                                                                 ))
                                                             }
-
-
                                                         </Grid>
                                                     }
-
                                                 </div>
                                             </div>
                                         </DialogContent>
                                     </div> :
                                     <div></div>
                     }
-
                 </div>
             </DialogContent>
         </div >

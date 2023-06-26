@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { baseURL } from '../../components/auth/auth';
 import {
     FETCH_MEMBER_STARTED,
     FETCH_MEMBER_SUCCEEDED,
@@ -31,11 +31,8 @@ export const fetchMemberGroup = (cookies, groupId) => {
     return async dispatch => {
         try {
             dispatch(fetchMemberStarted())
-            const requestURL = 'https://ckcsocial.site/api/v1/fetch-member-group/' + groupId;
-
-            axios({
-                method: 'GET',
-                url: requestURL,
+            // const requestURL = 'https://ckcsocial.site/api/v1/fetch-member-group/' + groupId;
+            baseURL.get('/api/v1/fetch-member-group/' + groupId, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -51,13 +48,10 @@ export const fetchMemberGroup = (cookies, groupId) => {
 export const addMemberToAdminGroup = (cookies, userId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/v1/add-admin-group';
-            axios({
-                method: 'POST',
-                url: requestURL,
-                data: {
-                    userId: userId, groupId: groupId
-                },
+            // const requestURL = 'https://ckcsocial.site/api/v1/add-admin-group';
+            baseURL.post('/api/v1/add-admin-group', {
+                userId: userId, groupId: groupId
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -76,13 +70,10 @@ export const addMemberToAdminGroup = (cookies, userId, groupId) => {
 export const removeAdminToGroup = (cookies, userId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/v1/remove-admin-to-group';
-            axios({
-                method: 'POST',
-                url: requestURL,
-                data: {
-                    userId: userId, groupId: groupId
-                },
+            // const requestURL = 'https://ckcsocial.site/api/v1/remove-admin-to-group';
+            baseURL.post('/api/v1/remove-admin-to-group', {
+                userId: userId, groupId: groupId
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -101,13 +92,10 @@ export const removeAdminToGroup = (cookies, userId, groupId) => {
 export const removeMemberFromGroup = (cookies, memberId, groupId) => {
     return async dispatch => {
         try {
-            const requestURL = 'https://ckcsocial.site/api/v1/remove-member-from-group';
-            axios({
-                method: "POST",
-                url: requestURL,
-                data: {
-                    userId: memberId, groupId: groupId
-                },
+            // const requestURL = 'https://ckcsocial.site/api/v1/remove-member-from-group';
+            baseURL.post('/api/v1/remove-member-from-group', {
+                userId: memberId, groupId: groupId
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
