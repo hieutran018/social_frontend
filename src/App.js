@@ -41,6 +41,7 @@ import ChatPage from './pages/chatPage/chatPage';
 import Pusher from 'pusher-js';
 import SettingPage from './pages/settingPage/settingPage';
 import { app, analytics } from './firebase/firebaseconfig';
+import CreateChatPage from './pages/createChatPage/createChatPage';
 
 const newapp = app;
 const newanalytics = analytics;
@@ -78,6 +79,8 @@ function App() {
       <Route path="/posts/view-post-detail/:postId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ViewPostDetail />} profile />} />} />
       <Route path='/search/:result' element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<Search />} sidebar={6} />} />} />
       <Route path="/chats/:userId" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage pusher={pusher} />} sidebar={10} />} />} />
+      <Route path="/chats" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<ChatPage pusher={pusher} />} sidebar={10} />} />} />
+      <Route path="/chats/create" element={<ProtectedRoutes children={<LayoutUser pusher={pusher} children={<CreateChatPage pusher={pusher} />} sidebar={10} />} />} />
       <Route path='/settings' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />
       <Route path='/settings/:setting' element={<LayoutUser pusher={pusher} children={<SettingPage />} sidebar={7} />} />
       //? ==================================================================

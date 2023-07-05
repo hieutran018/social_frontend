@@ -19,7 +19,6 @@ function Message({ close }) {
     return (
         close ?
             <div className='messages' >
-
                 {
                     status === 'loading' ?
                         <>LOADING</> :
@@ -27,6 +26,7 @@ function Message({ close }) {
                             (
                                 chats.length === 0 ?
                                     <div>
+                                        <div className='messageTitleBox'>Trò chuyện</div>
                                         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center" }}>
                                             <Lottie
                                                 loop
@@ -35,13 +35,17 @@ function Message({ close }) {
                                                 style={{ width: 400, height: 300 }}
                                             />
                                         </div>
-                                        <div style={{ display: "flex", justifyContent: "center", marginBottom: "2rem" }}><span style={{ color: "black", fontSize: "25px", fontWeight: "500" }}>Chưa có cuộc trò chuyện nào!</span></div>
+                                        <div style={{ display: "flex", justifyContent: "center", marginBottom: "2rem" }}>
+                                            <span style={{ color: "black", fontSize: "25px", fontWeight: "500" }}>Chưa có cuộc trò chuyện nào!</span>
+                                        </div>
+                                        <Link to="/chats" className='messageGotoChatsContainer'><span className='messageGotoChats'>Đi đến trò chuyện</span></Link>
                                     </div>
                                     :
                                     <div className='messages-list'>
+                                        <div className='messageTitleBox'>Trò chuyện</div>
                                         {
                                             chats.map((chat) => (
-                                                <Link style={{ textDecoration: "none" }} to={"/chats/" + chat.userId}>
+                                                <Link style={{ textDecoration: "none" }} to={"/chats/" + chat.id}>
                                                     <div key={chat.id} className='messagesItem' >
                                                         <div className='messagesHeader'>
                                                             <img className="messagesAvatar" src={chat.conversation_avatar} alt="" />
@@ -54,6 +58,7 @@ function Message({ close }) {
                                                 </Link>
                                             ))
                                         }
+                                        <Link to="/chats" className='messageGotoChatsContainer'><span className='messageGotoChats'>Đi đến trò chuyện</span></Link>
                                     </div>
                             ) :
                             status === 'failed' ?

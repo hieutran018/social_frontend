@@ -36,3 +36,13 @@
     align-items: center;
     justify-content: right;
 }
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #555;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+}

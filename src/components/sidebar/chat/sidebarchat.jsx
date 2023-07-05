@@ -1,4 +1,6 @@
 import './sidebarchat.css';
+import { RiChatNewLine } from 'react-icons/ri';
+import { BiArrowBack } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import ChatCard from './chatcard';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +22,14 @@ function SidebarChat() {
     return (
         <div className="sidebarChat">
             <div className="sidebarChatTitle">
-                <Link to="/friend"></Link> Trò chuyện
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '40%' }}>
+                    <Link to="/"><BiArrowBack size={25} /></Link> <div className='sidebarChatTitleDescription'>Trò chuyện</div>
+                </div>
+                <div className='sidebarChatCreateChat'>
+                    <Link style={{ textDecoration: 'none' }} to="/chats/create">
+                        <RiChatNewLine size={25} />
+                    </Link>
+                </div>
             </div>
             <div className='sidebarChatItemsList'>
                 {
