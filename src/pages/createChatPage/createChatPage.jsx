@@ -3,6 +3,7 @@ import './createChatPage.css';
 import { baseURL } from '../../components/auth/auth';
 import { useCookies } from 'react-cookie';
 import { AiOutlineFileAdd } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
 
 function CreateChatPage({ pusher }) {
     const cookies = useCookies('_tk')[0]._tk;
@@ -117,12 +118,14 @@ function CreateChatPage({ pusher }) {
         console.log(friend);
         setUserAdded([...userAdded, friend])
         setMembers([...members, friend.friendId])
+        setDataUsers(dataUsers.filter((user) => user.friendId !== friend.friendId))
 
     }
     const handleRemoveUser = (friend) => {
         setUserAdded((userAdded) =>
             userAdded.filter((add) => add.friendId !== friend.friendId)
         );
+
         setMembers((adding) =>
             adding.filter((add) => add !== friend.friendId)
         );
@@ -138,6 +141,9 @@ function CreateChatPage({ pusher }) {
                             userAdded.map((user) => (
                                 <div key={user.friendId} className='createChatPageMemberChatUserAdded'>
                                     {user.displayName}
+                                    <div onClick={() => handleRemoveUser(user)}>
+                                        <GrClose />
+                                    </div>
                                 </div>
                             ))
                         }

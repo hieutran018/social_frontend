@@ -99,7 +99,7 @@ function Profile({ pusher }) {
                 Authorization: "Bearer " + cookies
             }
         }).then((response) => {
-            navigate('/chats/' + userId);
+            navigate('/chats/' + response.data.id);
         }).catch((error) => {
             console.log(error);
         })
@@ -121,7 +121,6 @@ function Profile({ pusher }) {
                                                 src={!uploadCover ? (status === "loading" ? user.coverImage : user.coverImage) : URL.createObjectURL(uploadCover[0])}
                                                 alt=""
                                             />
-
                                             {
                                                 userCurrent.id.toString() === userId ?
                                                     <div className='profileCoverInput'>
