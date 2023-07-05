@@ -115,11 +115,11 @@ function CreateChatPage({ pusher }) {
     }
 
     const handleAddUser = (friend) => {
-        console.log(friend);
         setUserAdded([...userAdded, friend])
         setMembers([...members, friend.friendId])
         setDataUsers(dataUsers.filter((user) => user.friendId !== friend.friendId))
-
+        setInput('');
+        setSearchTemp('');
     }
     const handleRemoveUser = (friend) => {
         setUserAdded((userAdded) =>
@@ -142,7 +142,7 @@ function CreateChatPage({ pusher }) {
                                 <div key={user.friendId} className='createChatPageMemberChatUserAdded'>
                                     {user.displayName}
                                     <div onClick={() => handleRemoveUser(user)}>
-                                        <GrClose />
+                                        <GrClose className='createChatPageIconRemoveUsers' />
                                     </div>
                                 </div>
                             ))
@@ -151,47 +151,50 @@ function CreateChatPage({ pusher }) {
                     <div className='createChatPageSearchFriendChat'>
                         <input onChange={handleChangeSearch} value={searchTemp} className='createChatPageInputSearch' type="text" name="" id="" />
                         <div className='createChatPageSearchFriend'>
-                            <div className='createChatPageSearchFriendResult'>
-                                {
-                                    dataUsers.map((user) => (
-                                        <div onClick={() => handleAddUser(user)} key={user.friendId} className='createChatPageSearchFriendItem'>
-                                            <div className='createChatPageSearchFriendItemContainer'>
-                                                <img className='createChatPageSearchFriendItemAvatarUser' src={user.avatar} alt="" />
-                                                <div>
-                                                    {user.displayName}
+                            {
+                                dataUsers.length > 0 ?
+                                    <div className='createChatPageSearchFriendResult'>
+                                        {
+                                            dataUsers.map((user) => (
+                                                <div onClick={() => handleAddUser(user)} key={user.friendId} className='createChatPageSearchFriendItem'>
+                                                    <div className='createChatPageSearchFriendItemContainer'>
+                                                        <img className='createChatPageSearchFriendItemAvatarUser' src={user.avatar} alt="" />
+                                                        <div>
+                                                            {user.displayName}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
+                                            ))
+                                        }
+                                    </div> : <></>
+                            }
                         </div>
                     </div>
                 </div>
                 {
-                    members.length > 0 ? <div className='chatPageBottom'>
+                    members.length > 0 ? <div className='createChatPageBottom'>
                         <div>
                             {view ?
-                                <div className='chatPagePreviewFilesUpload'>
+                                <div className='createChatPagePreviewFilesUpload'>
                                     {
                                         images.map((item) => (
                                             item.type === 'image/jpeg' || item.type === 'image/png' || item.type === 'image/png' ||
                                                 item.type === 'image/svg' || item.type === 'image/gif' ?
                                                 <img
-                                                    className="chatPageImg"
+                                                    className="createChatPageImg"
                                                     src={item.url}
                                                     srcSet={item.url}
                                                     alt={item}
                                                     loading="lazy"
                                                 /> :
-                                                <video controls className="chatPageImg" src={item.url}></video>
+                                                <video controls className="createChatPageImg" src={item.url}></video>
                                         ))
                                     }
                                 </div>
                                 : <div></div>}
                         </div>
-                        <div className='chatPageBottomChangeInput'>
-                            <label onChange={handleFileChange} className='chatPageInputContainerSentFile' htmlFor="sentFiles"> <AiOutlineFileAdd size={25} /><input id='sentFiles' type="file" multiple hidden /></label>
+                        <div className='createChatPageBottomChangeInput'>
+                            <label onChange={handleFileChange} className='createChatPageInputContainerSentFile' htmlFor="sentFiles"> <AiOutlineFileAdd size={25} /><input id='sentFiles' type="file" multiple hidden /></label>
                             <input onKeyDownCapture={
                                 event => {
                                     if (event.key === 'Enter') {
@@ -203,8 +206,8 @@ function CreateChatPage({ pusher }) {
                                         }
                                     }
                                 }
-                            } value={contentMessage} onChange={handleChangeContentMessage} className='chatPageInput' type="text" />
-                            <button onClick={sendMessage} className='chatPageButtonSentMessage'>Gửi</button>
+                            } value={contentMessage} onChange={handleChangeContentMessage} className='createChatPageInput' type="text" />
+                            <button onClick={sendMessage} className='createChatPageButtonSentMessage'>Gửi</button>
                         </div>
 
                     </div> :

@@ -1,6 +1,5 @@
 .createChatPage{
     margin-top: 5rem;
-    flex: 3.5;
 }
 .createChatPageNewChat{
     display: flex;
@@ -16,11 +15,11 @@
     border-radius: 5px;
     padding: 0.2rem;
     width: calc(100vw -  31rem);
+    margin-right: 1rem;
 }
 .createChatPageInputSearch{
     border: none;
     outline: none;
-    background-color: aliceblue;
     height: 25px;
     min-width: 15rem;
     max-width: 20rem;
@@ -48,4 +47,78 @@
 }
 .createChatPageMemberChatUserAdded{
     display: flex;
+    align-items: center;
+    background-color: #DBE6F2;
+    color: #1876F3;
+    padding: 0.3rem;
+}
+.createChatPageSearchFriendResult{
+    position: absolute;
+    background-color: white;
+    width: 15rem;
+    border: 0.1px solid gray;
+    border-radius: 5px;
+    padding: 1rem;
+}
+.createChatPageIconRemoveUsers{
+    margin-left: 0.2rem;
+}
+.createChatPageBottom{
+    position: fixed;
+    bottom: 0;
+    width: -webkit-fill-available;
+    background-color: white;
+}
+.createChatPagePreviewFilesUpload{
+    display: flex;
+    justify-content: left;
+    overflow-x: auto;
+}
+.createChatPageImg{
+    min-width: 10%;
+    max-width: 12%;
+    max-height: 12%;
+    min-height: 10%;
+    margin: 0px 5px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+.createChatPageBottomChangeInput{
+    display: flex;
+    margin-top: 0.2rem;
+}
+.createChatPageInputContainerSentFile{
+    margin-right: 1rem;
+    border: 0.001rem solid gray;
+    border-radius: 5px;
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.createChatPageInput{
+    width: 100%;
+    height: 35px;
+    border-radius:10px;
+    border: none;
+    background-color: #F0F2F5;
+    outline: none;
+    font-size: 18px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.createChatPageButtonSentMessage{
+    height: 35px;
+    border-radius:10px;
+    border: none;
+    background-color: #0065fc;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
