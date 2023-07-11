@@ -1,11 +1,106 @@
-.chatPage{
-    flex: 4;
-    
-}
+
 .chatPageWrapper{
+    display: flex;
+}
+.chatPageMainContent{
     width: -webkit-fill-available;
     margin-bottom: 50px;
-    padding: 0 50px;
+    padding: 0 10px;
+}
+@media only screen and (max-width: 1599px) {
+    .chatPage{
+        
+        min-width: 70%;
+    }
+    .chatPageBottom{
+                position: fixed;
+                bottom: 0;
+                width: calc(100vw - 57%);
+                background-color: white;
+                left: 25rem;
+            }
+    @media only screen and (max-width: 1300px) {
+        .chatPage{
+            
+            min-width: 65%;
+        }
+        .chatPageBottom{
+                position: fixed;
+                bottom: 0;
+                width: calc(100vw - 63%);
+                background-color: white;
+                left: 25rem;
+            }
+        @media only screen and (max-width: 1200px) {
+            .chatPage{
+                
+                min-width: 60%;
+            }
+            .chatPageBottom{
+                position: fixed;
+                bottom: 0;
+                width: calc(100vw - 64%);
+                background-color: white;
+                left: 25rem;
+            }
+        }
+    }
+
+}
+@media only screen and (min-width: 1800px) {
+    .chatPage{
+        
+        min-width: 75%;
+    }
+    .chatPageBottom{
+                position: fixed;
+                bottom: 0;
+                width: calc(100vw - 53%);
+                background-color: white;
+                left: 25rem;
+            }
+}
+.chatPageInfoContent{
+    color: black;
+    margin-top: 3.5rem;
+    min-width: 25%;
+    max-width: 30%;
+    padding: 0 10px;
+    z-index: 99999;
+    height: calc(100vh - 3.5rem);
+    width: 536.69px;
+}
+.chatPageInfoContentTop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}  
+.chatPageAvatarChatInfo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 0.01px solid blue;
+    object-fit: contain;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.chatPageNameChatInfo{
+    font-size: 20px;
+    font-weight: 500;
+    
+}
+.chatPageOption{
+    font-size: 18px;
+    font-weight: 500;
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatPageOption:hover{
+    background-color: rgb(228, 228, 228);
+    border-radius: 5px;
 }
 .chatPageTop{
     display: flex;
@@ -15,6 +110,7 @@
     background-color: white;
     padding-top: 1rem;
     top: 3.5rem;
+    left: 26rem;
 }
 
 .chatPageAvatar{
@@ -39,12 +135,12 @@
     bottom: 0;
     margin-top: 10rem;
 }
-.chatPageBottom{
+/* .chatPageBottom{
     position: fixed;
     bottom: 0;
     width: -webkit-fill-available;
     background-color: white;
-}
+} */
 .chatPageInputContainer{
     display: flex;
     align-items: center;

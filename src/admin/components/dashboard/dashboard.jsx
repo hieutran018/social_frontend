@@ -41,7 +41,7 @@ function Dashboard() {
                                     <div className='adminDashboardStatisticsCardBottom'>
                                         <RiUser3Fill size={50} color='white' />
                                         <div className='adminDashboardStatisticsTotal'>
-                                            100
+                                            1
                                         </div>
                                     </div>
                                 </div>

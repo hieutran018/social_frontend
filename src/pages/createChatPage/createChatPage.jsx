@@ -4,6 +4,7 @@ import { baseURL } from '../../components/auth/auth';
 import { useCookies } from 'react-cookie';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 
 function CreateChatPage({ pusher }) {
     const cookies = useCookies('_tk')[0]._tk;
@@ -17,6 +18,7 @@ function CreateChatPage({ pusher }) {
     const [view, setView] = useState(false);
     const [members, setMembers] = useState([]);
     const [userAdded, setUserAdded] = useState([]);
+    const navigate = useNavigate();
     const handleChangeSearch = (event) => {
         setSearchTemp(event.target.value);
         if (!event.target.value) {
@@ -69,7 +71,8 @@ function CreateChatPage({ pusher }) {
                 }
             }).then((response) => {
                 setContentMessage('');
-                console.log(response.data);
+                console.log(response.data[0].id);
+                navigate('/chats/' + response.data[0].id);
             }).catch((error) => {
                 console.log(error);
             })

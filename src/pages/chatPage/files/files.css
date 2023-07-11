@@ -1,0 +1,11 @@
+
+.chatPageFileList{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.chatPageFileItems{
+    width: 131px;
+    height: 131px;
+}
