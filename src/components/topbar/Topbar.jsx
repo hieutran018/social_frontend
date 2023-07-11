@@ -12,6 +12,7 @@ import Notification from '../notification/notification';
 import { RxDotFilled } from 'react-icons/rx';
 import Message from '../../components/messages/messages';
 import { baseURL } from '../auth/auth';
+import audioMessage from '../../lottiefiles/audioMessage.mp3';
 
 
 function Topbar({ pusher }) {
@@ -24,13 +25,20 @@ function Topbar({ pusher }) {
     const [openNoti, setOpenNoti] = useState(false);
     const [openChat, setOpenChat] = useState(false);
     const [newNoti, setNewNoti] = useState(false);
+    const [newMessage, setNewMessage] = useState(false);
+    const audio = new Audio(audioMessage);
 
     const channel = pusher.subscribe('notif-' + user.id);
+    const channelMessage = pusher.subscribe('message-' + user.id);
     channel.bind('my-event', function (data) {
         setNewNoti(true);
         console.log(data);
     });
 
+    channelMessage.bind('my-message', function (data) {
+        setNewMessage(true);
+        audio.play()
+    });
     const handleOpenNoti = () => {
         setOpenNoti(true);
         setNewNoti(false);
@@ -42,7 +50,7 @@ function Topbar({ pusher }) {
 
     const handleOpenChat = () => {
         setOpenChat(true);
-        setNewNoti(false);
+        setNewMessage(false);
     }
 
     const handleCloseChat = () => {
@@ -140,7 +148,16 @@ function Topbar({ pusher }) {
                 <div className="topbarIcons">
                     <div className="topbarIconItem">
                         <div onClick={!openChat ? handleOpenChat : handleCloseChat}>
-                            <Chat fontSize='25' />
+                            <Chat fontSize='25' style={{ position: "relative" }} />
+                            {
+                                newMessage ?
+                                    <RxDotFilled color='red' style={{
+                                        position: "relative",
+                                        left: "-18px",
+                                        bottom: "8"
+                                    }} /> :
+                                    <></>
+                            }
                             <Message close={openChat} />
                         </div>
                     </div>

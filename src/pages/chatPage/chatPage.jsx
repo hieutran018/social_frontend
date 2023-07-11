@@ -9,6 +9,7 @@ import { AiOutlineFileAdd } from 'react-icons/ai';
 import { GrNext, GrDown } from 'react-icons/gr';
 import avatar from '../../ckc_social_logo.png';
 import Files from './files/files';
+import MemberChat from './members/members';
 
 function ChatPage({ pusher }) {
     const userId = useParams().userId;
@@ -21,6 +22,7 @@ function ChatPage({ pusher }) {
     const [images, setImages] = useState([]);
     const [view, setView] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openMember, setOpenMember] = useState(false);
 
     if (conversation) {
         const channel = pusher.subscribe('conversation-' + conversation.id);
@@ -35,6 +37,12 @@ function ChatPage({ pusher }) {
     }
     const handleClose = () => {
         setOpen(false);
+    }
+    const handleOpenMember = () => {
+        setOpenMember(true);
+    }
+    const handleCloseMember = () => {
+        setOpenMember(false);
     }
 
     const handleFileChange = (e) => {
@@ -192,16 +200,33 @@ function ChatPage({ pusher }) {
                         </div>
                         <div className='chatPageInfoContent'>
                             <div className='chatPageInfoContentTop'>
-                                <img className='chatPageAvatarChatInfo' src={avatar} alt="" />
-                                <span className='chatPageNameChatInfo'>Nhóm chưa đặt</span>
+                                <img className='chatPageAvatarChatInfo' src={conversation ? conversation.conversation_avatar : '...'} alt="" />
+                                <span className='chatPageNameChatInfo'>{conversation ? conversation.conversation_name : '...'}</span>
                             </div>
                             <div className='chatPageOptions'>
                                 {
-                                    conversation.userId ? <Link to={"/userId/" + conversation.userId} className='chatPageOption'>
+                                    conversation.userId ? <Link to={"/userId/" + conversation.userId} className='chatPageOption chatPageOptionRemoveLink'>
                                         Trang cá nhân
                                     </Link> :
                                         <></>
                                 }
+                                {
+                                    parseInt(conversation.conversation_type) === 1 ?
+                                        <div onClick={openMember ? handleCloseMember : handleOpenMember} className='chatPageOption'>
+                                            Thành viên
+                                            {
+                                                openMember ? <GrDown /> : <GrNext />
+                                            }
+                                        </div> :
+                                        <></>
+                                }
+                                <div className='chatPageShowMemberChats'>
+                                    {
+                                        openMember ?
+                                            <MemberChat conversation={conversation ? conversation.id : null} /> :
+                                            <></>
+                                    }
+                                </div>
                                 <div onClick={open ? handleClose : handleOpen} className='chatPageOption'>
                                     Lưu trữ tệp
                                     {

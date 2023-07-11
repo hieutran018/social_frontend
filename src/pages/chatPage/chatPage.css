@@ -3,72 +3,190 @@
     display: flex;
 }
 .chatPageMainContent{
-    width: -webkit-fill-available;
+    width: calc(100vw - 57rem);
     margin-bottom: 50px;
     padding: 0 10px;
 }
-@media only screen and (max-width: 1599px) {
-    .chatPage{
-        
-        min-width: 70%;
-    }
-    .chatPageBottom{
-                position: fixed;
-                bottom: 0;
-                width: calc(100vw - 57%);
-                background-color: white;
-                left: 25rem;
-            }
-    @media only screen and (max-width: 1300px) {
-        .chatPage{
-            
-            min-width: 65%;
-        }
-        .chatPageBottom{
-                position: fixed;
-                bottom: 0;
-                width: calc(100vw - 63%);
-                background-color: white;
-                left: 25rem;
-            }
-        @media only screen and (max-width: 1200px) {
-            .chatPage{
-                
-                min-width: 60%;
-            }
-            .chatPageBottom{
-                position: fixed;
-                bottom: 0;
-                width: calc(100vw - 64%);
-                background-color: white;
-                left: 25rem;
-            }
-        }
-    }
 
+
+@media only screen and (max-width: 1799px) {
+                .chatPage{
+                    
+                    min-width: 85%;
+                }
+                .chatPageMainContent{
+                    margin-left: 5rem;
+                }
+                .chatPageTop{
+                    display: flex;
+                    align-items: center;
+                    position: fixed;
+                    width: 100%;
+                    background-color: white;
+                    padding-top: 1rem;
+                    top: 3.5rem;
+                    left: 15rem;
+                }
+                .chatPageBottom{
+                    position: fixed;
+                    bottom: 0;
+                    width: calc(100vw - 42%);
+                    background-color: white;
+                    left: 15rem;
+                }
+                .chatPageMain{
+                    display: flex;
+                    flex-direction: column-reverse;
+                    position: relative;
+                    z-index: -1;
+                    margin-bottom: 45px;
+                    bottom: 0;
+                    margin-top: 10rem;
+                    width: 70rem;
+                }
+                @media only screen and (max-width: 1699px) {
+                    .chatPageMain{
+                        display: flex;
+                        flex-direction: column-reverse;
+                        position: relative;
+                        z-index: -1;
+                        margin-bottom: 45px;
+                        bottom: 0;
+                        margin-top: 10rem;
+                        width: 64rem;
+                    }
+                }
+                
+                @media only screen and (max-width: 1599px) {
+                    .chatPage{
+                        min-width: 70%;
+                    }
+                    .chatPageMainContent{
+                    margin-left: 0rem;
+                }
+                    .chatPageBottom{
+                        position: fixed;
+                        bottom: 0;
+                        width: calc(100vw - 48%);
+                        background-color: white;
+                        
+                    }
+                    .chatPageMain{
+                        display: flex;
+                        flex-direction: column-reverse;
+                        position: relative;
+                        z-index: -1;
+                        margin-bottom: 45px;
+                        bottom: 0;
+                        margin-top: 10rem;
+                        width: 47rem;
+                    }
+                    @media only screen and (max-width: 1499px) {
+                        .chatPageMain{
+                            display: flex;
+                            flex-direction: column-reverse;
+                            position: relative;
+                            z-index: -1;
+                            margin-bottom: 45px;
+                            bottom: 0;
+                            margin-top: 10rem;
+                            width: 40rem;
+                        }
+                        @media only screen and (max-width: 1300px) {
+                            .chatPage{       
+                                min-width: 65%;
+                            }
+                            .chatPageBottom{
+                                position: fixed;
+                                bottom: 0;
+                                width: calc(100vw - 53%);
+                                background-color: white;
+                                left: 16rem;
+                            }
+                            .chatPageMain{
+                                display: flex;
+                                flex-direction: column-reverse;
+                                position: relative;
+                                z-index: -1;
+                                margin-bottom: 45px;
+                                bottom: 0;
+                                margin-top: 10rem;
+                                width: 33rem;
+                            }
+                        @media only screen and (max-width: 1200px) {
+                            .chatPage{
+                                
+                                min-width: 60%;
+                            }
+                            
+                            .chatPageBottom{
+                                position: fixed;
+                                bottom: 0;
+                                width: calc(100vw - 64%);
+                                background-color: white;
+                                left: 16rem;
+                            }
+                            .chatPageMain{
+                                display: flex;
+                                flex-direction: column-reverse;
+                                position: relative;
+                                z-index: -1;
+                                margin-bottom: 45px;
+                                bottom: 0;
+                                margin-top: 10rem;
+                                width: 22rem    ;
+                            }   
+                        }
+
+                    }
+                    }  
+
+                }   
 }
+
 @media only screen and (min-width: 1800px) {
     .chatPage{
         
         min-width: 75%;
     }
+    .chatPageMain{
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+        z-index: -1;
+        margin-bottom: 45px;
+        bottom: 0;
+        margin-top: 10rem;
+    }
+    .chatPageTop{
+        display: flex;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        background-color: white;
+        padding-top: 1rem;
+        top: 3.5rem;
+        left: 26rem;
+    }
     .chatPageBottom{
-                position: fixed;
-                bottom: 0;
-                width: calc(100vw - 53%);
-                background-color: white;
-                left: 25rem;
-            }
+        position: fixed;
+        bottom: 0;
+        width: calc(100vw - 42%);
+        background-color: white;
+        left: 25rem;
+    }
 }
 .chatPageInfoContent{
     color: black;
     margin-top: 3.5rem;
-    min-width: 25%;
-    max-width: 30%;
+    min-width: 15%;
+    max-width: 20%;
     padding: 0 10px;
-    z-index: 99999;
+    z-index: 2;
     height: calc(100vh - 3.5rem);
     width: 536.69px;
+    position: fixed;
+    right: 0;
 }
 .chatPageInfoContentTop{
     display: flex;
@@ -90,6 +208,10 @@
     font-weight: 500;
     
 }
+.chatPageOptionRemoveLink{
+    text-decoration: none;
+    color: black;
+}
 .chatPageOption{
     font-size: 18px;
     font-weight: 500;
@@ -102,17 +224,6 @@
     background-color: rgb(228, 228, 228);
     border-radius: 5px;
 }
-.chatPageTop{
-    display: flex;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    background-color: white;
-    padding-top: 1rem;
-    top: 3.5rem;
-    left: 26rem;
-}
-
 .chatPageAvatar{
     width: 60px;
     height: 60px;
@@ -126,15 +237,7 @@
     font-size: 20px;
     font-weight: 500;
 }
-.chatPageMain{
-    display: flex;
-    flex-direction: column-reverse;
-    position: relative;
-    z-index: -1;
-    margin-bottom: 45px;
-    bottom: 0;
-    margin-top: 10rem;
-}
+
 /* .chatPageBottom{
     position: fixed;
     bottom: 0;

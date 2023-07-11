@@ -8,6 +8,7 @@ import {
     Cake,
     ReduceCapacity,
 } from '@mui/icons-material';
+import { AiFillHome } from 'react-icons/ai';
 
 import './sidebar.css';
 import SidebarHomePage from './home/home';
@@ -67,7 +68,7 @@ function Sidebar({ page }) {
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
                         <Link to="/" className="sidebarListItemText">
-                            <GroupOutlined className="sidebarIcon" />
+                            <AiFillHome className="sidebarIcon" size={25} />
                             <span className="sidebarListItemText">Trang Chủ </span>
                         </Link>
                     </li>
@@ -87,14 +88,14 @@ function Sidebar({ page }) {
                         <Diversity3 className="sidebarIcon" />
                         <span className="sidebarListItemText">Tất cả bạn bè</span>
                     </li>
-                    <li className="sidebarListItem">
+                    {/* <li className="sidebarListItem">
                         <Cake className="sidebarIcon" />
                         <span className="sidebarListItemText">Sinh nhật</span>
                     </li>
                     <li className="sidebarListItem">
                         <ReduceCapacity className="sidebarIcon" />
                         <span className="sidebarListItemText">Danh sách tùy chỉnh</span>
-                    </li>
+                    </li> */}
                 </ul>
 
 

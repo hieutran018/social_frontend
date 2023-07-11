@@ -12,12 +12,14 @@
     object-fit: cover;
     margin-right: 0.5rem;
 }
+.itemGetMessageUserName{
+    font-size: 12px;
+}
 .itemGetMassageContent{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     font-size: 18px;
     border-radius: 30px;
-    max-width: 40%;
     padding: 0.5rem;
     border: 0.1px solid blue;
 }

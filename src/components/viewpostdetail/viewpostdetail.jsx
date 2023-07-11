@@ -24,7 +24,7 @@ function ViewPostDetail() {
     }, [cookies, postId])
 
     return (
-        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: '3.5rem' }}>
             <div className='viewPotDetail'>
                 {
                     post ?

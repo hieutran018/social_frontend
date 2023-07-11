@@ -36,8 +36,8 @@ const SidebarHomePage = () => {
                     <span className="sidebarListItemText">Sự kiện</span>
                 </li> */}
             </ul>
-            <button className="sidebarButton">Xem thêm</button>
-            <hr className="sidebarHr" />
+            {/* <button className="sidebarButton">Xem thêm</button>
+            <hr className="sidebarHr" /> */}
         </div>);
 };
 

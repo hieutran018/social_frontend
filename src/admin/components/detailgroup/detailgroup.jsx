@@ -1,14 +1,20 @@
 import './detailgroup.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiUserGroup } from 'react-icons/hi';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import avatar from '../../../ckc_social_logo.png';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { baseURL } from '../../../components/auth/auth';
+import { useCookies } from 'react-cookie';
 function DetailGroup() {
     const groupId = useParams().groupId;
+    const navigate = useNavigate();
+    const cookies = useCookies('tk')[0].tk;
     const [openMember, setOpenMember] = useState(false);
+    const [members, setMembers] = useState([]);
+    const [group, setGroup] = useState();
     const handleClickOpenMember = () => {
         setOpenMember(true);
     };
@@ -16,17 +22,27 @@ function DetailGroup() {
     const handleCloseMemer = () => {
         setOpenMember(false);
     };
-    const groups = [
-        { id: 1, groupName: 'Nhóm 1', owner: 'Snow', members: 35, privacy: 'Công khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 2, groupName: 'Nhóm 2', owner: 'Lannister', members: 42, privacy: 'Công khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 3, groupName: 'Nhóm 3', owner: 'Lannister', members: 45, privacy: 'Riêng tư', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 4, groupName: 'Nhóm 4', owner: 'Stark', members: 16, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 5, groupName: 'Nhóm 5', owner: 'Targaryen', members: 20, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 6, groupName: 'Nhóm 6', owner: 'Melisandre', members: 21, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 7, groupName: 'Nhóm 7', owner: 'Clifford', members: 44, privacy: 'Công Khai', status: 'Dừng hoạt động', createdAt: '10/05/2023' },
-        { id: 8, groupName: 'Nhóm 8', owner: 'Frances', members: 36, privacy: 'Công Khai', status: 'Hoạt động', createdAt: '10/05/2023' },
-        { id: 9, groupName: 'Nhóm 9', owner: 'Roxie', members: 65, privacy: 'Riêng tư', status: 'Dừng hoạt động', createdAt: '10/05/2023' },
-    ];
+
+    useEffect(() => {
+        baseURL.get('/api/v1/admin/fetch-detail-group/groupId=' + groupId, {
+            headers: {
+                Authorization: 'Bearer ' + cookies
+            }
+        }).then((response) => {
+            setGroup(response.data)
+        })
+    }, [cookies, groupId])
+
+    useEffect(() => {
+        baseURL.get('/api/v1/admin/fetch-member-group/groupId=' + groupId, {
+            headers: {
+                Authorization: 'Bearer ' + cookies
+            }
+        }).then((response) => {
+            setMembers(response.data);
+        })
+    }, [cookies, groupId])
+
     return (
         <div className='adminDetailgroupWrapper'>
             <div className='groupManagementBreadCrumb'>
@@ -34,48 +50,50 @@ function DetailGroup() {
                 <div className='groupManagementBreadCrumbTitle'>Quản lý nhóm / <span className='groupManagementBreadCrumbTitleCurrent'>Chi tiết về nhóm</span></div>
             </div>
             <div className='adminDetailGroupMain'>
-                <div className='adminDetailGroupInfoWrapper'>
-                    <div className='adminDetailGroupInfoTop'>
-                        <img className='adminDetailGroupAvatar' src={avatar} alt="" />
-                        <div className='adminDetailGroupName'>{groups[groupId].groupName}</div>
-                    </div>
-                    <div className='adminDetailGroupInfoAccount'>
-                        <div className='adminDetailGroupInfoAccountItem'>
-                            <span className='adminDetailGroupInfoAccountDescription'>Số bài viết:</span> <span className='adminDetailGroupInfoAccountContent'>{groups[groupId].members}</span>
+                {
+                    group ? <div className='adminDetailGroupInfoWrapper'>
+                        <div className='adminDetailGroupInfoTop'>
+                            <img className='adminDetailGroupAvatar' src={group.avatar} alt="" />
+                            <div className='adminDetailGroupName'>{group.group_name}</div>
                         </div>
-                        <div className='adminDetailGroupInfoAccountItem'>
-                            <span className='adminDetailGroupInfoAccountDescription'>Ngày tạo tài khoản:</span> <span className='adminDetailGroupInfoAccountContent'>{groups[groupId].createdAt}</span>
-                        </div>
-                    </div>
-                    <div className='adminDetailGroupInfoBottom'>
-                        <div className='adminDetailGroupInfoBottomLeft'>
-                            <div className='adminDetailGroupInfoItem'>
-                                <span className='adminDetailGroupInfoItemDescription'>Người sở hữu:</span> <span className='adminDetailGroupInfoItemContent'>{groups[groupId].owner}</span>
+                        <div className='adminDetailGroupInfoAccount'>
+                            <div className='adminDetailGroupInfoAccountItem'>
+                                <span className='adminDetailGroupInfoAccountDescription'>Số bài viết:</span> <span className='adminDetailGroupInfoAccountContent'>{group.members}</span>
                             </div>
-                            <div className='adminDetailGroupInfoItem'>
-                                <span className='adminDetailGroupInfoItemDescription'>Quyền riêng tư:</span> <span className='adminDetailGroupInfoItemContent'>{groups[groupId].privacy}</span>
-                            </div>
-                            <div className='adminDetailGroupInfoItem'>
-                                <span className='adminDetailGroupInfoItemDescription'>Tình trạng:</span> <span className='adminDetailGroupInfoItemContent'>{groups[groupId].status}</span>
+                            <div className='adminDetailGroupInfoAccountItem'>
+                                <span className='adminDetailGroupInfoAccountDescription'>Ngày tạo tài khoản:</span> <span className='adminDetailGroupInfoAccountContent'>{group.created_at}</span>
                             </div>
                         </div>
-                        <div className='adminDetailGroupInfoBottomRight'>
-                            <div onClick={handleClickOpenMember} className='adminDetailGroupInfoItem'>
-                                <span className='adminDetailGroupInfoItemDescription'>Thành viên:</span> <span className='adminDetailGroupInfoItemContent'>10</span>
+                        <div className='adminDetailGroupInfoBottom'>
+                            <div className='adminDetailGroupInfoBottomLeft'>
+                                <div className='adminDetailGroupInfoItem'>
+                                    <span className='adminDetailGroupInfoItemDescription'>Người sở hữu:</span> <span className='adminDetailGroupInfoItemContent'>{group.admin}</span>
+                                </div>
+                                <div className='adminDetailGroupInfoItem'>
+                                    <span className='adminDetailGroupInfoItemDescription'>Quyền riêng tư:</span> <span className='adminDetailGroupInfoItemContent'>{group.privacy}</span>
+                                </div>
+                                <div className='adminDetailGroupInfoItem'>
+                                    <span className='adminDetailGroupInfoItemDescription'>Tình trạng:</span> <span className='adminDetailGroupInfoItemContent'>Hoạt động</span>
+                                </div>
                             </div>
-                            <div className='adminDetailGroupInfoItem'>
-                                <span className='adminDetailGroupInfoItemDescription'>Tập tin lưu trữ:</span> <span className='adminDetailGroupInfoItemContent'>10</span>
+                            <div className='adminDetailGroupInfoBottomRight'>
+                                <div onClick={handleClickOpenMember} className='adminDetailGroupInfoItem'>
+                                    <span className='adminDetailGroupInfoItemDescription'>Thành viên:</span> <span className='adminDetailGroupInfoItemContent'>{group.members}</span>
+                                </div>
+                                <div className='adminDetailGroupInfoItem'>
+                                    <span className='adminDetailGroupInfoItemDescription'>Tập tin lưu trữ:</span> <span className='adminDetailGroupInfoItemContent'>{group.mediaFile}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='adminDetailGroupInfoAction'>
-                        <button className='adminDetailGroupActionBlockGroup'>Khóa nhóm</button>
-                        <div>
-                            <button className='adminDetailGroupInfoActionCancel'>Quay lại</button>
-                            <button className='adminDetailGroupInfoActionOptions'>Tùy Chọn</button>
+                        <div className='adminDetailGroupInfoAction'>
+                            <button className='adminDetailGroupActionBlockGroup'>Khóa nhóm</button>
+                            <div>
+                                <button onClick={() => navigate(-1)} className='adminDetailGroupInfoActionCancel'>Quay lại</button>
+                                <button className='adminDetailGroupInfoActionOptions'>Tùy Chọn</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div> : <></>
+                }
             </div>
             <div>
                 <Dialog
@@ -85,13 +103,13 @@ function DetailGroup() {
                     <DialogTitle style={{ display: "flex", justifyContent: "center" }}> Danh sách thành viên nhóm</DialogTitle>
                     <DialogContent style={{ padding: "0px" }} >
                         {
-                            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map((item) => (
-                                <div key={item} className='groupDetailDialogMember'>
+                            members.map((member) => (
+                                <div key={member.id} className='groupDetailDialogMember'>
                                     <div className='groupDetailDialogMemberCard'>
-                                        <img className='groupDetailDialogMemberAvatar' src={avatar} alt="" />
+                                        <img className='groupDetailDialogMemberAvatar' src={member.avatar} alt="" />
                                         <div className='groupDetailDialogMemberNameContainer'>
-                                            <div className='groupDetailDialogMemberName'>Trần Dương Chí Hiếu {item}</div>
-                                            <div>Thành viên</div>
+                                            <div className='groupDetailDialogMemberName'>{member.displayName}</div>
+                                            <div>{parseInt(member.isAdminGroup) === 1 ? 'Quản trị viên' : 'Thành viên nhóm'}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -14,7 +14,6 @@ function SidebarChat() {
     const dispatch = useDispatch();
     const status = useSelector(selectStatusChats);
     const chats = useSelector(selectChats);
-
     useEffect(() => {
         dispatch(fetchChat(cookies));
     }, [dispatch, cookies]);

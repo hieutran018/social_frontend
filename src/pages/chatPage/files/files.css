@@ -2,10 +2,12 @@
 .chatPageFileList{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    height: calc(100vh - 22rem);
+    overflow-y: auto;
 }
 .chatPageFileItems{
-    width: 131px;
-    height: 131px;
+    width: 182px;
+    height: 182px;
+    object-fit: contain;
 }

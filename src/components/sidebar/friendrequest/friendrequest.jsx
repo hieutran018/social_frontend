@@ -5,15 +5,16 @@ import { ArrowBack } from '@mui/icons-material';
 import '../friendsuggestion/friendsuggestion.css';
 import '../sidebar.css';
 import { baseURL } from "../../auth/auth";
+import FriendRequestCard from "./friendRequestCard";
 
 function FriendRequest() {
     const [frs, setFrs] = useState([]);
     const cookies = useCookies('_tk')[0]._tk;
-
+    const user = JSON.parse(localStorage.getItem('user'));
     useEffect(() => {
         const fetchFriendRequest = () => {
             // const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
-            baseURL.post('/api/v1/fetch-friend-request-list', {}, {
+            baseURL.get('/api/v1/fetch-friend-request-list/userId=' + user.id, {
                 headers: {
                     Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
@@ -26,22 +27,7 @@ function FriendRequest() {
 
         }
         fetchFriendRequest()
-    }, [cookies])
-
-    const hanldeClickAcceptAddFriend = (userId) => {
-        // const requestURL = "https://ckcsocial.site/api/v1/accept-friend-request";
-        baseURL.post('/api/v1/accept-friend-request', {
-            userIdRequest: userId
-        }, {
-            headers: {
-                Authorization: 'Bearer ' + cookies,
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then((response) => {
-            console.log(response.data);
-        }).catch((error) => console.log(error));
-    }
+    }, [cookies, user.id])
 
     return (
         <div className="sidebarFriendSuggestion">
@@ -51,20 +37,7 @@ function FriendRequest() {
             </div>
             <ul className="sidebarList">
                 {frs.map((u) => (
-                    <li key={u.id} className="sidebarListItemFriendSuggestion">
-                        <Link className="frslinkProfile" to={"/friend-request/" + u.id} >
-                            <div className="frsContainnerImage"><img className='imageProfile' src={u.avatar} alt="" /></div>
-                        </Link>
-                        <div className='profileInfo'>
-                            <Link className="frslinkProfile" to={"/friend-suggestion/" + u.id} >
-                                <div className="nameProfile">{u.displayName}</div>
-                            </Link>
-                            <div className="buttonAction">
-                                <button onClick={() => hanldeClickAcceptAddFriend(u.user_request)} className='buttonSuggesstionAccept'>Đồng ý</button>
-                                <button className='buttonSuggesstionCancel'>Xóa, gỡ bỏ</button>
-                            </div>
-                        </div>
-                    </li>
+                    <FriendRequestCard friend={u} />
                 ))}
             </ul>
         </div >

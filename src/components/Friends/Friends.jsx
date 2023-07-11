@@ -9,15 +9,15 @@ import { baseURL } from '../auth/auth';
 
 
 function Friends() {
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const [frs, setFrs] = useState([]);
-    const cookies = useCookies('_tk');
+    const cookies = useCookies('_tk')[0]._tk;
     useEffect(() => {
         const fetchFriendSuggestion = () => {
             // const requestURL = 'https://ckcsocial.site/api/v1/fetch-friend-request-list';
-            baseURL.post('/api/v1/fetch-friend-request-list', {}, {
+            baseURL.get('/api/v1/fetch-friend-request-list/userId=' + user.id, {
                 headers: {
-                    Authorization: 'Bearer ' + cookies[0]._tk,
+                    Authorization: 'Bearer ' + cookies,
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                 }
@@ -27,7 +27,7 @@ function Friends() {
             }).catch((error) => console.log(error.message));
         }
         fetchFriendSuggestion()
-    }, [])
+    }, [user.id, cookies])
 
     return (
         <div className='friends'>

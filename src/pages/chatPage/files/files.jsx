@@ -1,12 +1,27 @@
 import './files.css';
-import file from '../../../ckc_social_logo.png';
+import { useEffect, useState } from 'react';
+import { baseURL } from '../../../components/auth/auth';
+import { useCookies } from 'react-cookie';
 
 function Files({ conversation }) {
+    const cookies = useCookies('_tk')[0]._tk;
+    const [files, setFiles] = useState([]);
+
+    useEffect(() => {
+        baseURL.get('/api/v1/chats/fetch-file-message/conversationId=' + conversation, {
+            headers: {
+                Authorization: 'Bearer ' + cookies
+            }
+        }).then((response) => {
+            setFiles(response.data);
+        })
+    }, [conversation, cookies])
+
     return (
         <div className='chatPageFileList'>
             {
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((item) => (
-                    <img key={item} className='chatPageFileItems' src={file} alt="" />
+                files.map((file) => (
+                    <img key={file.id} className='chatPageFileItems' src={file.media_file_name} alt="" />
                 ))
             }
         </div>

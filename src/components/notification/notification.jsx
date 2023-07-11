@@ -3,8 +3,8 @@ import { useCookies } from 'react-cookie';
 import './notification.css';
 import Lottie from 'react-lottie-player';
 import Nodata from '../../lottiefiles/nodata.json';
-import { Link } from 'react-router-dom';
 import { baseURL } from '../auth/auth';
+import NotificationCard from './notificationCards/notificationCard';
 
 function Notification({ close, channel }) {
     const cookies = useCookies('_tk')[0]._tk;
@@ -48,17 +48,7 @@ function Notification({ close, channel }) {
                         <div className='notification-list' >
                             {
                                 notifications.map((notification) => (
-                                    <Link key={notification.id} style={{ textDecoration: "none" }} to={notification.object_type === "crPost" ? "/posts/view-post-detail/" + notification.object_id : "/"}>
-                                        <div className='notificationItem' >
-                                            <div className='notificationHeader'>
-                                                <img className="notificationAvatar" src={notification.userAvatarFrom} alt="" />
-                                                <div className="notificationContent">
-                                                    <span className="notificationMessage"><span className='notificationUserName'>{notification.userNameFrom}</span> {notification.title}</span>
-                                                </div>
-                                            </div>
-                                            <div className='notificationBottom'><div className='notificationCreateAt'>1 ngày trước</div></div>
-                                        </div>
-                                    </Link>
+                                    <NotificationCard key={notification.id} notification={notification} />
                                 ))
                             }
 

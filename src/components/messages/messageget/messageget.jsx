@@ -1,17 +1,23 @@
 import './messageget.css';
-import Tooltip from '@mui/material/Tooltip';
 
 function MessageGet({ message }) {
+    console.log(message);
     return (
         <div className="itemGetMessage">
             <img className='itemGetMessageAvatar' src={message.avatar} alt="" />
             {
                 message.content !== null ?
-                    <Tooltip title="Add" placement="left">
-                        <div className='itemGettMassageContent'>
+                    <div style={{ maxWidth: '50%' }}>
+                        <div className='itemGetMessageUserName'>
+                            {
+                                message.userName
+                            }
+                        </div>
+                        <div className='itemGetMassageContent'>
                             {message.content}
                         </div>
-                    </Tooltip> :
+                    </div>
+                    :
                     <div className='itemGetMassageContentFile'>
                         {
                             message.media_file.map((file) => (
@@ -19,7 +25,6 @@ function MessageGet({ message }) {
                                     <video controls key={file.id} className='itemGetMessageFiles' src={file.media_file_name}></video> :
                                     <img key={file.id} className='itemGetMessageFiles' src={file.media_file_name} alt="file message" />
                             ))
-
                         }
                     </div>
             }

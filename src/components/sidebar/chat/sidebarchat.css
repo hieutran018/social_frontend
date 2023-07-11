@@ -1,10 +1,3 @@
-
-
-.sidebarChat{
-    position: fixed;
-    top: 4.5rem;
-    width: 25rem;
-}
 .sidebarChatTitle{
     font-size: 25px;
     font-weight: 500;
@@ -58,4 +51,44 @@
 }
 .sidebarChatCreateChat:hover{
     background-color: rgb(223, 220, 220);
+}
+
+@media only screen and (max-width: 1799px) {
+                .sidebarChat {
+                    position: fixed;
+                    top: 4.5rem;
+                    width: 14rem;
+                }
+                @media only screen and (max-width: 1599px) {
+                    .sidebarChat {
+                                position: fixed;
+                                top: 4.5rem;
+                                width: 14rem;
+                            }
+                    @media only screen and (max-width: 1300px) {
+                        .sidebarChat {
+                                position: fixed;
+                                top: 4.5rem;
+                                width: 14rem;
+                            }
+                        @media only screen and (max-width: 1200px) {
+                            .sidebarChat {
+                                position: fixed;
+                                top: 4.5rem;
+                                width: 14rem;
+                            }
+                            
+                        }
+
+                    }
+
+}
+}
+
+@media only screen and (min-width: 1800px) {
+    .sidebarChat {
+        position: fixed;
+        top: 4.5rem;
+        width: 25rem;
+    }
 }
