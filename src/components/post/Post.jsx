@@ -301,7 +301,7 @@ function Post({ post }) {
                         >
                             <div className="postMenuSetting">
                                 {
-                                    post.histories !== 0 ?
+                                    parseInt(post.histories) !== 0 ?
                                         <MenuItem onClick={handleOpenViewHistory}>
                                             <div className="postMenuSettingItem">
                                                 <div className="postMenuSettingIcon">
@@ -315,7 +315,7 @@ function Post({ post }) {
                                         <></>
                                 }
                                 {
-                                    post.user_id === user.id ?
+                                    parseInt(post.user_id) === user.id ?
                                         <MenuItem onClick={handleOpenEditPost}>
                                             <div className="postMenuSettingItem">
                                                 <div className="postMenuSettingIcon">
@@ -329,7 +329,7 @@ function Post({ post }) {
                                         <></>
                                 }
                                 {
-                                    post.user_id === user.id ?
+                                    parseInt(post.user_id) === user.id ?
                                         <MenuItem onClick={handleDeletePost}>
                                             <div className="postMenuSettingItem">
                                                 <div className="postMenuSettingIcon">
@@ -343,7 +343,7 @@ function Post({ post }) {
                                         <></>
                                 }
                                 {
-                                    post.user_id !== user.id ?
+                                    parseInt(post.user_id) !== user.id ?
                                         <MenuItem onClick={handleOpenReport}>
                                             <div className="postMenuSettingItem">
                                                 <div className="postMenuSettingIcon">

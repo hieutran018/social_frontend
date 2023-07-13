@@ -2,5 +2,5 @@ import axios from 'axios';
 
 export const baseURL = axios.create({
     //* Base Url
-    baseURL: 'http://127.0.0.1:8000'
+    baseURL: 'https://ckcsocial.site'
 })

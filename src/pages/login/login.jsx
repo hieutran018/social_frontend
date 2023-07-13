@@ -142,7 +142,7 @@ function Login() {
                         </div>
                         <div className='loginButtonSocial'>
                             <div onClick={signInWithGoogle}><FcGoogle size={40} /></div>
-                            <div onClick={signIntWithFaceBook}><FaFacebook size={40} color='blue' /></div>
+                            {/* <div onClick={signIntWithFaceBook}><FaFacebook size={40} color='blue' /></div> */}
                         </div>
                         <Link className="loginForgot" to="/forget-password"><span className="loginForgot">Quên mật khẩu?</span></Link>
 
