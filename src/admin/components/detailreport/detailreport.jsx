@@ -12,7 +12,7 @@ function DetailReport() {
     const cookies = useCookies('tk')[0].tk;
     const [report, setReport] = useState();
     useEffect(() => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/admin/fetch-report-by-id/reportId=" + reportId;
+        const requestURL = "https://ckcsocial.site/api/v1/admin/fetch-report-by-id/reportId=" + reportId;
         axios({
             method: "GET",
             url: requestURL,
@@ -28,7 +28,7 @@ function DetailReport() {
     }, [cookies, reportId])
 
     const handleCheckReport = (change) => {
-        const requestURL = "http://127.0.0.1:8000/api/v1/admin/check-report";
+        const requestURL = "https://ckcsocial.site/api/v1/admin/check-report";
         axios({
             method: "POST",
             url: requestURL,

@@ -28,7 +28,7 @@ export const fetchFAAs = (cookies) => {
     return async dispatch => {
         dispatch(adminFetchFaAStarted())
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/fetch-list-feel-and-activity";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/fetch-list-feel-and-activity";
             axios({
                 method: 'GET',
                 url: requestURL,
@@ -51,7 +51,7 @@ export const fetchFAAs = (cookies) => {
 export const addNewFeelAndActivity = (token, iconName, file) => {
     return async dispatch => {
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/create-feel-and-activity";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/create-feel-and-activity";
 
             axios({
                 method: 'POST',

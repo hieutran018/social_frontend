@@ -23,7 +23,7 @@ export const fetchReports = (cookies) => {
     return async dispatch => {
         dispatch(adminFetchReportStarted())
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/fetch-list-report";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/fetch-list-report";
             axios({
                 method: 'GET',
                 url: requestURL,

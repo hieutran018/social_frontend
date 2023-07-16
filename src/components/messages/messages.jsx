@@ -45,15 +45,14 @@ function Message({ close }) {
                                         <div className='messageTitleBox'>Trò chuyện</div>
                                         {
                                             chats.map((chat) => (
-                                                <Link style={{ textDecoration: "none" }} to={"/chats/" + chat.id}>
-                                                    <div key={chat.id} className='messagesItem' >
+                                                <Link key={chat.id} style={{ textDecoration: "none" }} to={"/chats/" + chat.id}>
+                                                    <div className='messagesItem' >
                                                         <div className='messagesHeader'>
                                                             <img className="messagesAvatar" src={chat.conversation_avatar} alt="" />
                                                             <div className="messagesContent">
                                                                 <span className="messagesMessage"><span className='messagesUserName'>{chat.conversation_name}</span></span>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </Link>
                                             ))

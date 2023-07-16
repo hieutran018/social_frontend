@@ -23,10 +23,10 @@ function MemberChat({ conversation }) {
         <div className='membersChat'>
             {
                 members.map((member) => (
-                    <div key={member.id} className='memberChatCard'>
-                        <Link to={"/userId/" + member.userId}><img className='memberCardChatAvatar' src={member.avatar} alt="" /></Link>
+                    <Link to={"/userId/" + member.userId} key={member.id} className='memberChatCard'>
+                        <img className='memberCardChatAvatar' src={member.avatar} alt="" />
                         <div>{member.displayName}</div>
-                    </div>
+                    </Link>
                 ))
             }
         </div>

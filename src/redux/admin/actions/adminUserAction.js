@@ -24,7 +24,7 @@ export const fetchUsers = (cookies) => {
         dispatch(adminFetchUserStarted())
         try {
 
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/fetch-list-user";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/fetch-list-user";
             axios({
                 method: 'GET',
                 url: requestURL,

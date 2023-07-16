@@ -7,11 +7,22 @@ import { useCookies } from 'react-cookie';
 import { baseURL } from '../../components/auth/auth';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { GrNext, GrDown } from 'react-icons/gr';
-import avatar from '../../ckc_social_logo.png';
 import Files from './files/files';
 import MemberChat from './members/members';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNameGroupChats } from '../../redux/actions/chatAction';
+import { selectStatusUpdateChats } from '../../redux/selectors/chatSelector';
+
 
 function ChatPage({ pusher }) {
+    const dispatch = useDispatch();
+    const statusUpdate = useSelector(selectStatusUpdateChats);
     const userId = useParams().userId;
     const user = JSON.parse(localStorage.getItem('user')).id;
     const cookies = useCookies('_tk')[0]._tk;
@@ -23,6 +34,15 @@ function ChatPage({ pusher }) {
     const [view, setView] = useState(false);
     const [open, setOpen] = useState(false);
     const [openMember, setOpenMember] = useState(false);
+    const [openName, setOpenName] = useState(false);
+    const [conversationName, setConversationname] = useState('');
+    const handleClickOpenName = () => {
+        setOpenName(true);
+    };
+
+    const handleCloseName = () => {
+        setOpenName(false);
+    };
 
     if (conversation) {
         const channel = pusher.subscribe('conversation-' + conversation.id);
@@ -63,7 +83,6 @@ function ChatPage({ pusher }) {
             setView(true)
         }
     };
-    console.log(images);
     useEffect(() => {
         // const requestURL = 'https://ckcsocial.site/api/v1/fetch-message/userId=' + userId;
         if (userId) {
@@ -82,7 +101,7 @@ function ChatPage({ pusher }) {
             })
             window.scrollTo(0, 9999999999);
         }
-    }, [cookies, userId])
+    }, [cookies, userId, statusUpdate])
 
     const handleChangeContentMessage = (e) => {
         setContentMessage(e.target.value);
@@ -113,7 +132,6 @@ function ChatPage({ pusher }) {
     }
 
     const sendMessageHaveFile = () => {
-
         baseURL.post('/api/v1/chats/sent-message-file', {
             conversationId: conversation.id,
             files: files
@@ -132,9 +150,14 @@ function ChatPage({ pusher }) {
         }).catch((error) => {
             console.log(error);
         })
+    }
+    const handleChangeConversationName = (e) => {
+        setConversationname(e.target.value);
+    }
 
-
-
+    const updateNameGroupChat = () => {
+        dispatch(updateNameGroupChats(cookies, userId, conversationName))
+        handleCloseName();
     }
 
     return (
@@ -208,7 +231,7 @@ function ChatPage({ pusher }) {
                                     conversation.userId ? <Link to={"/userId/" + conversation.userId} className='chatPageOption chatPageOptionRemoveLink'>
                                         Trang cá nhân
                                     </Link> :
-                                        <></>
+                                        <div onClick={handleClickOpenName} className='chatPageOption'>Đổi tên nhóm</div>
                                 }
                                 {
                                     parseInt(conversation.conversation_type) === 1 ?
@@ -251,7 +274,26 @@ function ChatPage({ pusher }) {
                         </div>
                     </div>
             }
-
+            <div>
+                <Dialog open={openName} onClose={handleCloseName}>
+                    <DialogTitle>Đổi tên nhóm</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Tên nhóm"
+                            type="text"
+                            variant="standard"
+                            onChange={handleChangeConversationName}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseName}>Hủy bỏ</Button>
+                        <Button onClick={updateNameGroupChat}>Xác nhận</Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </div>
     );
 }

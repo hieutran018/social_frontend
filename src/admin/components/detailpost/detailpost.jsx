@@ -55,7 +55,7 @@ function DetailPost({ props }) {
     };
 
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/admin/fetch-post-by-id/postId=' + id;
+        const requestURL = 'https://ckcsocial.site/api/v1/admin/fetch-post-by-id/postId=' + id;
         axios({
             method: 'GET',
             url: requestURL,

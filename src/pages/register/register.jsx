@@ -27,6 +27,14 @@ function Register() {
         });
     }
 
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const handleChangeConfirmPassword = (e) => {
+        setConfirmPassword(e.target.value);
+    }
+
     const validtate = () => {
         if (isEmpty(displayName)) {
             noti('Họ tên không được phép bỏ trống!');
@@ -109,10 +117,9 @@ function Register() {
 
                         <input placeholder="Email" className="registerInput" value={email} onChange={(event) => { setEmail(event.target.value); }} />
 
-                        <input placeholder="Mật khẩu" className="registerInput" value={password} onChange={(event) => { setPassword(event.target.value); }} />
+                        <input placeholder="Mật khẩu" type={"password"} className="registerInput" onChange={handleChangePassword} />
 
-
-                        <input placeholder="Xác nhận mật khẩu" className="registerInput" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                        <input placeholder="Xác nhận mật khẩu" type={"password"} className="registerInput" onChange={handleChangeConfirmPassword} />
 
                         <button onClick={handleFormSubmit} className="submitRegisterButton">Đăng ký</button>
 

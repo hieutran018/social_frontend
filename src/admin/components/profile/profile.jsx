@@ -16,7 +16,7 @@ function AdminProfile() {
     const [address, setAddress] = useState('');
     const [birthdate, setBirthdate] = useState('');
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/auth/admin/me';
+        const requestURL = 'https://ckcsocial.site/api/auth/admin/me';
         axios({
             method: "POST",
             url: requestURL,

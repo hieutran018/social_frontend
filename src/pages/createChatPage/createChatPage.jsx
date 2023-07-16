@@ -5,9 +5,12 @@ import { useCookies } from 'react-cookie';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createChatRoom } from '../../redux/actions/chatAction';
 
 function CreateChatPage({ pusher }) {
     const cookies = useCookies('_tk')[0]._tk;
+    const dispatch = useDispatch();
     const [input, setInput] = useState('');
     const typingTimeOutRef = useRef(null);
     const [searchTemp, setSearchTemp] = useState('');
@@ -71,8 +74,9 @@ function CreateChatPage({ pusher }) {
                 }
             }).then((response) => {
                 setContentMessage('');
-                console.log(response.data[0].id);
-                navigate('/chats/' + response.data[0].id);
+                console.log(response.data);
+                navigate('/chats/' + response.data.id);
+                dispatch(createChatRoom(response.data))
             }).catch((error) => {
                 console.log(error);
             })

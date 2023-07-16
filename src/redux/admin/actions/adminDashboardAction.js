@@ -23,7 +23,7 @@ export const fetchDashboardData = (cookies) => {
     return async dispatch => {
         dispatch(adminDashboardFetchStarted())
         try {
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/admin-dashboard-statistics";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/admin-dashboard-statistics";
             axios({
                 method: 'GET',
                 url: requestURL,

@@ -24,7 +24,7 @@ export const fetchPosts = (cookies) => {
         dispatch(adminFetchPostStarted())
         try {
 
-            const requestURL = "http://127.0.0.1:8000/api/v1/admin/fetch-list-post";
+            const requestURL = "https://ckcsocial.site/api/v1/admin/fetch-list-post";
             axios({
                 method: 'GET',
                 url: requestURL,

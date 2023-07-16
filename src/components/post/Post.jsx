@@ -390,14 +390,14 @@ function Post({ post }) {
                                 ><p>{post.post_content}</p>
                                 </ShowMoreText>
                                 <div onClick={handleOpenViewMedia}>
-                                    {post.totalMediaFile === 1 ?
+                                    {parseInt(post.totalMediaFile) === 1 ?
                                         <div>
                                             {
                                                 post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.mediafile[0].media_file_name} controls></video> :
                                                     <img className="postImg" src={post.mediafile[0].media_file_name} alt="" srcSet={post.mediafile[0].media_file_name} />
                                             }
                                         </div>
-                                        : post.totalMediaFile === 2 ?
+                                        : parseInt(post.totalMediaFile) === 2 ?
                                             <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                                 {post.mediafile.map((item) => (
                                                     <ImageListItem key={item.media_file_name}>
@@ -406,10 +406,11 @@ function Post({ post }) {
                                                             srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                                             alt={item.title}
                                                             loading="lazy"
+                                                            style={{ height: '300px' }}
                                                         />}
                                                     </ImageListItem>
                                                 ))}
-                                            </ImageList> : post.totalMediaFile === 3 ?
+                                            </ImageList> : parseInt(post.totalMediaFile) === 3 ?
                                                 <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                     {post.mediafile.map((item) => (
                                                         <ImageListItem key={item.media_file_name}>
@@ -418,10 +419,11 @@ function Post({ post }) {
                                                                 srcSet={`${item.id}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                                                 alt={item.title}
                                                                 loading="lazy"
+                                                                style={{ height: '300px' }}
                                                             />}
                                                         </ImageListItem>
                                                     ))}
-                                                </ImageList> : post.totalMediaFile === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                </ImageList> : parseInt(post.totalMediaFile) === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={2} rowHeight={348}>
                                                     {post.mediafile.map((item) => (
                                                         <ImageListItem key={item.media_file_name}>
                                                             {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -433,7 +435,7 @@ function Post({ post }) {
                                                         </ImageListItem>
                                                     ))}
                                                 </ImageList> :
-                                                    post.totalMediaFile > 4 ?
+                                                    parseInt(post.totalMediaFile) > 4 ?
                                                         <div className="postMediaFileContainerItemList">
                                                             <img className="postMediFileItemsList" src={post.mediafile[0].media_file_name} alt="" />
                                                             <img className="postMediFileItemsList" src={post.mediafile[1].media_file_name} alt="" />
@@ -459,14 +461,14 @@ function Post({ post }) {
                                     <div className="postShareWrapper">
                                         <div className="postShareCenter">
                                             <div onClick={handleOpenViewMedia}>
-                                                {post.parent_post.totalMediaFile === 1 ?
+                                                {parseInt(post.parent_post.totalMediaFile) === 1 ?
                                                     <div>
                                                         {
                                                             post.parent_post.mediafile[0].media_type === 'mp4' ? <video loop className="postVideo" src={post.parent_post.mediafile[0].media_file_name} controls></video> :
                                                                 <img className="postShareImg" src={post.parent_post.mediafile[0].media_file_name} alt="" />
                                                         }
                                                     </div>
-                                                    : post.parent_post.totalMediaFile === 2 ?
+                                                    : parseInt(post.parent_post.totalMediaFile) === 2 ?
                                                         <ImageList sm={{ width: "100%", height: "100%" }} cols={2} rowHeight={400}>
                                                             {post.parent_post.mediafile.map((item) => (
                                                                 <ImageListItem key={item.media_file_name}>
@@ -478,7 +480,7 @@ function Post({ post }) {
                                                                     />}
                                                                 </ImageListItem>
                                                             ))}
-                                                        </ImageList> : post.parent_post.totalMediaFile === 3 ?
+                                                        </ImageList> : parseInt(post.parent_post.totalMediaFile) === 3 ?
                                                             <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                                 {post.parent_post.mediafile.map((item) => (
                                                                     <ImageListItem key={item.media_file_name}>
@@ -491,7 +493,7 @@ function Post({ post }) {
                                                                     </ImageListItem>
                                                                 ))}
                                                             </ImageList> :
-                                                            post.parent_post.totalMediaFile === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
+                                                            parseInt(post.parent_post.totalMediaFile) === 4 ? <ImageList sx={{ width: "100%", height: "100%" }} cols={3} rowHeight={300}>
                                                                 {post.parent_post.mediafile.map((item) => (
                                                                     <ImageListItem key={item.media_file_name}>
                                                                         {item.media_type === 'mp4' ? <video loop className="postVideo" src={item.media_file_name} controls></video> : <img
@@ -503,7 +505,7 @@ function Post({ post }) {
                                                                     </ImageListItem>
                                                                 ))}
                                                             </ImageList> :
-                                                                post.parent_post.totalMediaFile > 4 ?
+                                                                parseInt(post.parent_post.totalMediaFile) > 4 ?
                                                                     <div className="postParentMediaFileContainerItemList">
                                                                         <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[0].media_file_name} alt="" />
                                                                         <img className="postParentMediFileItemsList" src={post.parent_post.mediafile[1].media_file_name} alt="" />
@@ -562,11 +564,11 @@ function Post({ post }) {
                                                                 <a className="postLinkProfileUser" href={"/userId/" + post.parent_post.user_id}>
                                                                     {post.parent_post.displayName}
                                                                 </a>
-                                                                {post.parent_post.isVerified === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {parseInt(post.parent_post.tag.length) === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
+                                                                {parseInt(post.parent_post.isVerified) === 1 ? <img style={{ width: "24px", height: "24px" }} src={authorUser} alt="" /> : <></>} {post.parent_post.iconName ? <span className='postWithText'>đang cảm thấy <img width={20} height={20} src={post.parent_post.iconPatch} alt="" /> <span className='postTagUser'>{post.parent_post.iconName}</span></span> : ""} {parseInt(post.parent_post.tag.length) === 0 ? "" : <span className="postWithText">cùng với <span className="postTagUser">{post.parent_post.tag.length + " người khác"}</span></span>}
                                                             </div>
                                                             <div className="postPrivacy">
                                                                 <span className="postshareDate">{moment(post.parent_post.created_at, 'YYYYMMDD h:mm:ss').fromNow()}
-                                                                    {post.parent_post.privacy === 0 ? <LockIcon className="postIconPrivacy" /> : post.parent_post.privacy === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
+                                                                    {parseInt(post.parent_post.privacy) === 0 ? <LockIcon className="postIconPrivacy" /> : parseInt(post.parent_post.privacy) === 1 ? <PublicIcon className="postIconPrivacy" /> : <GroupIcon className="postIconPrivacy" />}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -705,7 +707,7 @@ function Post({ post }) {
                                             <ArrowForwardIosIcon />
                                         </div>
                                     </div>
-                                    : post.totalMediaFile === 0 ? <div></div> :
+                                    : parseInt(post.totalMediaFile) === 0 ? <div></div> :
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <div onClick={handlePreMediaItem} className="dialogButton">
                                                 <ArrowBackIosNewIcon />

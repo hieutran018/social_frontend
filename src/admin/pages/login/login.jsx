@@ -57,7 +57,7 @@ function AdminLogin() {
             return;
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/auth/admin/login', {
+                axios.post('https://ckcsocial.site/api/auth/admin/login', {
                     email: email,
                     password: password,
                 }).then((res) => {
@@ -65,7 +65,7 @@ function AdminLogin() {
                     if (!res.statusText === 'OK') {
                         return;
                     } else {
-                        if (res.data.role === 1) {
+                        if (parseInt(res.data.role) === 1) {
                             setCookie('tk', res.data.access_token, { path: '/admin', maxAge: res.data.expires_in })
                             localStorage.setItem('adminInfo', JSON.stringify(res.data.user));
                             navigate('/admin/dashboard');

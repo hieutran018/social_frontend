@@ -25,7 +25,7 @@ function AdminHeader() {
 
 
     const handleLogout = () => {
-        const requestURL = 'http://127.0.0.1:8000/api/auth/admin/logout';
+        const requestURL = 'https://ckcsocial.site/api/auth/admin/logout';
         axios({
             method: 'POST',
             url: requestURL,

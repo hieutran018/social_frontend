@@ -19,7 +19,6 @@ function MessageSent({ message }) {
                         }
                     </div>
             }
-            <img className='itemSentMessageAvatar' src={message.avatar} alt="" />
         </div>
     );
 }

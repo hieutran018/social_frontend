@@ -10,7 +10,7 @@ function DetailUser() {
     const userId = useParams().userId;
     const [user, setUser] = useState();
     useEffect(() => {
-        const requestURL = 'http://127.0.0.1:8000/api/v1/admin/fetch-detail-user/userId=' + userId;
+        const requestURL = 'https://ckcsocial.site/api/v1/admin/fetch-detail-user/userId=' + userId;
         axios({
             method: 'GET',
             url: requestURL,

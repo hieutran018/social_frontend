@@ -200,3 +200,28 @@ font-size: 20px;
 .detailPostStatistical{
     margin-top: 0.5rem;
 }
+.postDetailMediaFileContainerItemList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.postDetailMediFileItemsList{
+    margin: 0.05rem;
+    width: 430px;
+    height: 362px;
+    object-fit: cover;
+}
+.postDetailMediFileCountItem{
+    position: absolute;
+    top: 45%;
+    left: 44%;
+    color: white;
+    font-size: 50px;
+    font-weight: 500;
+}
+.postDetailMediaFileCountItemsList{
+    position: absolute;
+    background-color: #262525bd;
+    width: 430px;
+    height: 362px;
+    
+}
