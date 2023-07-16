@@ -27,9 +27,11 @@ function Topbar({ pusher }) {
     const [newNoti, setNewNoti] = useState(false);
     const [newMessage, setNewMessage] = useState(false);
     const audio = new Audio(audioMessage);
+    const channleNewConversation = pusher.subscribe('new-conversation-' + user.id);
 
     const channel = pusher.subscribe('notif-' + user.id);
     const channelMessage = pusher.subscribe('message-' + user.id);
+
     channel.bind('my-event', function (data) {
         setNewNoti(true);
         console.log(data);
@@ -39,6 +41,11 @@ function Topbar({ pusher }) {
         setNewMessage(true);
         audio.play()
     });
+    channleNewConversation.bind('my-conversation-event', function (data) {
+        setNewMessage(true);
+        audio.play()
+    });
+
     const handleOpenNoti = () => {
         setOpenNoti(true);
         setNewNoti(false);
@@ -158,7 +165,7 @@ function Topbar({ pusher }) {
                                     }} /> :
                                     <></>
                             }
-                            <Message close={openChat} />
+                            <Message pusher={pusher} close={openChat} />
                         </div>
                     </div>
                     <div className="topbarIconItem">

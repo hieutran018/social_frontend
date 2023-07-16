@@ -57,6 +57,7 @@ export const fetchChat = (cookies) => {
 }
 export const createChatRoom = (conversation) => {
     return async dispatch => {
+        console.log('REDUX CREATE CHAT', conversation);
         dispatch(createChat(conversation));
     }
 }
@@ -74,6 +75,7 @@ export const updateNameGroupChats = (cookies, conversationId, conversationName) 
                     Authorization: 'Bearer ' + cookies,
                 }
             }).then((response) => {
+
                 dispatch(updateNameGroupChat(response.data));
             }).catch((error) => {
                 console.log(error);

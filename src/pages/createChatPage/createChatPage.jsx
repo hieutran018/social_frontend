@@ -74,7 +74,6 @@ function CreateChatPage({ pusher }) {
                 }
             }).then((response) => {
                 setContentMessage('');
-                console.log(response.data);
                 navigate('/chats/' + response.data.id);
                 dispatch(createChatRoom(response.data))
             }).catch((error) => {

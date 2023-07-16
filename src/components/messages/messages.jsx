@@ -3,19 +3,27 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectChats, selectStatusChats } from '../../redux/selectors/chatSelector';
-import { fetchChat } from '../../redux/actions/chatAction';
+import { fetchChat, createChat } from '../../redux/actions/chatAction';
 import { useEffect } from 'react';
 import Lottie from 'react-lottie-player';
 import Nodata from '../../lottiefiles/nomessage.json';
 
-function Message({ close }) {
+function Message({ pusher, close }) {
+    const user = JSON.parse(localStorage.getItem('user'));
     const cookies = useCookies('_tk')[0]._tk;
     const dispatch = useDispatch();
     const status = useSelector(selectStatusChats);
     const chats = useSelector(selectChats);
+
+    const channleNewConversation = pusher.subscribe('new-conversation-' + user.id);
+    channleNewConversation.bind('my-conversation-event', function (data) {
+        dispatch(createChat(data.conversation))
+    });
+
     useEffect(() => {
         dispatch(fetchChat(cookies));
     }, [dispatch, cookies]);
+
     return (
         close ?
             <div className='messages' >

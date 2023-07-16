@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     margin-left: 0.5rem;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     border: 0.01rem solid black;
     border-radius: 5px;
     padding: 0.2rem;
